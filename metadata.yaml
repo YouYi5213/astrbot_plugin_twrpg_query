@@ -1,7 +1,7 @@
 name: astrbot_plugin_twrpg_query
 display_name: 世界RPG 物品查询
 desc: 世界RPG（TWRPG）离线物品查询 — 输入「世界 物品名」或「界 物品名」，以图片卡片展示属性、合成、掉落等信息
-version: 1.0.3
+version: 1.0.4
 author: YouYi5213
 short_desc: 世界RPG 物品离线查询，支持合成链与 BOSS 掉落
 support_platforms:

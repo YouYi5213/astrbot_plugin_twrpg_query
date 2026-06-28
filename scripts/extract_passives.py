@@ -16,6 +16,9 @@ ENTRY_RE = re.compile(
 )
 
 
+_ATTRIB_RE = re.compile(r"\n*\s*装备翻译来自B站UP 阿我的手\s*$")
+
+
 def unescape_js_string(text: str) -> str:
     return (
         text.replace("\\r\\n", "\n")
@@ -23,6 +26,10 @@ def unescape_js_string(text: str) -> str:
         .replace('\\"', '"')
         .replace("\\\\", "\\")
     )
+
+
+def clean_passive_text(text: str) -> str:
+    return _ATTRIB_RE.sub("", text or "").rstrip()
 
 
 def main() -> None:
@@ -35,7 +42,7 @@ def main() -> None:
             "enName": en_name,
             "koName": ko_name,
             "en": unescape_js_string(en_text),
-            "cn": unescape_js_string(cn_text),
+            "cn": clean_passive_text(unescape_js_string(cn_text)),
         }
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)

@@ -235,14 +235,14 @@
     "enName": "Sunstone",
     "koName": "태양의 돌",
     "en": "Active\n❖ On use, activates Sun Blessing\n❖ Restores 40% of missing HP\n❖ Increases main stat by 50~450 for 15 seconds proportional to HP restored\n❖ Cooldown: 30s\n\nPassive\n⁘ On death, triggers Sun Protection\n⁘ Revives after 3 seconds\n⁘ Cooldown: 180s",
-    "cn": "点击使用 太阳祝福\n恢复40%已损失的生命值\n与恢复的生命值成比例在15秒内增加50～450主属性\n冷却时间：30秒\n\n死亡时触发太阳庇佑\n3秒后复活\n冷却时间：180秒\n\n\n装备翻译来自B站UP 阿我的手"
+    "cn": "点击使用 太阳祝福\n恢复40%已损失的生命值\n与恢复的生命值成比例在15秒内增加50～450主属性\n冷却时间：30秒\n\n死亡时触发太阳庇佑\n3秒后复活\n冷却时间：180秒"
   },
   {
     "id": "I0B8",
     "enName": "Eye of the Blood God",
     "koName": "혈신의 눈",
     "en": "Active\n❖ On use, summons Crimson Eye\n❖ Can be recast to give commands to the summon.\n❖ When used on ally, the summon will attach to the target.\n❖ Cooldown: 90 seconds\n❖ Crimson Eye:\n❖ Passive - Crimson Pact\n❖ Normal State: Deals INT X 5 bonus magic damage on attack and reduces damage taken by 40%.\n❖ Attached State: Becomes invulnerable and increases the skill damage of the attached target by 5%, and movement speed by 75.\n❖ Passive - Blood Nova\n❖ Accumulates your healing done to the summon or the attached ally (Max Amount: Max HP x 125%).\n❖ Upon max accumulation, deals (Accumulated Amount X 6) magic damage to nearby enemies (reactivation cooldown: 3 seconds)",
-    "cn": "主动：\n使用时召唤猩红之眼\n重复使用时，可以对召唤物下达命令。当对盟友使用时，它会附着在盟友身上转换为不可点击状态。\n冷却时间：90秒\n\n猩红之眼\n被动-血之契约\n基础状态：每次攻击造成智力x5的魔法伤害，受到的伤害减少40%\n附着状态：自身无敌，目标的移动速度增加75，给予附着目标5%技能伤害\n被动-鲜血新星\n累积自身或附着的友军受到的恢复量（最大值：生命值上限的1.25倍）\n当累积到最大值时，对周围敌人造成累积量x6的魔法伤害，冷却时间：3秒\n\n\n装备翻译来自B站UP 阿我的手"
+    "cn": "主动：\n使用时召唤猩红之眼\n重复使用时，可以对召唤物下达命令。当对盟友使用时，它会附着在盟友身上转换为不可点击状态。\n冷却时间：90秒\n\n猩红之眼\n被动-血之契约\n基础状态：每次攻击造成智力x5的魔法伤害，受到的伤害减少40%\n附着状态：自身无敌，目标的移动速度增加75，给予附着目标5%技能伤害\n被动-鲜血新星\n累积自身或附着的友军受到的恢复量（最大值：生命值上限的1.25倍）\n当累积到最大值时，对周围敌人造成累积量x6的魔法伤害，冷却时间：3秒"
   },
   {
     "id": "I0EV",
@@ -256,28 +256,28 @@
     "enName": "Divine Vein",
     "koName": "신성한 줄기",
     "en": "Passive\n⁘ Activates Weaponized Light every 7.5 seconds\n⁘ Empowers next 5 attacks with (AD X 0.5 + AGI X 5) additional magic damage and increasing your skill damage dealt to target by 6% for 3 seconds\nActive\n❖ On use, activates Light Bombardment\n❖ Summons 5 rays of light, each dealing AGI X 15 magic damage\n❖ Activates Weaponized Light\n❖ Cooldown: 45s",
-    "cn": "被动：\n每7.5秒激活一次光之武装 \n强化接下来的5次攻击，对目标造成（攻击力x0.5+敏捷x5）的额外魔法伤害，并使你在2秒内对目标造成的技能伤害增加6%\n\n主动：\n使用触发神圣轰击 \n对目标区域发射5道光束，每道光束造成敏捷x15的魔法伤害 \n立刻激活一次光之武装\n冷却时间：45秒\n\n\n装备翻译来自B站UP 阿我的手"
+    "cn": "被动：\n每7.5秒激活一次光之武装 \n强化接下来的5次攻击，对目标造成（攻击力x0.5+敏捷x5）的额外魔法伤害，并使你在2秒内对目标造成的技能伤害增加6%\n\n主动：\n使用触发神圣轰击 \n对目标区域发射5道光束，每道光束造成敏捷x15的魔法伤害 \n立刻激活一次光之武装\n冷却时间：45秒"
   },
   {
     "id": "I05G",
     "enName": "Divine Rose",
     "koName": "디바인 로즈",
     "en": "Passive\n⁘ On healing or shielding allies, activates Aegis of Light\n⁘ Increases skill damage by 10%, reduces damage taken by 10% [Type-A], and increases movement speed by 30 for 4 seconds\nActive\n❖ On use, activates Cradle of Light\n❖ Grants a shield to allies within the target area that absorbs up to INT X 5 damage for 4 seconds\n❖ If the shield successfully blocks damage, increases main stat by 200 for 20 seconds\n❖ Cooldown: 40 seconds",
-    "cn": "被动：\n治疗友军或施加护盾时触发光之加护\n技能伤害+10%，受到的伤害-10%（类型A），移动速度增加30，持续4秒\n\n主动：\n使用时触发光之摇篮\n对范围内友军施加一个可以吸收（智力x5）的护盾，持续4秒\n如果护盾持续期间受到boss技能时，主属性增加200，持续20秒\n冷却时间：40秒\n\n\n装备翻译来自B站UP 阿我的手"
+    "cn": "被动：\n治疗友军或施加护盾时触发光之加护\n技能伤害+10%，受到的伤害-10%（类型A），移动速度增加30，持续4秒\n\n主动：\n使用时触发光之摇篮\n对范围内友军施加一个可以吸收（智力x5）的护盾，持续4秒\n如果护盾持续期间受到boss技能时，主属性增加200，持续20秒\n冷却时间：40秒"
   },
   {
     "id": "I01X",
     "enName": "Ring of Noble Soul",
     "koName": "고결한 영혼의 반지",
     "en": "❖ On use, activates Noble Soul\n❖ Becomes immune to damage, debuff and CC effects for 3 seconds\n❖ On expiration, deals (Damage Taken X 15) pure damage to nearby enemies (max damage: Max HP X 15)\n❖ Cooldown: 60 seconds",
-    "cn": "被动:\n施放技能时发动光辉\n5秒内，造成技能伤害时追加 主属性x1.5 的伤害（最多触发30次）\n冷却时间：15秒\n主动使用时触发高洁之魂\n3秒内免疫debuff/伤害/控制效果\n持续时间结束后对范围内敌人造成吸收伤害x15的纯粹伤害（最大可造成生命值x15的伤害）并恢复50%生命值\n冷却时间：60秒\n\n\n装备翻译来自B站UP 阿我的手"
+    "cn": "被动:\n施放技能时发动光辉\n5秒内，造成技能伤害时追加 主属性x1.5 的伤害（最多触发30次）\n冷却时间：15秒\n主动使用时触发高洁之魂\n3秒内免疫debuff/伤害/控制效果\n持续时间结束后对范围内敌人造成吸收伤害x15的纯粹伤害（最大可造成生命值x15的伤害）并恢复50%生命值\n冷却时间：60秒"
   },
   {
     "id": "I01T",
     "enName": "Eye of Annihilation",
     "koName": "사멸의 눈",
     "en": "⁘ Upon moving 3000 distance, activates Annihilation on next attack\n⁘ Deals (MAIN STAT X 40) pure damage to target and enemies around it\n⁘ Increases your damage dealt to target by 10% for 4 seconds\n⁘ Can activate up to 2 more times within 5 seconds, dealing 25% of original damage and extending debuff by 1 second\n⁘ Cooldown: 5 seconds",
-    "cn": "被动:\n移动3000距离后，在你的下一次攻击时发动死亡吐息\n对目标及周围敌人造成主属性x40的纯粹伤害。\n使你最终伤害提高10%，持续4秒\n发动后可追加发动2次，造成25%伤害并延长1秒持续时间（冷却时间：1秒）\n激活后冷却5秒才可重新充能\n\n\n装备翻译来自B站UP 阿我的手"
+    "cn": "被动:\n移动3000距离后，在你的下一次攻击时发动死亡吐息\n对目标及周围敌人造成主属性x40的纯粹伤害。\n使你最终伤害提高10%，持续4秒\n发动后可追加发动2次，造成25%伤害并延长1秒持续时间（冷却时间：1秒）\n激活后冷却5秒才可重新充能"
   },
   {
     "id": "I0A5",
@@ -291,7 +291,7 @@
     "enName": "Espishu, the True Sword of Chaos",
     "koName": "진 혼돈의 검 에스피슈",
     "en": "Passive\n⁘ Chance to activate True Chaos Strike on attack\n⁘ 10% chance to deal (STR + AGI) X 7.5 magic damage\n⁘ every 4th proc lands as critical strike",
-    "cn": "被动:\n有10%概率对目标造成（力量+敏捷）x7.5的魔法伤害\n每第四次触发时该伤害必定暴击\n\n\n装备翻译来自B站UP 阿我的手"
+    "cn": "被动:\n有10%概率对目标造成（力量+敏捷）x7.5的魔法伤害\n每第四次触发时该伤害必定暴击"
   },
   {
     "id": "I0B9",
@@ -326,7 +326,7 @@
     "enName": "Silver Fang",
     "koName": "은빛 송곳니",
     "en": "Passive:\nOn attack, restores 10 HP\n",
-    "cn": "被动：\n攻击时，恢复 10 HP\n"
+    "cn": "被动：\n攻击时，恢复 10 HP"
   },
   {
     "id": "I0DW",
@@ -375,14 +375,14 @@
     "enName": "Shell Sword",
     "koName": "쉘 소드",
     "en": "Passive:\n25% chance to deal splash damage on attack\n",
-    "cn": "被动：\n25% 几率在攻击时造成溅射伤害\n"
+    "cn": "被动：\n25% 几率在攻击时造成溅射伤害"
   },
   {
     "id": "spsh",
     "enName": "Crab Armor",
     "koName": "크랩 아머",
     "en": "Passive:\nReflects 300 magic damage when attacked\n",
-    "cn": "被动：\n受到攻击时反射 300 魔法伤害\n"
+    "cn": "被动：\n受到攻击时反射 300 魔法伤害"
   },
   {
     "id": "ciri",
@@ -396,7 +396,7 @@
     "enName": "Ivory Cane",
     "koName": "상아 지팡이",
     "en": "Passive:\nOn attack, deals 300 bonus magic damage\n",
-    "cn": "被动：\n攻击时，造成 300 额外魔法伤害\n"
+    "cn": "被动：\n攻击时，造成 300 额外魔法伤害"
   },
   {
     "id": "ankh",
@@ -410,14 +410,14 @@
     "enName": "Icicle Bow",
     "koName": "아이시클 보우",
     "en": "Passive:\nEach basic attack deals an additional 200~400 magic damage and applies slow\nSlow lasts for 0.75 seconds\n",
-    "cn": "被动：\n每次普通攻击额外造成200~400魔法伤害并施加减速\n减速持续0.75秒\n"
+    "cn": "被动：\n每次普通攻击额外造成200~400魔法伤害并施加减速\n减速持续0.75秒"
   },
   {
     "id": "lgdh",
     "enName": "Glacier Guard",
     "koName": "글래시어 가드",
     "en": "Passive:\n10% chance to freeze nearby enemies on being hit for 1.5 seconds and deal 3000 magic damage\n",
-    "cn": "被动：\n10%几率在被击中时冻结附近的敌人1.5秒并造成3000魔法伤害\n"
+    "cn": "被动：\n10%几率在被击中时冻结附近的敌人1.5秒并造成3000魔法伤害"
   },
   {
     "id": "ssil",
@@ -431,21 +431,21 @@
     "enName": "King Kong's Claws",
     "koName": "킹콩의 손톱",
     "en": "Passive:\nOn consecutively attacking the same target, deals 400 bonus magic damage\n",
-    "cn": "被动：\n连续攻击同一个目标时，造成 400 额外魔法伤害\n"
+    "cn": "被动：\n连续攻击同一个目标时，造成 400 额外魔法伤害"
   },
   {
     "id": "hval",
     "enName": "Wind-Protection Clothing",
     "koName": "바람막이 털옷",
     "en": "Passive:\nAllows you to dodge fatal damage once every 90 seconds\nCannot be dropped during cooldown\n",
-    "cn": "被动：\n让你每 90 秒躲避一次致命伤害\n冷却期间不能掉落\n"
+    "cn": "被动：\n让你每 90 秒躲避一次致命伤害\n冷却期间不能掉落"
   },
   {
     "id": "I0DV",
     "enName": "Meat Bag",
     "koName": "고기 주머니",
     "en": "Passive:\nOn use, consumes some meat from the bag\nRestores 200 HP and MP and increase ATK SPD by 15%\n",
-    "cn": "被动：\n使用时，消耗袋子里的一些肉\n恢复 200 HP 和 MP 并增加 15% 攻击速度\n"
+    "cn": "被动：\n使用时，消耗袋子里的一些肉\n恢复 200 HP 和 MP 并增加 15% 攻击速度"
   },
   {
     "id": "I05R",
@@ -466,14 +466,14 @@
     "enName": "Raven Bow",
     "koName": "칠흑의 활",
     "en": "Passive:\n10% Chance to amplify ATK DMG by 2x for 5 seconds on attack\n",
-    "cn": "被动：\n10% 几率在攻击时将攻击伤害提高 2 倍，持续 5 秒\n"
+    "cn": "被动：\n10% 几率在攻击时将攻击伤害提高 2 倍，持续 5 秒"
   },
   {
     "id": "I0F0",
     "enName": "Raven Rifle",
     "koName": "칠흑의 활",
     "en": "Passive:\n10% Chance to amplify ATK DMG by 2x for 5 seconds on attack\n",
-    "cn": "被动：\n10% 几率在攻击时将攻击伤害提高 2 倍，持续 5 秒\n"
+    "cn": "被动：\n10% 几率在攻击时将攻击伤害提高 2 倍，持续 5 秒"
   },
   {
     "id": "mnst",
@@ -487,14 +487,14 @@
     "enName": "Blade of Requiem",
     "koName": "진혼검",
     "en": "Passive:\nOn every 14th attack, activates Unleash\nRed Wrath: deals (MAIN STAT X 3.5) magic splash damage\nGreen Wrath: reduces target MOV and ATK SPD by 66% for 3 seconds, deals (MAIN STAT X 1.9) magic splash damage, and stuns non-boss units for 0.25 seconds\nBlue Wrath: heals user for (MAIN STAT + 300) HP and (current MP + (max MP X 15%)) MP\n",
-    "cn": "被动：\n每第 14 次攻击，激活释放\n红色愤怒：造成 (主属性 X 3.5) 魔法溅射伤害\n绿色愤怒：降低目标 MOV 和 ATK SPD 66%，持续 3 秒，造成 ( 主属性 X 1.9) 魔法溅射伤害，并使非 Boss 单位昏迷 0.25 秒\nBlue Wrath：治疗用户 (主属性 + 300) HP 和 (当前 MP + (最大 MP X 15%)) MP\\r \n"
+    "cn": "被动：\n每第 14 次攻击，激活释放\n红色愤怒：造成 (主属性 X 3.5) 魔法溅射伤害\n绿色愤怒：降低目标 MOV 和 ATK SPD 66%，持续 3 秒，造成 ( 主属性 X 1.9) 魔法溅射伤害，并使非 Boss 单位昏迷 0.25 秒\nBlue Wrath：治疗用户 (主属性 + 300) HP 和 (当前 MP + (最大 MP X 15%)) MP\\r"
   },
   {
     "id": "I0CB",
     "enName": "Crossbow of Requiem",
     "koName": "진혼궁",
     "en": "Passive:\nActivates Unleash every 14th attack\nRed Wrath: deals (MAIN STAT X 3.5) magic splash damage\nGreen Wrath: reduces target MOV and ATK SPD by 66% for 3 seconds, deals (MAIN STAT X 1.9) magic splash damage, and stuns non-boss units for 0.25 seconds\nBlue Wrath: heals user for (MAIN STAT + 300) HP and (current MP + (max MP X 15%)) MP\n",
-    "cn": "被动：\n每 14 次攻击激活释放\n红色愤怒：造成 (主属性 X 3.5) 魔法溅射伤害\n绿色愤怒：将目标 MOV 和 ATK SPD 降低 66%，持续 3 秒，造成 (主属性 X 3.5) X 1.9) 魔法溅射伤害，并使非 Boss 单位昏迷 0.25 秒\n蓝色愤怒：治疗用户 (主属性 + 300) HP 和 (当前 MP + (最大 MP X 15%)) MP\n "
+    "cn": "被动：\n每 14 次攻击激活释放\n红色愤怒：造成 (主属性 X 3.5) 魔法溅射伤害\n绿色愤怒：将目标 MOV 和 ATK SPD 降低 66%，持续 3 秒，造成 (主属性 X 3.5) X 1.9) 魔法溅射伤害，并使非 Boss 单位昏迷 0.25 秒\n蓝色愤怒：治疗用户 (主属性 + 300) HP 和 (当前 MP + (最大 MP X 15%)) MP"
   },
   {
     "id": "I0BR",
@@ -508,14 +508,14 @@
     "enName": "Cape of the Dead",
     "koName": "망자의 옷",
     "en": "Passive:\nIf HP drops below 15%, gain 90% damage reduction for 3 seconds\nCooldown: 90 seconds\n",
-    "cn": "被动：\n如果生命值低于 15%，获得 90% 伤害减免，持续 3 秒\n冷却时间：90 秒\n"
+    "cn": "被动：\n如果生命值低于 15%，获得 90% 伤害减免，持续 3 秒\n冷却时间：90 秒"
   },
   {
     "id": "I0BT",
     "enName": "Ring of the Dead",
     "koName": "망자의 반지",
     "en": "Passive:\nPeriodically drains HP from nearby enemies (5 HP from mobs and 30 HP bosses)\n",
-    "cn": "被动：\n定期从附近的敌人身上吸取 HP（5 HP 来自小怪和 30 HP boss）\n"
+    "cn": "被动：\n定期从附近的敌人身上吸取 HP（5 HP 来自小怪和 30 HP boss）"
   },
   {
     "id": "I0C3",
@@ -536,14 +536,14 @@
     "enName": "Bat Wings",
     "koName": "박쥐 날개",
     "en": "Passive:\nUpon moving 400 distance, activates Drain on next attack\nDeals (33% ATK DMG) pure damage\nHeals 6% max HP\nCooldown: 0.125 seconds\n",
-    "cn": "被动：\n移动 400 距离后，在下次攻击时激活吸取\n造成 (33% 攻击伤害) 纯伤害\n治疗 6% 最大生命值\n冷却时间：0.125 秒\n"
+    "cn": "被动：\n移动 400 距离后，在下次攻击时激活吸取\n造成 (33% 攻击伤害) 纯伤害\n治疗 6% 最大生命值\n冷却时间：0.125 秒"
   },
   {
     "id": "dsum",
     "enName": "Flame Cloak",
     "koName": "화염의 망토",
     "en": "Passive:\nDeals 750 magic damage per second to nearby enemies\n",
-    "cn": "被动：\n每秒对附近的敌人造成 750 魔法伤害\n"
+    "cn": "被动：\n每秒对附近的敌人造成 750 魔法伤害"
   },
   {
     "id": "I05U",
@@ -557,21 +557,21 @@
     "enName": "Staff of Crimson Flame",
     "koName": "홍염의 지팡이",
     "en": "Passive:\nOn attack, 8% chance to activate Blessing of Flame\nIncreases damage by 500 and MAIN STAT by 50 for 5 seconds\n",
-    "cn": "被动：\n攻击时，8%几率激活火焰祝福\n伤害增加500，主属性增加50，持续5秒\n"
+    "cn": "被动：\n攻击时，8%几率激活火焰祝福\n伤害增加500，主属性增加50，持续5秒"
   },
   {
     "id": "I09E",
     "enName": "Bow of Crimson Flame",
     "koName": "홍염의 활",
     "en": "Passive:\nOn attack, 8% chance to activate Blessing of Flame\nIncreases damage by 500 and MAIN STAT by 50 for 5 seconds\n",
-    "cn": "被动：\n攻击时，8%几率激活火焰祝福\n伤害增加500，主属性增加50，持续5秒\n"
+    "cn": "被动：\n攻击时，8%几率激活火焰祝福\n伤害增加500，主属性增加50，持续5秒"
   },
   {
     "id": "I0F4",
     "enName": "Rifle of Crimson Flame",
     "koName": "홍염의 소총",
     "en": "Passive:\nOn attack, 8% chance to activate Blessing of Flame\nIncreases damage by 500 and MAIN STAT by 50 for 5 seconds\n",
-    "cn": "被动：\n攻击时，8%几率激活火焰祝福\n伤害增加500，主属性增加50，持续5秒\n"
+    "cn": "被动：\n攻击时，8%几率激活火焰祝福\n伤害增加500，主属性增加50，持续5秒"
   },
   {
     "id": "I0CF",
@@ -585,63 +585,63 @@
     "enName": "Flamereaver",
     "koName": "플레임리버",
     "en": "Passive:\nOn attack, 2% chance to deal STR X 10 magic damage\n",
-    "cn": "被动：\n攻击时，有 2% 几率造成 力量 X 10 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 2% 几率造成 力量 X 10 魔法伤害"
   },
   {
     "id": "rnec",
     "enName": "Blaster",
     "koName": "블래스터",
     "en": "Passive:\n15% Chance to activate Explosion on attack\nDeals (AGI X 1.5) magic damage in an AoE\n",
-    "cn": "被动：\n15% 几率在攻击时激活爆炸\n范围造成 (敏捷 X 1.5) 魔法伤害\n"
+    "cn": "被动：\n15% 几率在攻击时激活爆炸\n范围造成 (敏捷 X 1.5) 魔法伤害"
   },
   {
     "id": "bfhr",
     "enName": "Helm of Passion",
     "koName": "열정의 투구",
     "en": "Passive:\nIncreases nearby allies' movement speed by 20% and ATK SPD by 10%\n",
-    "cn": "被动:\n增加附近友军 20% 移动速度和 10% 攻击速度\n"
+    "cn": "被动:\n增加附近友军 20% 移动速度和 10% 攻击速度"
   },
   {
     "id": "stwa",
     "enName": "Crimson Stone",
     "koName": "적석",
     "en": "Passive:\nOn skill cast, increases HP regen by 90, skill damage by 6% for 3 seconds\n",
-    "cn": "被动：\n施放技能时，生命恢复提高90，技能伤害提高6%，持续3秒\n"
+    "cn": "被动：\n施放技能时，生命恢复提高90，技能伤害提高6%，持续3秒"
   },
   {
     "id": "blba",
     "enName": "A Small Piece of Wrath",
     "koName": "작은 분노의 조각",
     "en": "Passive:\n12.5% Chance to activate Wrath on skill cast\nDeals (MAIN STAT X 6) magic damage in an AoE and stuns for 1 second\n",
-    "cn": "被动：\n12.5% 几率在施放技能时激活愤怒\n在一个范围内造成 (主属性 X 6) 魔法伤害并眩晕 1 秒\n"
+    "cn": "被动：\n12.5% 几率在施放技能时激活愤怒\n在一个范围内造成 (主属性 X 6) 魔法伤害并眩晕 1 秒"
   },
   {
     "id": "I0BN",
     "enName": "Sword of Deep Sea",
     "koName": "심해의 검",
     "en": "Passive:\nOn attack, 20% chance to activate Abyss Tentacle\nDeals (0.01 X ATK DMG X 2) splash damage\n",
-    "cn": "被动：\n攻击时，有 20% 几率激活深渊触手\n造成 (0.01 X 攻击伤害 X 2) 溅射伤害\n"
+    "cn": "被动：\n攻击时，有 20% 几率激活深渊触手\n造成 (0.01 X 攻击伤害 X 2) 溅射伤害"
   },
   {
     "id": "I0BP",
     "enName": "Staff of Deep Sea",
     "koName": "심해의 지팡이",
     "en": "Passive:\nOn attack, 20% chance to activate Abyss Tentacle\nDeals (0.01 X ATK DMG X 2) splash damage\n",
-    "cn": "被动：\n攻击时，有 20% 几率激活深渊触手\n造成 (0.01 X 攻击伤害 X 2) 溅射伤害\n"
+    "cn": "被动：\n攻击时，有 20% 几率激活深渊触手\n造成 (0.01 X 攻击伤害 X 2) 溅射伤害"
   },
   {
     "id": "I0BO",
     "enName": "Bow of Deep Sea",
     "koName": "심해의 활",
     "en": "Passive:\nOn attack, 20% chance to activate Abyss Tentacle\nDeals (0.01 X ATK DMG X 2) splash damage\n",
-    "cn": "被动：\n攻击时，有 20% 几率激活深渊触手\n造成 (0.01 X 攻击伤害 X 2) 溅射伤害\n"
+    "cn": "被动：\n攻击时，有 20% 几率激活深渊触手\n造成 (0.01 X 攻击伤害 X 2) 溅射伤害"
   },
   {
     "id": "I0F6",
     "enName": "Rifle of Deep Sea",
     "koName": "심해의 소총",
     "en": "Passive:\nOn attack, 20% chance to activate Abyss Tentacle\nDeals (0.01 X ATK DMG X 2) splash damage\n",
-    "cn": "被动：\n攻击时，有 20% 几率激活深渊触手\n造成 (0.01 X 攻击伤害 X 2) 溅射伤害\n"
+    "cn": "被动：\n攻击时，有 20% 几率激活深渊触手\n造成 (0.01 X 攻击伤害 X 2) 溅射伤害"
   },
   {
     "id": "pnvu",
@@ -655,14 +655,14 @@
     "enName": "Trident",
     "koName": "삼지창",
     "en": "Passive:\nOn skill cast, empowers next 3 attacks\n",
-    "cn": "被动：\n施放技能时，强化接下来的 3 次攻击\n"
+    "cn": "被动：\n施放技能时，强化接下来的 3 次攻击"
   },
   {
     "id": "I0OT",
     "enName": "Tidal Robe",
     "koName": "타이달 로브",
     "en": "Passive:\nOn being damaged, restores 1200 HP over 5 seconds\n",
-    "cn": "被动：\n受到伤害时，在 5 秒内恢复 1200 生命值\n"
+    "cn": "被动：\n受到伤害时，在 5 秒内恢复 1200 生命值"
   },
   {
     "id": "I0OU",
@@ -676,49 +676,49 @@
     "enName": "Wings of Purification",
     "koName": "정화의 날개",
     "en": "Passive:\nRestores nearby allies' HP by 1000 every 5 seconds\n",
-    "cn": "被动：\n每 5 秒为附近盟友恢复 1000 生命值\n"
+    "cn": "被动：\n每 5 秒为附近盟友恢复 1000 生命值"
   },
   {
     "id": "I0A7",
     "enName": "Sword of Corruption",
     "koName": "타락의 검",
     "en": "Passive:\nOn attack, 10% chance to activate Corrupt Spike\nDeals 260 magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活腐蚀尖刺\n造成 260 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活腐蚀尖刺\n造成 260 魔法伤害"
   },
   {
     "id": "I0A8",
     "enName": "Staff of Corruption",
     "koName": "타락의 지팡이",
     "en": "Passive:\nOn attack, 10% chance to activate Corrupt Spike\nDeals 260 magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活腐蚀尖刺\n造成 260 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活腐蚀尖刺\n造成 260 魔法伤害"
   },
   {
     "id": "I0A9",
     "enName": "Bow of Corruption",
     "koName": "타락의 활",
     "en": "Passive:\nOn attack, 10% chance to activate Corrupt Spike\nDeals 260 magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活腐蚀尖刺\n造成 260 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活腐蚀尖刺\n造成 260 魔法伤害"
   },
   {
     "id": "I0F5",
     "enName": "Rifle of Corruption",
     "koName": "타락의 소총",
     "en": "Passive:\nOn attack, 10% chance to activate Corrupt Spike\nDeals 260 magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活腐蚀尖刺\n造成 260 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活腐蚀尖刺\n造成 260 魔法伤害"
   },
   {
     "id": "I08X",
     "enName": "Plates of Regeneration",
     "koName": "대지의 갑주",
     "en": "Passive:\nTemporarily boosts HP regen to 750 HP per second when HP drops below 30% of max HP for 10 seconds\nCooldown: 60 seconds\n",
-    "cn": "被动：\n当 HP 低于最大 HP 的 30% 并持续 10 秒时，暂时将 HP 恢复提高到每秒 750 HP\n冷却时间：60 秒\n"
+    "cn": "被动：\n当 HP 低于最大 HP 的 30% 并持续 10 秒时，暂时将 HP 恢复提高到每秒 750 HP\n冷却时间：60 秒"
   },
   {
     "id": "I06D",
     "enName": "Vest of Protection",
     "koName": "수호의 복장",
     "en": "Passive:\nCreates a barrier that absorbs 800 damage every 8 seconds\n",
-    "cn": "被动：\n创建一个屏障，每 8 秒吸收 800 点伤害\n"
+    "cn": "被动：\n创建一个屏障，每 8 秒吸收 800 点伤害"
   },
   {
     "id": "I0AV",
@@ -732,56 +732,56 @@
     "enName": "Lifestone",
     "koName": "생명의 돌",
     "en": "Passive:\nOn death, revives you after a short delay (cooldown: 3 minutes)\nCooldown: 180 seconds\n",
-    "cn": "被动：\n死亡时，短暂延迟后复活你（冷却时间：3 分钟）\n冷却时间：180 秒\n"
+    "cn": "被动：\n死亡时，短暂延迟后复活你（冷却时间：3 分钟）\n冷却时间：180 秒"
   },
   {
     "id": "I077",
     "enName": "Sword of Poison",
     "koName": "맹독의 검",
     "en": "Passive:\nOn attack, inflicts target with poison that deals 1500 magic damage per second for 10 seconds\n",
-    "cn": "被动：\n攻击时，对目标施加每秒造成 1500 魔法伤害的毒药，持续 10 秒\n"
+    "cn": "被动：\n攻击时，对目标施加每秒造成 1500 魔法伤害的毒药，持续 10 秒"
   },
   {
     "id": "I07A",
     "enName": "Staff of Poison",
     "koName": "맹독의 지팡이",
     "en": "Passive:\nOn attack, inflicts target with poison that deals 1500 magic damage per second for 10 seconds\n",
-    "cn": "被动：\n攻击时，对目标施加每秒造成 1500 魔法伤害的毒药，持续 10 秒\n"
+    "cn": "被动：\n攻击时，对目标施加每秒造成 1500 魔法伤害的毒药，持续 10 秒"
   },
   {
     "id": "I09D",
     "enName": "Bow of Poison",
     "koName": "맹독의 활",
     "en": "Passive:\nOn attack, inflicts target with poison that deals 1500 magic damage per second for 10 seconds\n",
-    "cn": "被动：\n攻击时，对目标施加每秒造成 1500 魔法伤害的毒药，持续 10 秒\n"
+    "cn": "被动：\n攻击时，对目标施加每秒造成 1500 魔法伤害的毒药，持续 10 秒"
   },
   {
     "id": "I0F2",
     "enName": "Rifle of Poison",
     "koName": "맹독의 소총",
     "en": "Passive:\nOn attack, inflicts target with poison that deals 1500 magic damage per second for 10 seconds\n",
-    "cn": "被动：\n攻击时，对目标施加每秒造成 1500 魔法伤害的毒药，持续 10 秒\n"
+    "cn": "被动：\n攻击时，对目标施加每秒造成 1500 魔法伤害的毒药，持续 10 秒"
   },
   {
     "id": "ajen",
     "enName": "Sanguiel, the Bloodspear",
     "koName": "피의 창 상귀엘",
     "en": "Passive:\nOn attack, drains 8% of damage dealt as life (up to 250)\n",
-    "cn": "被动：\n攻击时，吸取造成伤害的 8% 作为生命（最多 250）\n"
+    "cn": "被动：\n攻击时，吸取造成伤害的 8% 作为生命（最多 250）"
   },
   {
     "id": "I07I",
     "enName": "Bloodsword Tepethia",
     "koName": "피의 검 테페시아",
     "en": "Passive:\nOn attack, heals 10% of damage dealt (max 250)\n",
-    "cn": "被动：\n攻击时，治疗造成伤害的 10%（最多 250）\n"
+    "cn": "被动：\n攻击时，治疗造成伤害的 10%（最多 250）"
   },
   {
     "id": "moon",
     "enName": "Blood Cannon Tepes",
     "koName": "혈포 체페슈",
     "en": "Passive:\nOn attack, drains 10% of damage dealt as life (up to 400)\n",
-    "cn": "被动：\n攻击时，吸取伤害的 10% 作为生命（最多 400）\n"
+    "cn": "被动：\n攻击时，吸取伤害的 10% 作为生命（最多 400）"
   },
   {
     "id": "I0AY",
@@ -802,14 +802,14 @@
     "enName": "Leoreus, the Greatsword of Flame",
     "koName": "불의 장검 리오레우스",
     "en": "Passive:\nOn attack, 10% chance to activate Flame Explosion\nDeals (flame affinity X (STR X 2)) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活火焰爆炸\n造成 (火属性 X (力量 X 2)) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活火焰爆炸\n造成 (火属性 X (力量 X 2)) 魔法伤害"
   },
   {
     "id": "I080",
     "enName": "Irbeth, the Sword of Lightning",
     "koName": "뇌전의 검 이르베스",
     "en": "Passive:\nOn attack, 10% chance to strike down lightning\nDeals (wind affinity X (AGI X 5)) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率击落闪电\n造成（风属性 X (敏捷 X 5)）魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率击落闪电\n造成（风属性 X (敏捷 X 5)）魔法伤害"
   },
   {
     "id": "I09M",
@@ -830,7 +830,7 @@
     "enName": "Retus, the Iron Bullet",
     "koName": "강철의 탄환 레투스",
     "en": "Passive:\nEmpowers next attack with Iron Bullet every 8 seconds\nEmpowered attacks deal (7.5 X MAIN STAT) magic damage and stuns for 0.25 seconds\n",
-    "cn": "被动：\n每 8 秒用 铁子弹 强化下一次攻击\n强化攻击造成 (7.5 X 主属性) 魔法伤害并眩晕 0.25 秒\n"
+    "cn": "被动：\n每 8 秒用 铁子弹 强化下一次攻击\n强化攻击造成 (7.5 X 主属性) 魔法伤害并眩晕 0.25 秒"
   },
   {
     "id": "I083",
@@ -858,14 +858,14 @@
     "enName": "Dragonsword Lainhart",
     "koName": "용검 라인하르트",
     "en": "Passive:\nOn attack, 10% chance to activate Dragon's Claw\nDeals (MAIN STAT X 2) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2) 魔法伤害"
   },
   {
     "id": "I09S",
     "enName": "Dragonbow Aience",
     "koName": "용궁 에이엔스",
     "en": "Passive:\nOn attack, 10% chance to activate Dragon's Claw\nDeals (MAIN STAT X 2) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2) 魔法伤害"
   },
   {
     "id": "I07T",
@@ -879,7 +879,7 @@
     "enName": "Dragon Cannon Belenus",
     "koName": "용포 벨레누스",
     "en": "Passive:\nOn attack, 10% chance to activate Dragon's Claw\nDeals (MAIN STAT X 2) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2) 魔法伤害"
   },
   {
     "id": "I07X",
@@ -893,7 +893,7 @@
     "enName": "Karonphniamm, the Holy Sword",
     "koName": "성검 카론프니엠",
     "en": "Passive:\nOn attack, 10% chance to activate Holy Strike\nIf MAIN STAT is STR: deals (STR X 3) magic damage\nIf MAIN STAT is AGI or INT: deals (AGI X 3) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活神圣打击\n如果主属性为 力量：造成 (力量 X 3) 魔法伤害\n如果主属性为 敏捷 或 智力：造成 (敏捷 X 3)魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活神圣打击\n如果主属性为 力量：造成 (力量 X 3) 魔法伤害\n如果主属性为 敏捷 或 智力：造成 (敏捷 X 3)魔法伤害"
   },
   {
     "id": "I087",
@@ -907,14 +907,14 @@
     "enName": "Eana, the Holy Cannon",
     "koName": "성포 이아나",
     "en": "Passive:\nOn attack, chance to activate Holy Bullet\nIf MAIN STAT is STR: deals (STR X 3) magic damage\nIf MAIN STAT is AGI or INT: deals (AGI X 3) magic damage\n",
-    "cn": "被动：\n攻击时，有几率激活 圣弹\n如果 主属性 是 力量：造成 (力量 X 3) 魔法伤害\n如果 主属性 是 敏捷 或 智力：造成 (敏捷 X 3) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有几率激活 圣弹\n如果 主属性 是 力量：造成 (力量 X 3) 魔法伤害\n如果 主属性 是 敏捷 或 智力：造成 (敏捷 X 3) 魔法伤害"
   },
   {
     "id": "I088",
     "enName": "Sacred Armor",
     "koName": "성갑 홀리오스",
     "en": "Passive:\nOn being hit, 10% chance to activate Holy Barrier\nIncreases armor by 1000 for 4 seconds\nCooldown: 12 seconds\n",
-    "cn": "被动：\n被击中时，有 10% 几率激活神圣屏障\n增加 1000 护甲，持续 4 秒\n冷却时间：12 秒\n"
+    "cn": "被动：\n被击中时，有 10% 几率激活神圣屏障\n增加 1000 护甲，持续 4 秒\n冷却时间：12 秒"
   },
   {
     "id": "I089",
@@ -928,84 +928,84 @@
     "enName": "Eximelia, the Unholy Sword",
     "koName": "마검 엑시멜리아",
     "en": "Passive:\nOn attack, 10% chance to activate Unholy Strike\nDeals (AGI X 3) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活邪恶打击\n造成 (敏捷 X 3) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活邪恶打击\n造成 (敏捷 X 3) 魔法伤害"
   },
   {
     "id": "I08C",
     "enName": "Dekaros, the Unholy Armor",
     "koName": "마갑 데카로스",
     "en": "Passive:\n12% chance to reduce attacker's armor on being hit\nReduces armor by 125 for 5 seconds\n",
-    "cn": "被动：\n12% 几率在被击中时减少攻击者的护甲\n减少 125 护甲持续 5 秒\n"
+    "cn": "被动：\n12% 几率在被击中时减少攻击者的护甲\n减少 125 护甲持续 5 秒"
   },
   {
     "id": "I09O",
     "enName": "Alkate, the Unholy Bow",
     "koName": "마궁 알카테",
     "en": "Passive:\nOn attack, 10% chance to activate Unholy Spike\nDeals (AGI X 3) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活邪恶尖刺\n造成 (敏捷 X 3) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活邪恶尖刺\n造成 (敏捷 X 3) 魔法伤害"
   },
   {
     "id": "rhth",
     "enName": "Okelanq, the Spear of Frost",
     "koName": "빙결의 창 오켈렌크",
     "en": "Passive:\n13% chance to activate Frost effect on attack\nDeals (MAIN STAT X 3) magic damage and reduces enemy's movement speed by 20% for 3 seconds\n",
-    "cn": "被动：\n攻击时有 13% 几率激活冰霜效果\n造成 (主属性 X 3) 魔法伤害并降低敌人 20% 的移动速度，持续 3 秒\n"
+    "cn": "被动：\n攻击时有 13% 几率激活冰霜效果\n造成 (主属性 X 3) 魔法伤害并降低敌人 20% 的移动速度，持续 3 秒"
   },
   {
     "id": "I0D6",
     "enName": "Okelanq, the Bow of Frost",
     "koName": "빙결의 활 오켈렌크",
     "en": "Passive:\nOn attack, 13% chance to activate Frost Strike\nDeals (MAIN STAT X 3) magic damage and reduces enemy's movement speed by 20% for 3 seconds\n",
-    "cn": "被动：\n攻击时，有 13% 几率激活冰霜打击\n造成 (主属性 X 3) 魔法伤害并降低敌人 20% 的移动速度，持续 3 秒\n"
+    "cn": "被动：\n攻击时，有 13% 几率激活冰霜打击\n造成 (主属性 X 3) 魔法伤害并降低敌人 20% 的移动速度，持续 3 秒"
   },
   {
     "id": "I08D",
     "enName": "Robe of Everfrost",
     "koName": "서리한의 로브 켈투자드",
     "en": "Passive:\nOn being hit, 10% chance to activate Frost Armor\nIncreases armor by 50 for 15 seconds\n",
-    "cn": "被动：\n被击中时，有 10% 几率激活冰霜护甲\n增加 50 护甲，持续 15 秒\n"
+    "cn": "被动：\n被击中时，有 10% 几率激活冰霜护甲\n增加 50 护甲，持续 15 秒"
   },
   {
     "id": "I08R",
     "enName": "Helm of Everfrost",
     "koName": "서리한의 투구 프로스트",
     "en": "Passive:\nOn being hit, 10% chance to freeze the attacker\n",
-    "cn": "被动：\n被击中时，有 10% 的几率冻结攻击者\n"
+    "cn": "被动：\n被击中时，有 10% 的几率冻结攻击者"
   },
   {
     "id": "I08E",
     "enName": "Hood of Everfrost",
     "koName": "서리한의 후드 프로스트",
     "en": "Passive:\nOn being hit, 10% chance to freeze the attacker\n",
-    "cn": "被动：\n被击中时，有 10% 的几率冻结攻击者\n"
+    "cn": "被动：\n被击中时，有 10% 的几率冻结攻击者"
   },
   {
     "id": "I097",
     "enName": "Winter Rose",
     "koName": "윈터 로즈",
     "en": "Passive:\nOn attack, 10% chance to temporarily boost your INT by 25 for 6 seconds\n",
-    "cn": "被动：\n攻击时，有 10% 的几率使你的智力暂时提高 25，持续 6 秒\n"
+    "cn": "被动：\n攻击时，有 10% 的几率使你的智力暂时提高 25，持续 6 秒"
   },
   {
     "id": "I099",
     "enName": "Frost Web Brooch",
     "koName": "프로스트 웹 브로치",
     "en": "Passive:\nOn attack, 9% chance to reduce target's armor by 12% [Type-A] for 5 seconds\n",
-    "cn": "被动：\n攻击时，有 9% 的几率使目标的护甲降低 12% [Type-A]，持续 5 秒\n"
+    "cn": "被动：\n攻击时，有 9% 的几率使目标的护甲降低 12% [Type-A]，持续 5 秒"
   },
   {
     "id": "I067",
     "enName": "Winter's Tear",
     "koName": "겨울의 눈물",
     "en": "Passive:\nOn every 8th attack, activates Chilling Strike\nDeals (water affinity X (STR X 1.8 + AGI X 1.5)) pure damage\n",
-    "cn": "被动：\n每第 8 次攻击，激活寒冰打击\n造成 (水属性 X (力量 X 1.8 + 敏捷 X 1.5)) 真实伤害\n"
+    "cn": "被动：\n每第 8 次攻击，激活寒冰打击\n造成 (水属性 X (力量 X 1.8 + 敏捷 X 1.5)) 真实伤害"
   },
   {
     "id": "bspd",
     "enName": "Frostbane",
     "koName": "프로스트베인",
     "en": "Passive:\n15% chance to slow target on attack\nDeals (AGI X 1.3) magic damage and slows for 3 seconds\n",
-    "cn": "被动：\n15% 几率在攻击时减缓目标\n造成 (敏捷 X 1.3) 魔法伤害并减速 3 秒\n"
+    "cn": "被动：\n15% 几率在攻击时减缓目标\n造成 (敏捷 X 1.3) 魔法伤害并减速 3 秒"
   },
   {
     "id": "I098",
@@ -1026,14 +1026,14 @@
     "enName": "Claws of Destruction",
     "koName": "파괴의 손톱",
     "en": "Passive:\n(1 + HIT COUNT X 0.125)% chance to activate Doomsday on attack\nDeals (8 X (STR + AGI)) + (1.3 X ATK DMG) magic splash damage and stuns for 0.1 seconds\n",
-    "cn": "被动：\n(1 + 连击计数 X 0.125)% 机会在攻击时激活世界末日\n造成 (8 X (力量 + 敏捷)) + (1.3 X 攻击伤害) 魔法飞溅伤害和眩晕 0.1 秒\n"
+    "cn": "被动：\n(1 + 连击计数 X 0.125)% 机会在攻击时激活世界末日\n造成 (8 X (力量 + 敏捷)) + (1.3 X 攻击伤害) 魔法飞溅伤害和眩晕 0.1 秒"
   },
   {
     "id": "I0FG",
     "enName": "Bullet of Destruction",
     "koName": "파괴의 탄환",
     "en": "Passive:\n(1 + HIT COUNT X 0.125)% chance to activate Doomsday on attack\nDeals (8 X (STR + AGI)) + (1.3 X ATK DMG) magic splash damage and stuns for 0.1 seconds\n",
-    "cn": "被动：\n(1 + 连击计数 X 0.125)% 机会在攻击时激活世界末日\n造成 (8 X (力量 + 敏捷)) + (1.3 X 攻击伤害) 魔法飞溅伤害和眩晕 0.1 秒\n"
+    "cn": "被动：\n(1 + 连击计数 X 0.125)% 机会在攻击时激活世界末日\n造成 (8 X (力量 + 敏捷)) + (1.3 X 攻击伤害) 魔法飞溅伤害和眩晕 0.1 秒"
   },
   {
     "id": "ktrm",
@@ -1054,35 +1054,35 @@
     "enName": "Spiritus, the Sword of Elements",
     "koName": "정령검 스피리투스",
     "en": "Passive:\nEnables the use of Breath of Ancients every 6 seconds\nDeals (MAIN STAT X 6) magic damage on attack\n",
-    "cn": "被动：\n每 6 秒启用一次远古之息\n攻击时造成 ((力量 + 敏捷 + 智力) X 6) 魔法伤害\n"
+    "cn": "被动：\n每 6 秒启用一次远古之息\n攻击时造成 ((力量 + 敏捷 + 智力) X 6) 魔法伤害"
   },
   {
     "id": "rag1",
     "enName": "Storm Headdress",
     "koName": "폭풍우의 화관",
     "en": "Passive:\nOn crit, strike down a lightning\nDeals ((STR + AGI + INT) X 0.45) magic damage\nHas a 15% chance to deal ((STR + AGI + INT) X 2.25) magic damage instead\nCooldown: 2.5 seconds\n",
-    "cn": "被动：\n暴击时击落一道闪电\n造成 ((力量 + 敏捷 + 智力) X 0.45) 魔法伤害\n有 15% 的几率造成 ((力量 + 敏捷 + 智力) X 2.25 ) 改为魔法伤害\n冷却时间：2.5 秒\n"
+    "cn": "被动：\n暴击时击落一道闪电\n造成 ((力量 + 敏捷 + 智力) X 0.45) 魔法伤害\n有 15% 的几率造成 ((力量 + 敏捷 + 智力) X 2.25 ) 改为魔法伤害\n冷却时间：2.5 秒"
   },
   {
     "id": "afac",
     "enName": "Visvire, the Hammer of Storm",
     "koName": "우레의 망치 비스바이레",
     "en": "Passive:\nActivates Source of Power on skill cast\nDeals (STR X 0.225) magic damage on next attack\nIncreases STR by 40 for 6 seconds\nCooldown: 10 seconds\n",
-    "cn": "被动：\n在施放技能时激活能量之源\n下次攻击造成 (力量 X 0.225) 魔法伤害\n增加 40 点 力量，持续 6 秒\n冷却时间：10 秒\n"
+    "cn": "被动：\n在施放技能时激活能量之源\n下次攻击造成 (力量 X 0.225) 魔法伤害\n增加 40 点 力量，持续 6 秒\n冷却时间：10 秒"
   },
   {
     "id": "phlt",
     "enName": "Corruptor",
     "koName": "커럽터",
     "en": "Passive:\n25% chance to corrupt enemies in frontal cone on attack\nDeals (STR X 9) magic damage and reduces enemy armor by 175 for 6 seconds\n",
-    "cn": "被动：\n25% 的几率在攻击时腐蚀正面锥形中的敌人\n造成 (力量 X 9) 魔法伤害并使敌人的护甲降低 175，持续 6 秒\n"
+    "cn": "被动：\n25% 的几率在攻击时腐蚀正面锥形中的敌人\n造成 (力量 X 9) 魔法伤害并使敌人的护甲降低 175，持续 6 秒"
   },
   {
     "id": "rin1",
     "enName": "Stalker",
     "koName": "추적자",
     "en": "Passive:\n8% chance to activate Corrupt Explosion on attack\nDeals (AGI X 2) magic damage in an AoE\n",
-    "cn": "被动：\n8% 几率在攻击时激活腐蚀爆炸\n范围造成 (敏捷 X 2) 魔法伤害\n"
+    "cn": "被动：\n8% 几率在攻击时激活腐蚀爆炸\n范围造成 (敏捷 X 2) 魔法伤害"
   },
   {
     "id": "kpin",
@@ -1103,7 +1103,7 @@
     "enName": "Skull Seal",
     "koName": "해골 인장",
     "en": "Passive:\nOn being healed, converts 15% of excess amount into max HP for 6 seconds (max bonus HP of 750)\n",
-    "cn": "被动：\n被治疗时，将多余量的 15% 转化为最大生命值，持续 6 秒（最大额外生命值 750）\n"
+    "cn": "被动：\n被治疗时，将多余量的 15% 转化为最大生命值，持续 6 秒（最大额外生命值 750）"
   },
   {
     "id": "evtl",
@@ -1131,28 +1131,28 @@
     "enName": "Flameshard Armor",
     "koName": "플레임샤드 아머",
     "en": "Passive:\nIf HP drops below 35%, activates Flameshard\nIncreases STR by 5% for 10 seconds and restores 14% max HP\nDeals (flame affinity X (STR X 3.75)) magic damage in an AoE\nReduces enemy attack and movement speed by 75% for 1.5 seconds\nCooldown: 8 seconds\n",
-    "cn": "被动：\n如果 HP 低于 35%，激活 烈焰碎片\n增加 5% 的 力量，持续 10 秒并恢复 14% 最大 HP\\r范围造成 (火属性 X (力量 X 3.75)) 魔法伤害\n降低敌人攻击和移动速度 75%，持续 1.5 秒\n冷却时间：8 秒\n"
+    "cn": "被动：\n如果 HP 低于 35%，激活 烈焰碎片\n增加 5% 的 力量，持续 10 秒并恢复 14% 最大 HP\\r范围造成 (火属性 X (力量 X 3.75)) 魔法伤害\n降低敌人攻击和移动速度 75%，持续 1.5 秒\n冷却时间：8 秒"
   },
   {
     "id": "I0C8",
     "enName": "Ring of Nightmare",
     "koName": "악몽의 반지",
     "en": "Passive:\nOn attack, 5% chance to activate Nightmare\nIncreases ATK DMG by 4500, MAIN STAT by 270, and HP regen by 300 for 6 seconds\n",
-    "cn": "被动：\n攻击时，有 5% 几率激活梦魇\n攻击力增加 4500，主属性增加 270，HP 恢复增加 300，持续 6 秒\n"
+    "cn": "被动：\n攻击时，有 5% 几率激活梦魇\n攻击力增加 4500，主属性增加 270，HP 恢复增加 300，持续 6 秒"
   },
   {
     "id": "ssan",
     "enName": "Inferno",
     "koName": "인페르노",
     "en": "Passive:\n20% chance to activate Burning Wrath on attack\nCauses 5 explosions on target for 2.5 seconds\nEach explosion deals (AGI X 3) magic damage in an AoE\nRestores 1% HP per explosion\nCooldown: 10 seconds\n",
-    "cn": "被动：\n20% 几率在攻击时激活燃烧之怒\n在目标身上造成 5 次爆炸，持续 2.5 秒\n每次爆炸在一个范围内造成 (敏捷 X 3) 魔法伤害\n每次恢复 1% HP爆炸\n冷却时间：10 秒\n"
+    "cn": "被动：\n20% 几率在攻击时激活燃烧之怒\n在目标身上造成 5 次爆炸，持续 2.5 秒\n每次爆炸在一个范围内造成 (敏捷 X 3) 魔法伤害\n每次恢复 1% HP爆炸\n冷却时间：10 秒"
   },
   {
     "id": "I0C7",
     "enName": "Crown of Fervor",
     "koName": "열정의 화관",
     "en": "Passive:\nConverts 2% of max HP into INT (max 240)\n",
-    "cn": "被动：\n将最大 HP 的 2% 转换为 智力（最大 240）\n"
+    "cn": "被动：\n将最大 HP 的 2% 转换为 智力（最大 240）"
   },
   {
     "id": "skul",
@@ -1166,7 +1166,7 @@
     "enName": "Tunic of Subtlety",
     "koName": "교활의 튜닉",
     "en": "Passive:\nDodges upto 3 attacks every 20 seconds\n",
-    "cn": "被动：\n每 20 秒最多躲避 3 次攻击\n"
+    "cn": "被动：\n每 20 秒最多躲避 3 次攻击"
   },
   {
     "id": "I0CG",
@@ -1243,14 +1243,14 @@
     "enName": "Hood of the Fallen",
     "koName": "망자의 두건",
     "en": "Passive:\nActivates Hands of Fallen on death\nExplodes dealing (MAIN STAT X 40) magic damage in an AoE\nStuns for 1 second\n",
-    "cn": "被动：\n死亡时激活堕落之手\n爆炸在范围内造成 (主属性 X 40) 魔法伤害\n眩晕 1 秒\n"
+    "cn": "被动：\n死亡时激活堕落之手\n爆炸在范围内造成 (主属性 X 40) 魔法伤害\n眩晕 1 秒"
   },
   {
     "id": "stel",
     "enName": "Shroud of Perseverance",
     "koName": "집념의 장막",
     "en": "Passive:\nOn attack, 8% chance to activate Perseverance\nHeals 40% HP, increases ATK SPD by 50%, and MAIN STAT by 30 per second for 10 seconds\nCooldown: 30 seconds\n",
-    "cn": "被动：\n攻击时，8%几率激活毅力\n恢复40%生命值，增加50%攻击速度，每秒增加主属性30，持续10秒\n冷却时间：30秒，不可在冷却期间掉落\n"
+    "cn": "被动：\n攻击时，8%几率激活毅力\n恢复40%生命值，增加50%攻击速度，每秒增加主属性30，持续10秒\n冷却时间：30秒，不可在冷却期间掉落"
   },
   {
     "id": "I0D2",
@@ -1285,7 +1285,7 @@
     "enName": "Levante, the Sword of Love and Hate",
     "koName": "애증의 검 르반테",
     "en": "Passive:\nResonates with nearby allies to become stronger\nFor each nearby ally, increases ATK DMG by 525 and skill damage by 1%\n12% chance to deal (MAIN STAT X 5) magic damage\n",
-    "cn": "被动：\n与附近的盟友产生共鸣，变得更强大\n附近每有一个盟友，攻击伤害提高 525，技能伤害提高 1%\n12% 的几率造成 (主属性 X 5) 魔法伤害\\r \n"
+    "cn": "被动：\n与附近的盟友产生共鸣，变得更强大\n附近每有一个盟友，攻击伤害提高 525，技能伤害提高 1%\n12% 的几率造成 (主属性 X 5) 魔法伤害\\r"
   },
   {
     "id": "bzbf",
@@ -1306,14 +1306,14 @@
     "enName": "The Ender",
     "koName": "디 엔더",
     "en": "Passive:\nDeals 15% bonus damage to enemies under 50% HP\nEmpowers next attack every 12 seconds\nEmpowered attacks deal (MAIN STAT X 18.75) magic damage\n",
-    "cn": "被动：\n对生命值低于 50% 的敌人造成 15% 额外伤害\n每 12 秒强化下一次攻击\n强化攻击造成 (主属性 X 18.75) 魔法伤害\n"
+    "cn": "被动：\n对生命值低于 50% 的敌人造成 15% 额外伤害\n每 12 秒强化下一次攻击\n强化攻击造成 (主属性 X 18.75) 魔法伤害"
   },
   {
     "id": "oslo",
     "enName": "Armor of Grudge",
     "koName": "원한의 갑주",
     "en": "Passive:\nReleases Grudge every 6 seconds\nDeals (ATK DMG X 1.25) magic damage around user\nIncreases ATK DMG by 6000 for 1.5 seconds\n",
-    "cn": "被动：\n每 6 秒释放怨恨\n对用户周围造成 (攻击伤害 X 1.25) 魔法伤害\n增加 6000 攻击力持续 1.5 秒\n"
+    "cn": "被动：\n每 6 秒释放怨恨\n对用户周围造成 (攻击伤害 X 1.25) 魔法伤害\n增加 6000 攻击力持续 1.5 秒"
   },
   {
     "id": "sprn",
@@ -1327,7 +1327,7 @@
     "enName": "Ring of Destruction",
     "koName": "파괴의 반지",
     "en": "Passive:\n15% chance to do 40% bonus damage upon dealing damage\n",
-    "cn": "被动：\n15% 几率在造成伤害时造成 40% 额外伤害\n"
+    "cn": "被动：\n15% 几率在造成伤害时造成 40% 额外伤害"
   },
   {
     "id": "ocor",
@@ -1341,7 +1341,7 @@
     "enName": "Valtora Icon",
     "koName": "발토라 아이콘",
     "en": "Passive:\n~5% Chance to activate Elemental Fury on attack and skill cast\nRequires 1 second cooldown interval for checking the proc\nIncreases MAIN STAT by 2% for 30 seconds\n",
-    "cn": "被动：\n~5% 几率在攻击和技能施放时激活元素狂怒\n需要 1 秒冷却时间间隔来检查过程\n增加主属性 2% 持续 30 秒\n"
+    "cn": "被动：\n~5% 几率在攻击和技能施放时激活元素狂怒\n需要 1 秒冷却时间间隔来检查过程\n增加主属性 2% 持续 30 秒"
   },
   {
     "id": "I0JS",
@@ -1355,49 +1355,49 @@
     "enName": "Ifrit Icon",
     "koName": "이프리트 아이콘",
     "en": "Passive:\n~5% Chance to activate Elemental Fury on attack and skill cast\nRequires 1 second cooldown interval for checking the proc\nIncreases MAIN STAT by 2% for 30 seconds\n",
-    "cn": "被动：\n~5% 几率在攻击和技能施放时激活元素狂怒\n需要 1 秒冷却时间间隔来检查过程\n增加主属性 2% 持续 30 秒\n"
+    "cn": "被动：\n~5% 几率在攻击和技能施放时激活元素狂怒\n需要 1 秒冷却时间间隔来检查过程\n增加主属性 2% 持续 30 秒"
   },
   {
     "id": "I0LX",
     "enName": "Grail of Eternity",
     "koName": "영원의 잔",
     "en": "Passive:\nCreates Water Barrier every 8 seconds\nAbsorbs up to 3000 damage and increases HP and MP regen by 1%\n",
-    "cn": "被动：\n每 8 秒创建水屏障\n最多吸收 3000 点伤害并提高 HP 和 MP 恢复 1%\n"
+    "cn": "被动：\n每 8 秒创建水屏障\n最多吸收 3000 点伤害并提高 HP 和 MP 恢复 1%"
   },
   {
     "id": "I002",
     "enName": "Nereid Icon",
     "koName": "네레이드 아이콘",
     "en": "Passive:\n~5% Chance to activate Elemental Fury on attack and skill cast\nRequires 1 second cooldown interval for checking the proc\nIncreases MAIN STAT by 2% for 30 seconds\n",
-    "cn": "被动：\n~5% 几率在攻击和技能施放时激活元素狂怒\n需要 1 秒冷却时间间隔来检查过程\n增加主属性 2% 持续 30 秒\n"
+    "cn": "被动：\n~5% 几率在攻击和技能施放时激活元素狂怒\n需要 1 秒冷却时间间隔来检查过程\n增加主属性 2% 持续 30 秒"
   },
   {
     "id": "I0O3",
     "enName": "Curse of Greed",
     "koName": "탐욕의 저주",
     "en": "Passive\n⁘ On dealing damage, activates Greed\n⁘ When in combat for 5 seconds, increases ATK SPD and SKD by 1%\n⁘ Also increases damage taken by 2%\n⁘ Can be stacked up to 25 times\n⁘ Cooldown: 1 second",
-    "cn": "被动：\n造成伤害时，激活贪婪\n在战斗中持续 5 秒，增加攻击速度和技伤 1%\n同时增加 2% 受到的伤害\n最多可叠加 25次\n冷却时间：1 秒\n"
+    "cn": "被动：\n造成伤害时，激活贪婪\n在战斗中持续 5 秒，增加攻击速度和技伤 1%\n同时增加 2% 受到的伤害\n最多可叠加 25次\n冷却时间：1 秒"
   },
   {
     "id": "I014",
     "enName": "Crimson Rose",
     "koName": "핏빛 장미",
     "en": "Passive:\nOn use, activates Death and Decay\nTargets area and deals 20000 magic damage per second for 15 seconds\nDeals up to 100% bonus damage, depending on how long target stayed in area (max reached at 5 seconds)\nCooldown: 30 seconds\n",
-    "cn": "被动：\n使用时，激活死亡与腐烂\n目标区域并每秒造成 20000 魔法伤害，持续 15 秒\n造成高达 100% 的额外伤害，具体取决于目标在区域中停留的时间（最大达到在 5 秒）\n冷却时间：30 秒\n"
+    "cn": "被动：\n使用时，激活死亡与腐烂\n目标区域并每秒造成 20000 魔法伤害，持续 15 秒\n造成高达 100% 的额外伤害，具体取决于目标在区域中停留的时间（最大达到在 5 秒）\n冷却时间：30 秒"
   },
   {
     "id": "I01Z",
     "enName": "Gown of Life",
     "koName": "생명의 가운",
     "en": "Passive:\nOn use, activates Regeneration\nClears all debuffs and restores 12000 HP over 10s\nCooldown: 45 seconds\n",
-    "cn": "被动：\n使用时激活再生\n清除所有减益效果并在 10 秒内恢复 12000 HP\n冷却时间：45 秒\n"
+    "cn": "被动：\n使用时激活再生\n清除所有减益效果并在 10 秒内恢复 12000 HP\n冷却时间：45 秒"
   },
   {
     "id": "I095",
     "enName": "Mask of Truth",
     "koName": "진실의 가면",
     "en": "Passive:\nActivates Eye of Truth every 15s\nFor 3 seconds, any skill damage dealt can critically strike but crit multiplier is fixed to 1.2x\n",
-    "cn": "被动：\n每15秒激活一次真理之眼\n持续3秒，任何技能造成的伤害都可以暴击，但暴击倍数固定为1.2x\n"
+    "cn": "被动：\n每15秒激活一次真理之眼\n持续3秒，任何技能造成的伤害都可以暴击，但暴击倍数固定为1.2x"
   },
   {
     "id": "rlif",
@@ -1432,105 +1432,105 @@
     "enName": "Precious Wind-Protection Clothing",
     "koName": "소중한 바람막이 털옷",
     "en": "Passive:\nAllows you to dodge a fatal attack every 45 seconds\n",
-    "cn": "被动：\n让你每 45 秒躲避一次致命攻击\n"
+    "cn": "被动：\n让你每 45 秒躲避一次致命攻击"
   },
   {
     "id": "I07B",
     "enName": "Laksha, the Reigning Sword of Poison",
     "koName": "독의 지배검 라크샤",
     "en": "Passive:\nOn attack, inflicts target with poison that deals 2500 magic damage per second for 10 seconds\n",
-    "cn": "被动：\n攻击时，使目标中毒，每秒造成 2500 魔法伤害，持续 10 秒\n"
+    "cn": "被动：\n攻击时，使目标中毒，每秒造成 2500 魔法伤害，持续 10 秒"
   },
   {
     "id": "I0C1",
     "enName": "Parasitic Sword",
     "koName": "기생의 검",
     "en": "Passive:\nOn attack, causes splashing effect and restores HP on low chance\n",
-    "cn": "被动：\n攻击时，造成溅射效果并小概率恢复HP\n"
+    "cn": "被动：\n攻击时，造成溅射效果并小概率恢复HP"
   },
   {
     "id": "I0CC",
     "enName": "Staff of Tentacles",
     "koName": "촉수의 지팡이",
     "en": "Passive:\nRestore HP and MP on kill\n",
-    "cn": "被动：\n击杀时恢复 HP 和 MP\n"
+    "cn": "被动：\n击杀时恢复 HP 和 MP"
   },
   {
     "id": "I0C0",
     "enName": "Infected Crab Armor",
     "koName": "감염된 크랩 아머",
     "en": "Passive:\nOn being hit, deals damage to the attacker\nDeals (STR X 0.5) pure damage\nIncreases HP by 300 and spell damage by 7.5%\n",
-    "cn": "被动：\n被击中时，对攻击者造成伤害\n造成 (力量 X 0.5) 纯伤害\n生命值增加 300，法术伤害增加 7.5%\n"
+    "cn": "被动：\n被击中时，对攻击者造成伤害\n造成 (力量 X 0.5) 纯伤害\n生命值增加 300，法术伤害增加 7.5%"
   },
   {
     "id": "bgst",
     "enName": "Sanguiel, the Bloodspear of Domination",
     "koName": "진 혈포 체페슈",
     "en": "Passive:\nOn attack, drains 10% of damage dealt as life (up to 400)\n",
-    "cn": "被动：\n攻击时，吸取伤害的 10% 作为生命（最多 400）\n"
+    "cn": "被动：\n攻击时，吸取伤害的 10% 作为生命（最多 400）"
   },
   {
     "id": "I07J",
     "enName": "Tepethia, the Bloodsword of Domination",
     "koName": "피의 지배검 테페시아",
     "en": "Passive:\nOn attack, heals 10% of damage dealt (max 400)\n",
-    "cn": "被动：\n攻击时，治疗造成伤害的 10%（最多 400）\n"
+    "cn": "被动：\n攻击时，治疗造成伤害的 10%（最多 400）"
   },
   {
     "id": "I07S",
     "enName": "True Dragonsword Lainhart",
     "koName": "진 용검 라인하르트",
     "en": "Passive:\nOn attack, 10% chance to activate Dragon's Claw\nDeals (MAIN STAT X 2.5) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2.5) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2.5) 魔法伤害"
   },
   {
     "id": "gmfr",
     "enName": "Leoreus, the Greatsword of Explosion",
     "koName": "작렬의 장검 리오레우스",
     "en": "Passive:\nOn attack, 10% chance to activate Conflgration\nDeals (flame affinity X (STR X 2.5)) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活 Conflgration\n造成 (火属性 X (力量 X 2.5)) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活 Conflgration\n造成 (火属性 X (力量 X 2.5)) 魔法伤害"
   },
   {
     "id": "I08G",
     "enName": "Karonphniamm, the True Holy Sword",
     "koName": "진 성검 카론프니엠",
     "en": "Passive:\n10% Chance to activate Holy Strike on attack\nIf primary stat on hero is STR: deals (STR X 3) magic damage\nIf primary stat on hero is AGI or INT: deals (AGI X 3) magic damage\n",
-    "cn": "被动：\n10% 几率在攻击时激活神圣打击\n如果英雄的主属性是 力量：造成 (力量 X 3) 魔法伤害\n如果英雄的主属性是 敏捷 或 智力：造成 (敏捷 X 3) 魔法伤害\n"
+    "cn": "被动：\n10% 几率在攻击时激活神圣打击\n如果英雄的主属性是 力量：造成 (力量 X 3) 魔法伤害\n如果英雄的主属性是 敏捷 或 智力：造成 (敏捷 X 3) 魔法伤害"
   },
   {
     "id": "I08H",
     "enName": "Eximelia, the True Unholy Sword",
     "koName": "진 마검 엑시멜리아",
     "en": "Passive:\nOn attack, 10% chance to activate Unholy Strike\nDeals (AGI X 3) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活邪恶打击\n造成 (敏捷 X 3) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活邪恶打击\n造成 (敏捷 X 3) 魔法伤害"
   },
   {
     "id": "sehr",
     "enName": "Flame Soul",
     "koName": "플레임 소울",
     "en": "Passive:\nOn attack, 10% chance to activate Crimson Flame\nDeals (ATK DMG + STR X 0.9) magic damage and increases STR by 5 per stack (up to 8 stacks)\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活深红火焰\n造成 (攻击伤害 + 力量 X 0.9) 魔法伤害，每层增加 5 力量（最多 8 层）\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活深红火焰\n造成 (攻击伤害 + 力量 X 0.9) 魔法伤害，每层增加 5 力量（最多 8 层）"
   },
   {
     "id": "horl",
     "enName": "Bahanar, the Sword of Illusion",
     "koName": "환검 바하나르",
     "en": "Passive:\nOn attack, (8 + HIT COUNT X 0.2)% chance to activate Grace Tear\nDeals ((MAIN STAT X 2.5) + (ATK DMG DEALT X 0.45)) magic damage in an AoE and stuns for 0.1 seconds\n",
-    "cn": "被动：\n攻击时，有 (8 + 连击计数 X 0.2)% 几率激活 格蕾丝之泪\n范围中造成 ((主属性 X 2.5) + (攻击伤害 DEALT X 0.45)) 魔法伤害并眩晕持续 0.1 秒\n"
+    "cn": "被动：\n攻击时，有 (8 + 连击计数 X 0.2)% 几率激活 格蕾丝之泪\n范围中造成 ((主属性 X 2.5) + (攻击伤害 DEALT X 0.45)) 魔法伤害并眩晕持续 0.1 秒"
   },
   {
     "id": "guvi",
     "enName": "Maw of Monster",
     "koName": "괴물의 손아귀",
     "en": "Passive:\nOn attack, 20% chance to activate Devour\n",
-    "cn": "被动：\n攻击时，有 20% 几率激活吞噬\n"
+    "cn": "被动：\n攻击时，有 20% 几率激活吞噬"
   },
   {
     "id": "gopr",
     "enName": "Tepethia, the Crimson Sword of Requiem",
     "koName": "혈혼검 테페시아",
     "en": "Passive:\nActivates Blood Release on every 14th attack\nHeals user for (250 + MAIN STAT X 0.6) HP and activating a random Wrath effect\nRed Wrath: deals (MAIN STAT X 4.25) magic splash damage\nGreen Wrath: reduces enemy movement and ATK SPD by 66% for 3 seconds, deals (MAIN STAT X 2.25) magic damage in an AoE, and stuns non-boss units for 0.25 seconds\n",
-    "cn": "被动：\n每 14 次攻击激活血液释放\n治疗用户 (250 + 主属性 X 0.6) HP 并激活随机愤怒效果\n红色愤怒：造成 (主属性 X 4.25) 魔法溅射伤害\n绿色愤怒：降低敌人移动速度和攻击速度 66%，持续 3 秒，在范围内造成 (主属性 X 2.25) 魔法伤害，并使非 Boss 单位昏迷 0.25 秒\n"
+    "cn": "被动：\n每 14 次攻击激活血液释放\n治疗用户 (250 + 主属性 X 0.6) HP 并激活随机愤怒效果\n红色愤怒：造成 (主属性 X 4.25) 魔法溅射伤害\n绿色愤怒：降低敌人移动速度和攻击速度 66%，持续 3 秒，在范围内造成 (主属性 X 2.25) 魔法伤害，并使非 Boss 单位昏迷 0.25 秒"
   },
   {
     "id": "I07Q",
@@ -1551,7 +1551,7 @@
     "enName": "Staff of Void",
     "koName": "스태프 오브 보이드",
     "en": "Passive:\nOn skill cast, empower nearby allies for 4 seconds\nIncreases ATK SPD by 12%, skill damage by 6% [Type-B], and HP regen by 45\n",
-    "cn": "被动：\n施放技能时，强化附近盟友 4 秒\n攻击速度提高 12%，技能伤害提高 6% [Type-B]，HP 恢复速度提高 45\n"
+    "cn": "被动：\n施放技能时，强化附近盟友 4 秒\n攻击速度提高 12%，技能伤害提高 6% [Type-B]，HP 恢复速度提高 45"
   },
   {
     "id": "I0DH",
@@ -1565,28 +1565,28 @@
     "enName": "True Dragonbow Aience",
     "koName": "진 용궁 에이엔스",
     "en": "Passive:\nOn attack, 10% chance to activate Dragon's Claw\nDeals (MAIN STAT X 2.5) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2.5) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2.5) 魔法伤害"
   },
   {
     "id": "I09Q",
     "enName": "Alkate, the True Unholy Bow",
     "koName": "진 마궁 알카테",
     "en": "Passive:\nOn attack, 10% chance to activate Unholy Spike\nDeals (AGI X 3) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活邪恶尖刺\n造成 (敏捷 X 3) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活邪恶尖刺\n造成 (敏捷 X 3) 魔法伤害"
   },
   {
     "id": "I0FJ",
     "enName": "True Blood Cannon Tepes",
     "koName": "진 혈포 체페슈",
     "en": "Passive:\nOn attack, drains 10% of damage dealt as life (up to 400)\n",
-    "cn": "被动：\n攻击时，吸取伤害的 10% 作为生命（最多 400）\n"
+    "cn": "被动：\n攻击时，吸取伤害的 10% 作为生命（最多 400）"
   },
   {
     "id": "I0F9",
     "enName": "True Dragon Cannon Belenus",
     "koName": "진 용포 벨레누스",
     "en": "Passive:\nOn attack, 10% chance to activate Dragon's Claw\nDeals (MAIN STAT X 2.5) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2.5) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活龙爪\n造成 (主属性 X 2.5) 魔法伤害"
   },
   {
     "id": "wneu",
@@ -1600,7 +1600,7 @@
     "enName": "Eana, the True Holy Cannon",
     "koName": "진 성포 이아나",
     "en": "Passive:\nOn attack, 10% chance to activate Holy Bullet\nIf primary stat on hero is STR: deals (STR X 3) magic damage\nIf primary stat on hero is AGI or INT: deals (AGI X 3) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活神圣子弹\n如果英雄的主属性是 力量：造成 (力量 X 3) 魔法伤害\n如果英雄的主属性是 敏捷 或 智力：造成 ( 敏捷 X 3) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活神圣子弹\n如果英雄的主属性是 力量：造成 (力量 X 3) 魔法伤害\n如果英雄的主属性是 敏捷 或 智力：造成 ( 敏捷 X 3) 魔法伤害"
   },
   {
     "id": "I0FK",
@@ -1614,7 +1614,7 @@
     "enName": "True Dragon Armor Magron",
     "koName": "진 용갑 마그론",
     "en": "Passive:\nBlocks 20 damage on being hit\n",
-    "cn": "被动：\n被击中时格挡 20 点伤害\n"
+    "cn": "被动：\n被击中时格挡 20 点伤害"
   },
   {
     "id": "I07Y",
@@ -1635,7 +1635,7 @@
     "enName": "Hood of Reaper",
     "koName": "후드 오브 리퍼",
     "en": "Passive:\nActivates Possession when HP drops below 25%\nIncreases INT by 60\nDeals (INT X 7.5) magic damage and stuns for 0.3 seconds\nHeals 40% of max HP\nCooldown: 20 seconds\n",
-    "cn": "被动：\n当 HP 低于 25% 时激活占有\n增加 60 智力\n造成 (智力 X 7.5) 魔法伤害并眩晕 0.3 秒\n治疗最大 HP 的 40%\n冷却时间: 20 秒\n"
+    "cn": "被动：\n当 HP 低于 25% 时激活占有\n增加 60 智力\n造成 (智力 X 7.5) 魔法伤害并眩晕 0.3 秒\n治疗最大 HP 的 40%\n冷却时间: 20 秒"
   },
   {
     "id": "I03Z",
@@ -1670,7 +1670,7 @@
     "enName": "Ring of Light",
     "koName": "빛의 반지 세인트",
     "en": "Passive:\nIncreases nearby allies' armor by 30\n",
-    "cn": "被动：\n增加附近盟友的护甲 30\n"
+    "cn": "被动：\n增加附近盟友的护甲 30"
   },
   {
     "id": "brag",
@@ -1684,7 +1684,7 @@
     "enName": "Cape of the Count",
     "koName": "백작의 망토",
     "en": "Passive:\nEmpowers next attack with Darkness on skill cast\nDeals (MAIN STAT X 2.5) magic damage\n",
-    "cn": "被动：\n在施放技术时使用黑暗强化下一次攻击\n生成 (主属性 X 2.5) 魔法伤害\n"
+    "cn": "被动：\n在施放技术时使用黑暗强化下一次攻击\n生成 (主属性 X 2.5) 魔法伤害"
   },
   {
     "id": "modt",
@@ -1698,7 +1698,7 @@
     "enName": "Sanguiel, the Bloodspear of Requiem",
     "koName": "피의 진혼창 상귀엘",
     "en": "Passive:\nActivates Blood Release on every 14th attack\nHeals user for (250 + MAIN STAT X 0.6) HP and activates a random Wrath effect\nRed Wrath: deals (MAIN STAT X 4.25) magic damage in an AoE\nGreen Wrath: reduces target movement and ATK SPD by 66% for 3 seconds, deals (MAIN STAT X 2.25) magic damage in an AoE, and stuns non-boss units for 0.25 seconds\n",
-    "cn": "被动：\n每 14 次攻击激活鲜血释放\n治疗用户 (250 + 主属性 X 0.6) HP 并激活随机愤怒效果\n红色愤怒：范围造成 (主属性 X 4.25) 魔法伤害\n绿色愤怒：降低目标移动速度和攻击速度66%，持续3秒，在范围内造成(主属性 X 2.25)魔法伤害，并使非boss单位昏迷0.25秒\n"
+    "cn": "被动：\n每 14 次攻击激活鲜血释放\n治疗用户 (250 + 主属性 X 0.6) HP 并激活随机愤怒效果\n红色愤怒：范围造成 (主属性 X 4.25) 魔法伤害\n绿色愤怒：降低目标移动速度和攻击速度66%，持续3秒，在范围内造成(主属性 X 2.25)魔法伤害，并使非boss单位昏迷0.25秒"
   },
   {
     "id": "I0C9",
@@ -1712,7 +1712,7 @@
     "enName": "Aglaia, the Spear of Heavenly Flows",
     "koName": "천류의 창 아글라이아",
     "en": "Passive:\nActivates Song of Glory on skill cast\nIncreases STR by 25 and skill damage by 2.5% per stack for 5 seconds up to a max of 3 stacks\n",
-    "cn": "被动：\n在施放技能时激活荣耀之歌\n每层增加 25 点力量和 2.5% 的技能伤害，持续 5 秒，最多 3 层\n"
+    "cn": "被动：\n在施放技能时激活荣耀之歌\n每层增加 25 点力量和 2.5% 的技能伤害，持续 5 秒，最多 3 层"
   },
   {
     "id": "sorf",
@@ -1726,21 +1726,21 @@
     "enName": "Bahanar, the True Sword of Illusion",
     "koName": "진 환검 바하나르",
     "en": "Passive:\n(8 + HIT COUNT X 0.2)% chance to activate Grace Tear on attack\nDeals ((MAIN STAT X 0.45) + (DMG DEALT X 3)) magic damage in an AoE and stuns for 0.1 seconds\n",
-    "cn": "被动：\n(8 + 连击计数 X 0.2)% 几率在攻击时激活 Grace Tear\n范围中造成 ((主属性 X 0.45) + (攻击伤害 X 3)) 魔法伤害并眩晕0.1秒\n"
+    "cn": "被动：\n(8 + 连击计数 X 0.2)% 几率在攻击时激活 Grace Tear\n范围中造成 ((主属性 X 0.45) + (攻击伤害 X 3)) 魔法伤害并眩晕0.1秒"
   },
   {
     "id": "I08L",
     "enName": "Asmodeus, the Archdevil's Greatsword",
     "koName": "천 마검 아스모데우스",
     "en": "Passive:\nOn attack, 15% chance to activate Chaos Strike\nDeals ((STR + AGI) X 5) magic damage\n",
-    "cn": "被动：\n攻击时，有 15% 几率激活混乱打击\n造成 ((力量 + 敏捷) X 5) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 15% 几率激活混乱打击\n造成 ((力量 + 敏捷) X 5) 魔法伤害"
   },
   {
     "id": "cnhn",
     "enName": "Blazing Soul",
     "koName": "블레이징 소울",
     "en": "Passive:\n20% chance to activate Fervor on casting skill\nIncreases ATK DMG by 750 per stack (up to 5 stacks)\nDeals flame affinity X (ATK DMG X (0.15 + 3% stacks) + (STR X 1.5)) magic damage\n",
-    "cn": "被动：\n20% 几率在施放技能时激活 狂热\n每层增加 750 攻击力（最多 5 层）\n造成火属性 X（攻击伤害 X（0.15 + 3% 层数）+ (力量 X 1.5)) 魔法伤害\n"
+    "cn": "被动：\n20% 几率在施放技能时激活 狂热\n每层增加 750 攻击力（最多 5 层）\n造成火属性 X（攻击伤害 X（0.15 + 3% 层数）+ (力量 X 1.5)) 魔法伤害"
   },
   {
     "id": "gobm",
@@ -1754,7 +1754,7 @@
     "enName": "Storm Reaver",
     "koName": "스톰 리버",
     "en": "Passive:\nOn attack, chance to strike down lightning\n~11% chance to deal (2000 + AGI X 1.5) magic damage\n~33% chance to deal (3000 + AGI X 2.25) magic damage\nOn skill cast, chance to activate Awakening\n~11% chance to increase movement and ATK SPD by 50% for 6 seconds\n",
-    "cn": "被动：\n攻击时，有几率击落闪电\n~11% 几率造成 (2000 + 敏捷 X 1.5) 魔法伤害\n~33% 几率造成 (3000 + 敏捷 X 2.25)魔法伤害\n施放技能时，有几率激活觉醒\n~11% 几率增加 50% 移动速度和攻击速度，持续 6 秒\n"
+    "cn": "被动：\n攻击时，有几率击落闪电\n~11% 几率造成 (2000 + 敏捷 X 1.5) 魔法伤害\n~33% 几率造成 (3000 + 敏捷 X 2.25)魔法伤害\n施放技能时，有几率激活觉醒\n~11% 几率增加 50% 移动速度和攻击速度，持续 6 秒"
   },
   {
     "id": "I08M",
@@ -1775,7 +1775,7 @@
     "enName": "Staff of Madness",
     "koName": "스태프 오브 매드니스",
     "en": "Passive:\nOn skill cast, empowers nearby allies with skill damage by 7.5% and HP regen by 200 for 6 seconds\n",
-    "cn": "被动：\n施放技能时，使附近盟友的技能伤害提高 7.5%，HP 恢复速度提高 200，持续 6 秒\n"
+    "cn": "被动：\n施放技能时，使附近盟友的技能伤害提高 7.5%，HP 恢复速度提高 200，持续 6 秒"
   },
   {
     "id": "rde4",
@@ -1796,21 +1796,21 @@
     "enName": "Yggrect, the Archdevil's Bow",
     "koName": "천 마궁 이드렉트",
     "en": "Passive:\nOn attack, 15% chance to activate Chaos Spike\nDeals ((STR + AGI) X 5) magic damage\n",
-    "cn": "被动：\n攻击时，有 15% 几率激活混沌尖刺\n造成 ((力量 + 敏捷) X 5) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 15% 几率激活混沌尖刺\n造成 ((力量 + 敏捷) X 5) 魔法伤害"
   },
   {
     "id": "skrt",
     "enName": "Icicle Storm",
     "koName": "아이시클 스톰",
     "en": "Passive:\nApplies bonus magic damage and a slow effect on attack\nDeals (water affinity X (AGI X 0.1 ~ 0.2)) bonus magic damage\n8% chance to send out icicles on attack (5 icicles)\nEach icicle deals (water affinity X (AGI X 0.6 ~ 0.9)) magic damage\n",
-    "cn": "被动：\n施加额外魔法伤害和攻击减速效果\n造成（水属性 X（敏捷 X 0.1 ~ 0.2））额外魔法伤害\n攻击时有 8% 几率发出冰柱（5 个冰柱)\n每个冰柱造成(水属性X (敏捷 X 0.6 ~ 0.9))魔法伤害\n"
+    "cn": "被动：\n施加额外魔法伤害和攻击减速效果\n造成（水属性 X（敏捷 X 0.1 ~ 0.2））额外魔法伤害\n攻击时有 8% 几率发出冰柱（5 个冰柱)\n每个冰柱造成(水属性X (敏捷 X 0.6 ~ 0.9))魔法伤害"
   },
   {
     "id": "I0CU",
     "enName": "Flame Explosion",
     "koName": "플레임 익스플로전",
     "en": "Passive:\nOn attack, 12.5% chance to activate Destruction\nDeals (AGI X 0.75) magic damage\nReduced armor of target by 20 for 10 seconds\n",
-    "cn": "被动：\n攻击时，有 12.5% 几率激活毁灭\n造成 (敏捷 X 0.75) 魔法伤害\n减少目标护甲 20，持续 10 秒\n"
+    "cn": "被动：\n攻击时，有 12.5% 几率激活毁灭\n造成 (敏捷 X 0.75) 魔法伤害\n减少目标护甲 20，持续 10 秒"
   },
   {
     "id": "I0FI",
@@ -1831,42 +1831,42 @@
     "enName": "Retus, the Bullet of Judgment",
     "koName": "심판의 탄환 레투스",
     "en": "Passive:\nEmpowers next attack with Iron Bullet every 8 seconds\nDeals ((ATK DMG X 0.7) + (MAIN STAT X 7.5)) magic damage per stack (up to 1 stack)\nStuns for 0.25 seconds\n",
-    "cn": "被动：\n每 8 秒用 铁子弹 强化下一次攻击\n每层造成 ((攻击伤害 X 0.7) + (主属性 X 7.5)) 魔法伤害（最多叠加 1 层）\n眩晕 0.25秒\n"
+    "cn": "被动：\n每 8 秒用 铁子弹 强化下一次攻击\n每层造成 ((攻击伤害 X 0.7) + (主属性 X 7.5)) 魔法伤害（最多叠加 1 层）\n眩晕 0.25秒"
   },
   {
     "id": "I0FF",
     "enName": "Alchatratz, the Archdevil's Cannon",
     "koName": "천 마포 알카트라츠",
     "en": "Passive:\nOn attack, 15% chance to activate Chaos Bullet\nDeals ((STR + AGI) X 5) magic damage\n",
-    "cn": "被动：\n攻击时，有 15% 几率激活混沌子弹\n造成 ((力量 + 敏捷) X 5) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 15% 几率激活混沌子弹\n造成 ((力量 + 敏捷) X 5) 魔法伤害"
   },
   {
     "id": "I0FO",
     "enName": "Bullet of Ruin",
     "koName": "파멸의 탄환",
     "en": "Passive:\nEmpowers next attack with Bullet of Ruin every 6 seconds\nDeals ((ATK DMG X 0.85) + (MAIN STAT X 7.5)) magic damage per stack (up to 3 stacks)\nStuns for 0.25 seconds\n",
-    "cn": "被动：\n每 6 秒用毁灭之弹强化下一次攻击\n每层造成 ((攻击伤害 X 0.85) + (主属性 X 7.5)) 魔法伤害（最多 3 层）\n眩晕0.25秒\n"
+    "cn": "被动：\n每 6 秒用毁灭之弹强化下一次攻击\n每层造成 ((攻击伤害 X 0.85) + (主属性 X 7.5)) 魔法伤害（最多 3 层）\n眩晕0.25秒"
   },
   {
     "id": "I0B3",
     "enName": "Purelight Armor",
     "koName": "퓨어라이트 아머",
     "en": "Passive:\nIncreases nearby allies' stats by 5% [Type-A, excluding self]\n",
-    "cn": "被动:\n增加附近友军 5% [Type-A, excluding self]\n"
+    "cn": "被动:\n增加附近友军 5% [Type-A, excluding self]"
   },
   {
     "id": "sbch",
     "enName": "Earthen Plates",
     "koName": "대지의 각갑",
     "en": "Passive:\nTemporarily boosts HP regen by 1250 when HP drops below 30% for 10 seconds\nCooldown 60 seconds\n",
-    "cn": "被动：\n当生命值低于 30% 持续 10 秒时，暂时提高 1250 生命恢复速度\n冷却时间 60 秒\n"
+    "cn": "被动：\n当生命值低于 30% 持续 10 秒时，暂时提高 1250 生命恢复速度\n冷却时间 60 秒"
   },
   {
     "id": "I0CO",
     "enName": "Reactive Armor",
     "koName": "리액티브 아머",
     "en": "Passive:\nReflects damage on being damaged\nDeals (STR X 0.6) pure damage\nHas a 16% chance to deal (STR X 5) pure damage\nReleases a powerful pulse upon receiving enough damage (up to 150% max HP)\nPulse deals ((max HP X 10) X 1.75) magic damage\nStuns for 1 second\nCooldown: 5 seconds\n",
-    "cn": "被动：\n在受到伤害时反映伤害\n造成 (力量 X 0.6) 纯伤害\n有 16% 的机会造成 (力量 X 5) 纯伤害\n在受到足够的伤害时释放强大的脉冲（最多 150% 最大 HP）\n脉冲造成（（最大 HP X 10）X 1.75）魔法伤害\n眩晕 1 秒\n冷却时间：5 秒\n"
+    "cn": "被动：\n在受到伤害时反映伤害\n造成 (力量 X 0.6) 纯伤害\n有 16% 的机会造成 (力量 X 5) 纯伤害\n在受到足够的伤害时释放强大的脉冲（最多 150% 最大 HP）\n脉冲造成（（最大 HP X 10）X 1.75）魔法伤害\n眩晕 1 秒\n冷却时间：5 秒"
   },
   {
     "id": "I0B2",
@@ -1880,14 +1880,14 @@
     "enName": "Guardian Vest",
     "koName": "수호의 도복",
     "en": "Passive:\nCreates a barrier that absorbs 1500 damage every 8 seconds\n",
-    "cn": "被动：\n创建一个屏障，每 8 秒吸收 1500 点伤害\n"
+    "cn": "被动：\n创建一个屏障，每 8 秒吸收 1500 点伤害"
   },
   {
     "id": "I0JU",
     "enName": "Vest of Cyclone",
     "koName": "태풍의 도복",
     "en": "Passive:\nOn skill cast, activates Wind Fury for 1.5 seconds\nNext 2 attacks hit once to deal bonus (50% ATK DMG) physical damage\nIncreases movement speed by 300 (past limit)\n",
-    "cn": "被动：\n施放技能时，激活风怒 1.5 秒\n接下来的 2 次攻击命中一次以造成额外（50% 攻击伤害）物理伤害\n移动速度提高 300（超过限制）\n"
+    "cn": "被动：\n施放技能时，激活风怒 1.5 秒\n接下来的 2 次攻击命中一次以造成额外（50% 攻击伤害）物理伤害\n移动速度提高 300（超过限制）"
   },
   {
     "id": "I0B4",
@@ -1971,14 +1971,14 @@
     "enName": "Horn of Devil",
     "koName": "악마의 뿔",
     "en": "Passive:\nUpon moving 3000 distance, unleash Devil's Flame on next attack\nDeals (MAIN STAT X 20) pure damage\nCooldown: 5 seconds\n",
-    "cn": "被动：\n移动 3000 距离后，下次攻击时释放恶魔之炎\n造成 (主属性 X 20) 纯伤害\n冷却时间：5 秒\n"
+    "cn": "被动：\n移动 3000 距离后，下次攻击时释放恶魔之炎\n造成 (主属性 X 20) 纯伤害\n冷却时间：5 秒"
   },
   {
     "id": "I08J",
     "enName": "Demonis, the Devil Lord's Ring",
     "koName": "마왕의 반지 데모니스",
     "en": "Passive:\nIncreases nearby allies' armor by 40\n",
-    "cn": "被动：\n增加附近盟友的护甲 40\n"
+    "cn": "被动：\n增加附近盟友的护甲 40"
   },
   {
     "id": "I0B1",
@@ -2006,7 +2006,7 @@
     "enName": "Latea, the Ring of Chaos",
     "koName": "혼돈의 반지 라테아",
     "en": "Passive:\nDecreases nearby enemies' armor by 75\n10% chance to activate Absolute Defense on being damaged\n",
-    "cn": "被动：\n使附近敌人的护甲降低 75\n10% 几率在受到伤害时激活绝对防御\n"
+    "cn": "被动：\n使附近敌人的护甲降低 75\n10% 几率在受到伤害时激活绝对防御"
   },
   {
     "id": "clfm",
@@ -2020,14 +2020,14 @@
     "enName": "Purefrost Gauntlet",
     "koName": "퓨어프로스트 건틀릿",
     "en": "Passive:\nOn attack, applies slow on the target\n",
-    "cn": "被动：\n攻击时，对目标施加减速\n"
+    "cn": "被动：\n攻击时，对目标施加减速"
   },
   {
     "id": "I0D5",
     "enName": "Heart of Ifrit",
     "koName": "이프리트의 심장",
     "en": "Passive:\n13% chance to reduce target's armor by 12% [Type-A] on attack for 5 seconds\n",
-    "cn": "被动：\n攻击时有 13% 的几率使目标的护甲降低 12% [Type-A]，持续 5 秒\n"
+    "cn": "被动：\n攻击时有 13% 的几率使目标的护甲降低 12% [Type-A]，持续 5 秒"
   },
   {
     "id": "rst1",
@@ -2048,28 +2048,28 @@
     "enName": "Azathos, the Pipe of Chaos",
     "koName": "혼돈의 파이프 아자토스",
     "en": "Passive:\nIncreases nearby allies' stats\nATK SPD by 15%\nATK DMG by 1200\nHP regen by 60\n",
-    "cn": "被动：\n增加附近盟友的伤害\n攻击速度提高 15%\n攻击伤害提高 1200\n生命恢复提高 60\n"
+    "cn": "被动：\n增加附近盟友的伤害\n攻击速度提高 15%\n攻击伤害提高 1200\n生命恢复提高 60"
   },
   {
     "id": "I0B5",
     "enName": "Cape of Corrupt Flame",
     "koName": "타락한 불꽃의 망토",
     "en": "Passive:\nOn landing a single-target effect, engulfs target in corrupt flames\nDeals 10% additional damage over 3 seconds (effect stacks)\n",
-    "cn": "被动：\n单目标效果落地时，将目标吞没在腐败的火焰中\n在 3 秒内造成 10% 的额外伤害（效果叠加）\n"
+    "cn": "被动：\n单目标效果落地时，将目标吞没在腐败的火焰中\n在 3 秒内造成 10% 的额外伤害（效果叠加）"
   },
   {
     "id": "I0CE",
     "enName": "Wings of Fury",
     "koName": "진노의 날개",
     "en": "Passive:\nOn skill cast, empowers next attack with Blazing Flames\nDeals ((MAIN STAT X 2.5) + AGI) pure damage\n12.5% chance to deal ((MAIN STAT X 5) + (AGI X 2)) pure damage instead\nIncreases AGI by 18 for 7 seconds (up to 10 stacks)\n",
-    "cn": "被动：\n在施放技能时，下一次攻击会使用炽热的火焰\n造成 ((主属性 X 2.5) + 敏捷) 纯伤害\n12.5% 的几率造成 ((主属性 X 5) + (敏捷 X 2)) 纯伤害改为\n敏捷 提高 18 持续 7 秒（最多 10 层）\n"
+    "cn": "被动：\n在施放技能时，下一次攻击会使用炽热的火焰\n造成 ((主属性 X 2.5) + 敏捷) 纯伤害\n12.5% 的几率造成 ((主属性 X 5) + (敏捷 X 2)) 纯伤害改为\n敏捷 提高 18 持续 7 秒（最多 10 层）"
   },
   {
     "id": "schl",
     "enName": "Hungry Bat Wings",
     "koName": "굶주린 박쥐 날개",
     "en": "Passive:\nUpon moving 400 distance, activates Hungry Drain on next attack\nDeals (40% ATK DMG) pure damage\nHeals 8% HP\nIncreases HP regen by 45 for 2 seconds (up to 5 stacks)\nCooldown: 0.125 seconds\n",
-    "cn": "被动：\n移动 400 距离后，在下次攻击时激活饥饿消耗\n造成 (40% 攻击伤害) 纯伤害\n治疗 8% HP\nHP 恢复提高 45 持续 2 秒（最多5 层)\n冷却时间：0.125 秒\n"
+    "cn": "被动：\n移动 400 距离后，在下次攻击时激活饥饿消耗\n造成 (40% 攻击伤害) 纯伤害\n治疗 8% HP\nHP 恢复提高 45 持续 2 秒（最多5 层)\n冷却时间：0.125 秒"
   },
   {
     "id": "I0D4",
@@ -2090,14 +2090,14 @@
     "enName": "Frozen Heart",
     "koName": "프로즌 하트",
     "en": "Passive:\nReduces nearby enemy movement and ATK SPD by 15%\n",
-    "cn": "被动：\n减少附近敌人移动和攻击速度 15%\n"
+    "cn": "被动：\n减少附近敌人移动和攻击速度 15%"
   },
   {
     "id": "rej6",
     "enName": "Spirit Dagger",
     "koName": "정령의 비수",
     "en": "Passive:\nOn attack, activates Breath of Ancients every 6 seconds\nNext attack deals (MAIN STAT X 6) magic damage\nIncreases enemy damage taken by 4% for 4 seconds\nIncreases movement speed by 20% for 3 seconds\n",
-    "cn": "被动：\n攻击时，每 6 秒激活远古之息\n下次攻击造成 (主属性 X 6) 点魔法伤害\n使敌人受到的伤害提高 4%，持续 4 秒\n移动速度提高 20% 持续 3 秒\n"
+    "cn": "被动：\n攻击时，每 6 秒激活远古之息\n下次攻击造成 (主属性 X 6) 点魔法伤害\n使敌人受到的伤害提高 4%，持续 4 秒\n移动速度提高 20% 持续 3 秒"
   },
   {
     "id": "I0JB",
@@ -2125,14 +2125,14 @@
     "enName": "Blazing Heart",
     "koName": "블레이징 하트",
     "en": "Passive:\nOn skill cast, activates Burning Fervor\nIncreases ATK SPD by 100%, STR by 30, ATK DMG by 450 per stack for 9 seconds\nOn attack, 20% chance to deal (flame affinity X (0.225 + stacks X 0.045) X ATK DMG + (STR X 2.25)) magic damage\nAttack cooldown: 15 seconds\n",
-    "cn": "被动：\n施放技能时，激活燃烧的热情\n攻击速度提高 100%，力量 提高 30，每层攻击力提高 450，持续 9 秒\n攻击时，20% 几率造成（火属性） X (0.225 + 层数 X 0.045) X 攻击伤害 + (力量 X 2.25)) 魔法伤害\n攻击冷却时间：15 秒\n"
+    "cn": "被动：\n施放技能时，激活燃烧的热情\n攻击速度提高 100%，力量 提高 30，每层攻击力提高 450，持续 9 秒\n攻击时，20% 几率造成（火属性） X (0.225 + 层数 X 0.045) X 攻击伤害 + (力量 X 2.25)) 魔法伤害\n攻击冷却时间：15 秒"
   },
   {
     "id": "I0GY",
     "enName": "Espishu, the Sword of Eternity",
     "koName": "영겁의 검 에스피슈",
     "en": "Passive:\nOn attack, 10% chance to activate Chaos Strike\nDeals ((STR + AGI) X 6) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活混乱打击\n造成 ((力量 + 敏捷) X 6) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活混乱打击\n造成 ((力量 + 敏捷) X 6) 魔法伤害"
   },
   {
     "id": "uflg",
@@ -2167,7 +2167,7 @@
     "enName": "Claws of Beriel",
     "koName": "베리엘의 손톱",
     "en": "Passive:\nOn attack, (1 + HIT COUNT X 0.125)% chance to activate Doomsday\nDeals (ATK DMG X 1.6 + (STR + AGI) X 10) magic damage in an AoE\nStuns for 0.1 seconds\n",
-    "cn": "被动：\n攻击时，(1 + 连击计数 X 0.125)% 几率激活世界末日\n范围造成 (攻击伤害 X 1.6 + (力量 + 敏捷) X 10) 魔法伤害\n眩晕0.1秒\n"
+    "cn": "被动：\n攻击时，(1 + 连击计数 X 0.125)% 几率激活世界末日\n范围造成 (攻击伤害 X 1.6 + (力量 + 敏捷) X 10) 魔法伤害\n眩晕0.1秒"
   },
   {
     "id": "rat3",
@@ -2181,7 +2181,7 @@
     "enName": "Crimson Reaper",
     "koName": "크림슨 리퍼",
     "en": "Passive:\nEvery 14th attack activates Wrath of Blood\nDeals (MAIN STAT X 6) magic damage in an AoE\nHeals user for (300 + (MAIN STAT X 0.6)) HP\nOn skill cast, 30% chance to activate Blood Awakening\nIncreases AGI by 240, ATK SPD by 30% and empowers Wrath of Blood for 7.5 seconds\nEvery 5th empowered attack, deals (1.25 X MAIN STAT X 6) magic damage in an AoE\nHeals user for (450 + (MAIN STAT X 0.9)) HP\nHeals nearby allies (225 + (MAIN STAT X 0.45)) HP\nStuns target for 0.375 seconds\nBlood Awakening cooldown: 15 seconds\n",
-    "cn": "被动：\n每第 14 次攻击激活血之怒\n范围中造成 (主属性 X 6) 魔法伤害\n治疗友方 (300 + (主属性 X 0.6)) HP\n施法时, 30% 几率激活 血之觉醒\n敏捷 提高 240，攻击速度提高 30% 并强化 血怒 持续 7.5 秒\n每 5 次强化攻击，范围造成 (1.25 X 主属性 X 6) 魔法伤害\nH治疗友方 (450 + (主属性 X 0.9)) HP\n治疗附近单位 (225 + (主属性 X 0.45)) HP\n击晕目标 0.375 秒\n血之觉醒 冷却 : 15 秒\n"
+    "cn": "被动：\n每第 14 次攻击激活血之怒\n范围中造成 (主属性 X 6) 魔法伤害\n治疗友方 (300 + (主属性 X 0.6)) HP\n施法时, 30% 几率激活 血之觉醒\n敏捷 提高 240，攻击速度提高 30% 并强化 血怒 持续 7.5 秒\n每 5 次强化攻击，范围造成 (1.25 X 主属性 X 6) 魔法伤害\nH治疗友方 (450 + (主属性 X 0.9)) HP\n治疗附近单位 (225 + (主属性 X 0.45)) HP\n击晕目标 0.375 秒\n血之觉醒 冷却 : 15 秒"
   },
   {
     "id": "rej4",
@@ -2209,7 +2209,7 @@
     "enName": "Staff of Abyss",
     "koName": "스태프 오브 어비스",
     "en": "Passive:\nOn skill cast and healing, grants Mad Enhancement\nIncreases skill damage by 10% [Type-B], and HP regen by 75\nHealed ally will also get empowered\nLasts for 8 seconds\n",
-    "cn": "被动：\n在施放技能和治疗时，获得疯狂增强\n技能伤害提高 10% [Type-B]，HP 恢复 75\n被治疗的盟友也将获得强化\n持续 8秒\n"
+    "cn": "被动：\n在施放技能和治疗时，获得疯狂增强\n技能伤害提高 10% [Type-B]，HP 恢复 75\n被治疗的盟友也将获得强化\n持续 8秒"
   },
   {
     "id": "kybl",
@@ -2237,42 +2237,42 @@
     "enName": "Pheles, the Bow of Skies",
     "koName": "창공의 활 피레스",
     "en": "Passive:\nOn attack, activates Poem of Wind\nSends an additional arrow to target\nDeals (wind affinity X (10% ATK DMG)) pure damage\n",
-    "cn": "被动：\n攻击时，激活风之诗\n向目标发送额外的箭\n造成 (风属性 X (10% 攻击伤害)) 存粹伤害\n"
+    "cn": "被动：\n攻击时，激活风之诗\n向目标发送额外的箭\n造成 (风属性 X (10% 攻击伤害)) 存粹伤害"
   },
   {
     "id": "kgal",
     "enName": "Hellflame",
     "koName": "헬플레임",
     "en": "Passive:\n15% chance to activate Hellflame on attack\nDeals (flame affinity X (AGI X 2.25)) magic damage per second for 10 seconds\nIncrease magic damage taken of enemy by 2% for 5 seconds\n",
-    "cn": "被动：\n15% 几率在攻击时激活地狱烈焰\n每秒造成 (火属性 X (敏捷 X 2.25)) 魔法伤害，持续 10 秒\n增加敌人受到的魔法伤害 2%，持续 5 秒\n"
+    "cn": "被动：\n15% 几率在攻击时激活地狱烈焰\n每秒造成 (火属性 X (敏捷 X 2.25)) 魔法伤害，持续 10 秒\n增加敌人受到的魔法伤害 2%，持续 5 秒"
   },
   {
     "id": "rde2",
     "enName": "Heartseeker",
     "koName": "심장추적자",
     "en": "Passive:\nEmpowers next attack with Corrupt Arrow every 6 seconds\nDeals (AGI X 18) magic damage to target and (AGI X 12) magic damage to enemies around the target\nHeals (15% max HP)\n",
-    "cn": "被动：\n每 6 秒用腐蚀之箭强化下一次攻击\n对目标造成 (敏捷 X 18) 魔法伤害并对目标周围的敌人造成 (敏捷 X 12) 魔法伤害\n治疗（15% 最大 HP )\n"
+    "cn": "被动：\n每 6 秒用腐蚀之箭强化下一次攻击\n对目标造成 (敏捷 X 18) 魔法伤害并对目标周围的敌人造成 (敏捷 X 12) 魔法伤害\n治疗（15% 最大 HP )"
   },
   {
     "id": "tkno",
     "enName": "Everfrostbane",
     "koName": "에버프로스트 베인",
     "en": "Passive:\nOn attack, chance to activate Glacial Storm\nInitially deals (water affinity X (AGI X 2 ~ 3)) magic damage\n8% chance to deal (water affinity X (AGI X 6 ~ 7.5)) bonus magic damage\nCooldown: 9 seconds\n",
-    "cn": "被动：\n攻击时，有几率激活冰川风暴\n初始造成 (水属性 X (敏捷 X 2 ~ 3)) 魔法伤害\n8% 概率造成 (水属性 X (敏捷 X 6 ~ 7.5)) 额外魔法伤害\n冷却时间：9 秒\n"
+    "cn": "被动：\n攻击时，有几率激活冰川风暴\n初始造成 (水属性 X (敏捷 X 2 ~ 3)) 魔法伤害\n8% 概率造成 (水属性 X (敏捷 X 6 ~ 7.5)) 额外魔法伤害\n冷却时间：9 秒"
   },
   {
     "id": "sor9",
     "enName": "Soulstalker",
     "koName": "소울스토커",
     "en": "Passive:\n10% chance to activate Soul Reaping on attack\nDeals (MAIN STAT X 7.5) magic damage\n",
-    "cn": "被动：\n10% 几率在攻击时激活灵魂收割\n造成 (主属性 X 7.5) 魔法伤害\n"
+    "cn": "被动：\n10% 几率在攻击时激活灵魂收割\n造成 (主属性 X 7.5) 魔法伤害"
   },
   {
     "id": "I0H0",
     "enName": "Griveddon, the Bow of Certain Destruction",
     "koName": "필멸의 활 그리베돈",
     "en": "Passive:\nOn attack, 10% chance to activate Chaos Spike\nDeals ((STR + AGI) X 6) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活混沌尖刺\n造成 ((力量 + 敏捷) X 6) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活混沌尖刺\n造成 ((力量 + 敏捷) X 6) 魔法伤害"
   },
   {
     "id": "plcl",
@@ -2307,21 +2307,21 @@
     "enName": "Dante's Inferno",
     "koName": "단테스 인페르노",
     "en": "Passive:\nCharges a Bullet of Ruin every 6 seconds\nDeals ((MAIN STAT X 7.5) + (ATK DMG X 0.85)) magic damage per stack (up to 3 stacks)\nStuns for 0.25 seconds\n",
-    "cn": "被动：\n每 6 秒充能一次毁灭之弹\n每层造成 ((主属性 X 7.5) + (攻击伤害 X 0.85)) 魔法伤害（最多 3 层）\n眩晕 0.25 秒\n"
+    "cn": "被动：\n每 6 秒充能一次毁灭之弹\n每层造成 ((主属性 X 7.5) + (攻击伤害 X 0.85)) 魔法伤害（最多 3 层）\n眩晕 0.25 秒"
   },
   {
     "id": "I0N0",
     "enName": "Punisher",
     "koName": "퍼니셔",
     "en": "Passive:\nReloads a Bullet of Punishment every 6 seconds\nDeals ((MAIN STAT X 7.5) + ATK DMG) magic damage per stack (up to 3 stacks)\nStuns for 0.25 seconds\n",
-    "cn": "被动：\n每 6 秒装填一颗惩罚子弹\n每层造成 ((主属性 X 7.5) + 攻击伤害) 魔法伤害（最多 3 层）\n眩晕 0.25 秒\n "
+    "cn": "被动：\n每 6 秒装填一颗惩罚子弹\n每层造成 ((主属性 X 7.5) + 攻击伤害) 魔法伤害（最多 3 层）\n眩晕 0.25 秒"
   },
   {
     "id": "I0H1",
     "enName": "Chronos, the Cannon of Time",
     "koName": "시공의 대포 크로노스",
     "en": "Passive:\nOn attack, 10% chance to activate Chaos Bullet\nDeals ((STR + AGI) X 6) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活混沌子弹\n造成 ((力量 + 敏捷) X 6) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活混沌子弹\n造成 ((力量 + 敏捷) X 6) 魔法伤害"
   },
   {
     "id": "I0NT",
@@ -2335,7 +2335,7 @@
     "enName": "Frostshard Armor",
     "koName": "프로스트샤드 아머",
     "en": "Passive:\nActivates Frostshard when HP drops below 40%\nDeals (water affinity X (STR X 6)) magic damage in an AoE\nIncreases STR by 10%, damage reduction by 7.5% for 12 seconds\nHeals (17.5% max HP) HP\nReduces enemy movement and ATK SPD by 75% for 2 seconds\nCooldown: 8 seconds\n",
-    "cn": "被动：\n当 HP 低于 40% 时激活 冰霜碎片\n范围中造成（水属性 X（力量 X 6））魔法伤害\n增加 10% 的力量，减少 7.5% 的伤害，持续 12 秒\n治疗（17.5% 最大生命值）生命值\n减少敌人移动和攻击速度 75% 持续 2 秒\n冷却时间：8 秒\n"
+    "cn": "被动：\n当 HP 低于 40% 时激活 冰霜碎片\n范围中造成（水属性 X（力量 X 6））魔法伤害\n增加 10% 的力量，减少 7.5% 的伤害，持续 12 秒\n治疗（17.5% 最大生命值）生命值\n减少敌人移动和攻击速度 75% 持续 2 秒\n冷却时间：8 秒"
   },
   {
     "id": "scul",
@@ -2356,28 +2356,28 @@
     "enName": "Requiem, the Armor of Lamentation",
     "koName": "탄식의 갑주 레퀴엠",
     "en": "Passive:\nIncreases self and nearby allies' stats by 5%\nEvery 8 seconds, activates one of the following:\nAnger: +10% skill damage\nOblivion: +16% damage reduction\nObsession: (MAIN STAT X 20%) HP regen\nCooldown: 90 seconds\n",
-    "cn": "被动：\n将自身和附近盟友的属性提高 5%\n每 8 秒激活以下一项：\n愤怒：+10% 技能伤害\n遗忘：+16% 伤害减免 r\n痴迷：(主属性 X 20%) 生命恢复\n冷却时间：90 秒\n"
+    "cn": "被动：\n将自身和附近盟友的属性提高 5%\n每 8 秒激活以下一项：\n愤怒：+10% 技能伤害\n遗忘：+16% 伤害减免 r\n痴迷：(主属性 X 20%) 生命恢复\n冷却时间：90 秒"
   },
   {
     "id": "I0J6",
     "enName": "Plates of Lightning",
     "koName": "번개의 갑주",
     "en": "Passive:\nOn skill cast, releases lightning for 3 seconds\nDeals ((STR + AGI) X 3) magic damage\nIncreases HP regen by 3% max HP\nCooldown: 6 seconds\n",
-    "cn": "被动：\n施放技能时，释放闪电 3 秒\n造成 ((力量 + 敏捷) X 3) 魔法伤害\n增加生命恢复 3% 最大生命值\n冷却时间：6 秒\\r \n"
+    "cn": "被动：\n施放技能时，释放闪电 3 秒\n造成 ((力量 + 敏捷) X 3) 魔法伤害\n增加生命恢复 3% 最大生命值\n冷却时间：6 秒\\r"
   },
   {
     "id": "jpnt",
     "enName": "Tunic of the Wraith",
     "koName": "망령의 튜닉",
     "en": "Passive:\nWhen HP drops low, reduces damage taken by 90% and heals 25% max HP for 3 seconds\nCooldown: 60 seconds\n",
-    "cn": "被动：\n当生命值低时，受到的伤害减少 90% 并恢复 25% 最大生命值，持续 3 秒\n冷却时间：60 秒\n"
+    "cn": "被动：\n当生命值低时，受到的伤害减少 90% 并恢复 25% 最大生命值，持续 3 秒\n冷却时间：60 秒"
   },
   {
     "id": "I0JV",
     "enName": "Vest of Storm",
     "koName": "폭풍의 도복",
     "en": "Passive:\nOn skill cast, activates Storm Fury for 1.5 seconds\nNext 3 attacks hit once more and deal (50% ATK DMG) physical damage\nIncreases movement speed by 300 (past limit)\n",
-    "cn": "被动：\n施放技能时，激活风暴之怒 1.5 秒\n接下来的 3 次攻击再次命中并造成 (50% 攻击伤害) 物理伤害\n移动速度提高 300（超过限制）\n"
+    "cn": "被动：\n施放技能时，激活风暴之怒 1.5 秒\n接下来的 3 次攻击再次命中并造成 (50% 攻击伤害) 物理伤害\n移动速度提高 300（超过限制）"
   },
   {
     "id": "I0DQ",
@@ -2391,7 +2391,7 @@
     "enName": "Grandine, the Plates of Wraith",
     "koName": "망령의 갑주 그란디네",
     "en": "Passive:\nWhen HP drops below 20%, activates Grandine\nIncreases damage reduction by 90% for 3 seconds\nInstantly heals (35% max HP)\nHeals 6% max HP per second for 3 seconds\nCooldown: 60 seconds\n",
-    "cn": "被动：\n当 HP 低于 20% 时，激活 冰雹\n增加 90% 伤害减免，持续 3 秒\n立即治疗（35% 最大 HP）\n每秒治疗 6% 最大 HP，持续 3秒\n冷却时间：60 秒\n"
+    "cn": "被动：\n当 HP 低于 20% 时，激活 冰雹\n增加 90% 伤害减免，持续 3 秒\n立即治疗（35% 最大 HP）\n每秒治疗 6% 最大 HP，持续 3秒\n冷却时间：60 秒"
   },
   {
     "id": "dkfw",
@@ -2454,7 +2454,7 @@
     "enName": "Eye of Wallachia",
     "koName": "왈라키아의 눈",
     "en": "Passive:\n25% chance to activate Eye of Death on attack\nIncreases crit multiplier by 0.20, ATK DMG by 15%, and AGI by 225 for 6 seconds\nCooldown: 15 seconds\n",
-    "cn": "被动：\n25% 几率在攻击时激活死亡之眼\n暴击倍率增加 0.20，攻击伤害增加 15%，敏捷 增加 225，持续 6 秒\n冷却时间：15 秒\n"
+    "cn": "被动：\n25% 几率在攻击时激活死亡之眼\n暴击倍率增加 0.20，攻击伤害增加 15%，敏捷 增加 225，持续 6 秒\n冷却时间：15 秒"
   },
   {
     "id": "jdrn",
@@ -2496,7 +2496,7 @@
     "enName": "Crown of Serenity",
     "koName": "청명의 화관",
     "en": "Passive:\n15% chance to apply Serenity upon healing ally\nIncreases skill damage by 5%\nHeals ((INT X 0.125) + (2% max HP)) HP\nheals (1% max MP) per 0.5 seconds for 5 seconds\n",
-    "cn": "被动：\n15% 几率在治疗盟友时应用宁静\n技能伤害提高 5%\n治疗 ((智力 X 0.125) + (2% 最大生命值)) HP\n治疗 (1%最大 MP) 每 0.5 秒持续 5 秒\n"
+    "cn": "被动：\n15% 几率在治疗盟友时应用宁静\n技能伤害提高 5%\n治疗 ((智力 X 0.125) + (2% 最大生命值)) HP\n治疗 (1%最大 MP) 每 0.5 秒持续 5 秒"
   },
   {
     "id": "sclp",
@@ -2517,7 +2517,7 @@
     "enName": "Ring of Strike",
     "koName": "일격의 반지",
     "en": "Passive:\n7.5% chance to activate Absolute Strike on attack\nNext 3 hits will deal bonus (ATK DMG X 1) pure damage\nIncreases ATK DMG by 6000, MAIN STAT and HP regen by 300 for 7.5 seconds\nAbsolute Strike cooldown: 15 seconds\n",
-    "cn": "被动：\n攻击时有 7.5% 几率激活绝对打击\n接下来的 3 次攻击将造成额外的 (攻击伤害 X 1) 纯伤害\n攻击伤害增加 6000，主属性和 HP 恢复增加 300持续 7.5 秒\n绝对打击冷却时间：15 秒\n"
+    "cn": "被动：\n攻击时有 7.5% 几率激活绝对打击\n接下来的 3 次攻击将造成额外的 (攻击伤害 X 1) 纯伤害\n攻击伤害增加 6000，主属性和 HP 恢复增加 300持续 7.5 秒\n绝对打击冷却时间：15 秒"
   },
   {
     "id": "I0EF",
@@ -2573,14 +2573,14 @@
     "enName": "Wings of Blood Lord",
     "koName": "피의 군주의 날개",
     "en": "Passive:\nUpon moving 400 distance, activates Bloody Bite on next attack\nDeals (50% ATK DMG) pure damage\nHeals 8% max HP\nIncreases ATK DMG by 450, movement speed by 15, and HP regen by 75 for 4 seconds (up to 5 stacks)\ncooldown: 0.125 seconds\n",
-    "cn": "被动：\n移动 400 距离后，下次攻击激活血腥撕咬\n造成 (50% 攻击伤害) 纯伤害\n治疗 8% 最大生命值\n攻击伤害提高 450，移动速度提高 15 , HP 恢复 75 持续 4 秒（最多叠加 5 层）\n冷却: 0.125 秒\n"
+    "cn": "被动：\n移动 400 距离后，下次攻击激活血腥撕咬\n造成 (50% 攻击伤害) 纯伤害\n治疗 8% 最大生命值\n攻击伤害提高 450，移动速度提高 15 , HP 恢复 75 持续 4 秒（最多叠加 5 层）\n冷却: 0.125 秒"
   },
   {
     "id": "k3m3",
     "enName": "Pure Crystal Wings",
     "koName": "퓨어 크리스탈 윙",
     "en": "Passive:\n5% chance to reset non-ultimate skill cooldowns on skill cast\nCooldown: 150 seconds\n",
-    "cn": "被动：\n5% 几率在施放技能时重置非终极技能的冷却时间\n冷却时间：150 秒\n"
+    "cn": "被动：\n5% 几率在施放技能时重置非终极技能的冷却时间\n冷却时间：150 秒"
   },
   {
     "id": "I0D1",
@@ -2594,7 +2594,7 @@
     "enName": "Cloak of the Fallen Shadows",
     "koName": "타락한 그림자의 망토",
     "en": "Passive:\nOn single-target hits, engulfs target with Corruption\nDeals 12.5% bonus damage over 3 seconds (effect stacks)\nIncreases enemy magic damage taken by 2% [Type-B]\n",
-    "cn": "被动：\n在击中单个目标时，用腐蚀吞噬目标\n在 3 秒内造成 12.5% 的额外伤害（效果叠加）\n使敌人受到的魔法伤害提高 2% [Type-B]\n"
+    "cn": "被动：\n在击中单个目标时，用腐蚀吞噬目标\n在 3 秒内造成 12.5% 的额外伤害（效果叠加）\n使敌人受到的魔法伤害提高 2% [Type-B]"
   },
   {
     "id": "oflg",
@@ -2608,14 +2608,14 @@
     "enName": "Wings of Slayer",
     "koName": "학살자의 날개",
     "en": "Passive:\nOn skill cast, empowers next attack with Decimation\nDeals ((MAIN STAT X 1.5) + AGI) pure damage\nCan crit based on user's critical chance\nIncreases AGI by 27 for 6 seconds (up to 10 stacks)\nAt max stacks, duration cannot be extended but increases skill damage by 10%\n",
-    "cn": "被动：\n在施放技能时，用毁灭强化下一次攻击\n造成 ((主属性 X 1.5) + 敏捷) 纯伤害\n可以根据用户的暴击几率暴击\n将 敏捷 提高 27，持续 6秒（最多 10 层）\n达到最大层数时，持续时间无法延长，但技能伤害提高 10%\n"
+    "cn": "被动：\n在施放技能时，用毁灭强化下一次攻击\n造成 ((主属性 X 1.5) + 敏捷) 纯伤害\n可以根据用户的暴击几率暴击\n将 敏捷 提高 27，持续 6秒（最多 10 层）\n达到最大层数时，持续时间无法延长，但技能伤害提高 10%"
   },
   {
     "id": "gcel",
     "enName": "Soul of the Dead",
     "koName": "망자의 영혼",
     "en": "Passive:\nActivates Call of the Dead upon death\nDeals (MAIN STAT X 40) magic damage in an AoE\nStuns for 1 second\nRevives hero with 40% HP and 100% MP\nCooldown: 180 seconds\n",
-    "cn": "被动：\n死亡时激活死亡召唤\n范围中造成（主属性 X 40）魔法伤害\n昏迷 1 秒\n用 40 复活英雄% HP and 100% MP\n冷却时间：180 秒\n"
+    "cn": "被动：\n死亡时激活死亡召唤\n范围中造成（主属性 X 40）魔法伤害\n昏迷 1 秒\n用 40 复活英雄% HP and 100% MP\n冷却时间：180 秒"
   },
   {
     "id": "sor4",
@@ -2643,7 +2643,7 @@
     "enName": "Ethereal Dagger",
     "koName": "에테르 비수",
     "en": "Passive:\nEmpowers next attack with Elemental Breath every 4 seconds\nDeals (MAIN STAT X 8) magic damage\nIncreases enemy damage taken by 5% for 4 seconds\n",
-    "cn": "被动：\n每 4 秒使用元素吐息增强下一次攻击\n造成 (主属性 X 8) 点魔法伤害\n使敌人受到的伤害提高 5%，持续 4 秒\n"
+    "cn": "被动：\n每 4 秒使用元素吐息增强下一次攻击\n造成 (主属性 X 8) 点魔法伤害\n使敌人受到的伤害提高 5%，持续 4 秒"
   },
   {
     "id": "I0AL",
@@ -2685,21 +2685,21 @@
     "enName": "Cosmic Reaper",
     "koName": "코즈믹 리퍼",
     "en": "Passive:\nOn every 12th attack, activates Dimension Cut\nDeals (MAIN STAT X 7.5) magic damage in an AoE\nOn skill cast, activates Transcendence\nIncreases AGI by 300 and HP regen by (7.5% max HP) for 7.5 seconds\nWhile awakened, Dimension Cut activates every 4th attack\nSkill cast Cooldown: 15 seconds\n",
-    "cn": "被动：\n每第 12 次攻击，激活次元切割\n范围中造成 (主属性 X 7.5) 魔法伤害\n在施放技能时，激活超越\n增加 300 敏捷 和 ( 7.5% 最大生命值) HP 回复\n"
+    "cn": "被动：\n每第 12 次攻击，激活次元切割\n范围中造成 (主属性 X 7.5) 魔法伤害\n在施放技能时，激活超越\n增加 300 敏捷 和 ( 7.5% 最大生命值) HP 回复"
   },
   {
     "id": "I0F3",
     "enName": "Espishu, the True Sword of Eternity",
     "koName": "진 영겁의 검 에스피슈",
     "en": "Passive:\nOn attack, 10% chance to activate Chaos Strike\nDeals ((STR + AGI) X 6) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活混乱打击\n造成 ((力量 + 敏捷) X 6) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活混乱打击\n造成 ((力量 + 敏捷) X 6) 魔法伤害"
   },
   {
     "id": "I0AM",
     "enName": "Espishu, the Sword of Chaos",
     "koName": "혼돈의 검 에스피슈",
     "en": "Passive:\nOn attack, 10% chance to activate Chaos Strike\nDeals ((STR + AGI) X 7.5) magic damage\n",
-    "cn": "被动：\n攻击时，有 10% 几率激活混乱打击\n造成 ((力量 + 敏捷) X 7.5) 魔法伤害\n"
+    "cn": "被动：\n攻击时，有 10% 几率激活混乱打击\n造成 ((力量 + 敏捷) X 7.5) 魔法伤害"
   },
   {
     "id": "I0P4",
@@ -2734,7 +2734,7 @@
     "enName": "Maw of Beriel",
     "koName": "베리엘의 손아귀",
     "en": "Passive:\n(1 + HIT COUNT X 0.125)% chance to activate Doomsday on attack\nDeals (ATK DMG X 1.9 + (STR + AGI) X 10.5) magic damage\nStuns for 0.1 seconds\n",
-    "cn": "被动：\n(1 + 连击计数 X 0.125)% 机会在攻击时激活世界末日\n造成 (攻击伤害 X 1.9 + (力量 + 敏捷) X 10.5) 魔法伤害\n眩晕 0.1 秒 \n"
+    "cn": "被动：\n(1 + 连击计数 X 0.125)% 机会在攻击时激活世界末日\n造成 (攻击伤害 X 1.9 + (力量 + 敏捷) X 10.5) 魔法伤害\n眩晕 0.1 秒"
   },
   {
     "id": "tgxp",
@@ -2748,7 +2748,7 @@
     "enName": "Pheles, the Bow of God",
     "koName": "신궁 피레스",
     "en": "Passive:\nOn attack, activates Poem of Wind\nFires an arrow that deals (wind affinity X (10% ATK DMG)) pure damage\n50% chance to fire 2 arrows\n",
-    "cn": "被动：\n攻击时，激活风之诗\n发射一箭，造成（风属性 X（10% 攻击伤害））纯粹伤害\n50% 几率发射 2 支箭\n"
+    "cn": "被动：\n攻击时，激活风之诗\n发射一箭，造成（风属性 X（10% 攻击伤害））纯粹伤害\n50% 几率发射 2 支箭"
   },
   {
     "id": "I0N4",
@@ -2762,7 +2762,7 @@
     "enName": "Eternal Flame",
     "koName": "이터널 플레임",
     "en": "Passive:\nOn attack, 15% chance to activate Mark of Flame\nInitially deals (flame affinity X (AGI X 4.5)) magic damage\nAfterwards deals (flame affinity X (AGI X 2.25)) magic damage per second and increases magic damage taken by 2% for 10 seconds\nAccumulates Heat while in combat (up to 15 stacks)\nEach stack increases skill damage and flame affinity by 1%\n",
-    "cn": "被动：\n攻击时，有 15% 几率激活火焰印记\n最初造成 (火属性 X (敏捷 X 4.5)) 魔法伤害\n之后造成 (火属性 X (敏捷 X 2.25)) 魔法伤害每秒伤害并增加 2% 受到的魔法伤害，持续 10 秒\n在战斗中积累热量（最多 15 层）\n每层增加 1% 的技能伤害和火属性\n"
+    "cn": "被动：\n攻击时，有 15% 几率激活火焰印记\n最初造成 (火属性 X (敏捷 X 4.5)) 魔法伤害\n之后造成 (火属性 X (敏捷 X 2.25)) 魔法伤害每秒伤害并增加 2% 受到的魔法伤害，持续 10 秒\n在战斗中积累热量（最多 15 层）\n每层增加 1% 的技能伤害和火属性"
   },
   {
     "id": "I0N7",
@@ -2776,7 +2776,7 @@
     "enName": "Last Word",
     "koName": "라스트 워드",
     "en": "Passive:\nCharges a Bullet of Penance every 4 seconds\nDeals ((MAIN STAT X 7.5) + (ATK DMG X 1.2)) magic damage per stack (up to 3 stacks)\nStuns for 0.25 seconds\n",
-    "cn": "被动：\n每 4 秒充一次忏悔之弹\n每层造成 ((主属性 X 7.5) + (攻击伤害 X 1.2)) 魔法伤害（最多 3 层）\n眩晕 0.25 秒\n"
+    "cn": "被动：\n每 4 秒充一次忏悔之弹\n每层造成 ((主属性 X 7.5) + (攻击伤害 X 1.2)) 魔法伤害（最多 3 层）\n眩晕 0.25 秒"
   },
   {
     "id": "I0K0",
@@ -2902,21 +2902,21 @@
     "enName": "Athanasia, the Armor of the Reaper",
     "koName": "사신의 갑주 아타나시아",
     "en": "Passive:\nIf HP drops below 20%, summons Reaper\nPrevents HP from dropping below 1 for 6 seconds\nAfterwards deals (50 + (AGI X 75)) pure damage in an AoE\nDeals up to 125% more damage based on target's missing HP\nHeals to full\nCooldown: 60 seconds\n",
-    "cn": "被动：\n如果 HP 低于 20%，召唤死神\n防止 HP 低于 1 持续 6 秒\n之后范围中造成 (50 + (敏捷 X 75)) 纯粹伤害\n造成根据目标丢失的 HP 最多增加 125% 的伤害\n完全治愈\n冷却时间：60 秒\n"
+    "cn": "被动：\n如果 HP 低于 20%，召唤死神\n防止 HP 低于 1 持续 6 秒\n之后范围中造成 (50 + (敏捷 X 75)) 纯粹伤害\n造成根据目标丢失的 HP 最多增加 125% 的伤害\n完全治愈\n冷却时间：60 秒"
   },
   {
     "id": "I0OW",
     "enName": "Vest of Divine Winds",
     "koName": "신풍의 도복",
     "en": "Passive:\nOn skill cast, activates Wind Fury for 1.5 seconds\nNext 2 attacks hit 2 more times and deals (50% ATK DMG) physical damage\nIncreases AGI by 75 and movement speed by 400 (past limit)\n",
-    "cn": "被动：\n施放技能时，激活风怒 1.5 秒\n接下来的 2 次攻击再命中 2 次并造成 (50% 攻击伤害) 物理伤害\n增加 75 敏捷 和 400 移动速度（过去限制)\n"
+    "cn": "被动：\n施放技能时，激活风怒 1.5 秒\n接下来的 2 次攻击再命中 2 次并造成 (50% 攻击伤害) 物理伤害\n增加 75 敏捷 和 400 移动速度（过去限制)"
   },
   {
     "id": "I0IP",
     "enName": "Hades, the Armor of Despair",
     "koName": "절망의 갑주 하데스",
     "en": "Passive:\nIncreases nearby allies stats by 6%\nActivates Requiem every 6 seconds\nDeals ((STR + AGI + INT) X 3) magic damage in an AoE\nIncreases enemy damage taken by 3% [type-B]for 6 seconds\nOn next attack, heals (6% max HP)\n",
-    "cn": "被动：\n附近盟友的伤害增加 6%\n每 6 秒激活安魂曲\n范围中造成 ((力量 + 敏捷 + 智力) X 3) 魔法伤害\n增加敌人受到的伤害 3 %[B型] 持续 6 秒\n下次攻击时，治疗（6% 最大 HP）\n"
+    "cn": "被动：\n附近盟友的伤害增加 6%\n每 6 秒激活安魂曲\n范围中造成 ((力量 + 敏捷 + 智力) X 3) 魔法伤害\n增加敌人受到的伤害 3 %[B型] 持续 6 秒\n下次攻击时，治疗（6% 最大 HP）"
   },
   {
     "id": "I0LV",
@@ -2951,14 +2951,14 @@
     "enName": "Robe of Storm",
     "koName": "폭풍의 로브",
     "en": "Passive:\nDuring combat, activates Rig of Lightning\nDeals (4000 + INT X 2) magic damage to enemies in 550 ~ 800 from you every second\nAlso grants a charge every time it hits enemy\nWhen charge reaches 10 stacks, all charges are consumed and you gain 250 INT for 5 seconds\nCooldown: 5 seconds\n",
-    "cn": "被动：\n在战斗中，激活闪电装备\n每秒对你周围 550 ~ 800 范围内的敌人造成 (4000 + 智力 X 2) 魔法伤害\n每次击中敌人时也会充能\\r \n当蓄力达到 10 层时，所有蓄力将被消耗，你获得 250 智力，持续 5 秒\n冷却时间：5 秒\n"
+    "cn": "被动：\n在战斗中，激活闪电装备\n每秒对你周围 550 ~ 800 范围内的敌人造成 (4000 + 智力 X 2) 魔法伤害\n每次击中敌人时也会充能\\r \n当蓄力达到 10 层时，所有蓄力将被消耗，你获得 250 智力，持续 5 秒\n冷却时间：5 秒"
   },
   {
     "id": "I0IR",
     "enName": "Horn of Lightning God",
     "koName": "뇌신의 뿔",
     "en": "Passive:\nUpon moving 3000 distance, unleash Lightning God's Wrath on next attack\nDeals (MAIN STAT X 25) pure damage\nCooldown: 5 seconds\n",
-    "cn": "被动：\n移动 3000 距离后，在下次攻击时释放闪电之神的愤怒\n造成 (主属性 X 25) 纯伤害\n冷却时间：5 秒\n"
+    "cn": "被动：\n移动 3000 距离后，在下次攻击时释放闪电之神的愤怒\n造成 (主属性 X 25) 纯伤害\n冷却时间：5 秒"
   },
   {
     "id": "I0NB",
@@ -2972,7 +2972,7 @@
     "enName": "Eye of the Reaper",
     "koName": "사신의 눈",
     "en": "Passive:\nOn attack, activates Eye of the Reaper\nIncreases ATK DMG by 17.5%, critical damage by 0.25 and AGI by 300 for 7.5 seconds\nCooldown: 15 seconds\n",
-    "cn": "被动：\n攻击时，激活死神之眼\n攻击伤害提高 17.5%，暴击伤害提高 0.25，敏捷 提高 300，持续 7.5 秒\n冷却时间：15 秒\\r \n"
+    "cn": "被动：\n攻击时，激活死神之眼\n攻击伤害提高 17.5%，暴击伤害提高 0.25，敏捷 提高 300，持续 7.5 秒\n冷却时间：15 秒\\r"
   },
   {
     "id": "I0ND",
@@ -3021,7 +3021,7 @@
     "enName": "Horn of Demon God",
     "koName": "마신의 뿔",
     "en": "Passive:\nUpon moving 3000 distance, unleash Beam of Destruction on next attack\nDeals (MAIN STAT X 30) pure damage in a line in front of user\nIncreases damage output by 8% for 4 seconds (only for self towards target)\nCooldown: 5 seconds\n",
-    "cn": "被动：\n移动 3000 距离后，在下一次攻击时释放毁灭光束\n在用户面前的直线上造成 (主属性 X 30) 点纯粹伤害\n伤害输出提高 8%，持续 4 秒（仅对自己朝向目标)\n冷却时间：5 秒\n"
+    "cn": "被动：\n移动 3000 距离后，在下一次攻击时释放毁灭光束\n在用户面前的直线上造成 (主属性 X 30) 点纯粹伤害\n伤害输出提高 8%，持续 4 秒（仅对自己朝向目标)\n冷却时间：5 秒"
   },
   {
     "id": "I0IS",
@@ -3042,7 +3042,7 @@
     "enName": "Heaven's Fist",
     "koName": "헤븐즈 피스트",
     "en": "Passive:\nEmpowers next attack with Holy Fist every 6 seconds\nDeals 3 additional attacks with (200% ATK DMG) physical damage\nReduces armor by 15% [Type-A] for 3 seconds\n",
-    "cn": "被动：\n每 6 秒用神圣之拳强化下一次攻击\n额外造成 3 次攻击并造成 (200% 攻击伤害) 物理伤害\n护甲降低 15% [Type-A] 持续 3 秒\n"
+    "cn": "被动：\n每 6 秒用神圣之拳强化下一次攻击\n额外造成 3 次攻击并造成 (200% 攻击伤害) 物理伤害\n护甲降低 15% [Type-A] 持续 3 秒"
   },
   {
     "id": "I0OE",
@@ -3077,7 +3077,7 @@
     "enName": "Ring of Insanity",
     "koName": "광기의 반지",
     "en": "Passive:\nOn attack, 15% chance to activate Madness\nNext 3 hits will deal bonus (ATK DMG X 1) pure damage\nIncreases ATK DMG by 7500, MAIN STAT and HP regen by 375 for 7.5 seconds\nCooldown: 15 seconds\n",
-    "cn": "被动：\n攻击时，有 15% 几率激活疯狂\n接下来的 3 次攻击将造成额外的（攻击伤害 X 1）纯伤害\n攻击伤害提高 7500，主属性和 HP 恢复提高 375，持续 7.5秒\n冷却时间：15 秒\n"
+    "cn": "被动：\n攻击时，有 15% 几率激活疯狂\n接下来的 3 次攻击将造成额外的（攻击伤害 X 1）纯伤害\n攻击伤害提高 7500，主属性和 HP 恢复提高 375，持续 7.5秒\n冷却时间：15 秒"
   },
   {
     "id": "asbl",
@@ -3098,14 +3098,14 @@
     "enName": "Latea, the Ring of Overlord",
     "koName": "지배자의 반지 라테아",
     "en": "Passive:\nOn dealing damage, 20% chance to deal 20% bonus damage\nOn being damaged, 10% chance to activate Absolute Protection (blocks all damage)\n",
-    "cn": "被动：\n造成伤害时，有 20% 的几率造成 20% 的额外伤害\n受到伤害时，有 10% 的几率激活绝对保护（格挡所有伤害）\n"
+    "cn": "被动：\n造成伤害时，有 20% 的几率造成 20% 的额外伤害\n受到伤害时，有 10% 的几率激活绝对保护（格挡所有伤害）"
   },
   {
     "id": "I0PP",
     "enName": "Ring of the One",
     "koName": "절대자의 반지",
     "en": "Passive:\nOn dealing damage, 20% chance to deal 25% additional damage\nOn casting skill, 15% chance to increase damage dealt by 5% for 5 seconds\nOn being damaged, 10% chance to activate Absolute Protection (blocks all damage)\n",
-    "cn": "被动：\n造成伤害时，有 20% 的几率造成 25% 的额外伤害\n施法时，有 15% 的几率增加 5% 的伤害，持续 5 秒\n受到伤害时，有 10% 的几率激活绝对保护（阻止所有伤害）\n"
+    "cn": "被动：\n造成伤害时，有 20% 的几率造成 25% 的额外伤害\n施法时，有 15% 的几率增加 5% 的伤害，持续 5 秒\n受到伤害时，有 10% 的几率激活绝对保护（阻止所有伤害）"
   },
   {
     "id": "I0JZ",
@@ -3154,21 +3154,21 @@
     "enName": "Wings of Frost Lord",
     "koName": "서리 군주의 날개",
     "en": "Passive:\nOn skill cast, (proc rate X 100)% chance to summon Ice Spikes\nDeals (water affinity X (INT X 3.75)) magic damage per spike (up to 5 spikes)\n",
-    "cn": "被动：\n在施放技能时，(proc rate X 100)% 机会召唤冰刺\n每个冰刺造成 (水属性 X (智力 X 3.75)) 魔法伤害（最多 5 个冰刺）\n "
+    "cn": "被动：\n在施放技能时，(proc rate X 100)% 机会召唤冰刺\n每个冰刺造成 (水属性 X (智力 X 3.75)) 魔法伤害（最多 5 个冰刺）"
   },
   {
     "id": "I0OB",
     "enName": "Wings of Night Lord",
     "koName": "밤의 군주의 날개",
     "en": "Passive:\nOn skill cast, empowers next attack\nDeals ((MAIN STAT X 2) + (AGI X 1.5)) pure damage\nCan crit based on user's critical chance\nEmpowered attack stacks Madness of Night\nIncreases AGI by 36 per second for 8 seconds (up to 10 times)\nAt max stacks, duration cannot be extended but increases damage output by 10%\n",
-    "cn": "被动：\n在施放技能时，强化下一次攻击\n造成 (主属性 X 2 + 敏捷 X 1.5) 纯粹伤害\n可根据用户的暴击几率进行暴击\n强化攻击叠加疯狂之夜\n每层增加敏捷 36，持续 8 秒（最多 10 次）\n满层时，持续时间不可被延长，但增加伤害输出 10%\n"
+    "cn": "被动：\n在施放技能时，强化下一次攻击\n造成 (主属性 X 2 + 敏捷 X 1.5) 纯粹伤害\n可根据用户的暴击几率进行暴击\n强化攻击叠加疯狂之夜\n每层增加敏捷 36，持续 8 秒（最多 10 次）\n满层时，持续时间不可被延长，但增加伤害输出 10%"
   },
   {
     "id": "ram3",
     "enName": "Storm",
     "koName": "스톰",
     "en": "Passive:\nOn skill cast, increases critical chance by 6% for 6 seconds (stacks up to 3 times)\n",
-    "cn": "被动：\n施放技能时，增加暴击几率6%，持续6秒（最多叠加3次）\n"
+    "cn": "被动：\n施放技能时，增加暴击几率6%，持续6秒（最多叠加3次）"
   },
   {
     "id": "I0NP",
@@ -3182,14 +3182,14 @@
     "enName": "Cape of Deep Abyss",
     "koName": "깊은 심연의 망토",
     "en": "Passive:\nOn direct hit, activates Drowning Abyss\nSingle-target spells deal 15% bonus damage per skill cast over 3 seconds\n(Bonus damage type is same as the spell used)\nIncreases enemy magic damage taken by 2.5%\n",
-    "cn": "被动：\n直接命中时，激活溺水深渊\n在 3 秒内施放的每个技能对单一目标法术造成 15% 的额外伤害\n（额外伤害类型与所使用的法术相同）\n增加 敌方受到 2.5% 魔法伤害\n"
+    "cn": "被动：\n直接命中时，激活溺水深渊\n在 3 秒内施放的每个技能对单一目标法术造成 15% 的额外伤害\n（额外伤害类型与所使用的法术相同）\n增加 敌方受到 2.5% 魔法伤害"
   },
   {
     "id": "I0AU",
     "enName": "Archangel Wings",
     "koName": "대천사의 날개",
     "en": "Passive:\nOn skill cast, 5% chance to activate Archangel's Blessing\nRefreshes the cooldown of all non-ultimate skills\nIncreases skill damage by 10% and reduces damage taken by 50% for 10 seconds\nCooldown: 120 seconds\n",
-    "cn": "被动：\n施放技能时，有 5% 几率激活大天使的祝福\n刷新所有非终极技能的冷却时间\n技能伤害提高 10%，受到的伤害降低 50%，持续 10 秒\\r \n冷却时间：120 秒\n"
+    "cn": "被动：\n施放技能时，有 5% 几率激活大天使的祝福\n刷新所有非终极技能的冷却时间\n技能伤害提高 10%，受到的伤害降低 50%，持续 10 秒\\r \n冷却时间：120 秒"
   },
   {
     "id": "I0JW",
@@ -3210,7 +3210,7 @@
     "enName": "Wings of Immortal",
     "koName": "불멸자의 날개",
     "en": "Passive:\nDuring combat, stat gradually increases\nIncreases MAIN STAT by 9 per 3 seconds (up to 50 stacks)\nRevives upon dying\nCooldown: 180 seconds\n",
-    "cn": "被动：\n在战斗中，属性逐渐增加\n每 3 秒增加 9 个主属性（最多叠加 50 层）\n死亡时复活\n冷却时间：180 秒\\r \n"
+    "cn": "被动：\n在战斗中，属性逐渐增加\n每 3 秒增加 9 个主属性（最多叠加 50 层）\n死亡时复活\n冷却时间：180 秒\\r"
   },
   {
     "id": "I0OI",
@@ -3252,7 +3252,7 @@
     "enName": "Divine Slayer",
     "koName": "디바인 슬레이어",
     "en": "Passive:\nEvery 12th attack activates Divine Slayer\nDeals (4500 + MAIN STAT X 7.5) magic damage in an AoE\nDeals 20% bonus damage to enemies below 50% HP\nOn skill cast, activates Transcendence\nIncreases AGI by 450 and HP regen by (Max HP X 7.5%) for 7.5 seconds\nDivine Cut activates every 4th attack\nCooldown: 15 seconds\n",
-    "cn": "被动：\n每第 12 次攻击激活神圣杀手\n在范围内造成 (4500 + 主属性 X 7.5) 魔法伤害\n对生命值低于 50% 的敌人造成 20% 额外伤害\n技能施法时，激活 超越\\r提高 敏捷  450 与 HP 回复  (最大生命值 X 7.5%) 持续 7.5 秒\nDivine Cut activates every 4th attack\n冷却: 15 秒\n"
+    "cn": "被动：\n每第 12 次攻击激活神圣杀手\n在范围内造成 (4500 + 主属性 X 7.5) 魔法伤害\n对生命值低于 50% 的敌人造成 20% 额外伤害\n技能施法时，激活 超越\\r提高 敏捷  450 与 HP 回复  (最大生命值 X 7.5%) 持续 7.5 秒\nDivine Cut activates every 4th attack\n冷却: 15 秒"
   },
   {
     "id": "I02A",
@@ -3287,21 +3287,21 @@
     "enName": "Duskblade",
     "koName": "황혼검",
     "en": "Passive:\nOn basic attack, activates Twilight\nDeals (90000 + AGI X 30) magic damage to target and takes 10% bonus skill damage for 4 seconds\nCooldown: 12 seconds, reduced by 1 second on each skill crit\n",
-    "cn": "被动：\n普通攻击时，激活暮光\n对目标造成 (90000 + AGI X 30) 魔法伤害，并受到 10% 额外技能伤害，持续 4 秒\n冷却时间：12 秒，减少 1 秒 每个技能暴击\n"
+    "cn": "被动：\n普通攻击时，激活暮光\n对目标造成 (90000 + AGI X 30) 魔法伤害，并受到 10% 额外技能伤害，持续 4 秒\n冷却时间：12 秒，减少 1 秒 每个技能暴击"
   },
   {
     "id": "fgrd",
     "enName": "Agnitus, the Bow of Divine Fury",
     "koName": "사자의 활 아그니투스",
     "en": "Passive:\nOn attack, activates Divine Poem\nFires one or two additional arrows dealing Attack Damage X 10% pure damage (averages 1.7 arrows).\nThese arrows can proc 'on attack' effects\nApplies Judgment for 5 seconds, increasing target's damage taken from Divine Poem by 10% for 3 seconds (up to 8 stacks)\nJudgment cooldown: 1 second\n",
-    "cn": "被动：\n攻击时，激活神圣之诗\n发射一或两支额外的箭矢，造成攻击伤害 X 10% 的纯伤害（平均 1.7 支箭矢）。\n这些箭矢可以触发‘攻击时’效果\n施加审判，持续 5 秒，使目标从圣诗受到的伤害提高 10%，持续 3 秒（最多 8 层）\n审判冷却时间：1 秒\n"
+    "cn": "被动：\n攻击时，激活神圣之诗\n发射一或两支额外的箭矢，造成攻击伤害 X 10% 的纯伤害（平均 1.7 支箭矢）。\n这些箭矢可以触发‘攻击时’效果\n施加审判，持续 5 秒，使目标从圣诗受到的伤害提高 10%，持续 3 秒（最多 8 层）\n审判冷却时间：1 秒"
   },
   {
     "id": "I0AW",
     "enName": "Spirit Flame",
     "koName": "스피릿 플레임",
     "en": "Passive:\nOn attack, 15% chance to activate Mark of Flame\nInitially deals AGI X 5 magic damage\nAfterwards deals AGI X 2.5 magic damage per second and increases magic damage taken by 2.5% for 10 seconds\nWhen Heat stacks are above 10, becomes Spirit Flame, dealing 20% additional damage and increasing your damage dealt to target by 2.5% (becomes different color)\nAccumulates Heat while in combat\nEvery 4 seconds, increases skill damage and flame affinity by 1% (up to 15 stacks)\n",
-    "cn": "被动：\n攻击时，有 15% 几率激活火焰印记\n初始造成 敏捷 X 5 魔法伤害\n之后每秒造成 敏捷 X 2.5 魔法伤害，并增加 2.5% 受到的魔法伤害，持续 10 秒\n当热能层数超过 10 时，变为精神火焰，造成 20% 额外伤害并使你最终伤害提高 2.5%（变为不同颜色）\n在战斗中积累热能\n每 4 秒，增加技能伤害和火属性提高 1%（最多叠加 15 层）\n"
+    "cn": "被动：\n攻击时，有 15% 几率激活火焰印记\n初始造成 敏捷 X 5 魔法伤害\n之后每秒造成 敏捷 X 2.5 魔法伤害，并增加 2.5% 受到的魔法伤害，持续 10 秒\n当热能层数超过 10 时，变为精神火焰，造成 20% 额外伤害并使你最终伤害提高 2.5%（变为不同颜色）\n在战斗中积累热能\n每 4 秒，增加技能伤害和火属性提高 1%（最多叠加 15 层）"
   },
   {
     "id": "I0BG",
@@ -3315,7 +3315,7 @@
     "enName": "Final Omen",
     "koName": "파이널 오멘",
     "en": "Passive:\nLoads Bullet of Omen every 3 seconds\nDeals ((MAIN STAT x 7.5) + (Attack Damage x 1.4)) magic damage per stack\nDeals 25% bonus damage to enemies under 50% HP\nStuns for 0.25 seconds\nCan charge up to 4 stacks\n",
-    "cn": "被动：\n每 3 秒加载预兆子弹\n每层造成 ((主属性 x 7.5) + (Attack Damage x 1.4)) 魔法伤害\n对生命值低于 50% 的敌人造成 25% 额外伤害 r\n眩晕 0.25 秒\n最多可充电 4 层\n"
+    "cn": "被动：\n每 3 秒加载预兆子弹\n每层造成 ((主属性 x 7.5) + (Attack Damage x 1.4)) 魔法伤害\n对生命值低于 50% 的敌人造成 25% 额外伤害 r\n眩晕 0.25 秒\n最多可充电 4 层"
   },
   {
     "id": "I09K",
@@ -3329,7 +3329,7 @@
     "enName": "Fulminata, the Bringer of Storms",
     "koName": "천둥의 인도자 풀미나타",
     "en": "Passive:\nOn attack, activates Mark of Storm\nAttacking the same target 4 times applies Mark of Storm\nThe next PROC will consume the mark to activate Eye of the Storm\nWhile Eye of the Storm is active, you accumulate 20% charge for each 200 distance moved (up to 400%)\nIf you attack again with more than 100% charge, consumes Eye of the Storm to release a burst of lightning\nLightning deals magic damage to nearby enemies (can critically strike)\nDamage: INT X 7.5 X (100 + charge%), crit is guaranteed\nCooldown: 15 seconds\n",
-    "cn": "被动：\n攻击时，激活风暴印记\n攻击同一目标 4 次施加风暴印记\n下一次 PROC 将消耗标记以激活风暴之眼\n而风暴之眼处于激活状态时，你每移动 200 距离就会积累 20% 的能量（最多 400%）\n如果你再次攻击超过 100% 的能量，消耗风暴之眼释放一道闪电\\r \n闪电对附近的敌人造成魔法伤害（可以暴击）\n伤害：智力 X 7.5 X（100 + charge%），保证暴击\n冷却时间：15 秒\n"
+    "cn": "被动：\n攻击时，激活风暴印记\n攻击同一目标 4 次施加风暴印记\n下一次 PROC 将消耗标记以激活风暴之眼\n而风暴之眼处于激活状态时，你每移动 200 距离就会积累 20% 的能量（最多 400%）\n如果你再次攻击超过 100% 的能量，消耗风暴之眼释放一道闪电\\r \n闪电对附近的敌人造成魔法伤害（可以暴击）\n伤害：智力 X 7.5 X（100 + charge%），保证暴击\n冷却时间：15 秒"
   },
   {
     "id": "I005",
@@ -3357,14 +3357,14 @@
     "enName": "Prelude to Demise",
     "koName": "종말의 서곡",
     "en": "Passive:\nOn skill cast, activates Nightmare\nIncreases HP regen by 900 and INT by 444 for 4 seconds\nCooldown: 12 seconds\nActive:\nOn use, activates Song of Demise\nDeals (ATK DMG X 5 + INT X 30) to nearby enemies\nIncreases enemy magic damage taken by 13% [Type-A] for 8 seconds\nBreaks any shields effects\nCooldown: 30 seconds",
-    "cn": "被动：\n技能施放时，激活梦魇\n生命值恢复速度提高 900，智力增加444，持续4秒\n冷却时间：12秒\n\n主动：\n使用时，激活灭亡之歌 r\n对附近敌人造成（攻击力 X 5 + 智力 X 30）\n使敌人受到的魔法伤害增加 13% [Type-A]，持续 8 秒\n打破任何护盾效果\n冷却时间：30 秒 "
+    "cn": "被动：\n技能施放时，激活梦魇\n生命值恢复速度提高 900，智力增加444，持续4秒\n冷却时间：12秒\n\n主动：\n使用时，激活灭亡之歌 r\n对附近敌人造成（攻击力 X 5 + 智力 X 30）\n使敌人受到的魔法伤害增加 13% [Type-A]，持续 8 秒\n打破任何护盾效果\n冷却时间：30 秒"
   },
   {
     "id": "I01I",
     "enName": "Soul Torch",
     "koName": "영혼의 횃불",
     "en": "Passive:\nSummons Spirit Flame every 12 seconds\nUpon dealing skill periodic damage, deals (INT X 3~5) bonus magic damage (cooldown: 0.75s)\nWhen used, sends a spirit flame to target area to deal (INT X 20) magic damage and amplifying your skill damage against enemies hit by 10% for 4 seconds\nCan maintain up to 3 spirits\n",
-    "cn": "被动：\n每12秒召唤一次精神之炎\n造成技能周期性伤害时，造成(INT X 3~5)点额外魔法伤害（冷却时间：0.75秒）\n使用时，向目标发射精神之炎 区域对命中的敌人造成（智力 X 20）点魔法伤害，并使你的技能伤害提高 10%，持续 4 秒\n最多可维持 3 个灵魂\n"
+    "cn": "被动：\n每12秒召唤一次精神之炎\n造成技能周期性伤害时，造成(INT X 3~5)点额外魔法伤害（冷却时间：0.75秒）\n使用时，向目标发射精神之炎 区域对命中的敌人造成（智力 X 20）点魔法伤害，并使你的技能伤害提高 10%，持续 4 秒\n最多可维持 3 个灵魂"
   },
   {
     "id": "I00F",
@@ -3399,7 +3399,7 @@
     "enName": "Exitium, the Armor of Ruin",
     "koName": "파멸의 갑주 엑시티움",
     "en": "Passive:\nOn attack, applies Mark of Ruin\nIncreases your damage dealt to target up to 8% based on target's missing HP for 4 seconds\nIf HP drops below 20%, summons Reaper\nPrevents HP from dropping below 1 for 6 seconds\nAfterwards, heals you to full and deals (AGI X 50 ~ 125) pure damage to nearby enemies based on their missing HP\nCooldown 60 seconds\n",
-    "cn": "被动：\n攻击时，施加毁灭印记\n根据目标已损失的生命值，将你最终伤害提高最多 8%，持续 4 秒\n如果生命值低于 20%，召唤死神\n阻止生命值从低于 1 持续 6 秒\n之后，将你治愈至满并根据附近敌人损失的生命值对其造成 (敏捷 X 50 ~ 125) 纯粹伤害\n冷却时间 60 秒\\r \n"
+    "cn": "被动：\n攻击时，施加毁灭印记\n根据目标已损失的生命值，将你最终伤害提高最多 8%，持续 4 秒\n如果生命值低于 20%，召唤死神\n阻止生命值从低于 1 持续 6 秒\n之后，将你治愈至满并根据附近敌人损失的生命值对其造成 (敏捷 X 50 ~ 125) 纯粹伤害\n冷却时间 60 秒\\r"
   },
   {
     "id": "I018",
@@ -3427,14 +3427,14 @@
     "enName": "Astral Fury",
     "koName": "성운의 분노",
     "en": "Passive:\nOn skill cast, activates Astral Fury\nIncreases AGI by 150 and movement speed for 1.5 seconds\nNext 2 attacks strikes 2 additional times for 50% physical damage\nOn 3rd consecutive proc, increases damage dealt by skills by 5% for 4 seconds and next 3 attacks calls down comets, each dealing 12500 magic damage (can critically strike)\nProc cooldown: 0.5 seconds\n",
-    "cn": "被动：\n在施放技能时，激活星界之怒\n增加 150 敏捷 和移动速度，持续 1.5 秒\n接下来的 2 次攻击额外攻击 2 次，造成 50% 的物理伤害\n在连续第 3 次触发时，技能伤害增幅 5%，持续 4 秒，接下来的 3 次攻击召唤彗星，每次造成 12500 魔法伤害（可以暴击）\n过程冷却时间：0.5 秒\n"
+    "cn": "被动：\n在施放技能时，激活星界之怒\n增加 150 敏捷 和移动速度，持续 1.5 秒\n接下来的 2 次攻击额外攻击 2 次，造成 50% 的物理伤害\n在连续第 3 次触发时，技能伤害增幅 5%，持续 4 秒，接下来的 3 次攻击召唤彗星，每次造成 12500 魔法伤害（可以暴击）\n过程冷却时间：0.5 秒"
   },
   {
     "id": "I01S",
     "enName": "Divine Aegis",
     "koName": "천상의 가호",
     "en": "Passive:\nIncreases nearby allies skill damage by 12% & magic defense by 10%\nHeals nearby allies to full\nAfterwards heals (INT X 2.5) HP per 0.5 seconds to 3 allies with lowest HP for 6 seconds\nDeals (INT X 7.5) pure damage and stuns for 1 second per second for 6 seconds\nPrevents HP from dropping below 1\nCooldown: 75 seconds\n",
-    "cn": "被动：\n使附近盟友的技能伤害提高 12%，魔法防御提高 10%\n将附近的盟友恢复至满\n之后每 0.5 秒为除自己以外的生命值最低的 3 名盟友和所有召唤物恢复 (INT X 2.5) 点生命值，自己每秒恢复15%，持续 6 秒\n造成 (INT X 7.5) 纯伤害并每秒眩晕 1 秒，持续 6 秒\n防止生命值降至 1 以下\n冷却时间：75 秒\n"
+    "cn": "被动：\n使附近盟友的技能伤害提高 12%，魔法防御提高 10%\n将附近的盟友恢复至满\n之后每 0.5 秒为除自己以外的生命值最低的 3 名盟友和所有召唤物恢复 (INT X 2.5) 点生命值，自己每秒恢复15%，持续 6 秒\n造成 (INT X 7.5) 纯伤害并每秒眩晕 1 秒，持续 6 秒\n防止生命值降至 1 以下\n冷却时间：75 秒"
   },
   {
     "id": "I017",
@@ -3469,7 +3469,7 @@
     "enName": "Horn of Dragon",
     "koName": "게이트 오브 어비스",
     "en": "Passive:\nUpon moving 3000 distance, unleashes Dragon's Breath on next attack\nLaunches a shockwave in a straight path and explodes\nDeals (MAIN STAT X 30) pure damage\nIncreases damage output by 9% for 4 seconds (only for self towards target)\nCan activate up to 2 more times within 5 seconds, dealing 20% of original damage and extending debuff by 1 second\nCooldown: 5 seconds\n",
-    "cn": "被动：\n移动 3000 距离后，在下一次攻击时释放龙息\n沿直线路径发射冲击波并爆炸\n造成（主属性 X 30）纯伤害\n伤害输出提高 9%持续 4 秒（仅限自身朝向目标）\n可以在 5 秒内激活最多 2 次，造成原始伤害的 20% 并延长 debuff 1 秒\n冷却时间：5 秒\n"
+    "cn": "被动：\n移动 3000 距离后，在下一次攻击时释放龙息\n沿直线路径发射冲击波并爆炸\n造成（主属性 X 30）纯伤害\n伤害输出提高 9%持续 4 秒（仅限自身朝向目标）\n可以在 5 秒内激活最多 2 次，造成原始伤害的 20% 并延长 debuff 1 秒\n冷却时间：5 秒"
   },
   {
     "id": "I0DA",
@@ -3497,7 +3497,7 @@
     "enName": "Harvester's Mask",
     "koName": "수확자의 가면",
     "en": "Passive:\nOn attack, activates Harvester's Eye\nIncreases ATK DMG by 20%, crit multplier by 0.30x, AGI by 400 for 7.5 seconds\nWhile active, critical hits grant 1% bonus in skill damage (up to 10%)\nCooldown: 15 seconds\n",
-    "cn": "被动：\n攻击时，激活收割者之眼\n攻击伤害增加20%，暴击倍数增加0.30倍，AGI增加400，持续7.5秒\n激活时，暴击给予技能伤害1%加成( 最多 10%)\n冷却时间: 15 秒\n"
+    "cn": "被动：\n攻击时，激活收割者之眼\n攻击伤害增加20%，暴击倍数增加0.30倍，AGI增加400，持续7.5秒\n激活时，暴击给予技能伤害1%加成( 最多 10%)\n冷却时间: 15 秒"
   },
   {
     "id": "I01V",
@@ -3588,7 +3588,7 @@
     "enName": "Ring of Genesis",
     "koName": "창세의 반지",
     "en": "Passive:\nOn dealing damage, chance to deal 30% additional damage\nOn skill cast, 15% chance to increase damage dealt by 7.5% for 5 seconds\nOn ultimate cast, increases damage dealt by skills by 7.5% for 10 seconds\nOn being damaged, 10% chance to activate Absolute Protection\n",
-    "cn": "被动：\n造成伤害时，有几率造成 30% 额外伤害\n技能施展时，有 15% 几率造成伤害增加 7.5%，持续 5 秒\n终极施展时，技能伤害增幅 7.5% 持续 10 秒\n受到伤害时，有 10% 几率激活绝对防护\n"
+    "cn": "被动：\n造成伤害时，有几率造成 30% 额外伤害\n技能施展时，有 15% 几率造成伤害增加 7.5%，持续 5 秒\n终极施展时，技能伤害增幅 7.5% 持续 10 秒\n受到伤害时，有 10% 几率激活绝对防护"
   },
   {
     "id": "I0A6",
@@ -3693,14 +3693,14 @@
     "enName": "Legend Icon",
     "koName": "레전드 아이콘",
     "en": "Passive\n⁘ Deltirama ~ Alteia personal loot drop rate increased by 50%\nEXP gain by 50%\n⁘ ~5% Chance to activate Elemental Fury on attack and skill cast\n⁘ Requires 1 second cooldown interval for checking the proc\n⁘ Increases MAIN STAT by 2% for 30 seconds",
-    "cn": "被动：\n传奇至宝 ~ 冥灵传世 个人战利品掉落率增加 50%\n经验值获取增加 50%\n~5% 机会在攻击和技能施放时激活元素狂怒\n需要 1 秒冷却时间间隔来检查过程\n增加主属性提高 2%，持续 30 秒\n"
+    "cn": "被动：\n传奇至宝 ~ 冥灵传世 个人战利品掉落率增加 50%\n经验值获取增加 50%\n~5% 机会在攻击和技能施放时激活元素狂怒\n需要 1 秒冷却时间间隔来检查过程\n增加主属性提高 2%，持续 30 秒"
   },
   {
     "id": "I0HJ",
     "enName": "Glasses",
     "koName": "안경",
     "en": "Passive:\nYour night vision becomes better.\n",
-    "cn": "被动：\n你的夜视变得更好。\n"
+    "cn": "被动：\n你的夜视变得更好。"
   },
   {
     "id": "I05X",

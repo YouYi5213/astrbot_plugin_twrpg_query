@@ -23,6 +23,8 @@ WEAR_LIMIT_LABELS: dict[str, str] = {
     "6": "背包",
 }
 
+_PASSIVE_ATTRIB_RE = re.compile(r"\n*\s*装备翻译来自B站UP 阿我的手\s*$")
+
 # QuickSearch buildGood: Kle()[item.limit] -> limitHeroes
 # QuickSearch locale: common.stages
 STAGE_LABELS: list[str] = [
@@ -61,6 +63,10 @@ LIMIT_HERO_IDS: dict[str, list[str]] = {
 }
 
 
+def clean_passive_text(text: str) -> str:
+    return _PASSIVE_ATTRIB_RE.sub("", text or "").rstrip()
+
+
 def strip_color(text: str) -> str:
     if not text:
         return ""
@@ -80,6 +86,12 @@ class CraftEntry:
     name: str
     quantity: int
     icon: str | None = None
+
+
+@dataclass
+class RecipeLine:
+    entries: list[CraftEntry]
+    is_choice: bool = False
 
 
 @dataclass
@@ -116,7 +128,7 @@ class ItemDisplay:
     passive: str = ""
     limit_heroes: list[HeroRef] = field(default_factory=list)
     exclusives: list[ExclusiveEntry] = field(default_factory=list)
-    recipe: list[CraftEntry] = field(default_factory=list)
+    recipe: list[RecipeLine] = field(default_factory=list)
     crafts_into: list[CraftEntry] = field(default_factory=list)
     boss_drops: list[DropEntry] = field(default_factory=list)
 
@@ -127,7 +139,7 @@ class TwrpgDataStore:
         self.icons_dir = icons_dir
         self.items_by_id: dict[str, dict] = {}
         self.search_index: list[tuple[str, str]] = []
-        self.recipes: dict[str, list[tuple[str, int]]] = {}
+        self.recipes: dict[str, list[dict]] = {}
         self.used_in: dict[str, list[tuple[str, int]]] = {}
         self.drops_by_item: dict[str, list[tuple[str, float]]] = {}
         self.bosses_by_id: dict[str, dict] = {}
@@ -174,7 +186,26 @@ class TwrpgDataStore:
             num = int(row.get("num") or 1)
             if not item_id or not sub_id:
                 continue
-            self.recipes.setdefault(item_id, []).append((sub_id, num))
+
+            choose_rows = row.get("choose") or []
+            if choose_rows:
+                options = [
+                    (opt.get("subId", ""), int(opt.get("num") or 1))
+                    for opt in choose_rows
+                    if opt.get("subId")
+                ]
+                if not options:
+                    continue
+                self.recipes.setdefault(item_id, []).append(
+                    {"sub_id": sub_id, "num": num, "choose": options}
+                )
+                for opt_id, opt_num in options:
+                    self.used_in.setdefault(opt_id, []).append((item_id, opt_num))
+                continue
+
+            self.recipes.setdefault(item_id, []).append(
+                {"sub_id": sub_id, "num": num, "choose": None}
+            )
             self.used_in.setdefault(sub_id, []).append((item_id, num))
 
     def _load_drops(self) -> None:
@@ -213,8 +244,12 @@ class TwrpgDataStore:
             return
         for row in self._load_json("item_passives.json"):
             item_id = row.get("id", "")
-            if item_id:
-                self.passives_by_id[item_id] = row
+            if not item_id:
+                continue
+            cn = row.get("cn", "")
+            if cn:
+                row = {**row, "cn": clean_passive_text(cn)}
+            self.passives_by_id[item_id] = row
 
     def _item_icon(self, item_id: str) -> str | None:
         item = self.items_by_id.get(item_id)
@@ -335,14 +370,33 @@ class TwrpgDataStore:
                 )
             )
 
-        recipe = [
-            CraftEntry(
-                name=self.item_name(sub_id),
-                quantity=num,
-                icon=self._item_icon(sub_id),
+        recipe: list[RecipeLine] = []
+        for row in self.recipes.get(item_id, []):
+            choose = row.get("choose")
+            if choose:
+                entries = [
+                    CraftEntry(
+                        name=self.item_name(opt_id),
+                        quantity=opt_num,
+                        icon=self._item_icon(opt_id),
+                    )
+                    for opt_id, opt_num in choose
+                ]
+                recipe.append(RecipeLine(entries=entries, is_choice=True))
+                continue
+            sub_id = row.get("sub_id", "")
+            num = int(row.get("num") or 1)
+            recipe.append(
+                RecipeLine(
+                    entries=[
+                        CraftEntry(
+                            name=self.item_name(sub_id),
+                            quantity=num,
+                            icon=self._item_icon(sub_id),
+                        )
+                    ]
+                )
             )
-            for sub_id, num in self.recipes.get(item_id, [])
-        ]
 
         crafts_into = [
             CraftEntry(

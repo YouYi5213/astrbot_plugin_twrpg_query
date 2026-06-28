@@ -8,7 +8,7 @@ from typing import Iterable
 
 from PIL import Image, ImageDraw, ImageFont
 
-from .data_loader import ItemDisplay, strip_color
+from .data_loader import ItemDisplay, RecipeLine, strip_color
 from .desc_renderer import draw_game_panel, measure_game_panel, resolve_items_bg_path
 
 _PLUGIN_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -28,6 +28,9 @@ LIST_ICON_SIZE = (28, 28)
 HERO_ICON_SIZE = (32, 32)
 LIST_ICON_GAP = 8
 TITLE_HEIGHT = 52
+RECIPE_GROUP_GAP = 8
+RECIPE_CHOICE_ROW_HEIGHT = 28
+OPTIONAL_LABEL = "[可选]"
 
 COLORS = {
     "bg": (24, 26, 34),
@@ -311,7 +314,7 @@ def _estimate_height(draw: ImageDraw.ImageDraw, item: ItemDisplay) -> int:
 
     if _section_has_content(item, "recipe"):
         y += HEADER_HEIGHT
-        y += len(item.recipe) * ROW_HEIGHT
+        y += _recipe_section_height(item.recipe)
         y += SECTION_GAP
 
     if _section_has_content(item, "crafts_into"):
@@ -364,6 +367,20 @@ def _draw_bullet_lines(
     return y
 
 
+def _recipe_line_height(line: RecipeLine) -> int:
+    if line.is_choice:
+        return len(line.entries) * RECIPE_CHOICE_ROW_HEIGHT
+    return ROW_HEIGHT
+
+
+def _recipe_section_height(recipe: list[RecipeLine]) -> int:
+    if not recipe:
+        return 0
+    height = sum(_recipe_line_height(line) for line in recipe)
+    height += RECIPE_GROUP_GAP * (len(recipe) - 1)
+    return height
+
+
 def _draw_icon_rows(
     card: Image.Image,
     draw: ImageDraw.ImageDraw,
@@ -382,6 +399,41 @@ def _draw_icon_rows(
             rw = _text_width(draw, right_text, font)
             draw.text((right - rw, y + 6), right_text, fill=COLORS["muted"], font=font)
         y += ROW_HEIGHT
+    return y
+
+
+def _draw_recipe_lines(
+    card: Image.Image,
+    draw: ImageDraw.ImageDraw,
+    y: int,
+    recipe: list[RecipeLine],
+) -> int:
+    font = _font(15)
+    icon_x = CARD_PADDING + 16
+    text_x = icon_x + LIST_ICON_SIZE[0] + LIST_ICON_GAP
+    right = CARD_WIDTH - CARD_PADDING - 16
+
+    for group_idx, line in enumerate(recipe):
+        row_height = RECIPE_CHOICE_ROW_HEIGHT if line.is_choice else ROW_HEIGHT
+        for entry in line.entries:
+            icon = _load_image(entry.icon, LIST_ICON_SIZE)
+            _paste_in_slot(card, icon, icon_x, y, LIST_ICON_SIZE[0], row_height)
+            draw.text((text_x, y + 6), entry.name, fill=COLORS["text"], font=font)
+            if line.is_choice:
+                name_w = _text_width(draw, entry.name, font)
+                opt_x = text_x + name_w + 4
+                draw.text(
+                    (opt_x, y + 6),
+                    OPTIONAL_LABEL,
+                    fill=COLORS["header"],
+                    font=font,
+                )
+            qty = f"x{entry.quantity}"
+            qty_w = _text_width(draw, qty, font)
+            draw.text((right - qty_w, y + 6), qty, fill=COLORS["muted"], font=font)
+            y += row_height
+        if group_idx < len(recipe) - 1:
+            y += RECIPE_GROUP_GAP
     return y
 
 
@@ -474,10 +526,7 @@ def generate_item_card(item: ItemDisplay) -> str:
 
     if _section_has_content(item, "recipe"):
         y = _draw_header(draw, y, "▎合成方式")
-        rows = [
-            (entry.icon, entry.name, f"x{entry.quantity}") for entry in item.recipe
-        ]
-        y = _draw_icon_rows(card, draw, y, rows)
+        y = _draw_recipe_lines(card, draw, y, item.recipe)
         y += SECTION_GAP
 
     if _section_has_content(item, "crafts_into"):
@@ -527,8 +576,10 @@ def format_text_fallback(item: ItemDisplay) -> str:
 
     if _section_has_content(item, "recipe"):
         lines.append("【合成方式】")
-        for entry in item.recipe:
-            lines.append(f"· {entry.name} x{entry.quantity}")
+        for line in item.recipe:
+            for entry in line.entries:
+                suffix = f" {OPTIONAL_LABEL}" if line.is_choice else ""
+                lines.append(f"· {entry.name}{suffix} x{entry.quantity}")
         lines.append("")
 
     if _section_has_content(item, "crafts_into"):

@@ -87,7 +87,10 @@ class TwrpgQueryTests(unittest.TestCase):
         self.assertIn("18.75", display.passive)
         self.assertTrue(display.icon and os.path.exists(display.icon))
         self.assertGreater(len(display.recipe), 0)
-        self.assertTrue(display.recipe[0].icon and os.path.exists(display.recipe[0].icon))
+        self.assertTrue(
+            display.recipe[0].entries[0].icon
+            and os.path.exists(display.recipe[0].entries[0].icon)
+        )
         self.assertGreater(len(display.crafts_into), 0)
         self.assertTrue(
             display.crafts_into[0].icon and os.path.exists(display.crafts_into[0].icon)
@@ -99,6 +102,22 @@ class TwrpgQueryTests(unittest.TestCase):
         path = generate_item_card(display)
         self.assertTrue(os.path.exists(path))
         self.assertGreater(os.path.getsize(path), 5000)
+        os.remove(path)
+
+    def test_recipe_choice_group_i01m(self):
+        display = self.store.build_display("I01M")
+        assert display is not None
+        choice_lines = [line for line in display.recipe if line.is_choice]
+        self.assertEqual(len(choice_lines), 1)
+        choice = choice_lines[0]
+        self.assertEqual(len(choice.entries), 2)
+        names = {entry.name for entry in choice.entries}
+        self.assertIn("自然精粹", names)
+        self.assertIn("自然之纹", names)
+        for entry in choice.entries:
+            self.assertTrue(entry.icon and os.path.exists(entry.icon))
+        path = generate_item_card(display)
+        self.assertTrue(os.path.exists(path))
         os.remove(path)
 
     def test_normalize_query(self):

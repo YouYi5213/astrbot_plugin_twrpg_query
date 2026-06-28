@@ -1,4 +1,4 @@
-"""提交、推送 main 并发布 v1.0.3。"""
+"""提交、推送 main 并发布 v1.0.4。"""
 from __future__ import annotations
 
 import json
@@ -12,18 +12,18 @@ from pathlib import Path
 
 REPO = "YouYi5213/astrbot_plugin_twrpg_query"
 PLUGIN_DIR = Path(__file__).resolve().parents[1]
-TAG = "v1.0.3"
-COMMIT_MESSAGE = "物品卡片标题右侧显示红色阶段标签，版本 1.0.3"
+TAG = "v1.0.4"
+COMMIT_MESSAGE = "修复合成二选一材料显示，可选组分行展示并标注[可选]，版本 1.0.4"
 RELEASE_BODY = """## 更新内容
 
-- 物品卡片标题区在名称右侧显示阶段标签（如 `[大天使]`），颜色为红色，与 QuickSearch / 网页一致
-- 新增 `STAGE_LABELS` 阶段映射（来自 QuickSearch `common.stages`）
-- 文本回退格式同步带上阶段标签
-- 新增 `scripts/extract_stages.py` 便于从 QuickSearch 提取阶段名
+- 修复合成方式中「二选一」材料只显示物品 ID（如 `I05Q,I09R`）的问题
+- 解析 `makes.json` 的 `choose` 字段，展开为多个可选材料行
+- 可选材料组内两行紧贴，组与组之间增加间距
+- 可选材料名称后显示蓝色 `[可选]` 标签，与 QuickSearch / 网页一致
 
 ## 示例
 
-查询「魂隙·生死彼岸」时，标题显示为：**魂隙·生死彼岸** `[大天使]`
+查询「创世之戒」时，合成方式中「自然精粹 / 自然之纹」分两行显示，并标注 `[可选]`。
 """
 
 
