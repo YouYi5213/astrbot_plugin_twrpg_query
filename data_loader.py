@@ -8,6 +8,8 @@ import re
 import unicodedata
 from dataclasses import dataclass, field
 
+from .icon_utils import resolve_icon_path
+
 _WAR3_COLOR_RE = re.compile(r"\|c[A-Fa-f0-9]{8}", re.IGNORECASE)
 _WAR3_END_RE = re.compile(r"\|r", re.IGNORECASE)
 _NORMALIZE_RE = re.compile(r"[\s·•・\-_]+")
@@ -40,12 +42,14 @@ def normalize_query(text: str) -> str:
 class CraftEntry:
     name: str
     quantity: int
+    icon: str | None = None
 
 
 @dataclass
 class DropEntry:
     boss_name: str
     chance: float
+    icon: str | None = None
 
 
 @dataclass
@@ -60,6 +64,9 @@ class ItemDisplay:
     id: str
     name: str
     description: str
+    raw_description: str = ""
+    icon: str | None = None
+    passive: str = ""
     wear_limit: list[str] = field(default_factory=list)
     exclusives: list[ExclusiveEntry] = field(default_factory=list)
     recipe: list[CraftEntry] = field(default_factory=list)
@@ -68,8 +75,9 @@ class ItemDisplay:
 
 
 class TwrpgDataStore:
-    def __init__(self, data_dir: str):
+    def __init__(self, data_dir: str, icons_dir: str = ""):
         self.data_dir = data_dir
+        self.icons_dir = icons_dir
         self.items_by_id: dict[str, dict] = {}
         self.search_index: list[tuple[str, str]] = []
         self.recipes: dict[str, list[tuple[str, int]]] = {}
@@ -78,6 +86,7 @@ class TwrpgDataStore:
         self.bosses_by_id: dict[str, dict] = {}
         self.heros_by_id: dict[str, dict] = {}
         self.exclusives_by_item: dict[str, list[dict]] = {}
+        self.passives_by_id: dict[str, dict] = {}
         self.loaded = False
 
     def load(self) -> None:
@@ -103,6 +112,7 @@ class TwrpgDataStore:
         self._load_bosses()
         self._load_heros()
         self._load_exclusives()
+        self._load_passives()
         self.loaded = True
 
     def _load_json(self, filename: str):
@@ -149,6 +159,24 @@ class TwrpgDataStore:
             good_id = row.get("goodId", "")
             if good_id:
                 self.exclusives_by_item.setdefault(good_id, []).append(row)
+
+    def _load_passives(self) -> None:
+        path = os.path.join(self.data_dir, "item_passives.json")
+        if not os.path.exists(path):
+            return
+        for row in self._load_json("item_passives.json"):
+            item_id = row.get("id", "")
+            if item_id:
+                self.passives_by_id[item_id] = row
+
+    def _item_icon(self, item_id: str) -> str | None:
+        item = self.items_by_id.get(item_id)
+        if not item:
+            return None
+        return resolve_icon_path(self.icons_dir, item.get("img", ""))
+
+    def _entity_icon(self, img: str) -> str | None:
+        return resolve_icon_path(self.icons_dir, img)
 
     @staticmethod
     def _item_search_labels(item: dict) -> set[str]:
@@ -224,6 +252,7 @@ class TwrpgDataStore:
 
         name = strip_color(item.get("displayName") or item.get("name") or item_id)
         description = strip_color(item.get("description") or "")
+        raw_description = item.get("rawDesc") or item.get("description") or ""
 
         wear_limit: list[str] = []
         limit = str(item.get("limit") or "").strip()
@@ -242,28 +271,48 @@ class TwrpgDataStore:
             )
 
         recipe = [
-            CraftEntry(name=self.item_name(sub_id), quantity=num)
+            CraftEntry(
+                name=self.item_name(sub_id),
+                quantity=num,
+                icon=self._item_icon(sub_id),
+            )
             for sub_id, num in self.recipes.get(item_id, [])
         ]
 
         crafts_into = [
-            CraftEntry(name=self.item_name(target_id), quantity=num)
+            CraftEntry(
+                name=self.item_name(target_id),
+                quantity=num,
+                icon=self._item_icon(target_id),
+            )
             for target_id, num in self.used_in.get(item_id, [])
         ]
 
         boss_drops: list[DropEntry] = []
         for boss_id, chance in self.drops_by_item.get(item_id, []):
-            if boss_id not in self.bosses_by_id:
+            boss = self.bosses_by_id.get(boss_id)
+            if not boss:
                 continue
             boss_drops.append(
-                DropEntry(boss_name=self.boss_name(boss_id), chance=chance)
+                DropEntry(
+                    boss_name=self.boss_name(boss_id),
+                    chance=chance,
+                    icon=self._entity_icon(boss.get("img", "")),
+                )
             )
         boss_drops.sort(key=lambda x: (-x.chance, x.boss_name))
+
+        passive = strip_color(self.passives_by_id.get(item_id, {}).get("cn", ""))
+        if passive:
+            raw_description = raw_description.rstrip() + "\n" + passive
 
         return ItemDisplay(
             id=item_id,
             name=name,
             description=description,
+            raw_description=raw_description,
+            icon=self._item_icon(item_id),
+            passive=passive,
             wear_limit=wear_limit,
             exclusives=exclusives,
             recipe=recipe,

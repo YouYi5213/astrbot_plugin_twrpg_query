@@ -16,9 +16,11 @@ from astrbot.api.star import Context, Star
 
 from .card_renderer import format_text_fallback, generate_item_card
 from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
+from .icon_utils import resolve_icons_dir
 
 _PLUGIN_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = resolve_data_dir(_PLUGIN_DIR)
+_ICONS_DIR = resolve_icons_dir(_PLUGIN_DIR)
 _MAX_MATCHES = 5
 
 _CMD_RE = re.compile(r"^/?(世界|界)(\s|$)")
@@ -56,7 +58,7 @@ class TwrpgQueryPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig | None = None):
         super().__init__(context)
         self.config = config or {}
-        self.store = TwrpgDataStore(_DATA_DIR)
+        self.store = TwrpgDataStore(_DATA_DIR, icons_dir=_ICONS_DIR)
         self._load_data()
 
     def _load_data(self) -> None:

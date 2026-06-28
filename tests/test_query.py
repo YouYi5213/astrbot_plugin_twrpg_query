@@ -15,12 +15,16 @@ from astrbot_plugin_twrpg_query.data_loader import (
     normalize_query,
     resolve_data_dir,
 )
+from astrbot_plugin_twrpg_query.icon_utils import resolve_icons_dir
 
 
 class TwrpgQueryTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.store = TwrpgDataStore(resolve_data_dir(PLUGIN_DIR))
+        cls.store = TwrpgDataStore(
+            resolve_data_dir(PLUGIN_DIR),
+            icons_dir=resolve_icons_dir(PLUGIN_DIR),
+        )
         cls.store.load()
 
     def test_load_items(self):
@@ -58,6 +62,27 @@ class TwrpgQueryTests(unittest.TestCase):
         path = generate_item_card(display)
         self.assertTrue(os.path.exists(path))
         self.assertGreater(os.path.getsize(path), 1000)
+        os.remove(path)
+
+    def test_srbd_passive_and_icons(self):
+        display = self.store.build_display("srbd")
+        assert display is not None
+        self.assertIn("15% 额外伤害", display.passive)
+        self.assertIn("18.75", display.passive)
+        self.assertTrue(display.icon and os.path.exists(display.icon))
+        self.assertGreater(len(display.recipe), 0)
+        self.assertTrue(display.recipe[0].icon and os.path.exists(display.recipe[0].icon))
+        self.assertGreater(len(display.crafts_into), 0)
+        self.assertTrue(
+            display.crafts_into[0].icon and os.path.exists(display.crafts_into[0].icon)
+        )
+        self.assertEqual(len(display.boss_drops), 1)
+        self.assertTrue(
+            display.boss_drops[0].icon and os.path.exists(display.boss_drops[0].icon)
+        )
+        path = generate_item_card(display)
+        self.assertTrue(os.path.exists(path))
+        self.assertGreater(os.path.getsize(path), 5000)
         os.remove(path)
 
     def test_normalize_query(self):

@@ -8,20 +8,25 @@ from typing import Iterable
 
 from PIL import Image, ImageDraw, ImageFont
 
-from .data_loader import ItemDisplay
+from .data_loader import ItemDisplay, strip_color
+from .desc_renderer import draw_game_panel, measure_game_panel, resolve_items_bg_path
 
 _PLUGIN_DIR = os.path.dirname(os.path.abspath(__file__))
 _FONT_DIR = os.path.join(_PLUGIN_DIR, "assets", "fonts")
 _CARDS_DIR = os.path.join(_PLUGIN_DIR, "data", "cards")
 _BUNDLED_FONT = os.path.join(_FONT_DIR, "NotoSansSC-Bold.otf")
+_ITEMS_BG = resolve_items_bg_path(_PLUGIN_DIR)
 
 CARD_WIDTH = 640
 CARD_PADDING = 22
 SECTION_GAP = 14
 LINE_GAP = 4
-ROW_HEIGHT = 28
+ROW_HEIGHT = 32
 HEADER_HEIGHT = 34
-TITLE_HEIGHT = 42
+TITLE_ICON_SIZE = (52, 52)
+LIST_ICON_SIZE = (28, 28)
+LIST_ICON_GAP = 8
+TITLE_HEIGHT = 52
 
 COLORS = {
     "bg": (24, 26, 34),
@@ -131,6 +136,46 @@ def _wrap_lines(
     return lines
 
 
+def _fit_image(img: Image.Image, max_w: int, max_h: int) -> Image.Image:
+    w, h = img.size
+    if w <= 0 or h <= 0:
+        return img
+    scale = min(max_w / w, max_h / h)
+    new_w = max(1, round(w * scale))
+    new_h = max(1, round(h * scale))
+    if (new_w, new_h) == (w, h):
+        return img
+    resample = Image.NEAREST if scale > 1 else Image.LANCZOS
+    return img.resize((new_w, new_h), resample)
+
+
+def _load_image(path: str | None, size: tuple[int, int] | None = None) -> Image.Image | None:
+    if not path or not os.path.exists(path):
+        return None
+    try:
+        img = Image.open(path).convert("RGBA")
+        if size:
+            img = _fit_image(img, size[0], size[1])
+        return img
+    except OSError:
+        return None
+
+
+def _paste_in_slot(
+    card: Image.Image,
+    img: Image.Image | None,
+    x: int,
+    y: int,
+    slot_w: int,
+    slot_h: int,
+) -> None:
+    if not img:
+        return
+    ox = x + max(0, (slot_w - img.width) // 2)
+    oy = y + max(0, (slot_h - img.height) // 2)
+    card.paste(img, (ox, oy), img)
+
+
 def _format_chance(chance: float) -> str:
     if chance >= 10:
         return f"{chance:g}%"
@@ -144,7 +189,7 @@ def _section_has_content(item: ItemDisplay, section: str) -> bool:
     if section == "wear_limit":
         return bool(item.wear_limit or item.exclusives)
     if section == "stats":
-        return bool(item.description)
+        return bool(item.raw_description or item.description or item.passive)
     if section == "recipe":
         return bool(item.recipe)
     if section == "crafts_into":
@@ -172,7 +217,10 @@ def _estimate_height(draw: ImageDraw.ImageDraw, item: ItemDisplay) -> int:
 
     if _section_has_content(item, "stats"):
         y += HEADER_HEIGHT
-        y += len(_wrap_lines(draw, item.description, body_font, content_width)) * 20
+        panel_width = content_width
+        stats_text = item.raw_description or item.description
+        panel_height, _ = measure_game_panel(draw, stats_text, body_font, panel_width)
+        y += panel_height
         y += SECTION_GAP
 
     if _section_has_content(item, "recipe"):
@@ -230,19 +278,23 @@ def _draw_bullet_lines(
     return y
 
 
-def _draw_list_rows(
+def _draw_icon_rows(
+    card: Image.Image,
     draw: ImageDraw.ImageDraw,
     y: int,
-    rows: list[tuple[str, str | None]],
+    rows: list[tuple[str | None, str, str | None]],
 ) -> int:
     font = _font(15)
-    left = CARD_PADDING + 16
+    icon_x = CARD_PADDING + 16
+    text_x = icon_x + LIST_ICON_SIZE[0] + LIST_ICON_GAP
     right = CARD_WIDTH - CARD_PADDING - 16
-    for left_text, right_text in rows:
-        draw.text((left, y + 4), left_text, fill=COLORS["text"], font=font)
+    for icon_path, left_text, right_text in rows:
+        icon = _load_image(icon_path, LIST_ICON_SIZE)
+        _paste_in_slot(card, icon, icon_x, y, LIST_ICON_SIZE[0], ROW_HEIGHT)
+        draw.text((text_x, y + 6), left_text, fill=COLORS["text"], font=font)
         if right_text:
             rw = _text_width(draw, right_text, font)
-            draw.text((right - rw, y + 4), right_text, fill=COLORS["muted"], font=font)
+            draw.text((right - rw, y + 6), right_text, fill=COLORS["muted"], font=font)
         y += ROW_HEIGHT
     return y
 
@@ -264,8 +316,20 @@ def generate_item_card(item: ItemDisplay) -> str:
     )
 
     title_font = _font(22, bold=True)
+    title_x = CARD_PADDING + 8
+    if item.icon:
+        title_icon = _load_image(item.icon, TITLE_ICON_SIZE)
+        _paste_in_slot(
+            card,
+            title_icon,
+            CARD_PADDING + 8,
+            CARD_PADDING,
+            TITLE_ICON_SIZE[0],
+            TITLE_ICON_SIZE[1],
+        )
+        title_x = CARD_PADDING + 8 + TITLE_ICON_SIZE[0] + 10
     draw.text(
-        (CARD_PADDING + 8, CARD_PADDING),
+        (title_x, CARD_PADDING + 10),
         item.name,
         fill=COLORS["title"],
         font=title_font,
@@ -311,30 +375,47 @@ def generate_item_card(item: ItemDisplay) -> str:
     if _section_has_content(item, "stats"):
         y = _draw_header(draw, y, "▎属性")
         content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
-        for line in _wrap_lines(draw, item.description, _font(15), content_width):
-            draw.text((CARD_PADDING + 16, y), line, fill=COLORS["text"], font=_font(15))
-            y += 20
+        stats_font = _font(15)
+        stats_text = item.raw_description or item.description
+        panel_height, wrapped = measure_game_panel(
+            draw, stats_text, stats_font, content_width
+        )
+        draw_game_panel(
+            card,
+            draw,
+            CARD_PADDING + 16,
+            y,
+            content_width,
+            wrapped,
+            stats_font,
+            _ITEMS_BG,
+        )
+        y += panel_height
         y += SECTION_GAP
 
     if _section_has_content(item, "recipe"):
         y = _draw_header(draw, y, "▎合成方式")
-        rows = [(f"· {entry.name}", f"x{entry.quantity}") for entry in item.recipe]
-        y = _draw_list_rows(draw, y, rows)
+        rows = [
+            (entry.icon, entry.name, f"x{entry.quantity}") for entry in item.recipe
+        ]
+        y = _draw_icon_rows(card, draw, y, rows)
         y += SECTION_GAP
 
     if _section_has_content(item, "crafts_into"):
         y = _draw_header(draw, y, "▎可合成物品")
-        rows = [(f"· {entry.name}", f"x{entry.quantity}") for entry in item.crafts_into]
-        y = _draw_list_rows(draw, y, rows)
+        rows = [
+            (entry.icon, entry.name, f"x{entry.quantity}") for entry in item.crafts_into
+        ]
+        y = _draw_icon_rows(card, draw, y, rows)
         y += SECTION_GAP
 
     if _section_has_content(item, "boss_drops"):
         y = _draw_header(draw, y, "▎来源")
         rows = [
-            (f"· {entry.boss_name}", _format_chance(entry.chance))
+            (entry.icon, entry.boss_name, _format_chance(entry.chance))
             for entry in item.boss_drops
         ]
-        y = _draw_list_rows(draw, y, rows)
+        y = _draw_icon_rows(card, draw, y, rows)
 
     out_path = os.path.join(_CARDS_DIR, f"{item.id}_{uuid.uuid4().hex[:8]}.png")
     card.save(out_path, format="PNG", optimize=True)
@@ -359,7 +440,7 @@ def format_text_fallback(item: ItemDisplay) -> str:
 
     if _section_has_content(item, "stats"):
         lines.append("【属性】")
-        lines.append(item.description)
+        lines.append(strip_color(item.raw_description or item.description))
         lines.append("")
 
     if _section_has_content(item, "recipe"):
