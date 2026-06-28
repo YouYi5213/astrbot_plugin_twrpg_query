@@ -247,6 +247,8 @@ def _draw_hero_icon_grid(
     max_x = CARD_WIDTH - CARD_PADDING - 8
     gap = 6
     for hero in heroes:
+        if not hero.icon:
+            continue
         if x + HERO_ICON_SIZE[0] > max_x and x > x_start:
             row_y += HERO_ICON_SIZE[1] + gap
             x = x_start

@@ -284,7 +284,7 @@
     "enName": "World Sunderer",
     "koName": "세계의 파괴자",
     "en": "Passive:\nOn skill cast, accumulates Ruin\nEach stack increases AD by 600, STR/INT by 40, skill damage by 2.5%\nActive:\nOn use, activates World Sunderer\nDeals (MAIN STAT X 10) magic damage to nearby enemies 4 times\nThen deals up to (MAIN STAT X 60 ~ 120) magic damage based on their missing HP and silences them for 2 seconds\nGains max stacks of Ruin for 10 seconds\nCooldown: 60s",
-    "cn": "被动：\n施放技能时，累积毁灭\n每层增加 AD 600、力量/智力 40、技能伤害 2.5%\n\n主动：\n使用时，激活世界击破者\\r n对附近敌人造成 (主属性 X 10) 点魔法伤害 4 次\n然后根据敌人缺失的生命值造成最多 (主属性 X 60 ~ 120) 点魔法伤害，并使他们沉默 2 秒\n获得最大层数毁灭 10秒\n冷却时间: 60s"
+    "cn": "被动：\n施放技能时，累积毁灭\n每层增加 AD 600、力量/智力 40、技能伤害 2.5%\n\n主动：\n使用时，激活世界破坏者\n对附近敌人造成 (主属性 X 10) 点魔法伤害 4 次\n然后根据敌人缺失的生命值造成最多 (主属性 X 60 ~ 120) 点魔法伤害，并使他们沉默 2 秒\n获得最大层数毁灭 10秒\n冷却时间: 60s"
   },
   {
     "id": "I01K",

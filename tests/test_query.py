@@ -66,6 +66,14 @@ class TwrpgQueryTests(unittest.TestCase):
         self.assertTrue(os.path.exists(path))
         os.remove(path)
 
+    def test_limit_heroes_skip_missing_icons_i0a5(self):
+        display = self.store.build_display("I0A5")
+        assert display is not None
+        self.assertEqual(len(display.limit_heroes), 21)
+        for hero in display.limit_heroes:
+            self.assertTrue(hero.icon and os.path.exists(hero.icon))
+            self.assertNotEqual(hero.name, hero.id)
+
     def test_boss_drop_only(self):
         display = self.store.build_display("I023")
         assert display is not None

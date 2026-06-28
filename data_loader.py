@@ -269,11 +269,14 @@ class TwrpgDataStore:
     def _limit_heroes(self, limit: str) -> list[HeroRef]:
         heroes: list[HeroRef] = []
         for hero_id in LIMIT_HERO_IDS.get(limit, []):
+            icon = self._hero_icon(hero_id)
+            if not icon:
+                continue
             heroes.append(
                 HeroRef(
                     id=hero_id,
                     name=self.hero_name(hero_id),
-                    icon=self._hero_icon(hero_id),
+                    icon=icon,
                 )
             )
         return heroes
