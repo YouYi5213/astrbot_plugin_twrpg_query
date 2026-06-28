@@ -13,11 +13,12 @@
 
 插件会以图片卡片展示以下信息（有数据才显示对应区块）：
 
-- **佩戴限定**：武器类型限定（通用/近战/远程/法杖/枪支/背包）及英雄专属效果
-- **属性**：物品描述与数值
-- **合成方式**：合成所需材料
-- **可合成物品**：以该物品为材料的合成目标
-- **来源**：BOSS 掉落（仅显示 BOSS 掉落，不含其他来源）
+- **佩戴限定**：可佩戴英雄头像（与 QuickSearch 一致）
+- **专属效果**：英雄头像 + 专属技能改动说明
+- **属性**：GamePanel 金色边框 + War3 彩色描述与被动
+- **合成方式**：合成所需材料（含图标）
+- **可合成物品**：以该物品为材料的合成目标（含图标）
+- **来源**：BOSS 掉落（含 BOSS 图标）
 
 ## 安装
 
@@ -40,6 +41,9 @@ git clone <本仓库地址> astrbot_plugin_twrpg_query
 - `bosses.json`
 - `heros.json`
 - `exclusives.json`
+- `item_passives.json`（被动/主动描述，可用 `scripts/extract_passives.py` 生成）
+
+图标与背景资源可通过 `scripts/sync_assets.py` 从本地 QuickSearch 同步到 `assets/icons/` 与 `assets/items_bg.png`。
 
 ## 开发调试
 

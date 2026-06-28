@@ -25,6 +25,7 @@ ROW_HEIGHT = 32
 HEADER_HEIGHT = 34
 TITLE_ICON_SIZE = (52, 52)
 LIST_ICON_SIZE = (28, 28)
+HERO_ICON_SIZE = (32, 32)
 LIST_ICON_GAP = 8
 TITLE_HEIGHT = 52
 
@@ -187,7 +188,9 @@ def _format_chance(chance: float) -> str:
 
 def _section_has_content(item: ItemDisplay, section: str) -> bool:
     if section == "wear_limit":
-        return bool(item.wear_limit or item.exclusives)
+        return bool(item.limit_heroes)
+    if section == "exclusive":
+        return bool(item.exclusives)
     if section == "stats":
         return bool(item.raw_description or item.description or item.passive)
     if section == "recipe":
@@ -199,6 +202,88 @@ def _section_has_content(item: ItemDisplay, section: str) -> bool:
     return False
 
 
+def _hero_icon_grid_height(hero_count: int) -> int:
+    if hero_count <= 0:
+        return 0
+    usable = CARD_WIDTH - CARD_PADDING * 2 - 24
+    per_row = max(1, usable // (HERO_ICON_SIZE[0] + 6))
+    rows = (hero_count + per_row - 1) // per_row
+    return rows * HERO_ICON_SIZE[1] + max(0, rows - 1) * 6 + 4
+
+
+def _exclusive_block_height(
+    draw: ImageDraw.ImageDraw,
+    exclusives,
+    font,
+) -> int:
+    text_x = CARD_PADDING + 16 + HERO_ICON_SIZE[0] + LIST_ICON_GAP
+    max_width = CARD_WIDTH - CARD_PADDING - text_x - 8
+    total = 0
+    for ex in exclusives:
+        lines = [ln.strip() for ln in ex.description.split("\n") if ln.strip()]
+        if not lines:
+            lines = [""]
+        line_count = 0
+        for line in lines:
+            wrapped = _wrap_lines(draw, line, font, max_width) or [""]
+            line_count += len(wrapped)
+        block_h = max(HERO_ICON_SIZE[1], line_count * 18 + 4)
+        total += block_h + 6
+    return total
+
+
+def _draw_hero_icon_grid(
+    card: Image.Image,
+    y: int,
+    heroes,
+) -> int:
+    x_start = CARD_PADDING + 16
+    x = x_start
+    row_y = y
+    max_x = CARD_WIDTH - CARD_PADDING - 8
+    gap = 6
+    for hero in heroes:
+        if x + HERO_ICON_SIZE[0] > max_x and x > x_start:
+            row_y += HERO_ICON_SIZE[1] + gap
+            x = x_start
+        icon = _load_image(hero.icon, HERO_ICON_SIZE)
+        _paste_in_slot(card, icon, x, row_y, HERO_ICON_SIZE[0], HERO_ICON_SIZE[1])
+        x += HERO_ICON_SIZE[0] + gap
+    return row_y + HERO_ICON_SIZE[1] + 4
+
+
+def _draw_exclusive_rows(
+    card: Image.Image,
+    draw: ImageDraw.ImageDraw,
+    y: int,
+    exclusives,
+) -> int:
+    font = _font(14)
+    icon_x = CARD_PADDING + 16
+    text_x = icon_x + HERO_ICON_SIZE[0] + LIST_ICON_GAP
+    max_width = CARD_WIDTH - CARD_PADDING - text_x - 8
+
+    for ex in exclusives:
+        lines = [ln.strip() for ln in ex.description.split("\n") if ln.strip()]
+        if not lines:
+            continue
+
+        wrapped_lines: list[str] = []
+        for line in lines:
+            wrapped_lines.extend(_wrap_lines(draw, line, font, max_width) or [line])
+
+        block_h = max(HERO_ICON_SIZE[1], len(wrapped_lines) * 18 + 4)
+        icon = _load_image(ex.icon, HERO_ICON_SIZE)
+        _paste_in_slot(card, icon, icon_x, y, HERO_ICON_SIZE[0], block_h)
+
+        text_y = y + 4
+        for part in wrapped_lines:
+            draw.text((text_x, text_y), part, fill=COLORS["text"], font=font)
+            text_y += 18
+        y += block_h + 6
+    return y
+
+
 def _estimate_height(draw: ImageDraw.ImageDraw, item: ItemDisplay) -> int:
     body_font = _font(15)
     small_font = _font(14)
@@ -207,12 +292,12 @@ def _estimate_height(draw: ImageDraw.ImageDraw, item: ItemDisplay) -> int:
 
     if _section_has_content(item, "wear_limit"):
         y += HEADER_HEIGHT
-        if item.wear_limit:
-            y += len(item.wear_limit) * ROW_HEIGHT
-        for ex in item.exclusives:
-            y += ROW_HEIGHT
-            y += len(_wrap_lines(draw, ex.description, small_font, content_width - 16)) * 18
-            y += LINE_GAP
+        y += _hero_icon_grid_height(len(item.limit_heroes))
+        y += SECTION_GAP
+
+    if _section_has_content(item, "exclusive"):
+        y += HEADER_HEIGHT
+        y += _exclusive_block_height(draw, item.exclusives, small_font)
         y += SECTION_GAP
 
     if _section_has_content(item, "stats"):
@@ -348,28 +433,12 @@ def generate_item_card(item: ItemDisplay) -> str:
 
     if _section_has_content(item, "wear_limit"):
         y = _draw_header(draw, y, "▎佩戴限定")
-        wear_lines = [f"· {label}" for label in item.wear_limit]
-        y = _draw_bullet_lines(draw, y, wear_lines, _font(15))
-        for ex in item.exclusives:
-            header = f"· {ex.hero_name}"
-            if ex.skill:
-                header += f" · {ex.skill}"
-            draw.text(
-                (CARD_PADDING + 16, y),
-                header,
-                fill=COLORS["accent"],
-                font=_font(15, bold=True),
-            )
-            y += ROW_HEIGHT
-            if ex.description:
-                y = _draw_bullet_lines(
-                    draw,
-                    y,
-                    [ex.description],
-                    _font(14),
-                    indent=28,
-                    color=COLORS["muted"],
-                )
+        y = _draw_hero_icon_grid(card, y, item.limit_heroes)
+        y += SECTION_GAP
+
+    if _section_has_content(item, "exclusive"):
+        y = _draw_header(draw, y, "▎专属效果")
+        y = _draw_exclusive_rows(card, draw, y, item.exclusives)
         y += SECTION_GAP
 
     if _section_has_content(item, "stats"):
@@ -427,15 +496,15 @@ def format_text_fallback(item: ItemDisplay) -> str:
 
     if _section_has_content(item, "wear_limit"):
         lines.append("【佩戴限定】")
-        for label in item.wear_limit:
-            lines.append(f"· {label}")
+        for hero in item.limit_heroes:
+            lines.append(f"· {hero.name}")
+        lines.append("")
+
+    if _section_has_content(item, "exclusive"):
+        lines.append("【专属效果】")
         for ex in item.exclusives:
-            header = ex.hero_name
-            if ex.skill:
-                header += f" · {ex.skill}"
-            lines.append(f"· {header}")
             if ex.description:
-                lines.append(f"  {ex.description}")
+                lines.append(ex.description)
         lines.append("")
 
     if _section_has_content(item, "stats"):

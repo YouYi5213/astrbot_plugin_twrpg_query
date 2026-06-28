@@ -23,6 +23,22 @@ WEAR_LIMIT_LABELS: dict[str, str] = {
     "6": "背包",
 }
 
+# QuickSearch buildGood: Kle()[item.limit] -> limitHeroes
+LIMIT_HERO_IDS: dict[str, list[str]] = {
+    "2": [
+        "H001", "H004", "H00E", "H000", "H00H", "H003", "Hmkg", "Hblm",
+        "H01H", "H01V", "H011", "H02M", "H021", "H04Q", "H04R", "H04S",
+        "H05T", "H065", "H076", "H07X", "H09M", "H07Y", "H086", "H09R", "H019",
+    ],
+    "3": [
+        "H006", "H005", "H002", "H007", "H009", "H008", "H00J", "H01I",
+        "H01N", "H02M", "H021", "H066", "H065", "Hmkg", "H003", "H08G",
+    ],
+    "4": ["H00Z", "H015"],
+    "5": ["H00K", "H05B", "H09N"],
+    "6": ["H04Q", "H065"],
+}
+
 
 def strip_color(text: str) -> str:
     if not text:
@@ -53,10 +69,19 @@ class DropEntry:
 
 
 @dataclass
+class HeroRef:
+    id: str
+    name: str
+    icon: str | None = None
+
+
+@dataclass
 class ExclusiveEntry:
+    hero_id: str
     hero_name: str
-    skill: str
-    description: str
+    icon: str | None = None
+    skill: str = ""
+    description: str = ""
 
 
 @dataclass
@@ -67,7 +92,7 @@ class ItemDisplay:
     raw_description: str = ""
     icon: str | None = None
     passive: str = ""
-    wear_limit: list[str] = field(default_factory=list)
+    limit_heroes: list[HeroRef] = field(default_factory=list)
     exclusives: list[ExclusiveEntry] = field(default_factory=list)
     recipe: list[CraftEntry] = field(default_factory=list)
     crafts_into: list[CraftEntry] = field(default_factory=list)
@@ -178,6 +203,24 @@ class TwrpgDataStore:
     def _entity_icon(self, img: str) -> str | None:
         return resolve_icon_path(self.icons_dir, img)
 
+    def _hero_icon(self, hero_id: str) -> str | None:
+        hero = self.heros_by_id.get(hero_id)
+        if not hero:
+            return None
+        return self._entity_icon(hero.get("img", ""))
+
+    def _limit_heroes(self, limit: str) -> list[HeroRef]:
+        heroes: list[HeroRef] = []
+        for hero_id in LIMIT_HERO_IDS.get(limit, []):
+            heroes.append(
+                HeroRef(
+                    id=hero_id,
+                    name=self.hero_name(hero_id),
+                    icon=self._hero_icon(hero_id),
+                )
+            )
+        return heroes
+
     @staticmethod
     def _item_search_labels(item: dict) -> set[str]:
         labels = {
@@ -254,17 +297,17 @@ class TwrpgDataStore:
         description = strip_color(item.get("description") or "")
         raw_description = item.get("rawDesc") or item.get("description") or ""
 
-        wear_limit: list[str] = []
         limit = str(item.get("limit") or "").strip()
-        if limit and limit != "0":
-            label = WEAR_LIMIT_LABELS.get(limit, f"类型 {limit}")
-            wear_limit.append(label)
+        limit_heroes = self._limit_heroes(limit) if limit and limit != "0" else []
 
         exclusives: list[ExclusiveEntry] = []
         for row in self.exclusives_by_item.get(item_id, []):
+            hero_id = row.get("heroId", "")
             exclusives.append(
                 ExclusiveEntry(
-                    hero_name=self.hero_name(row.get("heroId", "")),
+                    hero_id=hero_id,
+                    hero_name=self.hero_name(hero_id),
+                    icon=self._hero_icon(hero_id),
                     skill=strip_color(row.get("on", "")),
                     description=strip_color(row.get("desc", "")),
                 )
@@ -313,7 +356,7 @@ class TwrpgDataStore:
             raw_description=raw_description,
             icon=self._item_icon(item_id),
             passive=passive,
-            wear_limit=wear_limit,
+            limit_heroes=limit_heroes,
             exclusives=exclusives,
             recipe=recipe,
             crafts_into=crafts_into,

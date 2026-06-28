@@ -45,10 +45,23 @@ class TwrpgQueryTests(unittest.TestCase):
         self.assertEqual(display.id, "I0ET")
         self.assertGreater(len(display.recipe), 0)
 
-    def test_wear_limit_backpack(self):
+    def test_limit_heroes_and_exclusives_i026(self):
         display = self.store.build_display("I026")
         assert display is not None
-        self.assertIn("背包", display.wear_limit)
+        hero_ids = {hero.id for hero in display.limit_heroes}
+        self.assertIn("H065", hero_ids)
+        self.assertIn("H04Q", hero_ids)
+        for hero in display.limit_heroes:
+            self.assertTrue(hero.icon and os.path.exists(hero.icon))
+        self.assertEqual(len(display.exclusives), 1)
+        ex = display.exclusives[0]
+        self.assertEqual(ex.hero_id, "H04Q")
+        self.assertIn("着手成春", ex.description)
+        self.assertIn("危险爆破", ex.description)
+        self.assertTrue(ex.icon and os.path.exists(ex.icon))
+        path = generate_item_card(display)
+        self.assertTrue(os.path.exists(path))
+        os.remove(path)
 
     def test_boss_drop_only(self):
         display = self.store.build_display("I023")
