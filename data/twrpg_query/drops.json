@@ -1,0 +1,2044 @@
+[
+  {
+    "id": "h0AB",
+    "dropId": "I023",
+    "chance": 0.4
+  },
+  {
+    "id": "h0AB",
+    "dropId": "I02N",
+    "chance": 0.6
+  },
+  {
+    "id": "h0AB",
+    "dropId": "I02P",
+    "chance": 0.6
+  },
+  {
+    "id": "h0AB",
+    "dropId": "I02O",
+    "chance": 0.6
+  },
+  {
+    "id": "h0AB",
+    "dropId": "I02U",
+    "chance": 0.15
+  },
+  {
+    "id": "h0AB",
+    "dropId": "I0R8",
+    "chance": 0.01
+  },
+  {
+    "id": "n00A",
+    "dropId": "I009",
+    "chance": 100
+  },
+  {
+    "id": "n00A",
+    "dropId": "I00P",
+    "chance": 100
+  },
+  {
+    "id": "n00H",
+    "dropId": "I00D",
+    "chance": 2
+  },
+  {
+    "id": "n00I",
+    "dropId": "I00S",
+    "chance": 3
+  },
+  {
+    "id": "n00J",
+    "dropId": "I01B",
+    "chance": 3
+  },
+  {
+    "id": "n00O",
+    "dropId": "I01G",
+    "chance": 50
+  },
+  {
+    "id": "n00O",
+    "dropId": "I013",
+    "chance": 100
+  },
+  {
+    "id": "n00G",
+    "dropId": "I00T",
+    "chance": 3
+  },
+  {
+    "id": "n00G",
+    "dropId": "I0PY",
+    "chance": 5
+  },
+  {
+    "id": "n00K",
+    "dropId": "I01C",
+    "chance": 3
+  },
+  {
+    "id": "n00K",
+    "dropId": "I0PY",
+    "chance": 5
+  },
+  {
+    "id": "n00L",
+    "dropId": "I01F",
+    "chance": 9
+  },
+  {
+    "id": "n00L",
+    "dropId": "I0PY",
+    "chance": 25
+  },
+  {
+    "id": "n01B",
+    "dropId": "rhe2",
+    "chance": 40
+  },
+  {
+    "id": "n01B",
+    "dropId": "I0PY",
+    "chance": 100
+  },
+  {
+    "id": "o003",
+    "dropId": "I0DW",
+    "chance": 50
+  },
+  {
+    "id": "o003",
+    "dropId": "I016",
+    "chance": 50
+  },
+  {
+    "id": "o003",
+    "dropId": "I00B",
+    "chance": 33
+  },
+  {
+    "id": "o003",
+    "dropId": "I00E",
+    "chance": 33
+  },
+  {
+    "id": "o003",
+    "dropId": "I0AJ",
+    "chance": 33
+  },
+  {
+    "id": "o003",
+    "dropId": "I00I",
+    "chance": 33
+  },
+  {
+    "id": "o003",
+    "dropId": "pclr",
+    "chance": 2
+  },
+  {
+    "id": "n00Y",
+    "dropId": "I02M",
+    "chance": 1
+  },
+  {
+    "id": "n00Y",
+    "dropId": "I038",
+    "chance": 1
+  },
+  {
+    "id": "n00X",
+    "dropId": "I02M",
+    "chance": 1
+  },
+  {
+    "id": "n00X",
+    "dropId": "I09B",
+    "chance": 1
+  },
+  {
+    "id": "n00X",
+    "dropId": "I0EU",
+    "chance": 1
+  },
+  {
+    "id": "n00Z",
+    "dropId": "I038",
+    "chance": 1
+  },
+  {
+    "id": "n00Z",
+    "dropId": "I09B",
+    "chance": 1
+  },
+  {
+    "id": "n00Z",
+    "dropId": "I0EU",
+    "chance": 1
+  },
+  {
+    "id": "n011",
+    "dropId": "I03B",
+    "chance": 1
+  },
+  {
+    "id": "n011",
+    "dropId": "I039",
+    "chance": 1
+  },
+  {
+    "id": "n011",
+    "dropId": "I03C",
+    "chance": 1
+  },
+  {
+    "id": "n010",
+    "dropId": "I03B",
+    "chance": 1
+  },
+  {
+    "id": "n010",
+    "dropId": "I039",
+    "chance": 1
+  },
+  {
+    "id": "n010",
+    "dropId": "I03C",
+    "chance": 1
+  },
+  {
+    "id": "n015",
+    "dropId": "vddl",
+    "chance": 40
+  },
+  {
+    "id": "n015",
+    "dropId": "I0Q3",
+    "chance": 40
+  },
+  {
+    "id": "orai",
+    "dropId": "pmna",
+    "chance": 100
+  },
+  {
+    "id": "orai",
+    "dropId": "spsh",
+    "chance": 100
+  },
+  {
+    "id": "orai",
+    "dropId": "ciri",
+    "chance": 100
+  },
+  {
+    "id": "o004",
+    "dropId": "I0DS",
+    "chance": 100
+  },
+  {
+    "id": "o004",
+    "dropId": "wneg",
+    "chance": 100
+  },
+  {
+    "id": "o004",
+    "dropId": "I0DT",
+    "chance": 100
+  },
+  {
+    "id": "n018",
+    "dropId": "I03K",
+    "chance": 1
+  },
+  {
+    "id": "n018",
+    "dropId": "I03H",
+    "chance": 1
+  },
+  {
+    "id": "n019",
+    "dropId": "I09H",
+    "chance": 1
+  },
+  {
+    "id": "n019",
+    "dropId": "I0EW",
+    "chance": 1
+  },
+  {
+    "id": "n01C",
+    "dropId": "I03I",
+    "chance": 1
+  },
+  {
+    "id": "n01C",
+    "dropId": "I03F",
+    "chance": 1
+  },
+  {
+    "id": "n01C",
+    "dropId": "I03L",
+    "chance": 1
+  },
+  {
+    "id": "n01E",
+    "dropId": "rnsp",
+    "chance": 40
+  },
+  {
+    "id": "n01E",
+    "dropId": "I08O",
+    "chance": 40
+  },
+  {
+    "id": "oshm",
+    "dropId": "prvt",
+    "chance": 100
+  },
+  {
+    "id": "oshm",
+    "dropId": "lgdh",
+    "chance": 100
+  },
+  {
+    "id": "oshm",
+    "dropId": "ssil",
+    "chance": 100
+  },
+  {
+    "id": "o005",
+    "dropId": "I0DU",
+    "chance": 100
+  },
+  {
+    "id": "o005",
+    "dropId": "hval",
+    "chance": 100
+  },
+  {
+    "id": "o005",
+    "dropId": "I0DV",
+    "chance": 100
+  },
+  {
+    "id": "h00P",
+    "dropId": "I044",
+    "chance": 1
+  },
+  {
+    "id": "h00P",
+    "dropId": "I0EZ",
+    "chance": 1
+  },
+  {
+    "id": "e01B",
+    "dropId": "I045",
+    "chance": 1
+  },
+  {
+    "id": "e01B",
+    "dropId": "I09J",
+    "chance": 1
+  },
+  {
+    "id": "h00R",
+    "dropId": "I044",
+    "chance": 1
+  },
+  {
+    "id": "h00R",
+    "dropId": "I045",
+    "chance": 1
+  },
+  {
+    "id": "h00R",
+    "dropId": "I09J",
+    "chance": 1
+  },
+  {
+    "id": "h00R",
+    "dropId": "I0EZ",
+    "chance": 1
+  },
+  {
+    "id": "h00S",
+    "dropId": "I040",
+    "chance": 1
+  },
+  {
+    "id": "h00S",
+    "dropId": "I041",
+    "chance": 1
+  },
+  {
+    "id": "h00S",
+    "dropId": "I046",
+    "chance": 1
+  },
+  {
+    "id": "h00T",
+    "dropId": "sor1",
+    "chance": 25
+  },
+  {
+    "id": "h00T",
+    "dropId": "sand",
+    "chance": 0.01
+  },
+  {
+    "id": "h00T",
+    "dropId": "I05R",
+    "chance": 25
+  },
+  {
+    "id": "h00T",
+    "dropId": "I05S",
+    "chance": 25
+  },
+  {
+    "id": "h00T",
+    "dropId": "I09G",
+    "chance": 25
+  },
+  {
+    "id": "h00T",
+    "dropId": "I0F0",
+    "chance": 25
+  },
+  {
+    "id": "n02L",
+    "dropId": "I0BQ",
+    "chance": 25
+  },
+  {
+    "id": "n02L",
+    "dropId": "I0CB",
+    "chance": 25
+  },
+  {
+    "id": "n02L",
+    "dropId": "I0BS",
+    "chance": 25
+  },
+  {
+    "id": "n02L",
+    "dropId": "I0BR",
+    "chance": 25
+  },
+  {
+    "id": "n02L",
+    "dropId": "I0C3",
+    "chance": 25
+  },
+  {
+    "id": "n02L",
+    "dropId": "I0BT",
+    "chance": 25
+  },
+  {
+    "id": "n03Y",
+    "dropId": "rspl",
+    "chance": 25
+  },
+  {
+    "id": "n03Y",
+    "dropId": "rhe1",
+    "chance": 25
+  },
+  {
+    "id": "n03Y",
+    "dropId": "rspd",
+    "chance": 25
+  },
+  {
+    "id": "n03Y",
+    "dropId": "I0BR",
+    "chance": 25
+  },
+  {
+    "id": "n03Y",
+    "dropId": "I0C3",
+    "chance": 25
+  },
+  {
+    "id": "n03Y",
+    "dropId": "I0BT",
+    "chance": 25
+  },
+  {
+    "id": "n01F",
+    "dropId": "I05C",
+    "chance": 1
+  },
+  {
+    "id": "n01F",
+    "dropId": "I05D",
+    "chance": 1
+  },
+  {
+    "id": "n01G",
+    "dropId": "I05C",
+    "chance": 1
+  },
+  {
+    "id": "n01G",
+    "dropId": "I09L",
+    "chance": 1
+  },
+  {
+    "id": "n01G",
+    "dropId": "I0F1",
+    "chance": 1
+  },
+  {
+    "id": "n01H",
+    "dropId": "I05D",
+    "chance": 1
+  },
+  {
+    "id": "n01H",
+    "dropId": "I09L",
+    "chance": 1
+  },
+  {
+    "id": "n01H",
+    "dropId": "I0F1",
+    "chance": 1
+  },
+  {
+    "id": "n01I",
+    "dropId": "I049",
+    "chance": 20
+  },
+  {
+    "id": "n01I",
+    "dropId": "I059",
+    "chance": 20
+  },
+  {
+    "id": "n01I",
+    "dropId": "I05F",
+    "chance": 20
+  },
+  {
+    "id": "n01J",
+    "dropId": "I05U",
+    "chance": 25
+  },
+  {
+    "id": "n01J",
+    "dropId": "I05W",
+    "chance": 25
+  },
+  {
+    "id": "n01J",
+    "dropId": "I09E",
+    "chance": 25
+  },
+  {
+    "id": "n01J",
+    "dropId": "I0F4",
+    "chance": 25
+  },
+  {
+    "id": "n01J",
+    "dropId": "dsum",
+    "chance": 25
+  },
+  {
+    "id": "n01J",
+    "dropId": "I0G5",
+    "chance": 1
+  },
+  {
+    "id": "n01J",
+    "dropId": "nspi",
+    "chance": 0.01
+  },
+  {
+    "id": "n02Z",
+    "dropId": "shcw",
+    "chance": 25
+  },
+  {
+    "id": "n02Z",
+    "dropId": "rnec",
+    "chance": 25
+  },
+  {
+    "id": "n02Z",
+    "dropId": "bfhr",
+    "chance": 25
+  },
+  {
+    "id": "n02Z",
+    "dropId": "stwa",
+    "chance": 25
+  },
+  {
+    "id": "n02Z",
+    "dropId": "blba",
+    "chance": 25
+  },
+  {
+    "id": "n02H",
+    "dropId": "I0BU",
+    "chance": 1
+  },
+  {
+    "id": "n02H",
+    "dropId": "I0BV",
+    "chance": 1
+  },
+  {
+    "id": "n02I",
+    "dropId": "I0BU",
+    "chance": 1
+  },
+  {
+    "id": "n02I",
+    "dropId": "I0BV",
+    "chance": 1
+  },
+  {
+    "id": "n02J",
+    "dropId": "I0BW",
+    "chance": 1
+  },
+  {
+    "id": "h014",
+    "dropId": "I0BN",
+    "chance": 25
+  },
+  {
+    "id": "h014",
+    "dropId": "I0BP",
+    "chance": 25
+  },
+  {
+    "id": "h014",
+    "dropId": "I0BO",
+    "chance": 25
+  },
+  {
+    "id": "h014",
+    "dropId": "I0F6",
+    "chance": 25
+  },
+  {
+    "id": "h014",
+    "dropId": "I0BZ",
+    "chance": 12.5
+  },
+  {
+    "id": "h014",
+    "dropId": "I0BY",
+    "chance": 12.5
+  },
+  {
+    "id": "h014",
+    "dropId": "I0G6",
+    "chance": 1
+  },
+  {
+    "id": "h014",
+    "dropId": "gvsm",
+    "chance": 0.01
+  },
+  {
+    "id": "h07P",
+    "dropId": "I0OS",
+    "chance": 25
+  },
+  {
+    "id": "h07P",
+    "dropId": "I0OT",
+    "chance": 25
+  },
+  {
+    "id": "h07P",
+    "dropId": "I0OU",
+    "chance": 25
+  },
+  {
+    "id": "h07P",
+    "dropId": "I0OV",
+    "chance": 25
+  },
+  {
+    "id": "n02A",
+    "dropId": "I0A3",
+    "chance": 1
+  },
+  {
+    "id": "n02A",
+    "dropId": "I0A4",
+    "chance": 1
+  },
+  {
+    "id": "n02B",
+    "dropId": "I0A1",
+    "chance": 1
+  },
+  {
+    "id": "h00Y",
+    "dropId": "I0A7",
+    "chance": 25
+  },
+  {
+    "id": "h00Y",
+    "dropId": "I0A8",
+    "chance": 25
+  },
+  {
+    "id": "h00Y",
+    "dropId": "I0A9",
+    "chance": 25
+  },
+  {
+    "id": "h00Y",
+    "dropId": "I0F5",
+    "chance": 25
+  },
+  {
+    "id": "h00Y",
+    "dropId": "I0AA",
+    "chance": 12.5
+  },
+  {
+    "id": "h00Y",
+    "dropId": "I0AB",
+    "chance": 12.5
+  },
+  {
+    "id": "h00Y",
+    "dropId": "I0G7",
+    "chance": 1
+  },
+  {
+    "id": "h00Y",
+    "dropId": "dtsb",
+    "chance": 0.01
+  },
+  {
+    "id": "h010",
+    "dropId": "I08X",
+    "chance": 10
+  },
+  {
+    "id": "h010",
+    "dropId": "I06D",
+    "chance": 10
+  },
+  {
+    "id": "h010",
+    "dropId": "I0AV",
+    "chance": 10
+  },
+  {
+    "id": "h010",
+    "dropId": "I06E",
+    "chance": 10
+  },
+  {
+    "id": "h010",
+    "dropId": "I0G9",
+    "chance": 1
+  },
+  {
+    "id": "h010",
+    "dropId": "grsl",
+    "chance": 0.05
+  },
+  {
+    "id": "h010",
+    "dropId": "envl",
+    "chance": 0.01
+  },
+  {
+    "id": "h01L",
+    "dropId": "I0A3",
+    "chance": 1
+  },
+  {
+    "id": "h01L",
+    "dropId": "I0A4",
+    "chance": 1
+  },
+  {
+    "id": "h01M",
+    "dropId": "I0A1",
+    "chance": 1
+  },
+  {
+    "id": "n036",
+    "dropId": "sor2",
+    "chance": 0.1
+  },
+  {
+    "id": "n037",
+    "dropId": "sora",
+    "chance": 0.1
+  },
+  {
+    "id": "n037",
+    "dropId": "I0AB",
+    "chance": 0.05
+  },
+  {
+    "id": "n038",
+    "dropId": "sor2",
+    "chance": 5
+  },
+  {
+    "id": "n038",
+    "dropId": "sora",
+    "chance": 5
+  },
+  {
+    "id": "n038",
+    "dropId": "ram1",
+    "chance": 5
+  },
+  {
+    "id": "n038",
+    "dropId": "soul",
+    "chance": 5
+  },
+  {
+    "id": "n038",
+    "dropId": "I0GA",
+    "chance": 0.5
+  },
+  {
+    "id": "n038",
+    "dropId": "wcyc",
+    "chance": 0.005
+  },
+  {
+    "id": "n043",
+    "dropId": "I0IO",
+    "chance": 12
+  },
+  {
+    "id": "n022",
+    "dropId": "I077",
+    "chance": 12.5
+  },
+  {
+    "id": "n022",
+    "dropId": "I07A",
+    "chance": 12.5
+  },
+  {
+    "id": "n022",
+    "dropId": "I09D",
+    "chance": 12.5
+  },
+  {
+    "id": "n022",
+    "dropId": "I0F2",
+    "chance": 12.5
+  },
+  {
+    "id": "n022",
+    "dropId": "I074",
+    "chance": 12.5
+  },
+  {
+    "id": "n022",
+    "dropId": "I072",
+    "chance": 12.5
+  },
+  {
+    "id": "n022",
+    "dropId": "I075",
+    "chance": 12.5
+  },
+  {
+    "id": "n022",
+    "dropId": "I073",
+    "chance": 12.5
+  },
+  {
+    "id": "n022",
+    "dropId": "I068",
+    "chance": 20
+  },
+  {
+    "id": "n022",
+    "dropId": "I06I",
+    "chance": 20
+  },
+  {
+    "id": "n022",
+    "dropId": "oven",
+    "chance": 0.005
+  },
+  {
+    "id": "H00F",
+    "dropId": "ajen",
+    "chance": 7.5
+  },
+  {
+    "id": "H00F",
+    "dropId": "I07I",
+    "chance": 7.5
+  },
+  {
+    "id": "H00F",
+    "dropId": "moon",
+    "chance": 7.5
+  },
+  {
+    "id": "H00F",
+    "dropId": "I07K",
+    "chance": 7.5
+  },
+  {
+    "id": "H00F",
+    "dropId": "I07L",
+    "chance": 7.5
+  },
+  {
+    "id": "H00F",
+    "dropId": "I07E",
+    "chance": 7.5
+  },
+  {
+    "id": "H00F",
+    "dropId": "I07H",
+    "chance": 7.5
+  },
+  {
+    "id": "H00F",
+    "dropId": "I06J",
+    "chance": 12.5
+  },
+  {
+    "id": "H00F",
+    "dropId": "I07G",
+    "chance": 12.5
+  },
+  {
+    "id": "H00F",
+    "dropId": "shen",
+    "chance": 0.005
+  },
+  {
+    "id": "n01W",
+    "dropId": "I07O",
+    "chance": 7.5
+  },
+  {
+    "id": "n01W",
+    "dropId": "I07M",
+    "chance": 7.5
+  },
+  {
+    "id": "n01W",
+    "dropId": "I0AY",
+    "chance": 7.5
+  },
+  {
+    "id": "n01W",
+    "dropId": "cnob",
+    "chance": 7.5
+  },
+  {
+    "id": "n01W",
+    "dropId": "I060",
+    "chance": 15
+  },
+  {
+    "id": "n01W",
+    "dropId": "sfog",
+    "chance": 0.25
+  },
+  {
+    "id": "n01W",
+    "dropId": "drph",
+    "chance": 0.005
+  },
+  {
+    "id": "h01B",
+    "dropId": "I06F:I080,I081,I09M,I0F7,I082",
+    "chance": 7.5,
+    "drops": [
+      {
+        "id": "I080",
+        "chance": 100
+      },
+      {
+        "id": "I081",
+        "chance": 100
+      },
+      {
+        "id": "I09M",
+        "chance": 100
+      },
+      {
+        "id": "I0F7",
+        "chance": 100
+      },
+      {
+        "id": "I082",
+        "chance": 100
+      }
+    ]
+  },
+  {
+    "id": "h01B",
+    "dropId": "I083",
+    "chance": 7.5
+  },
+  {
+    "id": "h01B",
+    "dropId": "I084",
+    "chance": 7.5
+  },
+  {
+    "id": "h01B",
+    "dropId": "I0AZ",
+    "chance": 7.5
+  },
+  {
+    "id": "h01B",
+    "dropId": "I062",
+    "chance": 12.5
+  },
+  {
+    "id": "h01B",
+    "dropId": "I06V",
+    "chance": 12.5
+  },
+  {
+    "id": "h01B",
+    "dropId": "cosl",
+    "chance": 0.25
+  },
+  {
+    "id": "h01B",
+    "dropId": "lnrn",
+    "chance": 0.005
+  },
+  {
+    "id": "n01K",
+    "dropId": "I07R",
+    "chance": 7.5
+  },
+  {
+    "id": "n01K",
+    "dropId": "I09S",
+    "chance": 7.5
+  },
+  {
+    "id": "n01K",
+    "dropId": "I07T",
+    "chance": 7.5
+  },
+  {
+    "id": "n01K",
+    "dropId": "I0F8",
+    "chance": 7.5
+  },
+  {
+    "id": "n01K",
+    "dropId": "I07U",
+    "chance": 7.5
+  },
+  {
+    "id": "n01K",
+    "dropId": "I07X",
+    "chance": 7.5
+  },
+  {
+    "id": "n01K",
+    "dropId": "I06P",
+    "chance": 12.5
+  },
+  {
+    "id": "n01K",
+    "dropId": "I06Q",
+    "chance": 12.5
+  },
+  {
+    "id": "n01K",
+    "dropId": "I06O",
+    "chance": 12.5
+  },
+  {
+    "id": "n01K",
+    "dropId": "oli2",
+    "chance": 0.005
+  },
+  {
+    "id": "H00V",
+    "dropId": "I0BJ",
+    "chance": 10
+  },
+  {
+    "id": "H00V",
+    "dropId": "I0FZ",
+    "chance": 0.5
+  },
+  {
+    "id": "H00V",
+    "dropId": "amrc",
+    "chance": 0.005
+  },
+  {
+    "id": "n01N",
+    "dropId": "I085",
+    "chance": 2.5
+  },
+  {
+    "id": "n01N",
+    "dropId": "I087",
+    "chance": 2.5
+  },
+  {
+    "id": "n01N",
+    "dropId": "I0FA",
+    "chance": 2.5
+  },
+  {
+    "id": "n01N",
+    "dropId": "I088",
+    "chance": 2.5
+  },
+  {
+    "id": "n01N",
+    "dropId": "I089",
+    "chance": 2.5
+  },
+  {
+    "id": "n01N",
+    "dropId": "I06R",
+    "chance": 5.0
+  },
+  {
+    "id": "n01N",
+    "dropId": "I06T",
+    "chance": 5.0
+  },
+  {
+    "id": "n01N",
+    "dropId": "tmmt",
+    "chance": 0.0015
+  },
+  {
+    "id": "n01O",
+    "dropId": "I0C4",
+    "chance": 7.5
+  },
+  {
+    "id": "n01O",
+    "dropId": "I086",
+    "chance": 7.5
+  },
+  {
+    "id": "n01O",
+    "dropId": "I08C",
+    "chance": 7.5
+  },
+  {
+    "id": "n01O",
+    "dropId": "I09O",
+    "chance": 7.5
+  },
+  {
+    "id": "n01O",
+    "dropId": "I06S",
+    "chance": 12.5
+  },
+  {
+    "id": "n01O",
+    "dropId": "I06U",
+    "chance": 12.5
+  },
+  {
+    "id": "n01O",
+    "dropId": "I0AB",
+    "chance": 12.5
+  },
+  {
+    "id": "n01O",
+    "dropId": "mnsf",
+    "chance": 0.005
+  },
+  {
+    "id": "n023",
+    "dropId": "I08D",
+    "chance": 7.5
+  },
+  {
+    "id": "n023",
+    "dropId": "I08R",
+    "chance": 7.5
+  },
+  {
+    "id": "n023",
+    "dropId": "I097",
+    "chance": 7.5
+  },
+  {
+    "id": "n023",
+    "dropId": "I099",
+    "chance": 7.5
+  },
+  {
+    "id": "n023",
+    "dropId": "I06X",
+    "chance": 10
+  },
+  {
+    "id": "n023",
+    "dropId": "I06K",
+    "chance": 10
+  },
+  {
+    "id": "n023",
+    "dropId": "olig",
+    "chance": 0.005
+  },
+  {
+    "id": "H01F",
+    "dropId": "I08D",
+    "chance": 7.5
+  },
+  {
+    "id": "H01F",
+    "dropId": "I08R",
+    "chance": 7.5
+  },
+  {
+    "id": "H01F",
+    "dropId": "I097",
+    "chance": 7.5
+  },
+  {
+    "id": "H01F",
+    "dropId": "I099",
+    "chance": 7.5
+  },
+  {
+    "id": "H01F",
+    "dropId": "I06X",
+    "chance": 10
+  },
+  {
+    "id": "H01F",
+    "dropId": "I06K",
+    "chance": 10
+  },
+  {
+    "id": "H01F",
+    "dropId": "stre",
+    "chance": 0.01
+  },
+  {
+    "id": "h034",
+    "dropId": "I067",
+    "chance": 5
+  },
+  {
+    "id": "h034",
+    "dropId": "I098",
+    "chance": 7.5
+  },
+  {
+    "id": "h034",
+    "dropId": "I096",
+    "chance": 7.5
+  },
+  {
+    "id": "h034",
+    "dropId": "bspd",
+    "chance": 5
+  },
+  {
+    "id": "h034",
+    "dropId": "I06X",
+    "chance": 5
+  },
+  {
+    "id": "h034",
+    "dropId": "I06K",
+    "chance": 5
+  },
+  {
+    "id": "h034",
+    "dropId": "I061",
+    "chance": 10
+  },
+  {
+    "id": "h034",
+    "dropId": "klmm",
+    "chance": 0.25
+  },
+  {
+    "id": "h034",
+    "dropId": "tst2",
+    "chance": 0.005
+  },
+  {
+    "id": "n01Y",
+    "dropId": "kysn",
+    "chance": 5
+  },
+  {
+    "id": "n01Y",
+    "dropId": "I0FG",
+    "chance": 5
+  },
+  {
+    "id": "n01Y",
+    "dropId": "I0B6",
+    "chance": 7.5
+  },
+  {
+    "id": "n01Y",
+    "dropId": "ches",
+    "chance": 7.5
+  },
+  {
+    "id": "n01Y",
+    "dropId": "dphe",
+    "chance": 7.5
+  },
+  {
+    "id": "n01Y",
+    "dropId": "I06W",
+    "chance": 10
+  },
+  {
+    "id": "n01Y",
+    "dropId": "I08K",
+    "chance": 10
+  },
+  {
+    "id": "n01Y",
+    "dropId": "fgsk",
+    "chance": 0.1
+  },
+  {
+    "id": "n01Y",
+    "dropId": "wswd",
+    "chance": 0.005
+  },
+  {
+    "id": "n02M",
+    "dropId": "odef",
+    "chance": 5
+  },
+  {
+    "id": "n02M",
+    "dropId": "rag1",
+    "chance": 5
+  },
+  {
+    "id": "n02M",
+    "dropId": "afac",
+    "chance": 5
+  },
+  {
+    "id": "n02M",
+    "dropId": "grsl",
+    "chance": 5
+  },
+  {
+    "id": "n02M",
+    "dropId": "I0JT",
+    "chance": 5
+  },
+  {
+    "id": "n02M",
+    "dropId": "I0G8",
+    "chance": 0.5
+  },
+  {
+    "id": "n02M",
+    "dropId": "ccmd",
+    "chance": 0.005
+  },
+  {
+    "id": "hmpr",
+    "dropId": "phlt",
+    "chance": 3.75
+  },
+  {
+    "id": "hmpr",
+    "dropId": "kpin",
+    "chance": 3.75
+  },
+  {
+    "id": "hmpr",
+    "dropId": "rwiz",
+    "chance": 2.5
+  },
+  {
+    "id": "hmpr",
+    "dropId": "rin1",
+    "chance": 3.75
+  },
+  {
+    "id": "hmpr",
+    "dropId": "I0FH",
+    "chance": 3.75
+  },
+  {
+    "id": "hmpr",
+    "dropId": "mcou",
+    "chance": 3.75
+  },
+  {
+    "id": "hmpr",
+    "dropId": "evtl",
+    "chance": 3.75
+  },
+  {
+    "id": "hmpr",
+    "dropId": "stpg",
+    "chance": 5
+  },
+  {
+    "id": "hmpr",
+    "dropId": "whwd",
+    "chance": 5
+  },
+  {
+    "id": "hmpr",
+    "dropId": "rugt",
+    "chance": 0.005
+  },
+  {
+    "id": "n02N",
+    "dropId": "I0CA",
+    "chance": 5
+  },
+  {
+    "id": "n02N",
+    "dropId": "ssan",
+    "chance": 5
+  },
+  {
+    "id": "n02N",
+    "dropId": "I0C6",
+    "chance": 5
+  },
+  {
+    "id": "n02N",
+    "dropId": "I0C7",
+    "chance": 2.5
+  },
+  {
+    "id": "n02N",
+    "dropId": "I0C8",
+    "chance": 5
+  },
+  {
+    "id": "n02N",
+    "dropId": "rej1",
+    "chance": 5
+  },
+  {
+    "id": "n02N",
+    "dropId": "I0CD",
+    "chance": 5
+  },
+  {
+    "id": "n02N",
+    "dropId": "shdt",
+    "chance": 0.005
+  },
+  {
+    "id": "h018",
+    "dropId": "skul",
+    "chance": 5
+  },
+  {
+    "id": "h018",
+    "dropId": "I0CR",
+    "chance": 5
+  },
+  {
+    "id": "h018",
+    "dropId": "I0CP",
+    "chance": 5
+  },
+  {
+    "id": "h018",
+    "dropId": "I0CG",
+    "chance": 5
+  },
+  {
+    "id": "h018",
+    "dropId": "crdt",
+    "chance": 2.5
+  },
+  {
+    "id": "h018",
+    "dropId": "I0CJ",
+    "chance": 5
+  },
+  {
+    "id": "h018",
+    "dropId": "sror",
+    "chance": 5
+  },
+  {
+    "id": "h018",
+    "dropId": "I0CK",
+    "chance": 5
+  },
+  {
+    "id": "h018",
+    "dropId": "wshs",
+    "chance": 0.005
+  },
+  {
+    "id": "n03S",
+    "dropId": "sreg",
+    "chance": 1.75
+  },
+  {
+    "id": "n03S",
+    "dropId": "pinv",
+    "chance": 1.75
+  },
+  {
+    "id": "n03S",
+    "dropId": "tret",
+    "chance": 2.5
+  },
+  {
+    "id": "n03S",
+    "dropId": "btst",
+    "chance": 2.5
+  },
+  {
+    "id": "n03S",
+    "dropId": "I0M7",
+    "chance": 0.25
+  },
+  {
+    "id": "n03S",
+    "dropId": "I0NZ",
+    "chance": 1.5
+  },
+  {
+    "id": "n03S",
+    "dropId": "rre1",
+    "chance": 0.005
+  },
+  {
+    "id": "n02V",
+    "dropId": "ratc",
+    "chance": 1.25
+  },
+  {
+    "id": "n02V",
+    "dropId": "rat6",
+    "chance": 1.25
+  },
+  {
+    "id": "n02V",
+    "dropId": "ward",
+    "chance": 1.75
+  },
+  {
+    "id": "n02V",
+    "dropId": "rat9",
+    "chance": 1.75
+  },
+  {
+    "id": "n02V",
+    "dropId": "I0EL",
+    "chance": 2.5
+  },
+  {
+    "id": "n02V",
+    "dropId": "nflg",
+    "chance": 2.5
+  },
+  {
+    "id": "n02V",
+    "dropId": "gsou",
+    "chance": 2.5
+  },
+  {
+    "id": "n02V",
+    "dropId": "I0NZ",
+    "chance": 1.5
+  },
+  {
+    "id": "n02V",
+    "dropId": "fgrg",
+    "chance": 0.005
+  },
+  {
+    "id": "n033",
+    "dropId": "belv",
+    "chance": 1.75
+  },
+  {
+    "id": "n033",
+    "dropId": "crys",
+    "chance": 1.75
+  },
+  {
+    "id": "n033",
+    "dropId": "stel",
+    "chance": 1.25
+  },
+  {
+    "id": "n033",
+    "dropId": "I0AS",
+    "chance": 2.5
+  },
+  {
+    "id": "n033",
+    "dropId": "rde1",
+    "chance": 2.5
+  },
+  {
+    "id": "n033",
+    "dropId": "I08P",
+    "chance": 2.5
+  },
+  {
+    "id": "n033",
+    "dropId": "I0NZ",
+    "chance": 1.75
+  },
+  {
+    "id": "n033",
+    "dropId": "pomn",
+    "chance": 0.005
+  },
+  {
+    "id": "n030",
+    "dropId": "pgin",
+    "chance": 1.75
+  },
+  {
+    "id": "n030",
+    "dropId": "srtl",
+    "chance": 1.75
+  },
+  {
+    "id": "n030",
+    "dropId": "I0D2",
+    "chance": 1.25
+  },
+  {
+    "id": "n030",
+    "dropId": "ofir",
+    "chance": 2.5
+  },
+  {
+    "id": "n030",
+    "dropId": "shtm",
+    "chance": 2.5
+  },
+  {
+    "id": "n030",
+    "dropId": "I0NZ",
+    "chance": 1.75
+  },
+  {
+    "id": "n030",
+    "dropId": "pres",
+    "chance": 0.005
+  },
+  {
+    "id": "o000",
+    "dropId": "I0EG",
+    "chance": 1.25
+  },
+  {
+    "id": "o000",
+    "dropId": "I0E5",
+    "chance": 2.5
+  },
+  {
+    "id": "o000",
+    "dropId": "I0E7",
+    "chance": 2.5
+  },
+  {
+    "id": "o000",
+    "dropId": "I0E6",
+    "chance": 2.5
+  },
+  {
+    "id": "o000",
+    "dropId": "I0NZ",
+    "chance": 2
+  },
+  {
+    "id": "o000",
+    "dropId": "sneg",
+    "chance": 0.005
+  },
+  {
+    "id": "o000",
+    "dropId": "00002",
+    "chance": "点击查看"
+  },
+  {
+    "id": "n02Y",
+    "dropId": "kymn",
+    "chance": 1
+  },
+  {
+    "id": "n02Y",
+    "dropId": "bzbf",
+    "chance": 1.5
+  },
+  {
+    "id": "n02Y",
+    "dropId": "shwd",
+    "chance": 1.5
+  },
+  {
+    "id": "n02Y",
+    "dropId": "mcri",
+    "chance": 2.5
+  },
+  {
+    "id": "n02Y",
+    "dropId": "I08N",
+    "chance": 2.5
+  },
+  {
+    "id": "n02Y",
+    "dropId": "I09N",
+    "chance": 2.5
+  },
+  {
+    "id": "n02Y",
+    "dropId": "I0NZ",
+    "chance": 2.5
+  },
+  {
+    "id": "n02Y",
+    "dropId": "shar",
+    "chance": 0.005
+  },
+  {
+    "id": "h01K",
+    "dropId": "srbd",
+    "chance": 2
+  },
+  {
+    "id": "h01K",
+    "dropId": "oslo",
+    "chance": 2.5
+  },
+  {
+    "id": "h01K",
+    "dropId": "sprn",
+    "chance": 2.5
+  },
+  {
+    "id": "h01K",
+    "dropId": "ledg",
+    "chance": 2.5
+  },
+  {
+    "id": "h01K",
+    "dropId": "I0DG",
+    "chance": 3
+  },
+  {
+    "id": "h01K",
+    "dropId": "kygh",
+    "chance": 3
+  },
+  {
+    "id": "h01K",
+    "dropId": "I0QH",
+    "chance": 0.75
+  },
+  {
+    "id": "h01K",
+    "dropId": "I0O0",
+    "chance": 0.8
+  },
+  {
+    "id": "h01K",
+    "dropId": "infs",
+    "chance": 0.005
+  },
+  {
+    "id": "h04O",
+    "dropId": "ocor",
+    "chance": 2.5
+  },
+  {
+    "id": "h04O",
+    "dropId": "I0IG",
+    "chance": 3
+  },
+  {
+    "id": "h04O",
+    "dropId": "I0IH",
+    "chance": 3
+  },
+  {
+    "id": "h04O",
+    "dropId": "phea",
+    "chance": 2
+  },
+  {
+    "id": "h04O",
+    "dropId": "I02E",
+    "chance": 0.75
+  },
+  {
+    "id": "h04O",
+    "dropId": "I0O0",
+    "chance": 0.8
+  },
+  {
+    "id": "h04O",
+    "dropId": "I0P0",
+    "chance": 0.005
+  },
+  {
+    "id": "h060",
+    "dropId": "I0JS",
+    "chance": 2.5
+  },
+  {
+    "id": "h060",
+    "dropId": "I0IE",
+    "chance": 3
+  },
+  {
+    "id": "h060",
+    "dropId": "I0IF",
+    "chance": 3
+  },
+  {
+    "id": "h060",
+    "dropId": "phea",
+    "chance": 2.5
+  },
+  {
+    "id": "h060",
+    "dropId": "I02D",
+    "chance": 0.75
+  },
+  {
+    "id": "h060",
+    "dropId": "I0O0",
+    "chance": 0.9
+  },
+  {
+    "id": "h060",
+    "dropId": "I0P1",
+    "chance": 0.005
+  },
+  {
+    "id": "h06T",
+    "dropId": "I0LX",
+    "chance": 2.5
+  },
+  {
+    "id": "h06T",
+    "dropId": "I0II",
+    "chance": 3
+  },
+  {
+    "id": "h06T",
+    "dropId": "I0IJ",
+    "chance": 3
+  },
+  {
+    "id": "h06T",
+    "dropId": "phea",
+    "chance": 3
+  },
+  {
+    "id": "h06T",
+    "dropId": "I002",
+    "chance": 0.75
+  },
+  {
+    "id": "h06T",
+    "dropId": "I0O0",
+    "chance": 1
+  },
+  {
+    "id": "h06T",
+    "dropId": "I0P2",
+    "chance": 0.005
+  },
+  {
+    "id": "h077",
+    "dropId": "I0O3",
+    "chance": 2
+  },
+  {
+    "id": "h077",
+    "dropId": "I0NV",
+    "chance": 2.5
+  },
+  {
+    "id": "h077",
+    "dropId": "I0NU",
+    "chance": 2.5
+  },
+  {
+    "id": "h077",
+    "dropId": "I0NW",
+    "chance": 2.5
+  },
+  {
+    "id": "h077",
+    "dropId": "I02S",
+    "chance": 0.75
+  },
+  {
+    "id": "h077",
+    "dropId": "I0O0",
+    "chance": 1.25
+  },
+  {
+    "id": "h077",
+    "dropId": "I0P3",
+    "chance": 0.005
+  },
+  {
+    "id": "h08K",
+    "dropId": "I014",
+    "chance": 1.2
+  },
+  {
+    "id": "h08K",
+    "dropId": "I0R2",
+    "chance": 1.5
+  },
+  {
+    "id": "h08K",
+    "dropId": "I0R4",
+    "chance": 1.5
+  },
+  {
+    "id": "h08K",
+    "dropId": "I0R3",
+    "chance": 1.5
+  },
+  {
+    "id": "h08K",
+    "dropId": "I0O2",
+    "chance": 0.25
+  },
+  {
+    "id": "h08K",
+    "dropId": "I0R6",
+    "chance": 0.005
+  },
+  {
+    "id": "h08K",
+    "dropId": "00001",
+    "chance": "点击查看"
+  },
+  {
+    "id": "h09B",
+    "dropId": "I01Z",
+    "chance": 0.9
+  },
+  {
+    "id": "h09B",
+    "dropId": "I05Q",
+    "chance": 1.2
+  },
+  {
+    "id": "h09B",
+    "dropId": "I09R",
+    "chance": 1.2
+  },
+  {
+    "id": "h09B",
+    "dropId": "I05P",
+    "chance": 1.2
+  },
+  {
+    "id": "h09B",
+    "dropId": "I0LY",
+    "chance": 0.2
+  },
+  {
+    "id": "h09B",
+    "dropId": "I0R7",
+    "chance": 0.005
+  },
+  {
+    "id": "h09V",
+    "dropId": "I095",
+    "chance": 0.6
+  },
+  {
+    "id": "h09V",
+    "dropId": "I0LP",
+    "chance": 0.8
+  },
+  {
+    "id": "h09V",
+    "dropId": "I0O1",
+    "chance": 0.8
+  },
+  {
+    "id": "h09V",
+    "dropId": "I02W",
+    "chance": 0.15
+  },
+  {
+    "id": "h09V",
+    "dropId": "I0GH",
+    "chance": 0.005
+  },
+  {
+    "id": "h0A1",
+    "dropId": "rlif",
+    "chance": 0.4
+  },
+  {
+    "id": "h0A1",
+    "dropId": "I02V",
+    "chance": 0.6
+  },
+  {
+    "id": "h0A1",
+    "dropId": "I05K",
+    "chance": 0.6
+  },
+  {
+    "id": "h0A1",
+    "dropId": "I05H",
+    "chance": 0.6
+  },
+  {
+    "id": "h0A1",
+    "dropId": "I0M0",
+    "chance": 0.15
+  },
+  {
+    "id": "h0A1",
+    "dropId": "I0QE",
+    "chance": 0.01
+  },
+  {
+    "id": "n033",
+    "dropId": "I0J5",
+    "desc": "9 kill"
+  }
+]

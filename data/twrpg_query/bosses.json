@@ -1,0 +1,2498 @@
+[
+  {
+    "id": "n00A",
+    "name": "银色利爪族狼",
+    "displayName": "银色利爪族狼",
+    "colorName": "银色利爪族狼",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNTimberWolf.blp",
+    "model": "units\\creeps\\WhiteWolf\\WhiteWolf.mdx",
+    "rawStats": {
+      "ua1b": 105,
+      "ua1c": 2,
+      "ucol": 48,
+      "udef": 10,
+      "udty": "small",
+      "uhpm": 2500,
+      "uhpr": 2.5,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "o003",
+    "name": "自然守护者",
+    "displayName": "自然守护者",
+    "colorName": "|c00562789自然守护者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNAncientOfLore.blp",
+    "model": "buildings\\nightelf\\AncientOfLore\\AncientOfLore.mdx",
+    "rawStats": {
+      "ua1b": 239,
+      "ua1c": 2,
+      "ucol": 96,
+      "udef": 30,
+      "udty": "small",
+      "uhpm": 12500,
+      "uhpr": 15,
+      "umvs": 200
+    }
+  },
+  {
+    "id": "n015",
+    "name": "dragonturtle",
+    "displayName": "dragonturtle",
+    "colorName": "dragonturtle",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSeaTurtleRed.blp",
+    "model": "Units\\Creeps\\DragonSeaTurtle\\DragonSeaTurtle.mdx",
+    "rawStats": {
+      "ua1b": 430,
+      "ua1c": 1.5,
+      "ucol": 96,
+      "udef": 40,
+      "udty": "small",
+      "uhpm": 30000,
+      "uhpr": 25,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "orai",
+    "name": "帝王蟹",
+    "displayName": "帝王蟹",
+    "colorName": "|c00ff0000帝王蟹|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNLobstrokkRed.blp",
+    "model": "Units\\Creeps\\Lobstrokkred\\Lobstrokkred.mdx",
+    "rawStats": {
+      "ua1b": 413,
+      "ua1c": 2,
+      "ucol": 40,
+      "udef": 60,
+      "uhpm": 40000,
+      "uhpr": 40,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "o004",
+    "name": "海象",
+    "displayName": "海象",
+    "colorName": "|c00bacefc海象|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNUnit_Walrus.blp",
+    "model": "Models\\Walrus.mdx",
+    "rawStats": {
+      "ua1b": 361,
+      "ua1c": 2,
+      "ucol": 64,
+      "udef": 50,
+      "udty": "medium",
+      "uhpm": 40000,
+      "uhpr": 50,
+      "umvs": 250
+    }
+  },
+  {
+    "id": "n01E",
+    "name": "巨型极地熊",
+    "displayName": "巨型极地熊",
+    "colorName": "巨型极地熊",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFrostBear.blp",
+    "model": "units\\creeps\\PolarBear\\PolarBear.mdx",
+    "rawStats": {
+      "ua1b": 530,
+      "ua1c": 2,
+      "udef": 30,
+      "udty": "small",
+      "uhpm": 50000,
+      "uhpr": 25,
+      "umvs": 360
+    }
+  },
+  {
+    "id": "oshm",
+    "name": "冰原猛犸",
+    "displayName": "冰原猛犸",
+    "colorName": "|c00bacefc冰原猛犸|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMammoth.blp",
+    "model": "Units\\Creeps\\Mammoth\\Mammoth.mdx",
+    "rawStats": {
+      "ua1b": 729,
+      "ua1c": 2.4000000953674316,
+      "ucol": 40,
+      "udef": 120,
+      "udty": "medium",
+      "uhpm": 70000,
+      "uhpr": 50,
+      "umvs": 250
+    }
+  },
+  {
+    "id": "o005",
+    "name": "金刚",
+    "displayName": "金刚",
+    "colorName": "|c00bacefc金刚|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSpiritWalker.blp",
+    "model": "Models\\ElderGorilla.mdx",
+    "rawStats": {
+      "ua1b": 639,
+      "ua1c": 2.200000047683716,
+      "ucol": 64,
+      "udef": 100,
+      "udty": "medium",
+      "uhpm": 70000,
+      "uhpr": 50,
+      "umvs": 250
+    }
+  },
+  {
+    "id": "h00T",
+    "name": "瓦几内拉古堡 爵士 领主",
+    "displayName": "瓦几内拉古堡 爵士 领主",
+    "colorName": "|c00696969瓦几内拉古堡|r 爵士 |c00FF0000领主|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroDeathKnight.blp",
+    "model": "units\\undead\\HeroDeathKnight\\HeroDeathKnight.mdx",
+    "rawStats": {
+      "ua1b": 736,
+      "ua1c": 1,
+      "ucol": 64,
+      "udef": 150,
+      "udty": "medium",
+      "uhpm": 125000,
+      "uhpr": 250,
+      "umvs": 480
+    }
+  },
+  {
+    "id": "n01J",
+    "name": "火焰统治者 拉格纳",
+    "displayName": "火焰统治者 拉格纳",
+    "colorName": "|c00FF0000火焰统治者 |c00ffd700拉格纳|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroAvatarOfFlame.blp",
+    "model": "Units\\Creeps\\HeroFlameLord\\HeroFlameLord.mdx",
+    "rawStats": {
+      "ua1b": 629,
+      "ua1c": 1.5,
+      "ucol": 96,
+      "udef": 250,
+      "udty": "medium",
+      "uhpm": 200000,
+      "uhpr": 100,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "h014",
+    "name": "触须统治者",
+    "displayName": "触须统治者",
+    "colorName": "|c008080ff触须|c00ff9b9b统治者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFacelessOne.blp",
+    "model": "Units\\Creeps\\FacelessOne\\FacelessOne.mdx",
+    "rawStats": {
+      "ua1b": 883,
+      "ua1c": 0.5,
+      "ucol": 64,
+      "udef": 550,
+      "udty": "medium",
+      "uhpm": 300000,
+      "uhpr": 300,
+      "umvs": 360
+    }
+  },
+  {
+    "id": "h00Y",
+    "name": "巨人魔像",
+    "displayName": "巨人魔像",
+    "colorName": "巨人|c00ff0000魔像|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNArmorGolem.blp",
+    "model": "units\\creeps\\GolemStatue\\GolemStatue.mdx",
+    "rawStats": {
+      "ua1b": 2391,
+      "ua1c": 1.2000000476837158,
+      "ucol": 64,
+      "udef": 500,
+      "udty": "medium",
+      "uhpm": 600000,
+      "uhpr": 100,
+      "umvs": 425
+    }
+  },
+  {
+    "id": "n02L",
+    "name": "鲜血亡灵",
+    "displayName": "鲜血亡灵",
+    "colorName": "|c00ff0000鲜血|c00f2b5aa亡灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNGhost.blp",
+    "model": "units\\creeps\\BansheeGhost\\BansheeGhost.mdx",
+    "rawStats": {
+      "ua1b": 436,
+      "ua1c": 0.75,
+      "udef": 420,
+      "udty": "medium",
+      "uhpm": 200000,
+      "uhpr": 500,
+      "umvs": 440
+    }
+  },
+  {
+    "id": "n03Y",
+    "name": "瓦几内拉古堡 怪人",
+    "displayName": "瓦几内拉古堡 怪人",
+    "colorName": "|c00696969瓦几内拉古堡 |cffff6666怪人|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroDreadLord.blp",
+    "model": "units\\undead\\HeroDreadLord\\HeroDreadLord.mdx",
+    "rawStats": {
+      "ua1b": 379,
+      "ua1c": 1.25,
+      "udef": 450,
+      "udty": "medium",
+      "uhpm": 200000,
+      "uhpr": 250,
+      "umvs": 520
+    }
+  },
+  {
+    "id": "n036",
+    "name": "噬魂尸虫",
+    "displayName": "噬魂尸虫",
+    "colorName": "|c00b6ab87噬魂尸虫|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNCarrionScarabs.blp",
+    "model": "units\\undead\\scarab\\scarab.mdx",
+    "rawStats": {
+      "ua1b": 439,
+      "ua1c": 0.4000000059604645,
+      "ucol": 40,
+      "udef": 300,
+      "udty": "medium",
+      "uhpm": 120000,
+      "uhpr": 3000,
+      "umvs": 522
+    }
+  },
+  {
+    "id": "n037",
+    "name": "瓦几内拉古堡 亡灵",
+    "displayName": "瓦几内拉古堡 亡灵",
+    "colorName": "|c00696969瓦几内拉古堡|r 亡灵",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNVengeanceIncarnate.tga",
+    "model": "units\\nightelf\\SpiritOfVengeance\\SpiritOfVengeance.mdx",
+    "rawStats": {
+      "ua1b": 1039,
+      "ua1c": 0.6000000238418579,
+      "ucol": 40,
+      "udef": 325,
+      "udty": "medium",
+      "uhpm": 200000,
+      "uhpr": 500,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n02Z",
+    "name": "远古熔岩巨兽",
+    "displayName": "远古熔岩巨兽",
+    "colorName": "|c00ab2121远古|c00ff0000熔岩巨兽|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNVoidWalker.blp",
+    "model": "units\\creeps\\VoidWalker\\VoidWalker.mdx",
+    "rawStats": {
+      "ua1b": 901,
+      "ua1c": 0.6000000238418579,
+      "udef": 400,
+      "uhpm": 450000,
+      "uhpr": 500,
+      "umvs": 522
+    }
+  },
+  {
+    "id": "h010",
+    "name": "远古法老",
+    "displayName": "远古法老",
+    "colorName": "|c0080a2fd远古法老|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNAncientOfTheEarth.blp",
+    "model": "AncientBeast(mana).mdx",
+    "rawStats": {
+      "ua1b": 1836,
+      "ua1c": 1.75,
+      "ucol": 96,
+      "udef": 650,
+      "udty": "medium",
+      "uhpm": 1000000,
+      "uhpr": 1000,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "h07P",
+    "name": "海洋守护者",
+    "displayName": "海洋守护者",
+    "colorName": "|c0085bfbd海洋守护者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSeaElemental.blp",
+    "model": "Models\\GreatSeaElemental.mdx",
+    "rawStats": {
+      "ua1b": 939,
+      "ua1c": 1,
+      "ucol": 64,
+      "udef": 550,
+      "uhpm": 300000,
+      "uhpr": 100,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "n022",
+    "name": "拉芙海统治者 许德拉",
+    "displayName": "拉芙海统治者 许德拉",
+    "colorName": "|c00fa8072拉芙海统治者 |c002040f0许德拉|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNGreenHydra.blp",
+    "model": "Units\\Creeps\\Hydra\\Hydra.mdx",
+    "rawStats": {
+      "ua1b": 438,
+      "ua1c": 1.2000000476837158,
+      "ucol": 96,
+      "udef": 400,
+      "udty": "medium",
+      "uhpm": 250000,
+      "uhpr": 100,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "H00F",
+    "name": "瓦几内拉 伯爵",
+    "displayName": "瓦几内拉 伯爵",
+    "colorName": "|c00696969瓦几内拉|r 伯爵",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroDreadLord.blp",
+    "model": "al.mdx",
+    "rawStats": {
+      "ua1b": 1373,
+      "ua1c": 1.2000000476837158,
+      "udef": 500,
+      "udty": "medium",
+      "uhpm": 400000,
+      "uhpr": 75,
+      "umvs": 480
+    }
+  },
+  {
+    "id": "n01K",
+    "name": "死亡之翼 巨龙",
+    "displayName": "死亡之翼 巨龙",
+    "colorName": "|c002f4f4f死亡之翼 |c00dc143c巨龙|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNBlackDragon.blp",
+    "model": "Deathwing.mdx",
+    "rawStats": {
+      "ua1b": 1329,
+      "ua1c": 1.399999976158142,
+      "ucol": 96,
+      "udef": 600,
+      "udty": "medium",
+      "uhpm": 600000,
+      "uhpr": 375,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "n01W",
+    "name": "杰克隆登",
+    "displayName": "杰克隆登",
+    "colorName": "|c00FF8200杰克隆登|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHelmet1.blp",
+    "model": "Saikann.mdx",
+    "rawStats": {
+      "ua1b": 730,
+      "ua1c": 0.8999999761581421,
+      "udef": 500,
+      "udty": "medium",
+      "uhpm": 400000,
+      "uhpr": 150,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "h01B",
+    "name": "元素领主",
+    "displayName": "元素领主",
+    "colorName": "|c00696969元素领主|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNRevenant.blp",
+    "model": "Witchking.mdx",
+    "rawStats": {
+      "ua1b": 1290,
+      "ua1c": 0.949999988079071,
+      "ucol": 64,
+      "udef": 600,
+      "udty": "medium",
+      "uhpm": 600000,
+      "uhpr": 400,
+      "umvs": 480
+    }
+  },
+  {
+    "id": "H00V",
+    "name": "圣堡阿瓦隆 守门人",
+    "displayName": "圣堡阿瓦隆 守门人",
+    "colorName": "|c00ffff00圣堡阿瓦隆|r 守门人",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNChaosWarlord.blp",
+    "model": "Models\\IceWings.mdx",
+    "rawStats": {
+      "ua1b": 1230,
+      "ua1c": 0.550000011920929,
+      "ucol": 30,
+      "udef": 600,
+      "udty": "medium",
+      "uhpm": 500000,
+      "uhpr": 75,
+      "umvs": 480
+    }
+  },
+  {
+    "id": "n01N",
+    "name": "第三军团守卫军 白天使",
+    "displayName": "第三军团守卫军 白天使",
+    "colorName": "|c0040e0d0第三军团守卫军 |c00ffd700白天使|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMonster001.blp",
+    "model": "AvengingAngel.mdx",
+    "rawStats": {
+      "ua1b": 545,
+      "ua1c": 0.75,
+      "udef": 700,
+      "udty": "medium",
+      "uhpm": 500000,
+      "uhpr": 400,
+      "umvs": 320
+    }
+  },
+  {
+    "id": "n01O",
+    "name": "堕落天使 黑天使",
+    "displayName": "堕落天使 黑天使",
+    "colorName": "|c0000008b堕落天使 |c008b008b黑天使|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNEvilIllidan.blp",
+    "model": "Amaducias.mdx",
+    "rawStats": {
+      "ua1b": 736,
+      "ua1c": 0.6000000238418579,
+      "udef": 700,
+      "udty": "medium",
+      "uhpm": 800000,
+      "uhpr": 600,
+      "umvs": 440
+    }
+  },
+  {
+    "id": "n023",
+    "name": "冰霜领主卡尔特兹",
+    "displayName": "冰霜领主卡尔特兹",
+    "colorName": "|c000000cd冰霜领主|r|c00191970卡尔特兹|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNLichVersion2.blp",
+    "model": "units\\undead\\HeroLichCIN\\HeroLichCIN.mdx",
+    "rawStats": {
+      "ua1b": 950,
+      "ua1c": 1.2000000476837158,
+      "udef": 700,
+      "udty": "medium",
+      "uhpm": 800000,
+      "uhpr": 600,
+      "umvs": 440
+    }
+  },
+  {
+    "id": "H01F",
+    "name": "蜘蛛女皇",
+    "displayName": "蜘蛛女皇",
+    "colorName": "|c008692f9蜘蛛女皇|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSpiderBlue.blp",
+    "model": "Icespider.mdx",
+    "rawStats": {
+      "ua1b": 1009,
+      "ua1c": 0.4000000059604645,
+      "ucol": 48,
+      "udef": 700,
+      "udty": "medium",
+      "uhpm": 800000,
+      "uhpr": 500,
+      "umvs": 480
+    }
+  },
+  {
+    "id": "h034",
+    "name": "冰霜巨蛛 极寒领主",
+    "displayName": "冰霜巨蛛 极寒领主",
+    "colorName": "|c006ba3de冰霜巨蛛 |c00a39c7f极寒领主|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroCryptLord.blp",
+    "model": "Models\\NerubianSlayer.mdx",
+    "rawStats": {
+      "ua1b": 1603,
+      "ua1c": 2.5,
+      "ucol": 96,
+      "udef": 750,
+      "uhpm": 1000000,
+      "uhpr": 750,
+      "umvs": 380
+    }
+  },
+  {
+    "id": "n01Y",
+    "name": "恶魔领主 恶魔",
+    "displayName": "恶魔领主 恶魔",
+    "colorName": "|c00ff00ff恶魔领主 |c00FF0000恶魔|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMetamorphosis.blp",
+    "model": "Dolomeros.mdx",
+    "rawStats": {
+      "ua1b": 1539,
+      "ua1c": 0.800000011920929,
+      "ucol": 96,
+      "udef": 750,
+      "udty": "medium",
+      "uhpm": 1000000,
+      "uhpr": 150,
+      "umvs": 450
+    }
+  },
+  {
+    "id": "n038",
+    "name": "瓦几内拉古堡 领主",
+    "displayName": "瓦几内拉古堡 领主",
+    "colorName": "|c00696969瓦几内拉古堡 |c00FF0000领主|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMonster003.blp",
+    "model": "Saikann.mdx",
+    "rawStats": {
+      "ua1b": 1020,
+      "ua1c": 0.30000001192092896,
+      "udef": 700,
+      "udty": "medium",
+      "uhpm": 1500000,
+      "uhpr": 123,
+      "umvs": 522
+    }
+  },
+  {
+    "id": "hmpr",
+    "name": "堕落者电棍",
+    "displayName": "堕落者电棍",
+    "colorName": "|c00cfcfcf堕落者|c0080ff80电棍|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNRevenant_Green.blp",
+    "model": "units\\creeps\\RevenantOfTheWaves\\RevenantOfTheWaves.mdx",
+    "rawStats": {
+      "ua1b": 2187,
+      "ua1c": 1.2000000476837158,
+      "ucol": 40,
+      "udef": 750,
+      "udty": "medium",
+      "uhpm": 2000000,
+      "uhpr": 1000,
+      "umvs": 430
+    }
+  },
+  {
+    "id": "n02N",
+    "name": "苍白焱灵 火焰梦魇",
+    "displayName": "苍白焱灵 火焰梦魇",
+    "colorName": "|c00d91c1c苍白焱灵 |c00400080火焰梦魇|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNReincarnation.blp",
+    "model": "Models\\IceWings.mdx",
+    "rawStats": {
+      "ua1b": 4829,
+      "ua1c": 1.25,
+      "ucol": 96,
+      "udef": 750,
+      "udty": "medium",
+      "uhpm": 2000000,
+      "uhpr": 1250,
+      "umvs": 522
+    }
+  },
+  {
+    "id": "n02M",
+    "name": "枭兽 雷奥利斯",
+    "displayName": "枭兽 雷奥利斯",
+    "colorName": "|c0000ff00枭兽 |c00008000雷奥利斯|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNJungleBeast.blp",
+    "model": "units\\creeps\\JungleBeast\\JungleBeast.mdx",
+    "rawStats": {
+      "ua1b": 1420,
+      "ua1c": 1.5,
+      "ucol": 96,
+      "udef": 750,
+      "udty": "medium",
+      "uhpm": 2000000,
+      "uhpr": 1250,
+      "umvs": 440
+    }
+  },
+  {
+    "id": "h018",
+    "name": "沧海巨兽 领主",
+    "displayName": "沧海巨兽 领主",
+    "colorName": "|c006cfdb8沧海巨兽 |c00ff0000领主|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSeaTurtleGreen.blp",
+    "model": "Units\\Creeps\\GiantSeaTurtle\\GiantSeaTurtle.mdx",
+    "rawStats": {
+      "ua1b": 2139,
+      "ua1c": 1.399999976158142,
+      "ucol": 96,
+      "udef": 750,
+      "uhpm": 1750000,
+      "uhpr": 3000,
+      "umvs": 380
+    }
+  },
+  {
+    "id": "n033",
+    "name": "僵尸领主",
+    "displayName": "僵尸领主",
+    "colorName": "|c00c1bd9f僵尸|c00525926领主|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNZombie.blp",
+    "model": "units\\creeps\\Zombie\\Zombie.mdx",
+    "rawStats": {
+      "ua1b": 4135,
+      "ua1c": 0.6000000238418579,
+      "ucol": 96,
+      "udef": 800,
+      "uhpm": 2750000,
+      "uhpr": 0,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "n02V",
+    "name": "亡灵 战神 维扎克斯",
+    "displayName": "亡灵 战神 维扎克斯",
+    "colorName": "|c00c0c0c0亡灵 |c00bf595b战神 |c00727362维扎克斯|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSkeletalOrc.blp",
+    "model": "units\\creeps\\SkeletonOrc\\SkeletonOrc.mdx",
+    "rawStats": {
+      "ua1b": 8487,
+      "ua1c": 1,
+      "ucol": 96,
+      "udef": 800,
+      "uhpm": 6500000,
+      "uhpr": 15000,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n03X",
+    "name": "巨人法爷",
+    "displayName": "巨人法爷",
+    "colorName": "|c0071ca57巨人|c00c5b189法爷|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNTreant.blp",
+    "model": "buildings\\nightelf\\AncientProtector\\AncientProtector.mdx",
+    "rawStats": {
+      "ua1b": 1560,
+      "ua1c": 1,
+      "ucol": 32,
+      "udef": 600,
+      "udty": "medium",
+      "uhpm": 1000000,
+      "uhpr": 7500,
+      "umvs": 280
+    }
+  },
+  {
+    "id": "n03W",
+    "name": "远古法爷",
+    "displayName": "远古法爷",
+    "colorName": "|c0071ca57远古|c00c5b189法爷|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNAncientOfWonders.blp",
+    "model": "buildings\\nightelf\\AncientOfWonder\\AncientOfWonder.mdx",
+    "rawStats": {
+      "ua1b": 6960,
+      "ua1c": 1.5,
+      "ucol": 96,
+      "udef": 700,
+      "udty": "medium",
+      "uhpm": 3750000,
+      "uhpr": 7500,
+      "umvs": 220
+    }
+  },
+  {
+    "id": "n030",
+    "name": "秘境守护者法老他爷",
+    "displayName": "秘境守护者法老他爷",
+    "colorName": "|c0071ca57秘境守护者|c00c5b189法老他爷|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNAncientOfTheMoon.blp",
+    "model": "buildings\\nightelf\\AncientOfWind\\AncientOfWind.mdx",
+    "rawStats": {
+      "ua1b": 4710,
+      "ua1c": 2,
+      "ucol": 96,
+      "udef": 800,
+      "udty": "medium",
+      "uhpm": 7500000,
+      "uhpr": 22500,
+      "umvs": 0
+    }
+  },
+  {
+    "id": "n03S",
+    "name": "远古 骨龙",
+    "displayName": "远古 骨龙",
+    "colorName": "|cffdf9f9f远古|r 骨龙",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNBoneDragon.blp",
+    "model": "Models\\HeroDracoRich.mdx",
+    "rawStats": {
+      "ua1b": 5269,
+      "ua1c": 2,
+      "ucol": 128,
+      "udef": 800,
+      "uhpm": 5750000,
+      "uhpr": 3000,
+      "umvs": 450
+    }
+  },
+  {
+    "id": "o000",
+    "name": "主天使 哈乜嘢",
+    "displayName": "主天使 哈乜嘢",
+    "colorName": "|c00ffff80主天使 |c00eef312哈乜嘢|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNPriestT.blp",
+    "model": "Models\\Imperius.mdx",
+    "rawStats": {
+      "ua1b": 5427,
+      "ua1c": 2.4000000953674316,
+      "ucol": 64,
+      "udef": 800,
+      "udty": "medium",
+      "uhpm": 7250000,
+      "uhpr": 2250,
+      "umvs": 380
+    }
+  },
+  {
+    "id": "n02Y",
+    "name": "被诅咒的冰霜巨龙 辛德拉苟萨",
+    "displayName": "被诅咒的冰霜巨龙 辛德拉苟萨",
+    "colorName": "|c002f2f2f被诅咒的冰霜巨龙 |c00445e99辛德拉苟萨|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFrostWyrm.blp",
+    "model": "units\\undead\\FrostWyrm\\FrostWyrm.mdx",
+    "rawStats": {
+      "ua1b": 5522,
+      "ua1c": 1.2000000476837158,
+      "ucol": 96,
+      "udef": 800,
+      "uhpm": 7500000,
+      "uhpr": 7500,
+      "umvs": 360
+    }
+  },
+  {
+    "id": "h01K",
+    "name": "被遗忘的黑暗怨魔",
+    "displayName": "被遗忘的黑暗怨魔",
+    "colorName": "被遗忘的|c00ff0000黑暗怨魔|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFelGuard.blp",
+    "model": "FelGuard.mdx",
+    "rawStats": {
+      "ua1b": 10784,
+      "ua1c": 1.7999999523162842,
+      "ucol": 96,
+      "udef": 850,
+      "uhpm": 7533000,
+      "uhpr": 7500,
+      "umvs": 425
+    }
+  },
+  {
+    "id": "h04O",
+    "name": "雷电战神 瓦尔托拉",
+    "displayName": "雷电战神 瓦尔托拉",
+    "colorName": "|c00f5f2af雷电战神 瓦尔托拉|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroTaurenChieftain.blp",
+    "model": "Models\\TaurenRock.mdx",
+    "rawStats": {
+      "ua1b": 7991,
+      "ua1c": 2,
+      "ucol": 96,
+      "udef": 850,
+      "uhpm": 10000000,
+      "uhpr": 7500,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "h060",
+    "name": "火灵战神 伊弗利特",
+    "displayName": "火灵战神·伊弗利特",
+    "colorName": "|cffff6666火灵战神·伊弗利特|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNBoss_Ifrit.blp",
+    "model": "Models\\FireTempleKeeperElemental.mdx",
+    "rawStats": {
+      "ua1b": 8888,
+      "ucol": 96,
+      "udef": 850,
+      "uhpm": 11000000,
+      "uhpr": 7500,
+      "umvs": 380
+    }
+  },
+  {
+    "id": "h06T",
+    "name": "水灵战神",
+    "displayName": "水灵战神",
+    "colorName": "|c00bbbbff水灵战神|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNTreeOfAges.blp",
+    "model": "Models\\WaterElemental.mdx",
+    "rawStats": {
+      "ua1b": 9880,
+      "ucol": 96,
+      "udef": 850,
+      "uhpm": 11250000,
+      "uhpr": 15000,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "h077",
+    "name": "地底君主 阿迦瑞斯",
+    "displayName": "地底君主 阿迦瑞斯",
+    "colorName": "|c00883333地底君主|r 阿迦瑞斯",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNEvilIllidan.blp",
+    "model": "units\\nightelf\\EvilIllidan\\IllidanEvil.mdx",
+    "rawStats": {
+      "ua1b": 6554,
+      "ua1c": 1,
+      "ucol": 96,
+      "udef": 850,
+      "uhpm": 12500000,
+      "uhpr": 15000,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "h07A",
+    "name": "地狱门卫",
+    "displayName": "地狱门卫",
+    "colorName": "|c00bbbbff地狱门卫|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNDoomGuard.blp",
+    "model": "units\\demon\\DoomGuard\\DoomGuard.mdx",
+    "rawStats": {
+      "ua1b": 3,
+      "ua1c": 2.5,
+      "ucol": 48,
+      "udef": 0,
+      "udty": "hero",
+      "uhpm": 9,
+      "uhpr": 0,
+      "umvs": 250
+    }
+  },
+  {
+    "id": "h07C",
+    "name": "灵魂水晶",
+    "displayName": "灵魂水晶",
+    "colorName": "灵魂水晶",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNOrbOfLightning.blp",
+    "model": "Models\\ZDinsFire_White.mdx",
+    "rawStats": {
+      "ua1c": 2,
+      "udef": 700,
+      "uhpm": 2250000,
+      "uhpr": 0,
+      "umvs": 0
+    }
+  },
+  {
+    "id": "h07D",
+    "name": "冤魂",
+    "displayName": "冤魂",
+    "colorName": "冤魂",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNRevenant.blp",
+    "model": "units\\creeps\\Revenant\\Revenant.mdx",
+    "rawStats": {
+      "ua1b": 0,
+      "ua1c": 2,
+      "ucol": 16,
+      "udef": 0,
+      "udty": "small",
+      "uhpm": 1,
+      "uhpr": 0,
+      "umvs": 150
+    }
+  },
+  {
+    "id": "h079",
+    "name": "地狱之子",
+    "displayName": "地狱之子",
+    "colorName": "|cff905b5b地狱之子|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSpiritOfVengeance.blp",
+    "model": "units\\nightelf\\SpiritOfVengeance\\SpiritOfVengeance.mdx",
+    "rawStats": {
+      "ua1b": 3260,
+      "ua1c": 0.6600000262260437,
+      "udef": 650,
+      "uhpm": 1632123,
+      "uhpr": 7500,
+      "umvs": 250
+    }
+  },
+  {
+    "id": "h08K",
+    "name": "公爵 拉撒路",
+    "displayName": "公爵 拉撒路",
+    "colorName": "|c00883333公爵|r 拉撒路",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNBoss_Duke.blp",
+    "model": "Models\\UndeadBloodElf.mdx",
+    "rawStats": {
+      "ua1b": 7530,
+      "ua1c": 2,
+      "ucol": 128,
+      "udef": 900,
+      "uhpm": 30000000,
+      "uhpr": 50000,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "h09B",
+    "name": "土灵战神盖亚",
+    "displayName": "土灵战神盖亚",
+    "colorName": "|c00a6daa4土灵战神|c008b8574盖亚|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNDryad.blp",
+    "model": "Models\\Gaia.mdx",
+    "rawStats": {
+      "ucol": 128,
+      "udef": 900,
+      "uhpm": 37000000,
+      "uhpr": 75000,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "h09V",
+    "name": "古代魔导机器",
+    "displayName": "古代魔导机器",
+    "colorName": "|c00e4d7ad古代魔导机器|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNBoss_ArcaneConstruct.blp",
+    "model": "Models\\ArcaneConstruct.mdx",
+    "rawStats": {
+      "ua1b": 6941,
+      "ua1c": 1,
+      "ucol": 128,
+      "udef": 900,
+      "uhpm": 51000000,
+      "uhpr": 50000,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "h06U",
+    "name": "潮汐召唤者",
+    "displayName": "潮汐召唤者",
+    "colorName": "|c00bbbbff潮汐召唤者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNNetherDragon.blp",
+    "model": "units\\creeps\\NetherDragon\\NetherDragon.mdx",
+    "rawStats": {
+      "ua1c": 2,
+      "udef": 600,
+      "uhpm": 900000,
+      "uhpr": 3000,
+      "umvs": 250
+    }
+  },
+  {
+    "id": "n02X",
+    "name": "主天使 哈德克",
+    "displayName": "主天使 哈德克",
+    "colorName": "|c00ffd700主天使|r 哈德克",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNPriestT.blp",
+    "model": "SharedModels\\EntangleWisp.mdx",
+    "rawStats": {
+      "ua1b": 50000000,
+      "ua1c": 0.009999999776482582,
+      "udef": 1000000,
+      "udty": "medium",
+      "uhpm": 500000000,
+      "uhpr": 50000,
+      "umvs": 520
+    }
+  },
+  {
+    "id": "h0AB",
+    "name": "光之引导者 凯梅尔",
+    "displayName": "光之引导者 凯梅尔",
+    "colorName": "|c00ffd700光之引导者|r 凯梅尔",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNBoss_Kamael.blp",
+    "model": "SharedModels\\EntangleWisp.mdx",
+    "rawStats": {
+      "ua1b": 50000000,
+      "ua1c": 0.009999999776482582,
+      "udef": 1000000,
+      "udty": "medium",
+      "uhpm": 500000000,
+      "uhpr": 50000,
+      "umvs": 520
+    }
+  },
+  {
+    "id": "h0A1",
+    "name": "灵魂收割者 斯蒂里克斯",
+    "displayName": "灵魂收割者·斯蒂里克斯",
+    "colorName": "|c003f7045灵魂收割者·斯蒂里克斯|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNBoss_Styrix.blp",
+    "model": "Models\\Styrix.mdx",
+    "rawStats": {
+      "ua1b": 9105,
+      "ucol": 128,
+      "udef": 900,
+      "uhpm": 80000000,
+      "uhpr": 50000,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "n005",
+    "name": "spider",
+    "displayName": "spider",
+    "colorName": "spider",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSpider.blp",
+    "model": "units\\creeps\\Spider\\Spider.mdx",
+    "rawStats": {
+      "ua1b": 24,
+      "ua1c": 1.600000023841858,
+      "udty": "small",
+      "uhpm": 350,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n008",
+    "name": "巨型蜘蛛",
+    "displayName": "巨型蜘蛛",
+    "colorName": "巨型蜘蛛",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSpider.blp",
+    "model": "units\\creeps\\Spider\\Spider.mdx",
+    "rawStats": {
+      "ua1b": 58,
+      "ua1c": 1.7999999523162842,
+      "udef": 5,
+      "udty": "small",
+      "uhpm": 2000,
+      "umvs": 280
+    }
+  },
+  {
+    "id": "n004",
+    "name": "狼",
+    "displayName": "狼",
+    "colorName": "狼",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNTimberWolf.blp",
+    "model": "units\\creeps\\TimberWolf\\TimberWolf.mdx",
+    "rawStats": {
+      "ua1b": 31,
+      "ua1c": 1.600000023841858,
+      "udef": 3,
+      "udty": "small",
+      "uhpm": 600,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "n007",
+    "name": "蓝狼",
+    "displayName": "蓝狼",
+    "colorName": "蓝狼",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNDireWolf.blp",
+    "model": "units\\creeps\\DireWolf\\DireWolf.mdx",
+    "rawStats": {
+      "ua1b": 34,
+      "ua1c": 1.600000023841858,
+      "udef": 5,
+      "udty": "small",
+      "uhpm": 800,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "n00G",
+    "name": "furbolg",
+    "displayName": "furbolg",
+    "colorName": "furbolg",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFurbolg.blp",
+    "model": "units\\creeps\\Furbolg\\Furbolg.mdx",
+    "rawStats": {
+      "ua1b": 63,
+      "ua1c": 1.2000000476837158,
+      "ucol": 32,
+      "udef": 7,
+      "udty": "small",
+      "uhpm": 2300
+    }
+  },
+  {
+    "id": "n00L",
+    "name": "furbolgshaman",
+    "displayName": "furbolgshaman",
+    "colorName": "furbolgshaman",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFurbolg.blp",
+    "model": "units\\creeps\\FurbolgShaman\\FurbolgShaman.mdx",
+    "rawStats": {
+      "ua1b": 124,
+      "ua1c": 2,
+      "ucol": 32,
+      "udef": 13,
+      "udty": "small",
+      "uhpm": 3950,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n00K",
+    "name": "熊怪狂战士",
+    "displayName": "熊怪狂战士",
+    "colorName": "熊怪狂战士",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFurbolg.blp",
+    "model": "units\\creeps\\FurbolgTracker\\FurbolgTracker.mdx",
+    "rawStats": {
+      "ua1b": 81,
+      "ua1c": 1.2000000476837158,
+      "ucol": 32,
+      "udef": 8,
+      "udty": "small",
+      "uhpm": 2600
+    }
+  },
+  {
+    "id": "n00H",
+    "name": "巨魔",
+    "displayName": "巨魔",
+    "colorName": "巨魔",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNForestTroll.blp",
+    "model": "units\\creeps\\ForestTroll\\ForestTroll.mdx",
+    "rawStats": {
+      "ua1b": 39,
+      "ua1c": 1.5,
+      "udef": 5,
+      "udty": "small",
+      "uhpm": 1000,
+      "uhpr": 2.5,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "n00I",
+    "name": "巨魔萨满",
+    "displayName": "巨魔萨满",
+    "colorName": "巨魔萨满",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNForestTrollShadowPriest.blp",
+    "model": "units\\creeps\\ForestTrollShadowPriest\\ForestTrollShadowPriest.mdx",
+    "rawStats": {
+      "ua1b": 43,
+      "ua1c": 1.5,
+      "ucol": 32,
+      "udef": 3,
+      "udty": "small",
+      "uhpm": 1150,
+      "uhpr": 2.5,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "n00J",
+    "name": "巨魔狂战士",
+    "displayName": "巨魔狂战士",
+    "colorName": "巨魔狂战士",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNForestTroll.blp",
+    "model": "units\\creeps\\ForestTroll\\ForestTroll.mdx",
+    "rawStats": {
+      "ua1b": 76,
+      "ua1c": 1,
+      "udef": 5,
+      "udty": "small",
+      "uhpm": 2000,
+      "uhpr": 4,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "n00M",
+    "name": "炸弹龙虾",
+    "displayName": "炸弹龙虾",
+    "colorName": "炸弹龙虾",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNLobstrokkGreen.blp",
+    "model": "Models\\LobsterYellow.mdx",
+    "rawStats": {
+      "ua1b": 19,
+      "ua1c": 1,
+      "udty": "small",
+      "uhpm": 400,
+      "uhpr": 0,
+      "umvs": 200
+    }
+  },
+  {
+    "id": "n00O",
+    "name": "巨魔领主",
+    "displayName": "巨魔领主",
+    "colorName": "巨魔领主",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNForestTroll.blp",
+    "model": "units\\creeps\\ForestTrollTrapper\\ForestTrollTrapper.mdx",
+    "rawStats": {
+      "ua1b": 171,
+      "ua1c": 2,
+      "ucol": 48,
+      "udef": 15,
+      "udty": "small",
+      "uhpm": 5000,
+      "uhpr": 15,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "n00X",
+    "name": "深海鱼人绿的",
+    "displayName": "深海鱼人绿的",
+    "colorName": "深海鱼人绿的",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMurgulTideWarrior.blp",
+    "model": "Units\\Creeps\\MurgulTideWarrior\\MurgulTideWarrior.mdx",
+    "rawStats": {
+      "ua1b": 159,
+      "ua1c": 1.5,
+      "udef": 9,
+      "udty": "small",
+      "uhpm": 6700,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "n00Y",
+    "name": "深海鱼人白的",
+    "displayName": "深海鱼人白的",
+    "colorName": "深海鱼人白的",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMurgalSlave.blp",
+    "model": "units\\creeps\\MurgulSlave\\MurgulSlave.mdx",
+    "rawStats": {
+      "ua1b": 153,
+      "ua1c": 1.5,
+      "udef": 8,
+      "udty": "small",
+      "uhpm": 6300,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "n00Z",
+    "name": "深海鱼人橙的",
+    "displayName": "深海鱼人橙的",
+    "colorName": "深海鱼人橙的",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMurgulBloodGill.blp",
+    "model": "Units\\Creeps\\MurgulBloodGill\\MurgulBloodGill.mdx",
+    "rawStats": {
+      "ua1b": 163,
+      "ua1c": 1.5,
+      "udef": 10,
+      "udty": "small",
+      "uhpm": 7150,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "n010",
+    "name": "深海鱼人紫的",
+    "displayName": "深海鱼人紫的",
+    "colorName": "深海鱼人紫的",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMurgulShadowCaster.blp",
+    "model": "Units\\Creeps\\MurgulShadowCaster\\MurgulShadowCaster.mdx",
+    "rawStats": {
+      "ua1b": 171,
+      "ua1c": 1.5,
+      "udef": 12,
+      "udty": "small",
+      "uhpm": 7800,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "n011",
+    "name": "深海鱼人蓝的",
+    "displayName": "深海鱼人蓝的",
+    "colorName": "深海鱼人蓝的",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMurlocFlesheater.blp",
+    "model": "units\\creeps\\MurlocFlesheater\\MurlocFlesheater_V1.mdx",
+    "rawStats": {
+      "ua1b": 167,
+      "ua1c": 1.5,
+      "udef": 11,
+      "udty": "small",
+      "uhpm": 7400,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "n018",
+    "name": "icetroll",
+    "displayName": "icetroll",
+    "colorName": "icetroll",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNIceTroll.blp",
+    "model": "units\\creeps\\IceTroll\\IceTroll.mdx",
+    "rawStats": {
+      "ua1b": 201,
+      "ua1c": 1.7999999523162842,
+      "udef": 20,
+      "udty": "small",
+      "uhpm": 10300,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n019",
+    "name": "icetrollshadowpriest",
+    "displayName": "icetrollshadowpriest",
+    "colorName": "icetrollshadowpriest",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNIceTrollShadowPriest.blp",
+    "model": "units\\creeps\\IceTrollShadowPriest\\IceTrollShadowPriest.mdx",
+    "rawStats": {
+      "ua1b": 213,
+      "ua1c": 1.899999976158142,
+      "udef": 20,
+      "udty": "small",
+      "uhpm": 11900,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n01C",
+    "name": "polarbear",
+    "displayName": "polarbear",
+    "colorName": "polarbear",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFrostBear.blp",
+    "model": "units\\creeps\\PolarBear\\PolarBear.mdx",
+    "rawStats": {
+      "ua1b": 229,
+      "ua1c": 1.5,
+      "ucol": 32,
+      "udef": 25,
+      "udty": "small",
+      "uhpm": 13100,
+      "uhpr": 2.5,
+      "umvs": 330
+    }
+  },
+  {
+    "id": "n01B",
+    "name": "熊怪巨人",
+    "displayName": "熊怪巨人",
+    "colorName": "熊怪巨人",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFurbolgElder.blp",
+    "model": "units\\creeps\\FurbolgElder\\FurbolgElder.mdx",
+    "rawStats": {
+      "ua1b": 109,
+      "ua1c": 1.5,
+      "udef": 35,
+      "udty": "small",
+      "uhpm": 5500,
+      "uhpr": 12.5,
+      "umvs": 340
+    }
+  },
+  {
+    "id": "h00P",
+    "name": "瓦几内拉步兵",
+    "displayName": "瓦几内拉步兵",
+    "colorName": "|c00696969瓦几内拉|r步兵",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFootman.blp",
+    "model": "units\\human\\Footman\\Footman.mdx",
+    "rawStats": {
+      "ua1b": 243,
+      "ua1c": 1.2000000476837158,
+      "udef": 30,
+      "udty": "small",
+      "uhpm": 15300,
+      "uhpr": 0,
+      "umvs": 360
+    }
+  },
+  {
+    "id": "e01B",
+    "name": "瓦几内拉弓箭手",
+    "displayName": "瓦几内拉弓箭手",
+    "colorName": "|c00696969瓦几内拉|r弓箭手",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFootman.blp",
+    "model": "Guarcher.mdx",
+    "rawStats": {
+      "ua1b": 259,
+      "ua1c": 2,
+      "udef": 25,
+      "udty": "small",
+      "uhpm": 14800,
+      "uhpr": 0,
+      "umvs": 380
+    }
+  },
+  {
+    "id": "h00R",
+    "name": "瓦几内拉骑兵",
+    "displayName": "瓦几内拉骑兵",
+    "colorName": "|c00696969瓦几内拉|r骑兵",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNKnight.blp",
+    "model": "units\\human\\Knight\\Knight.mdx",
+    "rawStats": {
+      "ua1b": 274,
+      "ua1c": 1.2000000476837158,
+      "udef": 35,
+      "udty": "small",
+      "uhpm": 17500,
+      "uhpr": 0,
+      "umvs": 420
+    }
+  },
+  {
+    "id": "h00S",
+    "name": "瓦几内拉卫兵",
+    "displayName": "瓦几内拉卫兵",
+    "colorName": "|c00696969瓦几内拉|r卫兵",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNDeepLordRevenant.blp",
+    "model": "units\\human\\BloodElfSpellThief\\BloodElfSpellThief.mdx",
+    "rawStats": {
+      "ua1b": 324,
+      "ua1c": 1,
+      "udef": 50,
+      "udty": "small",
+      "uhpm": 22500,
+      "uhpr": 0,
+      "umvs": 440
+    }
+  },
+  {
+    "id": "n01F",
+    "name": "熔岩幼体",
+    "displayName": "熔岩幼体",
+    "colorName": "熔岩幼体",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNLavaSpawn.blp",
+    "model": "Units\\Creeps\\LavaSpawn\\LavaSpawn.mdx",
+    "rawStats": {
+      "ua1b": 293,
+      "ua1c": 2.25,
+      "ucol": 32,
+      "udef": 50,
+      "udty": "small",
+      "uhpm": 20300,
+      "uhpr": 50,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n01H",
+    "name": "熔岩蠕虫",
+    "displayName": "熔岩蠕虫",
+    "colorName": "熔岩蠕虫",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNLavaSpawn.blp",
+    "model": "Units\\Creeps\\LavaSpawn\\LavaSpawn.mdx",
+    "rawStats": {
+      "ua1b": 325,
+      "ua1c": 2.25,
+      "ucol": 32,
+      "udef": 75,
+      "udty": "small",
+      "uhpm": 23500,
+      "uhpr": 100,
+      "umvs": 320
+    }
+  },
+  {
+    "id": "n01I",
+    "name": "熔岩野兽",
+    "displayName": "熔岩野兽",
+    "colorName": "熔岩野兽",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNLavaSpawn.blp",
+    "model": "FireElemental.mdx",
+    "rawStats": {
+      "ua1b": 539,
+      "ua1c": 1.75,
+      "ucol": 48,
+      "udef": 100,
+      "udty": "small",
+      "uhpm": 50000,
+      "uhpr": 250,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "n01G",
+    "name": "熔岩巨兽",
+    "displayName": "熔岩巨兽",
+    "colorName": "熔岩巨兽",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNLavaSpawn.blp",
+    "model": "Units\\Creeps\\LavaSpawn\\LavaSpawn.mdx",
+    "rawStats": {
+      "ua1b": 305,
+      "ua1c": 2.25,
+      "ucol": 32,
+      "udef": 60,
+      "udty": "small",
+      "uhpm": 21600,
+      "uhpr": 75,
+      "umvs": 310
+    }
+  },
+  {
+    "id": "n02K",
+    "name": "深海鱼人蓝的",
+    "displayName": "深海鱼人蓝的",
+    "colorName": "深海鱼人蓝的",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMurlocFlesheater.blp",
+    "model": "units\\creeps\\MurlocFlesheater\\MurlocFlesheater_V1.mdx",
+    "rawStats": {
+      "ua1b": 159,
+      "ua1c": 1.5,
+      "ucol": 32,
+      "udef": 210,
+      "udty": "small",
+      "uhpm": 10000,
+      "uhpr": 125,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n02H",
+    "name": "深海巨人",
+    "displayName": "深海巨人",
+    "colorName": "深海巨人",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMurlocFlesheater.blp",
+    "model": "Units\\Creeps\\MurgulReaver\\MurgulReaver.mdx",
+    "rawStats": {
+      "ua1b": 369,
+      "ua1c": 1.75,
+      "ucol": 40,
+      "udef": 125,
+      "udty": "small",
+      "uhpm": 22000,
+      "uhpr": 250,
+      "umvs": 325
+    }
+  },
+  {
+    "id": "n02I",
+    "name": "潮汐召唤者",
+    "displayName": "潮汐召唤者",
+    "colorName": "潮汐召唤者",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSeaElemental.blp",
+    "model": "Units\\Creeps\\SeaElemental\\SeaElemental.mdx",
+    "rawStats": {
+      "ua1b": 380,
+      "ua1c": 0.6000000238418579,
+      "ucol": 40,
+      "udef": 140,
+      "udty": "small",
+      "uhpm": 20000,
+      "uhpr": 375,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "n02J",
+    "name": "沧海卫兵",
+    "displayName": "沧海卫兵",
+    "colorName": "沧海卫兵",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidon.blp",
+    "model": "units\\naga\\NagaMyrmidon\\NagaMyrmidon.mdx",
+    "rawStats": {
+      "ua1b": 519,
+      "ua1c": 2,
+      "ucol": 40,
+      "udef": 150,
+      "udty": "small",
+      "uhpm": 24000,
+      "uhpr": 500,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "n02A",
+    "name": "岩石傀儡",
+    "displayName": "岩石傀儡",
+    "colorName": "岩石傀儡",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNRockGolem.blp",
+    "model": "units\\creeps\\RockGolem\\RockGolem.mdx",
+    "rawStats": {
+      "ua1b": 351,
+      "ua1c": 1.399999976158142,
+      "ucol": 32,
+      "udef": 175,
+      "udty": "small",
+      "uhpm": 30000,
+      "uhpr": 500,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n02B",
+    "name": "花岗岩傀儡",
+    "displayName": "花岗岩傀儡",
+    "colorName": "花岗岩傀儡",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNRockGolem.blp",
+    "model": "units\\creeps\\RockGolem\\RockGolem.mdx",
+    "rawStats": {
+      "ua1b": 413,
+      "ua1c": 1.600000023841858,
+      "ucol": 32,
+      "udef": 200,
+      "udty": "small",
+      "uhpm": 37500,
+      "uhpr": 500,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "h01L",
+    "name": "瓦几内拉 刺客",
+    "displayName": "瓦几内拉 刺客",
+    "colorName": "|c00696969瓦几内拉|r 刺客",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNAvengingWatcher.blp",
+    "model": "units\\creeps\\watcher\\watcher.mdx",
+    "rawStats": {
+      "ua1b": 219,
+      "ua1c": 0.6000000238418579,
+      "udef": 125,
+      "udty": "small",
+      "uhpm": 30000,
+      "uhpr": 250,
+      "umvs": 480
+    }
+  },
+  {
+    "id": "h01M",
+    "name": "瓦几内拉 使徒",
+    "displayName": "瓦几内拉 使徒",
+    "colorName": "|c00696969瓦几内拉|r 使徒",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroBloodElfPrince.blp",
+    "model": "units\\human\\Kael\\Kael.mdx",
+    "rawStats": {
+      "ua1b": 492,
+      "ua1c": 2,
+      "udef": 140,
+      "udty": "small",
+      "uhpm": 35000,
+      "uhpr": 300,
+      "umvs": 380
+    }
+  },
+  {
+    "id": "n002",
+    "name": "仙女龙",
+    "displayName": "仙女龙",
+    "colorName": "仙女龙",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFaerieDragon.blp",
+    "model": "units\\nightelf\\FaerieDragon\\FaerieDragon.mdx",
+    "rawStats": {
+      "ua1b": 329,
+      "ua1c": 0.800000011920929,
+      "ucol": 32,
+      "udef": 250,
+      "udty": "small",
+      "uhpm": 50000,
+      "uhpr": 75,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n00B",
+    "name": "森林精灵",
+    "displayName": "森林精灵",
+    "colorName": "森林精灵",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNEnt.blp",
+    "model": "units\\nightelf\\Ent\\Ent.mdx",
+    "rawStats": {
+      "ua1b": 681,
+      "ua1c": 1.75,
+      "ucol": 32,
+      "udef": 300,
+      "udty": "small",
+      "uhpm": 60000,
+      "uhpr": 90,
+      "umvs": 325
+    }
+  },
+  {
+    "id": "n02T",
+    "name": "仙女龙幽灵",
+    "displayName": "仙女龙幽灵",
+    "colorName": "仙女龙幽灵",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFaerieDragon.blp",
+    "model": "units\\nightelf\\FaerieDragon\\FaerieDragon.mdx",
+    "rawStats": {
+      "ua1b": 539,
+      "ua1c": 0.800000011920929,
+      "ucol": 32,
+      "udef": 400,
+      "udty": "small",
+      "uhpm": 80000,
+      "uhpr": 500,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n02U",
+    "name": "秘境女妖",
+    "displayName": "秘境女妖",
+    "colorName": "秘境女妖",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNDryad.blp",
+    "model": "units\\nightelf\\Dryad\\Dryad.mdx",
+    "rawStats": {
+      "ua1b": 1236,
+      "ucol": 32,
+      "udef": 450,
+      "udty": "small",
+      "uhpm": 100000,
+      "uhpr": 500,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n043",
+    "name": "混沌精灵",
+    "displayName": "混沌精灵",
+    "colorName": "|cffbf00ff混沌精灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNElementalistUlt.blp",
+    "model": "ShadowGOLEM.mdx",
+    "rawStats": {
+      "ua1b": 1434,
+      "ua1c": 0.75,
+      "ucol": 32,
+      "udef": 500,
+      "udty": "small",
+      "uhpm": 1589000,
+      "uhpr": 500,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n03F",
+    "name": "幼龙",
+    "displayName": "幼龙",
+    "colorName": "幼龙",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNRedDragon.blp",
+    "model": "units\\creeps\\RedDragonWelp\\RedDragonWelp.mdx",
+    "rawStats": {
+      "ua1b": 1503,
+      "ua1c": 1.5,
+      "ucol": 32,
+      "udef": 500,
+      "udty": "medium",
+      "uhpm": 250000,
+      "uhpr": 2500,
+      "umvs": 370
+    }
+  },
+  {
+    "id": "n03G",
+    "name": "火炎战龙",
+    "displayName": "火炎战龙",
+    "colorName": "火炎战龙",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNRedDragon.blp",
+    "model": "Units\\Creeps\\DragonSpawnBlue\\DragonSpawnBlue.mdx",
+    "rawStats": {
+      "ua1b": 3010,
+      "ua1c": 2.5,
+      "ucol": 32,
+      "udef": 550,
+      "udty": "medium",
+      "uhpm": 400000,
+      "uhpr": 4000,
+      "umvs": 420
+    }
+  },
+  {
+    "id": "n01L",
+    "name": "城堡防御者",
+    "displayName": "城堡防御者",
+    "colorName": "城堡防御者",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNRevenant.blp",
+    "model": "units\\creeps\\Revenant\\Revenant.mdx",
+    "rawStats": {
+      "ua1b": 940,
+      "ua1c": 0.800000011920929,
+      "ucol": 32,
+      "udef": 450,
+      "udty": "small",
+      "uhpm": 40000,
+      "uhpr": 100,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "n01M",
+    "name": "城堡守护者",
+    "displayName": "城堡守护者",
+    "colorName": "城堡守护者",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNRevenant.blp",
+    "model": "units\\creeps\\RevenantOfTheWaves\\RevenantOfTheWaves.mdx",
+    "rawStats": {
+      "ua1b": 840,
+      "ua1c": 0.800000011920929,
+      "ucol": 32,
+      "udef": 700,
+      "udty": "small",
+      "uhpm": 50000,
+      "uhpr": 150,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "h01C",
+    "name": "恶灵",
+    "displayName": "恶灵",
+    "colorName": "|c00FF0000恶灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFelHound.blp",
+    "model": "units\\demon\\felhound\\felhound_V1.mdx",
+    "rawStats": {
+      "ua1b": 610,
+      "ua1c": 1,
+      "udef": 550,
+      "udty": "medium",
+      "uhpm": 45000,
+      "uhpr": 100,
+      "umvs": 480
+    }
+  },
+  {
+    "id": "h01D",
+    "name": "恶灵",
+    "displayName": "恶灵",
+    "colorName": "|c00FF0000恶灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFleshGolem.blp",
+    "model": "units\\other\\FleshGolem\\FleshGolem.mdx",
+    "rawStats": {
+      "ua1b": 839,
+      "ua1c": 1,
+      "udef": 750,
+      "udty": "medium",
+      "uhpm": 60000,
+      "uhpr": 200,
+      "umvs": 420
+    }
+  },
+  {
+    "id": "h01E",
+    "name": "恶灵",
+    "displayName": "恶灵",
+    "colorName": "|c00FF0000恶灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSludgeCreature.blp",
+    "model": "units\\creeps\\SludgeMonster\\SludgeMonster.mdx",
+    "rawStats": {
+      "ua1b": 975,
+      "ua1c": 1,
+      "udef": 900,
+      "udty": "medium",
+      "uhpm": 90000,
+      "uhpr": 500,
+      "umvs": 360
+    }
+  },
+  {
+    "id": "n01Z",
+    "name": "地狱之门",
+    "displayName": "地狱之门",
+    "colorName": "|c00FF0000地狱之门|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNPortal.blp",
+    "model": "doodads\\cinematic\\ShimmeringPortal\\ShimmeringPortal.mdx",
+    "rawStats": {
+      "ucol": 0,
+      "udef": 750,
+      "uhpm": 6000000,
+      "uhpr": 0,
+      "umvs": 0
+    }
+  },
+  {
+    "id": "h00I",
+    "name": "亡灵",
+    "displayName": "亡灵",
+    "colorName": "|c002040f0亡灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNShade.blp",
+    "model": "units\\undead\\Shade\\Shade.mdx",
+    "rawStats": {
+      "ua1b": 179,
+      "ua1c": 1,
+      "udef": 300,
+      "udty": "medium",
+      "uhpm": 15000,
+      "uhpr": 50,
+      "umvs": 450
+    }
+  },
+  {
+    "id": "n024",
+    "name": "圣焰奴仆",
+    "displayName": "圣焰奴仆",
+    "colorName": "|c00FF0000圣焰奴仆|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNLavaSpawn.blp",
+    "model": "FireElemental.mdx",
+    "rawStats": {
+      "ua1b": 206,
+      "ua1c": 1,
+      "ucol": 32,
+      "udef": 300,
+      "udty": "medium",
+      "uhpm": 15000,
+      "uhpr": 125,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "n025",
+    "name": "冰霜怨灵",
+    "displayName": "冰霜怨灵",
+    "colorName": "|c002040f0冰霜怨灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNVoidWalker.blp",
+    "model": "units\\creeps\\VoidWalker\\VoidWalker.mdx",
+    "rawStats": {
+      "ua1b": 539,
+      "ua1c": 0.75,
+      "ucol": 32,
+      "udef": 500,
+      "udty": "medium",
+      "uhpm": 50000,
+      "uhpr": 200,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "n026",
+    "name": "地狱傀儡",
+    "displayName": "地狱傀儡",
+    "colorName": "|c00FF0000地狱傀儡|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNInfernal.blp",
+    "model": "units\\demon\\Infernal\\Infernal.mdx",
+    "rawStats": {
+      "ua1b": 1039,
+      "ua1c": 1,
+      "ucol": 64,
+      "udef": 750,
+      "udty": "medium",
+      "uhpm": 150000,
+      "uhpr": 250,
+      "umvs": 150
+    }
+  },
+  {
+    "id": "n014",
+    "name": "冰霜蜘蛛",
+    "displayName": "冰霜蜘蛛",
+    "colorName": "冰霜蜘蛛",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSpiderBlue.blp",
+    "model": "units\\creeps\\SpiderBlue\\SpiderBlue.mdx",
+    "rawStats": {
+      "ua1b": 359,
+      "ua1c": 0.4000000059604645,
+      "ucol": 24,
+      "udef": 750,
+      "udty": "medium",
+      "uhpm": 40000,
+      "uhpr": 350,
+      "umvs": 350
+    }
+  },
+  {
+    "id": "n021",
+    "name": "变异蜘蛛",
+    "displayName": "变异蜘蛛",
+    "colorName": "|c008080ff变异蜘蛛|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSpiderBlue.blp",
+    "model": "units\\creeps\\SpiderBlue\\SpiderBlue.mdx",
+    "rawStats": {
+      "ua1b": 0,
+      "ucol": 12,
+      "udef": 385,
+      "udty": "medium",
+      "uhpm": 37500,
+      "uhpr": 0,
+      "umvs": 400
+    }
+  },
+  {
+    "id": "n028",
+    "name": "冰霜守卫",
+    "displayName": "冰霜守卫",
+    "colorName": "冰霜守卫",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSpiderBlue.blp",
+    "model": "units\\creeps\\SpiderBlue\\SpiderBlue.mdx",
+    "rawStats": {
+      "ua1b": 312,
+      "ua1c": 1.0499999523162842,
+      "ucol": 24,
+      "udef": 540,
+      "udty": "medium",
+      "uhpm": 30000,
+      "uhpr": 150,
+      "umvs": 275
+    }
+  },
+  {
+    "id": "h017",
+    "name": "鲜血勇士",
+    "displayName": "鲜血勇士",
+    "colorName": "|c002040f0鲜血勇士|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSkeletonWarrior.blp",
+    "model": "units\\undead\\Skeleton\\Skeleton.mdx",
+    "rawStats": {
+      "ua1b": 390,
+      "ua1c": 1.25,
+      "udef": 300,
+      "udty": "medium",
+      "uhpm": 20000,
+      "uhpr": 2500,
+      "umvs": 450
+    }
+  },
+  {
+    "id": "n02O",
+    "name": "死神",
+    "displayName": "死神",
+    "colorName": "|c00FF0000死神|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNShade.blp",
+    "model": "GrimReaper.mdx",
+    "rawStats": {
+      "ucol": 0,
+      "udef": 750,
+      "udty": "medium",
+      "uhpm": 10000000,
+      "uhpr": 2400000,
+      "umvs": 5
+    }
+  },
+  {
+    "id": "n02P",
+    "name": "愤怒",
+    "displayName": "愤怒",
+    "colorName": "|c00FF0000愤怒|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNCharm.blp",
+    "model": "units\\creeps\\Revenant\\Revenant.mdx",
+    "rawStats": {
+      "ua1b": 1293,
+      "ua1c": 3,
+      "ucol": 48,
+      "udef": 870,
+      "udty": "medium",
+      "uhpm": 10000000,
+      "uhpr": 1500000,
+      "umvs": 340
+    }
+  },
+  {
+    "id": "n02Q",
+    "name": "小炎魔",
+    "displayName": "小炎魔",
+    "colorName": "|c00e24b4b小炎魔|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroAvatarOfFlame.blp",
+    "model": "Units\\Creeps\\HeroFlameLord\\HeroFlameLord.mdx",
+    "rawStats": {
+      "ua1b": 0,
+      "ucol": 24,
+      "udef": 680,
+      "udty": "medium",
+      "uhpm": 250000,
+      "uhpr": 25000,
+      "umvs": 125
+    }
+  },
+  {
+    "id": "h00W",
+    "name": "骷髅勇士",
+    "displayName": "骷髅勇士",
+    "colorName": "|c005f5f5f骷髅勇士|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSkeletonWarrior.blp",
+    "model": "units\\undead\\Skeleton\\Skeleton.mdx",
+    "rawStats": {
+      "ua1b": 2376,
+      "ua1c": 0.75,
+      "ucol": 48,
+      "udef": 740,
+      "udty": "medium",
+      "uhpm": 750000,
+      "uhpr": 1000,
+      "umvs": 240
+    }
+  },
+  {
+    "id": "n02R",
+    "name": "龟",
+    "displayName": "龟",
+    "colorName": "|c00a9ee7b龟|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSeaTurtleGreen.blp",
+    "model": "Units\\Creeps\\SeaTurtle\\SeaTurtle.mdx",
+    "rawStats": {
+      "ua1b": 101,
+      "ua1c": 0.5,
+      "ucol": 36,
+      "udef": 310,
+      "uhpm": 60000,
+      "uhpr": 600,
+      "umvs": 250
+    }
+  },
+  {
+    "id": "n039",
+    "name": "不朽信徒",
+    "displayName": "不朽信徒",
+    "colorName": "|c00c1bd9f不朽信徒|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNAcolyte.blp",
+    "model": "units\\undead\\Acolyte\\Acolyte.mdx",
+    "rawStats": {
+      "ua1b": 0,
+      "ua1c": 1.0499999523162842,
+      "udef": 910,
+      "uhpm": 50000000,
+      "uhpr": 2500000,
+      "umvs": 0
+    }
+  },
+  {
+    "id": "n03A",
+    "name": "僵尸",
+    "displayName": "僵尸",
+    "colorName": "|c00c1bd9f僵尸|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNZombie.blp",
+    "model": "units\\creeps\\Zombie\\Zombie.mdx",
+    "rawStats": {
+      "ua1b": 1097,
+      "ua1c": 1.0499999523162842,
+      "ucol": 16,
+      "udef": 840,
+      "uhpm": 50000,
+      "uhpr": 0,
+      "umvs": 250
+    }
+  },
+  {
+    "id": "n01Q",
+    "name": "迎宾者-罗伯特",
+    "displayName": "迎宾者-罗伯特",
+    "colorName": "|c00445e99迎宾者-罗伯特|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFrostWyrm.blp",
+    "model": "units\\undead\\FrostWyrm\\FrostWyrm.mdx",
+    "rawStats": {
+      "ua1b": 2700,
+      "ua1c": 1.2000000476837158,
+      "ucol": 32,
+      "udef": 800,
+      "uhpm": 2750000,
+      "uhpr": 3750,
+      "umvs": 360
+    }
+  },
+  {
+    "id": "n03I",
+    "name": "迎宾者-罗伯特 (大佬)",
+    "displayName": "迎宾者-罗伯特 (大佬)",
+    "colorName": "|c00445e99迎宾者-罗伯特 (大佬)|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFrostWyrm.blp",
+    "model": "units\\undead\\FrostWyrm\\FrostWyrm.mdx",
+    "rawStats": {
+      "ua1b": 5522,
+      "ua1c": 1.2000000476837158,
+      "ucol": 48,
+      "udef": 1090,
+      "uhpm": 4750000,
+      "uhpr": 7500,
+      "umvs": 360
+    }
+  },
+  {
+    "id": "h01P",
+    "name": "被遗忘的迪鲌雷奥",
+    "displayName": "被遗忘的迪鲌雷奥",
+    "colorName": "被遗忘的|c00ff0000迪鲌雷奥|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFelHound.blp",
+    "model": "units\\demon\\felhound\\felhound_V1.mdx",
+    "rawStats": {
+      "ua1b": 3083,
+      "ua1c": 1.2000000476837158,
+      "ucol": 64,
+      "udef": 750,
+      "uhpm": 2636000,
+      "uhpr": 15000,
+      "umvs": 522
+    }
+  },
+  {
+    "id": "h01R",
+    "name": "被遗忘的韦保尔",
+    "displayName": "被遗忘的韦保尔",
+    "colorName": "被遗忘的|c00ff0000韦保尔|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNDemoness.blp",
+    "model": "units\\demon\\Demoness\\Demoness.mdx",
+    "rawStats": {
+      "ua1b": 3639,
+      "ua1c": 0.8999999761581421,
+      "ucol": 64,
+      "udef": 750,
+      "uhpm": 5097000,
+      "uhpr": 15000,
+      "umvs": 522
+    }
+  },
+  {
+    "id": "h01S",
+    "name": "被遗忘的女猎手",
+    "displayName": "被遗忘的女猎手",
+    "colorName": "被遗忘的|c00ff0000女猎手|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNBansheeRanger.blp",
+    "model": "Units\\Creeps\\BansheeRanger\\BansheeRanger.mdx",
+    "rawStats": {
+      "ua1b": 5219,
+      "ua1c": 1.25,
+      "ucol": 64,
+      "udef": 750,
+      "uhpm": 4595000,
+      "uhpr": 15000,
+      "umvs": 522
+    }
+  },
+  {
+    "id": "h01T",
+    "name": "被遗忘的猎犬",
+    "displayName": "被遗忘的猎犬",
+    "colorName": "被遗忘的|c00ff0000猎犬|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSkeletonArcher.blp",
+    "model": "units\\creeps\\SkeletonArcher\\SkeletonArcher.mdx",
+    "rawStats": {
+      "ua1b": 1980,
+      "ua1c": 3,
+      "ucol": 40,
+      "udef": 810,
+      "uhpm": 1200000,
+      "uhpr": 15000
+    }
+  },
+  {
+    "id": "h04P",
+    "name": "雷神的奴仆",
+    "displayName": "雷神的奴仆",
+    "colorName": "|c00f5f2af雷神的奴仆|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSpiritWalker.blp",
+    "model": "units\\orc\\spiritwalker\\spiritwalker.mdx",
+    "rawStats": {
+      "ua1b": 2900,
+      "ua1c": 1.25,
+      "ucol": 96,
+      "udef": 700,
+      "uhpm": 1800000,
+      "uhpr": 7500,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "e066",
+    "name": "火凤凰",
+    "displayName": "火凤凰",
+    "colorName": "火凤凰",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMarkOfFire.blp",
+    "model": "units\\human\\phoenix\\phoenix.mdx",
+    "rawStats": {
+      "ucol": 0,
+      "udty": "divine",
+      "umvs": 522
+    }
+  },
+  {
+    "id": "n03T",
+    "name": "火焰精灵",
+    "displayName": "火焰精灵",
+    "colorName": "|c00FF0000火焰精灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNLavaSpawn.blp",
+    "model": "units\\human\\phoenix\\phoenix.mdx",
+    "rawStats": {
+      "ua1b": 619,
+      "ua1c": 3,
+      "ucol": 32,
+      "udef": 590,
+      "udty": "medium",
+      "uhpm": 100000,
+      "uhpr": 5000,
+      "umvs": 300
+    }
+  },
+  {
+    "id": "n03U",
+    "name": "地狱之灵",
+    "displayName": "地狱之灵",
+    "colorName": "|c00FF0000地狱之灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNPhilosophersStone.blp",
+    "model": "Units\\Creeps\\ForgottenOne\\ForgottenOneTent.mdx",
+    "rawStats": {
+      "ua1b": 0,
+      "ua1c": 3,
+      "ucol": 160,
+      "udef": 650,
+      "udty": "medium",
+      "uhpm": 1000000000,
+      "uhpr": 0,
+      "umvs": 5
+    }
+  },
+  {
+    "id": "n03Z",
+    "name": "蝙蝠石像鬼",
+    "displayName": "蝙蝠石像鬼",
+    "colorName": "蝙蝠石像鬼",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNGargoyle.blp",
+    "model": "units\\undead\\Gargoyle\\Gargoyle.mdx",
+    "rawStats": {
+      "ua1b": 0,
+      "ua1c": 0.75,
+      "ucol": 32,
+      "udef": 250,
+      "udty": "medium",
+      "uhpm": 10000,
+      "uhpr": 250,
+      "umvs": 0
+    }
+  },
+  {
+    "id": "h035",
+    "name": "小蜘蛛",
+    "displayName": "小蜘蛛",
+    "colorName": "小蜘蛛",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNWeb.blp",
+    "model": "Abilities\\Spells\\Undead\\Web\\WebTarget.mdx",
+    "rawStats": {
+      "ua1b": 99,
+      "ua1c": 1,
+      "ucol": 80,
+      "udef": 500,
+      "udty": "normal",
+      "uhpm": 3,
+      "uhpr": 0,
+      "umvs": 0
+    }
+  },
+  {
+    "id": "hsor",
+    "name": "生命宝珠",
+    "displayName": "生命宝珠",
+    "colorName": "|c0080ff80生命宝珠|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNWisp.blp",
+    "model": "units\\nightelf\\Wisp\\Wisp.mdx",
+    "rawStats": {
+      "ucol": 32,
+      "udef": 430,
+      "udty": "hero",
+      "uhpm": 150000,
+      "uhpr": 0,
+      "umvs": 0
+    }
+  },
+  {
+    "id": "otau",
+    "name": "雪人",
+    "displayName": "雪人",
+    "colorName": "|c00bef8fc雪人|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFrostBolt.blp",
+    "model": "Doodads\\Icecrown\\Props\\SnowMan\\SnowMan.mdx",
+    "rawStats": {
+      "ua1b": 103,
+      "ua1c": 0.5,
+      "ucol": 8,
+      "udef": 75,
+      "udty": "hero",
+      "uhpm": 7500,
+      "uhpr": 0,
+      "umvs": 0
+    }
+  },
+  {
+    "id": "odoc",
+    "name": "食尸者",
+    "displayName": "食尸者",
+    "colorName": "|c003a9115食尸者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNGhoul.blp",
+    "model": "units\\undead\\Ghoul\\Ghoul.mdx",
+    "rawStats": {
+      "ua1b": 416,
+      "ua1c": 0.4000000059604645,
+      "udef": 500,
+      "udty": "medium",
+      "uhpm": 250000,
+      "uhpr": 1250,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "ohun",
+    "name": "憎恶者",
+    "displayName": "憎恶者",
+    "colorName": "|c003a9115憎恶者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNAbomination.blp",
+    "model": "units\\undead\\Abomination\\Abomination.mdx",
+    "rawStats": {
+      "ua1b": 2186,
+      "ua1c": 2.75,
+      "ucol": 40,
+      "udef": 600,
+      "uhpm": 700000,
+      "uhpr": 1250,
+      "umvs": 250
+    }
+  },
+  {
+    "id": "hpxe",
+    "name": "巨兽海尔",
+    "displayName": "巨兽海尔",
+    "colorName": "|c009ef8d1巨兽海尔|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSeaTurtleGreen.blp",
+    "model": "Units\\Creeps\\SeaTurtle\\SeaTurtle.mdx",
+    "rawStats": {
+      "ucol": 64,
+      "udef": 820,
+      "uhpm": 200000,
+      "uhpr": 2500,
+      "umvs": 200
+    }
+  },
+  {
+    "id": "h061",
+    "name": "岩浆",
+    "displayName": "岩浆",
+    "colorName": "岩浆",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNPhilosophersStone.blp",
+    "model": "Models\\Slime.mdx",
+    "rawStats": {
+      "ua1c": 2,
+      "ucol": 24,
+      "udef": 500,
+      "uhpm": 600000,
+      "uhpr": 7500,
+      "umvs": 100
+    }
+  },
+  {
+    "id": "h062",
+    "name": "熔岩精灵",
+    "displayName": "熔岩精灵",
+    "colorName": "熔岩精灵",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNWisp.blp",
+    "model": "units\\creeps\\VoidWalker\\VoidWalker.mdx",
+    "rawStats": {
+      "udef": 650,
+      "uhpm": 900000,
+      "uhpr": 7500,
+      "umvs": 0
+    }
+  },
+  {
+    "id": "h063",
+    "name": "黑曜石巨人",
+    "displayName": "黑曜石巨人",
+    "colorName": "黑曜石巨人",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMountainGiant.blp",
+    "model": "units\\nightelf\\MountainGiant\\MountainGiant.mdx",
+    "rawStats": {
+      "ua1b": 6229,
+      "udef": 750,
+      "uhpm": 2400000,
+      "uhpr": 7500,
+      "umvs": 250
+    }
+  },
+  {
+    "id": "n04D",
+    "name": "记忆石",
+    "displayName": "记忆石",
+    "colorName": "记忆石",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNTesseract.blp",
+    "model": "Models\\Tesseract.mdx",
+    "rawStats": {
+      "ucol": 32,
+      "uhpm": 1000000000,
+      "uhpr": 0,
+      "umvs": 250
+    }
+  }
+]

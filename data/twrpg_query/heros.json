@@ -1,0 +1,817 @@
+[
+  {
+    "id": "H019",
+    "name": "圣剑士",
+    "displayName": "圣剑士",
+    "colorName": "|cffe1c4ed圣剑士|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroSwordSaint.blp",
+    "model": "Models\\HeroSwordSaint.mdx",
+    "rawStats": {
+      "upro": "塞莱斯特",
+      "ua1c": 1,
+      "ua1r": 150,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 1.0
+    }
+  },
+  {
+    "id": "H001",
+    "name": "追星剑圣",
+    "displayName": "追星剑圣",
+    "colorName": "|c00869dd2追星剑圣|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSwordsman.blp",
+    "model": "Hakuman.mdx",
+    "rawStats": {
+      "upro": "路易斯·阿兹恩",
+      "ua1c": 1.5,
+      "ua1r": 175,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 1.4500000476837158
+    }
+  },
+  {
+    "id": "H004",
+    "name": "刺客",
+    "displayName": "刺客",
+    "colorName": "|c00ffff80刺客|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNAssassin.blp",
+    "model": "Assassin.mdx",
+    "rawStats": {
+      "upro": "绫美",
+      "ua1c": 1,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "H01H",
+    "name": "雷霆行者",
+    "displayName": "雷霆行者",
+    "colorName": "|c00fe2101雷霆行者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNThunderer.blp",
+    "model": "Kinpika.mdx",
+    "rawStats": {
+      "upro": "艾斯特波",
+      "ua1c": 0.8500000238418579,
+      "ua1r": 120,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "H000",
+    "name": "剑之骑士",
+    "displayName": "剑之骑士",
+    "colorName": "|c0087cefa剑之骑士|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroKnight.blp",
+    "model": "Models\\sein.mdx",
+    "rawStats": {
+      "upro": "伊切丽娜依",
+      "ua1c": 1.2999999523162842,
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.8999999761581421
+    }
+  },
+  {
+    "id": "H003",
+    "name": "圣光十字军",
+    "displayName": "圣光十字军",
+    "colorName": "|c007b68ee圣光十字军|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNPaladin.blp",
+    "model": "Models\\Micalela.mdx",
+    "rawStats": {
+      "upro": "弗雷德里克·卡斯雅",
+      "ua1c": 1.2000000476837158,
+      "ua1r": 125,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.6499999761581421
+    }
+  },
+  {
+    "id": "H008",
+    "name": "灵魂炽女",
+    "displayName": "灵魂炽女",
+    "colorName": "|c003a8732灵魂炽女|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroSoulWeaver.blp",
+    "model": "Models\\Shinoa.mdx",
+    "rawStats": {
+      "upro": "斯特拉",
+      "ua1c": 1.2999999523162842,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.6000000238418579
+    }
+  },
+  {
+    "id": "H00H",
+    "name": "狂战士",
+    "displayName": "狂战士",
+    "colorName": "|c00f75b40狂战士|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNBerserker.blp",
+    "model": "Berserker.mdx",
+    "rawStats": {
+      "upro": "埃琳娜",
+      "ua1c": 1.100000023841858,
+      "ua1r": 75,
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 1.5499999523162842
+    }
+  },
+  {
+    "id": "H007",
+    "name": "牧师",
+    "displayName": "牧师",
+    "colorName": "|c00fffacd牧师|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNPriest.blp",
+    "model": "Models\\Hayate.mdx",
+    "rawStats": {
+      "upro": "爱丽丝·多尼亚",
+      "ua1c": 1.2999999523162842,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 1.25
+    }
+  },
+  {
+    "id": "h00C",
+    "name": "拉古尔",
+    "displayName": "拉古尔",
+    "colorName": "拉古尔",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNPriestT.blp",
+    "model": "AvengingAngel.mdx",
+    "rawStats": {
+      "ua1c": 0.5,
+      "ua1r": 800,
+      "udef": 200,
+      "uhpm": 20000,
+      "uhpr": 50,
+      "umvs": 500,
+      "usca": 1.2999999523162842
+    }
+  },
+  {
+    "id": "Hmkg",
+    "name": "黑暗骑士",
+    "displayName": "黑暗骑士",
+    "colorName": "|c00bc8bf1黑暗骑士|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroDarkKnight.blp",
+    "model": "Models\\DarkKnight.mdx",
+    "rawStats": {
+      "upro": "艾德兰多",
+      "ua1c": 1.5,
+      "ua1r": 50,
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "H00J",
+    "name": "暗黑术士",
+    "displayName": "暗黑术士",
+    "colorName": "|c00c3c3e1暗黑术士|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroWarlock.blp",
+    "model": "Models\\DarkMage.mdx",
+    "rawStats": {
+      "upro": "哈兰特·布拉斯",
+      "ua1c": 1.25,
+      "ua1r": 700,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.800000011920929
+    }
+  },
+  {
+    "id": "Hblm",
+    "name": "魔枪斗士",
+    "displayName": "魔枪斗士",
+    "colorName": "|c0084f9d2魔枪斗士|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNLancer.blp",
+    "model": "Models\\LSWeiss.mdx",
+    "rawStats": {
+      "upro": "内奥米 默西迪丝",
+      "ua1c": 1.5,
+      "ua1r": 175,
+      "uarm": "Metal",
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.8999999761581421
+    }
+  },
+  {
+    "id": "H01I",
+    "name": "炼金术士",
+    "displayName": "炼金术士",
+    "colorName": "|c00c4c099炼金术士|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNAlchemist.blp",
+    "model": "Models\\Edward.mdx",
+    "rawStats": {
+      "upro": "依兰杰特",
+      "ua1c": 1.2999999523162842,
+      "ua1r": 150,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 1.100000023841858
+    }
+  },
+  {
+    "id": "h01J",
+    "name": "无知",
+    "displayName": "无知",
+    "colorName": "|c00c5aa83无知|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNGolemThunderclap.blp",
+    "model": "Sphere.mdx",
+    "rawStats": {
+      "ua1c": 2.5,
+      "ua1r": 100,
+      "udef": 150,
+      "uhpm": 2500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 1.75
+    }
+  },
+  {
+    "id": "H00E",
+    "name": "拳师",
+    "displayName": "拳师",
+    "colorName": "|c00c0c0c0拳师|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMartialArtist.blp",
+    "model": "Ryu.mdx",
+    "rawStats": {
+      "upro": "肯尼斯·德尔克",
+      "ua1c": 0.800000011920929,
+      "ua1r": 50,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.8500000238418579
+    }
+  },
+  {
+    "id": "H005",
+    "name": "火法",
+    "displayName": "火法",
+    "colorName": "|c00e4afaf火法|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNFireMage.blp",
+    "model": "Models\\TohsakaRin.mdx",
+    "rawStats": {
+      "upro": "小T.",
+      "ua1c": 1.7999999523162842,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.800000011920929
+    }
+  },
+  {
+    "id": "H002",
+    "name": "冰法",
+    "displayName": "冰法",
+    "colorName": "|c00bec6fa冰法|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNWaterMage.blp",
+    "model": "huashi.mdx",
+    "rawStats": {
+      "upro": "雪梨 P.",
+      "ua1c": 1.2000000476837158,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "H006",
+    "name": "月法",
+    "displayName": "月法",
+    "colorName": "|c00f9cdfe月法|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNArcaneMage.blp",
+    "model": "Models\\LSYou.mdx",
+    "rawStats": {
+      "upro": "玲缇斯",
+      "ua1c": 1.2000000476837158,
+      "ua1r": 500,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.8999999761581421
+    }
+  },
+  {
+    "id": "H01N",
+    "name": "风法",
+    "displayName": "风法",
+    "colorName": "|c00caffca风法|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNWindMage.blp",
+    "model": "Models\\Reset_01.mdx",
+    "rawStats": {
+      "upro": "阿伊莎",
+      "ua1c": 1.2000000476837158,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.6499999761581421
+    }
+  },
+  {
+    "id": "h01O",
+    "name": "风之守护者",
+    "displayName": "风之守护者",
+    "colorName": "|c00c2f9c1风之守护者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNWindMageUlt.blp",
+    "model": "units\\orc\\Spiritwolf\\Spiritwolf.mdx",
+    "rawStats": {
+      "ua1c": 0.5,
+      "ua1r": 175,
+      "udef": 200,
+      "uhpm": 36000,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 2
+    }
+  },
+  {
+    "id": "H021",
+    "name": "电法",
+    "displayName": "电法",
+    "colorName": "|c00b9f9f8电法|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNLightningMage.blp",
+    "model": "Models\\Killua.mdx",
+    "rawStats": {
+      "upro": "查斯克",
+      "ua1c": 0.800000011920929,
+      "ua1r": 150,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.75
+    }
+  },
+  {
+    "id": "H015",
+    "name": "狙击手",
+    "displayName": "狙击手",
+    "colorName": "|c00a2f76f狙击手|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSniper.blp",
+    "model": "Models\\Uryu.mdx",
+    "rawStats": {
+      "upro": "雷理若·梵",
+      "ua1c": 1.75,
+      "ua1r": 900,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "H00Z",
+    "name": "神射手",
+    "displayName": "神射手",
+    "colorName": "|c00d9bfa8神射手|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNBowMaster.blp",
+    "model": "Models\\Shya.mdx",
+    "rawStats": {
+      "upro": "鸢尾·米伦",
+      "ua1c": 1.5,
+      "ua1r": 850,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 1.149999976158142
+    }
+  },
+  {
+    "id": "H01V",
+    "name": "魅影十字军",
+    "displayName": "魅影十字军",
+    "colorName": "|c00f7fc98魅影十字军|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNCrusader.blp",
+    "model": "Sharis.mdx",
+    "rawStats": {
+      "upro": "爱思塔丽特",
+      "ua1c": 1.2999999523162842,
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.949999988079071
+    }
+  },
+  {
+    "id": "H00K",
+    "name": "机械师",
+    "displayName": "机械师",
+    "colorName": "|cff99ffdd机械师|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNShooter.blp",
+    "model": "Models\\Chaika.mdx",
+    "rawStats": {
+      "upro": "莱茵卟 R.",
+      "ua1c": 1.2000000476837158,
+      "ua1r": 900,
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.8500000238418579
+    }
+  },
+  {
+    "id": "H02M",
+    "name": "血法师",
+    "displayName": "血法师",
+    "colorName": "|c00ff6666血法师|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNBloodWeaver.blp",
+    "model": "Models\\Kururu.mdx",
+    "rawStats": {
+      "upro": "莎瑞拉",
+      "ua1c": 0.8999999761581421,
+      "ua1r": 150,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.5
+    }
+  },
+  {
+    "id": "H04Q",
+    "name": "旅行商人",
+    "displayName": "旅行商人",
+    "colorName": "|cffc3c388旅行商人|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNMerchant.blp",
+    "model": "Models\\Mayoi.mdx",
+    "rawStats": {
+      "upro": "凯瑟琳·约伊",
+      "ua1c": 0.75,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.8999999761581421
+    }
+  },
+  {
+    "id": "H04R",
+    "name": "附魔师",
+    "displayName": "附魔师",
+    "colorName": "|c00dfdfdf附魔师|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNSwordEnchanter.blp",
+    "model": "Models\\Beast_XH.mdx",
+    "rawStats": {
+      "upro": "希罗",
+      "ua1c": 1,
+      "ua1r": 75,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "H04S",
+    "name": "收割者",
+    "displayName": "收割者",
+    "colorName": "|cffff9999收割者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNReaper.blp",
+    "model": "Models\\HeroReaper.mdx",
+    "rawStats": {
+      "upro": "奥瑞莉娅",
+      "ua1c": 1.2999999523162842,
+      "ua1r": 175,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.949999988079071
+    }
+  },
+  {
+    "id": "H05B",
+    "name": "赏金猎人",
+    "displayName": "赏金猎人",
+    "colorName": "|cffdfbe9f赏金猎人|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroGunner.blp",
+    "model": "Models\\Desperado_fix7.mdx",
+    "rawStats": {
+      "upro": "路西·克雷",
+      "ua1c": 1.2999999523162842,
+      "ua1r": 500,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 1.149999976158142
+    }
+  },
+  {
+    "id": "H05T",
+    "name": "无极剑魂",
+    "displayName": "无极剑魂",
+    "colorName": "|c0099ffbb无极剑魂|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroPhantomBlade.blp",
+    "model": "Models\\Youmu.mdx",
+    "rawStats": {
+      "upro": "岚哈芿",
+      "ua1c": 1.100000023841858,
+      "ua1r": 500,
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 1.100000023841858
+    }
+  },
+  {
+    "id": "H065",
+    "name": "幽人",
+    "displayName": "幽人",
+    "colorName": "|c004faaae幽人|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroHermit.blp",
+    "model": "Models\\Jueviolace.mdx",
+    "rawStats": {
+      "upro": "没有名字的人",
+      "ua1c": 0.699999988079071,
+      "ua1r": 125,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.8500000238418579
+    }
+  },
+  {
+    "id": "H066",
+    "name": "巫术师",
+    "displayName": "巫术师",
+    "colorName": "|c00b1a6d2巫术师|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroWitch.blp",
+    "model": "Models\\KagariAtsuko.mdx",
+    "rawStats": {
+      "upro": "阿米瑞卡",
+      "ua1c": 0.6499999761581421,
+      "ua1r": 1000,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.800000011920929
+    }
+  },
+  {
+    "id": "h067",
+    "name": "亚马罗斯",
+    "displayName": "亚马罗斯",
+    "colorName": "亚马罗斯",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNDizzy.blp",
+    "model": "Models\\Suigintou.mdx",
+    "rawStats": {
+      "ua1c": 0.5,
+      "ua1r": 750,
+      "udef": 200,
+      "uhpm": 20000,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.800000011920929
+    }
+  },
+  {
+    "id": "H076",
+    "name": "斗士",
+    "displayName": "斗士",
+    "colorName": "|cff995c00斗士|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroFighter.blp",
+    "model": "Models\\Fighter.mdx",
+    "rawStats": {
+      "upro": "无面",
+      "ua1r": 175,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.75
+    }
+  },
+  {
+    "id": "H07X",
+    "name": "欺诈者",
+    "displayName": "欺诈者",
+    "colorName": "|cff39ac73欺诈者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroTrickster.blp",
+    "model": "Models\\Hazama.mdx",
+    "rawStats": {
+      "upro": "卢克",
+      "ua1c": 1.100000023841858,
+      "ua1r": 150,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "H08G",
+    "name": "圣殿祭司",
+    "displayName": "圣殿祭司",
+    "colorName": "|cffd3f9f8圣殿祭司|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroShrinePriestess.blp",
+    "model": "Models\\HeroMedeiaLily.mdx",
+    "rawStats": {
+      "upro": "米娜",
+      "ua1c": 1.2000000476837158,
+      "ua1r": 800,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.8999999761581421
+    }
+  },
+  {
+    "id": "H09M",
+    "name": "逐光者",
+    "displayName": "逐光者",
+    "colorName": "|c00f2f7b9逐光者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroLightseeker.blp",
+    "model": "Models\\Lightseeker.mdx",
+    "rawStats": {
+      "upro": "玛卢",
+      "ua1c": 1,
+      "ua1r": 125,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "H09N",
+    "name": "爆破者",
+    "displayName": "爆破者",
+    "colorName": "|c00c57372爆破者|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNHeroBlaster.blp",
+    "model": "Models\\Blaster.mdx",
+    "rawStats": {
+      "upro": "瑞橘卡",
+      "ua1c": 0.5,
+      "ua1r": 800,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "H009",
+    "name": "精灵召唤师",
+    "displayName": "精灵召唤师",
+    "colorName": "|c00ff69b4精灵召唤师|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNElementalist.blp",
+    "model": "Models\\CYT-PST.mdx",
+    "rawStats": {
+      "upro": "桃乐茜·梅里安",
+      "ua1c": 0.8999999761581421,
+      "ua1r": 600,
+      "uarm": "Flesh",
+      "udef": 0,
+      "uhpm": 500,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 0.699999988079071
+    }
+  },
+  {
+    "id": "nlv1",
+    "name": "熔岩精灵",
+    "displayName": "熔岩精灵",
+    "colorName": "|c00ff8080熔岩精灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNElementalistQ.blp",
+    "model": "Models\\Boogie.mdx",
+    "rawStats": {
+      "ua1r": 64,
+      "uhpm": 1000,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 1.5
+    }
+  },
+  {
+    "id": "hwat",
+    "name": "水殄精灵",
+    "displayName": "水殄精灵",
+    "colorName": "|c00b9cdfa水殄精灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNElementalistW.blp",
+    "model": "Models\\Timu.mdx",
+    "rawStats": {
+      "ua1c": 0.75,
+      "ua1r": 500,
+      "uarm": "Ethereal",
+      "uhpm": 1000,
+      "uhpr": 0,
+      "umvs": 500,
+      "usca": 1.25
+    }
+  },
+  {
+    "id": "hwt2",
+    "name": "闪电精灵",
+    "displayName": "闪电精灵",
+    "colorName": "|c00c39beb闪电精灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNElementalistE.blp",
+    "model": "Models\\Ttotto.mdx",
+    "rawStats": {
+      "ua1c": 1,
+      "ua1r": 750,
+      "uarm": "Metal",
+      "udef": 0,
+      "uhpm": 1000,
+      "uhpr": 0,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "hmil",
+    "name": "自然精灵",
+    "displayName": "自然精灵",
+    "colorName": "|c00afeb8c自然精灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNElementalistR.blp",
+    "model": "Models\\CrystalGolem.mdx",
+    "rawStats": {
+      "ua1c": 1.5,
+      "ua1r": 750,
+      "uarm": "Wood",
+      "udef": 0,
+      "uhpm": 1000,
+      "uhpr": 0,
+      "umvs": 500
+    }
+  },
+  {
+    "id": "hphx",
+    "name": "混沌精灵",
+    "displayName": "混沌精灵",
+    "colorName": "|c00800040混沌精灵|r",
+    "img": "ReplaceableTextures\\CommandButtons\\BTNElementalistUlt.blp",
+    "model": "ShadowGOLEM.mdx",
+    "rawStats": {
+      "ua1c": 0.6000000238418579,
+      "ua1r": 150,
+      "uarm": "Ethereal",
+      "udef": 1000,
+      "uhpm": 50000,
+      "uhpr": 1000000000,
+      "umvs": 500,
+      "usca": 2
+    }
+  }
+]
