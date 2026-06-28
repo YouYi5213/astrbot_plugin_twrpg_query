@@ -13,6 +13,7 @@ from .data_loader import ItemDisplay
 _PLUGIN_DIR = os.path.dirname(os.path.abspath(__file__))
 _FONT_DIR = os.path.join(_PLUGIN_DIR, "assets", "fonts")
 _CARDS_DIR = os.path.join(_PLUGIN_DIR, "data", "cards")
+_BUNDLED_FONT = os.path.join(_FONT_DIR, "NotoSansSC-Bold.otf")
 
 CARD_WIDTH = 640
 CARD_PADDING = 22
@@ -34,7 +35,7 @@ COLORS = {
     "line": (58, 62, 78),
 }
 
-_FONT_CACHE: dict[tuple[str, int], ImageFont.FreeTypeFont | ImageFont.ImageFont] = {}
+_FONT_CACHE: dict[int, ImageFont.FreeTypeFont | ImageFont.ImageFont] = {}
 _RESOLVED_FONT: str | None = None
 
 
@@ -48,10 +49,9 @@ def _resolve_font_path() -> str | None:
         return _RESOLVED_FONT or None
 
     candidates = [
+        _BUNDLED_FONT,
         "C:/Windows/Fonts/msyhbd.ttc",
         "C:/Windows/Fonts/msyh.ttc",
-        os.path.join(_FONT_DIR, "NotoSansSC-Bold.otf"),
-        os.path.join(_FONT_DIR, "NotoSansSC-Regular.otf"),
         "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
         "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
     ]
@@ -68,21 +68,20 @@ def _resolve_font_path() -> str | None:
 
 
 def _font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
-    key = ("bold" if bold else "regular", size)
-    if key in _FONT_CACHE:
-        return _FONT_CACHE[key]
+    if size in _FONT_CACHE:
+        return _FONT_CACHE[size]
 
     path = _resolve_font_path()
     if path:
         try:
             font = ImageFont.truetype(path, size)
-            _FONT_CACHE[key] = font
+            _FONT_CACHE[size] = font
             return font
         except OSError:
             pass
 
     font = ImageFont.load_default()
-    _FONT_CACHE[key] = font
+    _FONT_CACHE[size] = font
     return font
 
 
