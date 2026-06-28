@@ -38,6 +38,7 @@ COLORS = {
     "text": (230, 232, 240),
     "muted": (160, 166, 182),
     "accent": (255, 180, 96),
+    "stage": (244, 88, 88),
     "line": (58, 62, 78),
 }
 
@@ -413,12 +414,21 @@ def generate_item_card(item: ItemDisplay) -> str:
             TITLE_ICON_SIZE[1],
         )
         title_x = CARD_PADDING + 8 + TITLE_ICON_SIZE[0] + 10
+    title_y = CARD_PADDING + 10
     draw.text(
-        (title_x, CARD_PADDING + 10),
+        (title_x, title_y),
         item.name,
         fill=COLORS["title"],
         font=title_font,
     )
+    if item.stage_label:
+        stage_x = title_x + _text_width(draw, item.name, title_font) + 8
+        draw.text(
+            (stage_x, title_y),
+            item.stage_label,
+            fill=COLORS["stage"],
+            font=title_font,
+        )
     id_text = f"ID: {item.id}"
     id_font = _font(12)
     id_w = _text_width(draw, id_text, id_font)
@@ -492,7 +502,10 @@ def generate_item_card(item: ItemDisplay) -> str:
 
 
 def format_text_fallback(item: ItemDisplay) -> str:
-    lines = [item.name, ""]
+    title = item.name
+    if item.stage_label:
+        title = f"{title} {item.stage_label}"
+    lines = [title, ""]
 
     if _section_has_content(item, "wear_limit"):
         lines.append("【佩戴限定】")

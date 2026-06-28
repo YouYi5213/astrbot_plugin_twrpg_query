@@ -24,6 +24,27 @@ WEAR_LIMIT_LABELS: dict[str, str] = {
 }
 
 # QuickSearch buildGood: Kle()[item.limit] -> limitHeroes
+# QuickSearch locale: common.stages
+STAGE_LABELS: list[str] = [
+    "",
+    "[野外]",
+    "[粉末]",
+    "[小四]",
+    "[四大]",
+    "[主龙]",
+    "[白怨火水]",
+    "[君主]",
+    "[爵土马判]",
+    "[大天使]",
+]
+
+
+def stage_label(stage: int | None) -> str:
+    if stage is None or stage <= 0 or stage >= len(STAGE_LABELS):
+        return ""
+    return STAGE_LABELS[stage]
+
+
 LIMIT_HERO_IDS: dict[str, list[str]] = {
     "2": [
         "H001", "H004", "H00E", "H000", "H00H", "H003", "Hmkg", "Hblm",
@@ -90,6 +111,7 @@ class ItemDisplay:
     name: str
     description: str
     raw_description: str = ""
+    stage_label: str = ""
     icon: str | None = None
     passive: str = ""
     limit_heroes: list[HeroRef] = field(default_factory=list)
@@ -352,6 +374,7 @@ class TwrpgDataStore:
         return ItemDisplay(
             id=item_id,
             name=name,
+            stage_label=stage_label(item.get("stage")),
             description=description,
             raw_description=raw_description,
             icon=self._item_icon(item_id),

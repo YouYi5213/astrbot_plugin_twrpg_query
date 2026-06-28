@@ -14,6 +14,7 @@ from astrbot_plugin_twrpg_query.data_loader import (
     TwrpgDataStore,
     normalize_query,
     resolve_data_dir,
+    stage_label,
 )
 from astrbot_plugin_twrpg_query.icon_utils import resolve_icons_dir
 
@@ -48,6 +49,8 @@ class TwrpgQueryTests(unittest.TestCase):
     def test_limit_heroes_and_exclusives_i026(self):
         display = self.store.build_display("I026")
         assert display is not None
+        self.assertEqual(stage_label(9), "[大天使]")
+        self.assertEqual(display.stage_label, "[大天使]")
         hero_ids = {hero.id for hero in display.limit_heroes}
         self.assertIn("H065", hero_ids)
         self.assertIn("H04Q", hero_ids)
