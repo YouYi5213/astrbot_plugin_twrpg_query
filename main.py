@@ -1,20 +1,30 @@
 """
-世界RPG（TWRPG）物品查询插件
+世界RPG（TWRPG）查询插件
 ==============================
-指令: 世界 <物品名> 或 界 <物品名>（无需 / 前缀）
-功能: 从本地离线数据库查询物品，以图片卡片展示属性、合成、掉落等信息
+指令:
+  世界 <物品名> / 界 <物品名> — 物品查询
+  英雄 <名> / 英 <名> — 英雄查询
+  技能 <名> / 技 <名> — 技能查询
 """
 
 from __future__ import annotations
 
 import os
 import re
+from collections.abc import AsyncIterator, Callable
 
 from astrbot.api import AstrBotConfig, logger
 from astrbot.api.event import AstrMessageEvent, filter
 from astrbot.api.star import Context, Star
 
-from .card_renderer import format_text_fallback, generate_item_card
+from .card_renderer import (
+    format_hero_text_fallback,
+    format_skill_text_fallback,
+    format_text_fallback,
+    generate_hero_card,
+    generate_item_card,
+    generate_skill_card,
+)
 from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
 from .icon_utils import resolve_icons_dir
 
@@ -23,7 +33,9 @@ _DATA_DIR = resolve_data_dir(_PLUGIN_DIR)
 _ICONS_DIR = resolve_icons_dir(_PLUGIN_DIR)
 _MAX_MATCHES = 5
 
-_CMD_RE = re.compile(r"^/?(世界|界)(\s|$)")
+_ITEM_CMD_RE = re.compile(r"^/?(世界|界)(\s|$)")
+_HERO_CMD_RE = re.compile(r"^/?(英雄|英)(\s|$)")
+_SKILL_CMD_RE = re.compile(r"^/?(技能|技)(\s|$)")
 
 
 def _normalize_message(text: str) -> str:
@@ -33,25 +45,14 @@ def _normalize_message(text: str) -> str:
     return text
 
 
-def _extract_query_text(text: str) -> str | None:
+def _extract_query_text(text: str, prefixes: tuple[str, ...]) -> str | None:
     normalized = _normalize_message(text)
-    for prefix in ("世界", "界"):
+    for prefix in prefixes:
         if normalized == prefix:
             return ""
         if normalized.startswith(prefix + " "):
             return normalized[len(prefix) + 1 :].strip()
     return None
-
-
-def _match_label(store: TwrpgDataStore, item_id: str, query: str) -> str:
-    display = store.build_display(item_id)
-    if not display:
-        return item_id
-    key = normalize_query(query)
-    name_key = normalize_query(display.name)
-    if name_key == key:
-        return display.name
-    return display.name
 
 
 class TwrpgQueryPlugin(Star):
@@ -72,24 +73,106 @@ class TwrpgQueryPlugin(Star):
         try:
             self.store.load()
             logger.info(
-                f"世界RPG 查询插件已加载，共 {len(self.store.items_by_id)} 个物品"
+                "世界RPG 查询插件已加载，"
+                f"物品 {len(self.store.items_by_id)} / "
+                f"英雄 {len(self.store.heros_by_id)} / "
+                f"技能 {len(self.store.skills_by_key)}"
             )
         except Exception as e:
             logger.error(f"加载 TWRPG 数据失败: {e}")
 
-    @filter.regex(_CMD_RE, priority=10)
-    async def on_twrpg_command(self, event: AstrMessageEvent):
-        """处理世界RPG 物品查询指令（支持无 / 前缀）。"""
+    @filter.regex(_ITEM_CMD_RE, priority=10)
+    async def on_twrpg_item_command(self, event: AstrMessageEvent):
         raw = event.message_str.strip()
-        query_text = _extract_query_text(raw)
+        query_text = _extract_query_text(raw, ("世界", "界"))
         if query_text is None:
             return
 
-        async for result in self._handle_query(event, query_text):
+        async for result in self._handle_entity_query(
+            event,
+            query_text,
+            entity_label="物品",
+            usage="世界 <物品名>\n      界 <物品名>",
+            example="世界 洞悉·真理之瞳\n      界 太阳石",
+            search=self.store.search,
+            exact_name=lambda entity_id: self.store.item_name(entity_id),
+            build_display=self.store.build_display,
+            match_label=lambda entity_id, query: self.store.item_name(entity_id),
+            generate_card=generate_item_card,
+            text_fallback=format_text_fallback,
+            log_prefix="物品",
+        ):
             yield result
         event.stop_event()
 
-    async def _handle_query(self, event: AstrMessageEvent, text: str):
+    @filter.regex(_HERO_CMD_RE, priority=10)
+    async def on_twrpg_hero_command(self, event: AstrMessageEvent):
+        raw = event.message_str.strip()
+        query_text = _extract_query_text(raw, ("英雄", "英"))
+        if query_text is None:
+            return
+
+        async for result in self._handle_entity_query(
+            event,
+            query_text,
+            entity_label="英雄",
+            usage="英雄 <英雄名>\n      英 <英雄名>",
+            example="英雄 追星剑圣\n      英 路易斯",
+            search=self.store.search_hero,
+            exact_name=lambda entity_id: self.store.hero_name(entity_id),
+            build_display=self.store.build_hero_display,
+            match_label=lambda entity_id, query: self.store.hero_name(entity_id),
+            generate_card=generate_hero_card,
+            text_fallback=format_hero_text_fallback,
+            log_prefix="英雄",
+        ):
+            yield result
+        event.stop_event()
+
+    @filter.regex(_SKILL_CMD_RE, priority=10)
+    async def on_twrpg_skill_command(self, event: AstrMessageEvent):
+        raw = event.message_str.strip()
+        query_text = _extract_query_text(raw, ("技能", "技"))
+        if query_text is None:
+            return
+
+        async for result in self._handle_entity_query(
+            event,
+            query_text,
+            entity_label="技能",
+            usage="技能 <技能名>\n      技 <技能名>",
+            example="技能 升龙击\n      技 恩赐解脱",
+            search=self.store.search_skill,
+            exact_name=lambda entity_id: (
+                display.name
+                if (display := self.store.build_skill_display(entity_id))
+                else entity_id
+            ),
+            build_display=self.store.build_skill_display,
+            match_label=lambda entity_id, query: self.store.skill_label(entity_id),
+            generate_card=generate_skill_card,
+            text_fallback=format_skill_text_fallback,
+            log_prefix="技能",
+        ):
+            yield result
+        event.stop_event()
+
+    async def _handle_entity_query(
+        self,
+        event: AstrMessageEvent,
+        text: str,
+        *,
+        entity_label: str,
+        usage: str,
+        example: str,
+        search: Callable[[str, int], list[str]],
+        exact_name: Callable[[str], str],
+        build_display: Callable[[str], object | None],
+        match_label: Callable[[str, str], str],
+        generate_card: Callable[[object], str],
+        text_fallback: Callable[[object], str],
+        log_prefix: str,
+    ) -> AsyncIterator:
         if not self.store.loaded:
             yield event.plain_result(
                 "❌ 离线数据尚未准备。\n"
@@ -99,24 +182,19 @@ class TwrpgQueryPlugin(Star):
             return
 
         if not text:
-            yield event.plain_result(
-                "用法: 世界 <物品名>\n"
-                "      界 <物品名>\n"
-                "例如: 世界 洞悉·真理之瞳\n"
-                "      界 太阳石"
-            )
+            yield event.plain_result(f"用法: {usage}\n例如: {example}")
             return
 
-        matches = self.store.search(text, limit=_MAX_MATCHES + 3)
+        matches = search(text, limit=_MAX_MATCHES + 3)
         if not matches:
-            yield event.plain_result(f"❌ 未找到「{text}」的相关物品。")
+            yield event.plain_result(f"❌ 未找到「{text}」的相关{entity_label}。")
             return
 
         query_key = normalize_query(text)
         exact_matches = [
-            item_id
-            for item_id in matches
-            if normalize_query(self.store.item_name(item_id)) == query_key
+            entity_id
+            for entity_id in matches
+            if normalize_query(exact_name(entity_id)) == query_key
         ]
         if len(exact_matches) == 1:
             matches = exact_matches
@@ -126,23 +204,23 @@ class TwrpgQueryPlugin(Star):
                 f"找到 {len(matches)} 个匹配结果，请输入更精确的名称后重新查询：",
                 "",
             ]
-            for item_id in matches[:8]:
-                lines.append(f"· {_match_label(self.store, item_id, text)}")
+            for entity_id in matches[:8]:
+                lines.append(f"· {match_label(entity_id, text)}")
             yield event.plain_result("\n".join(lines))
             return
 
-        item_id = matches[0]
-        display = self.store.build_display(item_id)
+        entity_id = matches[0]
+        display = build_display(entity_id)
         if not display:
-            yield event.plain_result(f"❌ 物品数据异常: {item_id}")
+            yield event.plain_result(f"❌ {entity_label}数据异常: {entity_id}")
             return
 
         try:
-            card_path = generate_item_card(display)
+            card_path = generate_card(display)
             yield event.image_result(card_path)
         except Exception as e:
-            logger.error(f"生成 TWRPG 查询卡片失败 ({item_id}): {e}")
-            yield event.plain_result(format_text_fallback(display))
+            logger.error(f"生成 TWRPG {log_prefix}查询卡片失败 ({entity_id}): {e}")
+            yield event.plain_result(text_fallback(display))
 
     async def terminate(self):
         logger.info("世界RPG 查询插件已卸载")

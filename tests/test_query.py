@@ -9,7 +9,11 @@ PARENT_DIR = os.path.dirname(PLUGIN_DIR)
 if PARENT_DIR not in sys.path:
     sys.path.insert(0, PARENT_DIR)
 
-from astrbot_plugin_twrpg_query.card_renderer import generate_item_card
+from astrbot_plugin_twrpg_query.card_renderer import (
+    generate_hero_card,
+    generate_item_card,
+    generate_skill_card,
+)
 from astrbot_plugin_twrpg_query.data_loader import (
     TwrpgDataStore,
     normalize_query,
@@ -130,6 +134,47 @@ class TwrpgQueryTests(unittest.TestCase):
 
     def test_normalize_query(self):
         self.assertEqual(normalize_query("洞悉·真理之瞳"), normalize_query("洞悉 真理之瞳"))
+
+    def test_search_hero_by_name(self):
+        matches = self.store.search_hero("追星剑圣")
+        self.assertEqual(matches[0], "H001")
+
+    def test_search_hero_by_character(self):
+        matches = self.store.search_hero("路易斯")
+        self.assertIn("H001", matches)
+
+    def test_build_hero_display(self):
+        display = self.store.build_hero_display("H001")
+        self.assertIsNotNone(display)
+        assert display is not None
+        self.assertEqual(display.name, "追星剑圣")
+        self.assertIn("路易斯", display.character_name)
+        self.assertTrue(display.icon and os.path.exists(display.icon))
+        self.assertGreater(len(display.skills), 0)
+        for skill in display.skills:
+            self.assertTrue(skill.name)
+            self.assertTrue(skill.icon and os.path.exists(skill.icon))
+        path = generate_hero_card(display)
+        self.assertTrue(os.path.exists(path))
+        self.assertGreater(os.path.getsize(path), 3000)
+        os.remove(path)
+
+    def test_search_skill_by_name(self):
+        matches = self.store.search_skill("升龙击")
+        self.assertTrue(matches)
+        display = self.store.build_skill_display(matches[0])
+        assert display is not None
+        self.assertIn("升龙击", display.name)
+        self.assertEqual(display.hero_id, "H001")
+
+    def test_generate_skill_card(self):
+        matches = self.store.search_skill("升龙击")
+        display = self.store.build_skill_display(matches[0])
+        assert display is not None
+        path = generate_skill_card(display)
+        self.assertTrue(os.path.exists(path))
+        self.assertGreater(os.path.getsize(path), 2000)
+        os.remove(path)
 
 
 if __name__ == "__main__":

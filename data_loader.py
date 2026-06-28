@@ -118,6 +118,38 @@ class ExclusiveEntry:
 
 
 @dataclass
+class SkillDisplay:
+    id: str
+    name: str
+    description: str
+    raw_description: str = ""
+    icon: str | None = None
+    hotkey: str = ""
+    hero_id: str = ""
+    hero_name: str = ""
+    hero_icon: str | None = None
+
+
+@dataclass
+class HeroSkillEntry:
+    id: str
+    name: str
+    description: str
+    raw_description: str = ""
+    icon: str | None = None
+    hotkey: str = ""
+
+
+@dataclass
+class HeroDisplay:
+    id: str
+    name: str
+    character_name: str = ""
+    icon: str | None = None
+    skills: list[HeroSkillEntry] = field(default_factory=list)
+
+
+@dataclass
 class ItemDisplay:
     id: str
     name: str
@@ -144,6 +176,9 @@ class TwrpgDataStore:
         self.drops_by_item: dict[str, list[tuple[str, float]]] = {}
         self.bosses_by_id: dict[str, dict] = {}
         self.heros_by_id: dict[str, dict] = {}
+        self.hero_search_index: list[tuple[str, str]] = []
+        self.skill_search_index: list[tuple[str, str]] = []
+        self.skills_by_key: dict[str, tuple[str, int]] = {}
         self.exclusives_by_item: dict[str, list[dict]] = {}
         self.passives_by_id: dict[str, dict] = {}
         self.loaded = False
@@ -229,8 +264,32 @@ class TwrpgDataStore:
     def _load_heros(self) -> None:
         for hero in self._load_json("heros.json"):
             hero_id = hero.get("id", "")
-            if hero_id:
-                self.heros_by_id[hero_id] = hero
+            if not hero_id:
+                continue
+            self.heros_by_id[hero_id] = hero
+            for label in self._hero_search_labels(hero):
+                key = normalize_query(label)
+                if key:
+                    self.hero_search_index.append((key, hero_id))
+            for skill_idx, skill in enumerate(hero.get("skills") or []):
+                skill_id = skill.get("id", "")
+                if not skill_id:
+                    continue
+                self.skills_by_key[f"{hero_id}:{skill_id}"] = (hero_id, skill_idx)
+                for label in self._skill_search_labels(skill):
+                    key = normalize_query(label)
+                    if key:
+                        self.skill_search_index.append((key, f"{hero_id}:{skill_id}"))
+                close = skill.get("closeInfo")
+                if close:
+                    close_id = f"{skill_id}_close"
+                    self.skills_by_key[f"{hero_id}:{close_id}"] = (hero_id, skill_idx)
+                    for label in self._skill_search_labels(close, suffix="_close"):
+                        key = normalize_query(label)
+                        if key:
+                            self.skill_search_index.append(
+                                (key, f"{hero_id}:{close_id}")
+                            )
 
     def _load_exclusives(self) -> None:
         for row in self._load_json("exclusives.json"):
@@ -291,6 +350,29 @@ class TwrpgDataStore:
         }
         return {x for x in labels if x}
 
+    @staticmethod
+    def _hero_search_labels(hero: dict) -> set[str]:
+        labels = {
+            hero.get("displayName", ""),
+            hero.get("name", ""),
+            strip_color(hero.get("colorName", "")),
+            hero.get("characterName", ""),
+            hero.get("id", ""),
+        }
+        raw = hero.get("rawStats") or {}
+        if raw.get("upro"):
+            labels.add(raw["upro"])
+        return {x for x in labels if x}
+
+    @staticmethod
+    def _skill_search_labels(skill: dict, suffix: str = "") -> set[str]:
+        labels = {
+            skill.get("displayName", ""),
+            skill.get("name", ""),
+            skill.get("id", "") + suffix,
+        }
+        return {x for x in labels if x}
+
     def item_name(self, item_id: str) -> str:
         item = self.items_by_id.get(item_id)
         if not item:
@@ -319,7 +401,14 @@ class TwrpgDataStore:
             return False
         return True
 
-    def search(self, query: str, limit: int = 8) -> list[str]:
+    @staticmethod
+    def _search_index(
+        query: str,
+        index: list[tuple[str, str]],
+        limit: int,
+        *,
+        validate=None,
+    ) -> list[str]:
         key = normalize_query(query)
         if not key:
             return []
@@ -329,24 +418,142 @@ class TwrpgDataStore:
         contains: list[str] = []
         seen: set[str] = set()
 
-        for index_key, item_id in self.search_index:
-            if item_id in seen:
+        for index_key, entity_id in index:
+            if entity_id in seen:
                 continue
-            item = self.items_by_id.get(item_id)
-            if not item or not self._is_queryable(item):
+            if validate and not validate(entity_id):
                 continue
             if index_key == key:
-                exact.append(item_id)
-                seen.add(item_id)
+                exact.append(entity_id)
+                seen.add(entity_id)
             elif index_key.startswith(key):
-                prefix.append(item_id)
-                seen.add(item_id)
+                prefix.append(entity_id)
+                seen.add(entity_id)
             elif key in index_key:
-                contains.append(item_id)
-                seen.add(item_id)
+                contains.append(entity_id)
+                seen.add(entity_id)
 
-        ordered = exact + prefix + contains
-        return ordered[:limit]
+        return (exact + prefix + contains)[:limit]
+
+    def search(self, query: str, limit: int = 8) -> list[str]:
+        return self._search_index(
+            query,
+            self.search_index,
+            limit,
+            validate=lambda item_id: self._is_queryable(
+                self.items_by_id.get(item_id, {})
+            ),
+        )
+
+    def search_hero(self, query: str, limit: int = 8) -> list[str]:
+        return self._search_index(
+            query,
+            self.hero_search_index,
+            limit,
+            validate=lambda hero_id: hero_id in self.heros_by_id,
+        )
+
+    def search_skill(self, query: str, limit: int = 8) -> list[str]:
+        return self._search_index(
+            query,
+            self.skill_search_index,
+            limit,
+            validate=lambda skill_key: skill_key in self.skills_by_key,
+        )
+
+    def _hero_skill_entries(self, hero_id: str) -> list[HeroSkillEntry]:
+        hero = self.heros_by_id.get(hero_id)
+        if not hero:
+            return []
+        entries: list[HeroSkillEntry] = []
+        for skill in hero.get("skills") or []:
+            entries.append(
+                HeroSkillEntry(
+                    id=skill.get("id", ""),
+                    name=strip_color(skill.get("name") or skill.get("displayName") or ""),
+                    description=strip_color(skill.get("description") or ""),
+                    raw_description=skill.get("rawDesc") or skill.get("description") or "",
+                    icon=self._entity_icon(skill.get("img", "")),
+                    hotkey=(skill.get("hotkey") or "").strip(),
+                )
+            )
+            close = skill.get("closeInfo")
+            if close:
+                entries.append(
+                    HeroSkillEntry(
+                        id=f"{skill.get('id', '')}_close",
+                        name=strip_color(close.get("name") or close.get("displayName") or ""),
+                        description=strip_color(close.get("description") or ""),
+                        raw_description=close.get("rawDesc") or close.get("description") or "",
+                        icon=self._entity_icon(close.get("img", "")),
+                        hotkey=(skill.get("hotkey") or "").strip(),
+                    )
+                )
+        return entries
+
+    def build_hero_display(self, hero_id: str) -> HeroDisplay | None:
+        hero = self.heros_by_id.get(hero_id)
+        if not hero:
+            return None
+        raw = hero.get("rawStats") or {}
+        character_name = strip_color(
+            hero.get("characterName") or raw.get("upro") or ""
+        )
+        return HeroDisplay(
+            id=hero_id,
+            name=self.hero_name(hero_id),
+            character_name=character_name,
+            icon=self._hero_icon(hero_id),
+            skills=self._hero_skill_entries(hero_id),
+        )
+
+    def build_skill_display(self, skill_key: str) -> SkillDisplay | None:
+        ref = self.skills_by_key.get(skill_key)
+        if not ref:
+            return None
+        hero_id, skill_idx = ref
+        hero = self.heros_by_id.get(hero_id)
+        if not hero:
+            return None
+        skills = hero.get("skills") or []
+        if skill_idx >= len(skills):
+            return None
+
+        skill = skills[skill_idx]
+        is_close = skill_key.endswith("_close")
+        if is_close:
+            close = skill.get("closeInfo") or {}
+            return SkillDisplay(
+                id=f"{skill.get('id', '')}_close",
+                name=strip_color(close.get("name") or close.get("displayName") or ""),
+                description=strip_color(close.get("description") or ""),
+                raw_description=close.get("rawDesc") or close.get("description") or "",
+                icon=self._entity_icon(close.get("img", "")),
+                hotkey=(skill.get("hotkey") or "").strip(),
+                hero_id=hero_id,
+                hero_name=self.hero_name(hero_id),
+                hero_icon=self._hero_icon(hero_id),
+            )
+
+        return SkillDisplay(
+            id=skill.get("id", ""),
+            name=strip_color(skill.get("name") or skill.get("displayName") or ""),
+            description=strip_color(skill.get("description") or ""),
+            raw_description=skill.get("rawDesc") or skill.get("description") or "",
+            icon=self._entity_icon(skill.get("img", "")),
+            hotkey=(skill.get("hotkey") or "").strip(),
+            hero_id=hero_id,
+            hero_name=self.hero_name(hero_id),
+            hero_icon=self._hero_icon(hero_id),
+        )
+
+    def skill_label(self, skill_key: str) -> str:
+        display = self.build_skill_display(skill_key)
+        if not display:
+            return skill_key
+        if display.hero_name:
+            return f"{display.name}（{display.hero_name}）"
+        return display.name
 
     def build_display(self, item_id: str) -> ItemDisplay | None:
         item = self.items_by_id.get(item_id)

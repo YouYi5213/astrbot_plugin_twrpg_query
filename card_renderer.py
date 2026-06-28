@@ -8,7 +8,7 @@ from typing import Iterable
 
 from PIL import Image, ImageDraw, ImageFont
 
-from .data_loader import ItemDisplay, RecipeLine, strip_color
+from .data_loader import HeroDisplay, ItemDisplay, RecipeLine, SkillDisplay, strip_color
 from .desc_renderer import draw_game_panel, measure_game_panel, resolve_items_bg_path
 
 _PLUGIN_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -30,6 +30,8 @@ LIST_ICON_GAP = 8
 TITLE_HEIGHT = 52
 RECIPE_GROUP_GAP = 8
 RECIPE_CHOICE_ROW_HEIGHT = 28
+SKILL_ICON_SIZE = (40, 40)
+SKILL_BLOCK_GAP = 10
 OPTIONAL_LABEL = "[可选]"
 
 COLORS = {
@@ -595,4 +597,274 @@ def format_text_fallback(item: ItemDisplay) -> str:
         for entry in item.boss_drops:
             lines.append(f"· {entry.boss_name} ({_format_chance(entry.chance)})")
 
+    return "\n".join(lines).strip()
+
+
+def _skill_block_height(
+    draw: ImageDraw.ImageDraw,
+    skill,
+    font,
+    panel_width: int,
+) -> int:
+    text_x = CARD_PADDING + 16 + SKILL_ICON_SIZE[0] + LIST_ICON_GAP
+    text_width = CARD_WIDTH - CARD_PADDING - text_x - 8
+    title_h = 22 if skill.name else 0
+    desc_text = skill.raw_description or skill.description
+    panel_height, _ = measure_game_panel(
+        draw,
+        desc_text,
+        font,
+        min(panel_width, text_width),
+    )
+    return max(SKILL_ICON_SIZE[1], title_h + panel_height + 4)
+
+
+def _draw_skill_block(
+    card: Image.Image,
+    draw: ImageDraw.ImageDraw,
+    y: int,
+    skill,
+    panel_width: int,
+) -> int:
+    font = _font(15)
+    title_font = _font(15, bold=True)
+    icon_x = CARD_PADDING + 16
+    text_x = icon_x + SKILL_ICON_SIZE[0] + LIST_ICON_GAP
+    text_width = CARD_WIDTH - CARD_PADDING - text_x - 8
+
+    desc_text = skill.raw_description or skill.description
+    panel_height, wrapped = measure_game_panel(
+        draw,
+        desc_text,
+        font,
+        min(panel_width, text_width),
+    )
+    title_h = 22 if skill.name else 0
+    block_h = max(SKILL_ICON_SIZE[1], title_h + panel_height + 4)
+
+    icon = _load_image(skill.icon, SKILL_ICON_SIZE)
+    _paste_in_slot(card, icon, icon_x, y, SKILL_ICON_SIZE[0], block_h)
+
+    text_y = y
+    if skill.name:
+        title = skill.name
+        if skill.hotkey:
+            title = f"{title} {skill.hotkey}"
+        draw.text((text_x, text_y), title, fill=COLORS["accent"], font=title_font)
+        text_y += title_h
+
+    draw_game_panel(
+        card,
+        draw,
+        text_x,
+        text_y,
+        min(panel_width, text_width),
+        wrapped,
+        font,
+        _ITEMS_BG,
+    )
+    return y + block_h + SKILL_BLOCK_GAP
+
+
+def _estimate_hero_height(draw: ImageDraw.ImageDraw, hero: HeroDisplay) -> int:
+    body_font = _font(15)
+    content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
+    y = CARD_PADDING + TITLE_HEIGHT + SECTION_GAP
+
+    if hero.skills:
+        y += HEADER_HEIGHT
+        for skill in hero.skills:
+            y += _skill_block_height(draw, skill, body_font, content_width)
+        y -= SKILL_BLOCK_GAP
+        y += SECTION_GAP
+
+    return y + CARD_PADDING
+
+
+def generate_hero_card(hero: HeroDisplay) -> str:
+    _ensure_dirs()
+    tmp = Image.new("RGB", (CARD_WIDTH, 200), COLORS["bg"])
+    measure = ImageDraw.Draw(tmp)
+    height = _estimate_hero_height(measure, hero)
+
+    card = Image.new("RGB", (CARD_WIDTH, height), COLORS["bg"])
+    draw = ImageDraw.Draw(card)
+    draw.rounded_rectangle(
+        (8, 8, CARD_WIDTH - 8, height - 8),
+        radius=14,
+        fill=COLORS["panel"],
+        outline=COLORS["border"],
+        width=1,
+    )
+
+    title_font = _font(22, bold=True)
+    subtitle_font = _font(15)
+    title_x = CARD_PADDING + 8
+    if hero.icon:
+        title_icon = _load_image(hero.icon, TITLE_ICON_SIZE)
+        _paste_in_slot(
+            card,
+            title_icon,
+            CARD_PADDING + 8,
+            CARD_PADDING,
+            TITLE_ICON_SIZE[0],
+            TITLE_ICON_SIZE[1],
+        )
+        title_x = CARD_PADDING + 8 + TITLE_ICON_SIZE[0] + 10
+
+    title_y = CARD_PADDING + 8
+    draw.text(
+        (title_x, title_y),
+        hero.name,
+        fill=COLORS["title"],
+        font=title_font,
+    )
+    if hero.character_name:
+        sub_y = title_y + 28
+        draw.text(
+            (title_x, sub_y),
+            hero.character_name,
+            fill=COLORS["muted"],
+            font=subtitle_font,
+        )
+
+    id_text = f"ID: {hero.id}"
+    id_font = _font(12)
+    id_w = _text_width(draw, id_text, id_font)
+    draw.text(
+        (CARD_WIDTH - CARD_PADDING - 8 - id_w, CARD_PADDING + 8),
+        id_text,
+        fill=COLORS["muted"],
+        font=id_font,
+    )
+
+    y = CARD_PADDING + TITLE_HEIGHT
+    content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
+
+    if hero.skills:
+        y = _draw_header(draw, y, "▎技能")
+        for skill in hero.skills:
+            y = _draw_skill_block(card, draw, y, skill, content_width)
+
+    out_path = os.path.join(_CARDS_DIR, f"hero_{hero.id}_{uuid.uuid4().hex[:8]}.png")
+    card.save(out_path, format="PNG", optimize=True)
+    return out_path
+
+
+def _estimate_skill_height(draw: ImageDraw.ImageDraw, skill: SkillDisplay) -> int:
+    body_font = _font(15)
+    content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
+    y = CARD_PADDING + TITLE_HEIGHT + SECTION_GAP
+    y += HEADER_HEIGHT
+    y += _skill_block_height(draw, skill, body_font, content_width)
+    return y + CARD_PADDING
+
+
+def generate_skill_card(skill: SkillDisplay) -> str:
+    _ensure_dirs()
+    tmp = Image.new("RGB", (CARD_WIDTH, 200), COLORS["bg"])
+    measure = ImageDraw.Draw(tmp)
+    height = _estimate_skill_height(measure, skill)
+
+    card = Image.new("RGB", (CARD_WIDTH, height), COLORS["bg"])
+    draw = ImageDraw.Draw(card)
+    draw.rounded_rectangle(
+        (8, 8, CARD_WIDTH - 8, height - 8),
+        radius=14,
+        fill=COLORS["panel"],
+        outline=COLORS["border"],
+        width=1,
+    )
+
+    title_font = _font(22, bold=True)
+    subtitle_font = _font(15)
+    title_x = CARD_PADDING + 8
+    if skill.icon:
+        title_icon = _load_image(skill.icon, TITLE_ICON_SIZE)
+        _paste_in_slot(
+            card,
+            title_icon,
+            CARD_PADDING + 8,
+            CARD_PADDING,
+            TITLE_ICON_SIZE[0],
+            TITLE_ICON_SIZE[1],
+        )
+        title_x = CARD_PADDING + 8 + TITLE_ICON_SIZE[0] + 10
+
+    title_y = CARD_PADDING + 8
+    title = skill.name
+    if skill.hotkey:
+        title = f"{title} {skill.hotkey}"
+    draw.text(
+        (title_x, title_y),
+        title,
+        fill=COLORS["title"],
+        font=title_font,
+    )
+
+    if skill.hero_name:
+        hero_x = title_x
+        hero_y = title_y + 28
+        if skill.hero_icon:
+            hero_icon = _load_image(skill.hero_icon, LIST_ICON_SIZE)
+            _paste_in_slot(
+                card,
+                hero_icon,
+                hero_x,
+                hero_y - 2,
+                LIST_ICON_SIZE[0],
+                LIST_ICON_SIZE[1],
+            )
+            hero_x += LIST_ICON_SIZE[0] + 6
+        draw.text(
+            (hero_x, hero_y),
+            skill.hero_name,
+            fill=COLORS["muted"],
+            font=subtitle_font,
+        )
+
+    id_text = f"ID: {skill.id}"
+    id_font = _font(12)
+    id_w = _text_width(draw, id_text, id_font)
+    draw.text(
+        (CARD_WIDTH - CARD_PADDING - 8 - id_w, CARD_PADDING + 8),
+        id_text,
+        fill=COLORS["muted"],
+        font=id_font,
+    )
+
+    y = CARD_PADDING + TITLE_HEIGHT
+    content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
+    y = _draw_header(draw, y, "▎描述")
+    _draw_skill_block(card, draw, y, skill, content_width)
+
+    out_path = os.path.join(_CARDS_DIR, f"skill_{skill.id}_{uuid.uuid4().hex[:8]}.png")
+    card.save(out_path, format="PNG", optimize=True)
+    return out_path
+
+
+def format_hero_text_fallback(hero: HeroDisplay) -> str:
+    lines = [hero.name]
+    if hero.character_name:
+        lines.append(hero.character_name)
+    lines.append("")
+    for skill in hero.skills:
+        title = skill.name
+        if skill.hotkey:
+            title = f"{title} {skill.hotkey}"
+        lines.append(f"【{title}】")
+        lines.append(strip_color(skill.raw_description or skill.description))
+        lines.append("")
+    return "\n".join(lines).strip()
+
+
+def format_skill_text_fallback(skill: SkillDisplay) -> str:
+    title = skill.name
+    if skill.hotkey:
+        title = f"{title} {skill.hotkey}"
+    lines = [title]
+    if skill.hero_name:
+        lines.append(f"英雄: {skill.hero_name}")
+    lines.append("")
+    lines.append(strip_color(skill.raw_description or skill.description))
     return "\n".join(lines).strip()
