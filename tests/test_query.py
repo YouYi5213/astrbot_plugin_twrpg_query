@@ -207,6 +207,31 @@ class TwrpgQueryTests(unittest.TestCase):
         self.assertEqual(skill_display.name, "圣光裂空")
         self.assertEqual(skill_display.hotkey, "[Q]")
 
+    def test_hero_summon_skills(self):
+        priest = self.store.build_hero_display("H007")
+        assert priest is not None
+        skill_names = {skill.name for skill in priest.skills}
+        self.assertIn("天国之门", skill_names)
+        self.assertIn("神圣之光", skill_names)
+        self.assertIn("返回", skill_names)
+
+        elementalist = self.store.build_hero_display("H009")
+        assert elementalist is not None
+        self.assertEqual(len(elementalist.skill_sections), 6)
+        summon_titles = [s.title for s in elementalist.skill_sections if s.title]
+        self.assertEqual(
+            summon_titles,
+            ["熔岩精灵", "水殄精灵", "闪电精灵", "自然精灵", "混沌精灵"],
+        )
+        self.assertNotIn("返回", {s.name for s in elementalist.skills})
+        self.assertIn("爆破", {s.name for s in elementalist.skills})
+
+        for hero_id in ("H01I", "H01N", "H066"):
+            display = self.store.build_hero_display(hero_id)
+            assert display is not None
+            self.assertEqual(len(display.skill_sections), 2)
+            self.assertGreater(len(display.skill_sections[1].skills), 0)
+
     def test_hero_card_height_covers_content(self):
         from PIL import Image, ImageDraw
 
@@ -233,6 +258,19 @@ class TwrpgQueryTests(unittest.TestCase):
 
         img = Image.open(path)
         self.assertGreaterEqual(img.size[1], tracked[-1])
+        self.assertGreaterEqual(img.size[1], estimated)
+        img.close()
+        os.remove(path)
+
+    def test_summon_hero_card_height(self):
+        from PIL import Image, ImageDraw
+
+        hero = self.store.build_hero_display("H009")
+        assert hero is not None
+        measure = ImageDraw.Draw(Image.new("RGB", (640, 200)))
+        estimated = _estimate_hero_height(measure, hero)
+        path = generate_hero_card(hero)
+        img = Image.open(path)
         self.assertGreaterEqual(img.size[1], estimated)
         img.close()
         os.remove(path)

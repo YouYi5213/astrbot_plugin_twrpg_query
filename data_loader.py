@@ -63,6 +63,15 @@ LIMIT_HERO_IDS: dict[str, list[str]] = {
     "6": ["H04Q", "H065"],
 }
 
+# 英雄本体技能之外，需一并展示在英雄卡片上的召唤物（heros.json 中的单位 ID）
+HERO_SUMMON_IDS: dict[str, list[str]] = {
+    "H007": ["h00C"],  # 牧师 → 拉古尔
+    "H01I": ["h01J"],  # 炼金术士 → 无知
+    "H01N": ["h01O"],  # 风法 → 风之守护者
+    "H066": ["h067"],  # 巫术师 → 亚马罗斯
+    "H009": ["nlv1", "hwat", "hwt2", "hmil", "hphx"],  # 精灵召唤师 → 五元素精灵
+}
+
 
 def clean_passive_text(text: str) -> str:
     return _PASSIVE_ATTRIB_RE.sub("", text or "").rstrip()
@@ -161,12 +170,23 @@ class HeroSkillEntry:
 
 
 @dataclass
+class HeroSkillSection:
+    title: str = ""
+    icon: str | None = None
+    skills: list[HeroSkillEntry] = field(default_factory=list)
+
+
+@dataclass
 class HeroDisplay:
     id: str
     name: str
     character_name: str = ""
     icon: str | None = None
-    skills: list[HeroSkillEntry] = field(default_factory=list)
+    skill_sections: list[HeroSkillSection] = field(default_factory=list)
+
+    @property
+    def skills(self) -> list[HeroSkillEntry]:
+        return [skill for section in self.skill_sections for skill in section.skills]
 
 
 @dataclass
@@ -552,6 +572,43 @@ class TwrpgDataStore:
                 )
         return entries
 
+    def _summon_skill_entries(
+        self,
+        summon_id: str,
+        *,
+        skip_shared_return: bool = False,
+    ) -> list[HeroSkillEntry]:
+        entries = self._hero_skill_entries(summon_id)
+        if not skip_shared_return:
+            return entries
+        return [
+            entry
+            for entry in entries
+            if not (entry.id == "A00F" and entry.name == "返回")
+        ]
+
+    def _hero_skill_sections(self, hero_id: str) -> list[HeroSkillSection]:
+        sections = [
+            HeroSkillSection(title="", skills=self._hero_skill_entries(hero_id))
+        ]
+        summon_ids = HERO_SUMMON_IDS.get(hero_id, [])
+        skip_shared_return = len(summon_ids) > 1
+        for summon_id in summon_ids:
+            skills = self._summon_skill_entries(
+                summon_id,
+                skip_shared_return=skip_shared_return,
+            )
+            if not skills:
+                continue
+            sections.append(
+                HeroSkillSection(
+                    title=self.hero_name(summon_id),
+                    icon=self._hero_icon(summon_id),
+                    skills=skills,
+                )
+            )
+        return sections
+
     def build_hero_display(self, hero_id: str) -> HeroDisplay | None:
         hero = self.heros_by_id.get(hero_id)
         if not hero:
@@ -565,7 +622,7 @@ class TwrpgDataStore:
             name=self.hero_name(hero_id),
             character_name=character_name,
             icon=self._hero_icon(hero_id),
-            skills=self._hero_skill_entries(hero_id),
+            skill_sections=self._hero_skill_sections(hero_id),
         )
 
     def build_skill_display(self, skill_key: str) -> SkillDisplay | None:

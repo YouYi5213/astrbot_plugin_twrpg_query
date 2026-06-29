@@ -23,6 +23,7 @@ SECTION_GAP = 14
 LINE_GAP = 4
 ROW_HEIGHT = 32
 HEADER_HEIGHT = 34
+SUBSECTION_HEIGHT = 30
 TITLE_ICON_SIZE = (52, 52)
 LIST_ICON_SIZE = (28, 28)
 HERO_ICON_SIZE = (32, 32)
@@ -351,6 +352,113 @@ def _draw_header(draw: ImageDraw.ImageDraw, y: int, title: str) -> int:
     return line_y + 10
 
 
+def _draw_subsection_header(
+    card: Image.Image,
+    draw: ImageDraw.ImageDraw,
+    y: int,
+    title: str,
+    icon: str | None = None,
+) -> int:
+    x = CARD_PADDING + 16
+    text_y = y + 4
+    if icon:
+        header_icon = _load_image(icon, LIST_ICON_SIZE)
+        _paste_in_slot(
+            card,
+            header_icon,
+            x,
+            y,
+            LIST_ICON_SIZE[0],
+            SUBSECTION_HEIGHT,
+        )
+        x += LIST_ICON_SIZE[0] + 8
+    draw.text(
+        (x, text_y),
+        f"▸ {title}",
+        fill=COLORS["muted"],
+        font=_font(14, bold=True),
+    )
+    return y + SUBSECTION_HEIGHT
+
+
+def _hero_has_skill_content(hero: HeroDisplay) -> bool:
+    return any(section.skills for section in hero.skill_sections)
+
+
+def _estimate_hero_height(draw: ImageDraw.ImageDraw, hero: HeroDisplay) -> int:
+    body_font = _font(15)
+    content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
+    y = CARD_PADDING + TITLE_HEIGHT
+
+    if not _hero_has_skill_content(hero):
+        return y + CARD_PADDING + CARD_BOTTOM_EXTRA
+
+    hero_section = next((s for s in hero.skill_sections if not s.title), None)
+    summon_sections = [s for s in hero.skill_sections if s.title]
+
+    if hero_section and hero_section.skills:
+        y += HEADER_HEIGHT
+        for skill in hero_section.skills:
+            y += _skill_block_height(draw, skill, body_font, content_width)
+            y += SKILL_BLOCK_GAP
+        y -= SKILL_BLOCK_GAP
+
+    if summon_sections:
+        if len(summon_sections) == 1:
+            y += SECTION_GAP // 2 + HEADER_HEIGHT
+            section = summon_sections[0]
+            for skill in section.skills:
+                y += _skill_block_height(draw, skill, body_font, content_width)
+                y += SKILL_BLOCK_GAP
+            y -= SKILL_BLOCK_GAP
+        else:
+            y += SECTION_GAP // 2 + HEADER_HEIGHT
+            for section in summon_sections:
+                y += SUBSECTION_HEIGHT
+                for skill in section.skills:
+                    y += _skill_block_height(draw, skill, body_font, content_width)
+                    y += SKILL_BLOCK_GAP
+                if section.skills:
+                    y -= SKILL_BLOCK_GAP
+                y += 4
+
+    return y + CARD_PADDING + CARD_BOTTOM_EXTRA
+
+
+def _draw_hero_skill_sections(
+    card: Image.Image,
+    draw: ImageDraw.ImageDraw,
+    y: int,
+    hero: HeroDisplay,
+    content_width: int,
+) -> int:
+    hero_section = next((s for s in hero.skill_sections if not s.title), None)
+    summon_sections = [s for s in hero.skill_sections if s.title]
+
+    if hero_section and hero_section.skills:
+        y = _draw_header(draw, y, "▎技能")
+        for skill in hero_section.skills:
+            y = _draw_skill_block(card, draw, y, skill, content_width)
+
+    if not summon_sections:
+        return y
+
+    if len(summon_sections) == 1:
+        section = summon_sections[0]
+        y = _draw_header(draw, y + SECTION_GAP // 2, f"▎召唤 · {section.title}")
+        for skill in section.skills:
+            y = _draw_skill_block(card, draw, y, skill, content_width)
+        return y
+
+    y = _draw_header(draw, y + SECTION_GAP // 2, "▎召唤精灵")
+    for section in summon_sections:
+        y = _draw_subsection_header(card, draw, y, section.title, section.icon)
+        for skill in section.skills:
+            y = _draw_skill_block(card, draw, y, skill, content_width)
+        y += 4
+    return y
+
+
 def _draw_bullet_lines(
     draw: ImageDraw.ImageDraw,
     y: int,
@@ -667,21 +775,6 @@ def _draw_skill_block(
     return y + block_h + SKILL_BLOCK_GAP
 
 
-def _estimate_hero_height(draw: ImageDraw.ImageDraw, hero: HeroDisplay) -> int:
-    body_font = _font(15)
-    content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
-    y = CARD_PADDING + TITLE_HEIGHT
-
-    if hero.skills:
-        y += HEADER_HEIGHT
-        for skill in hero.skills:
-            y += _skill_block_height(draw, skill, body_font, content_width)
-            y += SKILL_BLOCK_GAP
-        y -= SKILL_BLOCK_GAP
-
-    return y + CARD_PADDING + CARD_BOTTOM_EXTRA
-
-
 def _estimate_skill_height(draw: ImageDraw.ImageDraw, skill: SkillDisplay) -> int:
     body_font = _font(15)
     content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
@@ -751,10 +844,8 @@ def generate_hero_card(hero: HeroDisplay) -> str:
     y = CARD_PADDING + TITLE_HEIGHT
     content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
 
-    if hero.skills:
-        y = _draw_header(draw, y, "▎技能")
-        for skill in hero.skills:
-            y = _draw_skill_block(card, draw, y, skill, content_width)
+    if _hero_has_skill_content(hero):
+        _draw_hero_skill_sections(card, draw, y, hero, content_width)
 
     out_path = os.path.join(_CARDS_DIR, f"hero_{hero.id}_{uuid.uuid4().hex[:8]}.png")
     card.save(out_path, format="PNG", optimize=True)
@@ -849,13 +940,48 @@ def format_hero_text_fallback(hero: HeroDisplay) -> str:
     if hero.character_name:
         lines.append(hero.character_name)
     lines.append("")
-    for skill in hero.skills:
-        title = skill.name
-        if skill.hotkey:
-            title = f"{title} {skill.hotkey}"
-        lines.append(f"【{title}】")
-        lines.append(strip_color(skill.raw_description or skill.description))
-        lines.append("")
+
+    hero_section = next((s for s in hero.skill_sections if not s.title), None)
+    summon_sections = [s for s in hero.skill_sections if s.title]
+
+    if hero_section and hero_section.skills:
+        lines.append("【技能】")
+        for skill in hero_section.skills:
+            title = skill.name
+            if skill.hotkey:
+                title = f"{title} {skill.hotkey}"
+            lines.append(f"· {title}")
+            lines.append(strip_color(skill.raw_description or skill.description))
+            lines.append("")
+
+    if summon_sections:
+        if len(summon_sections) == 1:
+            section = summon_sections[0]
+            lines.append(f"【召唤 · {section.title}】")
+            for skill in section.skills:
+                title = skill.name
+                if skill.hotkey:
+                    title = f"{title} {skill.hotkey}"
+                lines.append(f"· {title}")
+                lines.append(strip_color(skill.raw_description or skill.description))
+                lines.append("")
+        else:
+            lines.append("【召唤精灵】")
+            for section in summon_sections:
+                lines.append(f"▸ {section.title}")
+                for skill in section.skills:
+                    title = skill.name
+                    if skill.hotkey:
+                        title = f"{title} {skill.hotkey}"
+                    lines.append(f"  · {title}")
+                    lines.append(
+                        "  "
+                        + strip_color(skill.raw_description or skill.description).replace(
+                            "\n", "\n  "
+                        )
+                    )
+                lines.append("")
+
     return "\n".join(lines).strip()
 
 

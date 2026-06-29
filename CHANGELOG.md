@@ -6,6 +6,15 @@
 
 ---
 
+## [1.1.2] - 2026-06-29
+
+### 新增
+
+- 英雄卡片展示召唤物技能：牧师（拉古尔）、炼金术士（无知）、风法（风之守护者）、巫术师（亚马罗斯）
+- 精灵召唤师五元素精灵分区展示（熔岩 / 水殄 / 闪电 / 自然 / 混沌），多精灵时合并重复的「返回」技能
+
+---
+
 ## [1.1.1] - 2026-06-29
 
 ### 修复
@@ -125,6 +134,7 @@
 
 ---
 
+[1.1.2]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.2
 [1.1.1]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.1
 [1.1.0]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.0
 [1.0.9]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.0.9
