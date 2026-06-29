@@ -6,6 +6,14 @@
 
 ---
 
+## [1.1.3] - 2026-06-29
+
+### 修复
+
+- 召唤精灵子标题前的「X」缺字框：移除字体不支持的 `▸` 符号，改为仅显示精灵图标与名称
+
+---
+
 ## [1.1.2] - 2026-06-29
 
 ### 新增
@@ -134,6 +142,7 @@
 
 ---
 
+[1.1.3]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.3
 [1.1.2]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.2
 [1.1.1]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.1
 [1.1.0]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.0

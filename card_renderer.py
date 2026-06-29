@@ -374,7 +374,7 @@ def _draw_subsection_header(
         x += LIST_ICON_SIZE[0] + 8
     draw.text(
         (x, text_y),
-        f"▸ {title}",
+        title,
         fill=COLORS["muted"],
         font=_font(14, bold=True),
     )
@@ -968,7 +968,7 @@ def format_hero_text_fallback(hero: HeroDisplay) -> str:
         else:
             lines.append("【召唤精灵】")
             for section in summon_sections:
-                lines.append(f"▸ {section.title}")
+                lines.append(f"· {section.title}")
                 for skill in section.skills:
                     title = skill.name
                     if skill.hotkey:
