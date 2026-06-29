@@ -6,6 +6,14 @@
 
 ---
 
+## [1.0.9] - 2026-06-28
+
+### 修复
+
+- 部分装备在「可合成物品」等区块显示为 `@Old Quest`：同一物品 ID 在数据中存在重复条目（占位任务物覆盖真实装备），加载时现优先保留真实装备名称（如「奥义之核」合成链中的「神煞者印章」）
+
+---
+
 ## [1.0.8] - 2026-06-28
 
 ### 新增
@@ -100,6 +108,7 @@
 
 ---
 
+[1.0.9]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.0.9
 [1.0.8]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.0.8
 [1.0.7]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.0.7
 [1.0.6]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.0.6

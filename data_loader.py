@@ -215,7 +215,11 @@ class TwrpgDataStore:
             item_id = item.get("id", "")
             if not item_id:
                 continue
-            self.items_by_id[item_id] = item
+            self._store_item_entry(item_id, item)
+
+        for item_id, item in self.items_by_id.items():
+            if not self._is_queryable(item):
+                continue
             for label in self._item_search_labels(item):
                 key = normalize_query(label)
                 if key:
@@ -414,12 +418,43 @@ class TwrpgDataStore:
         return strip_color(hero.get("displayName") or hero.get("name") or hero_id)
 
     @staticmethod
+    def _is_placeholder_item(item: dict) -> bool:
+        name = strip_color(item.get("displayName") or item.get("name") or "")
+        if not name or name.startswith("@"):
+            return True
+        categories = item.get("category") or []
+        if categories == ["Quest"] and int(item.get("goodType") or 0) == 10:
+            return True
+        return False
+
+    @staticmethod
+    def _item_entry_priority(item: dict) -> int:
+        if TwrpgDataStore._is_placeholder_item(item):
+            return 0
+        score = 1
+        categories = item.get("category") or []
+        if "Equip" in categories:
+            score += 100
+        score += int(item.get("stage") or 0) * 10
+        score += int(item.get("level") or 0)
+        return score
+
+    def _store_item_entry(self, item_id: str, item: dict) -> None:
+        existing = self.items_by_id.get(item_id)
+        if existing is None or self._item_entry_priority(item) >= self._item_entry_priority(
+            existing
+        ):
+            self.items_by_id[item_id] = item
+
+    @staticmethod
     def _is_queryable(item: dict) -> bool:
         item_id = str(item.get("id") or "")
         name = strip_color(item.get("displayName") or item.get("name") or "")
         if item_id.startswith("000"):
             return False
         if "说明" in name or "掉率" in name:
+            return False
+        if TwrpgDataStore._is_placeholder_item(item):
             return False
         return True
 

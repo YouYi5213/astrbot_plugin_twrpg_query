@@ -138,6 +138,17 @@ class TwrpgQueryTests(unittest.TestCase):
     def test_normalize_query(self):
         self.assertEqual(normalize_query("洞悉·真理之瞳"), normalize_query("洞悉 真理之瞳"))
 
+    def test_duplicate_id_prefers_equipment_over_old_quest(self):
+        self.assertEqual(self.store.item_name("I024"), "神煞者印章")
+        self.assertEqual(self.store.item_name("I00Z"), "阿瓦隆护灵之翼")
+
+    def test_i0lp_crafts_into_shows_real_item_names(self):
+        display = self.store.build_display("I0LP")
+        assert display is not None
+        craft_names = {entry.name for entry in display.crafts_into}
+        self.assertIn("神煞者印章", craft_names)
+        self.assertNotIn("@Old Quest", craft_names)
+
     def test_search_hero_by_name(self):
         matches = self.store.search_hero("追星剑圣")
         self.assertEqual(matches[0], "H001")
