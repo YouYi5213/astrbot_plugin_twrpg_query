@@ -1,4 +1,4 @@
-"""推送 main 并发布 v1.0.10。"""
+"""推送 main 并发布 v1.1.0。"""
 from __future__ import annotations
 
 import json
@@ -12,8 +12,9 @@ from pathlib import Path
 
 REPO = "YouYi5213/astrbot_plugin_twrpg_query"
 PLUGIN_DIR = Path(__file__).resolve().parents[1]
-TAG = "v1.0.10"
-COMMIT_MESSAGE = "拦截界前缀误查三国杀界武将，版本 1.0.10"
+TAG = "v1.1.0"
+OLD_TAG = "v1.0.10"
+COMMIT_MESSAGE = "拦截界前缀误查三国杀界武将，版本 1.1.0"
 RELEASE_BODY = """## 更新内容
 
 - 误用「界」前缀查询三国杀界武将时，不再提示未找到物品，改为回复「滚回去玩你的三国杀！」
@@ -73,6 +74,13 @@ def api(method: str, url: str, payload: dict | None = None) -> dict | list | Non
         raise SystemExit(f"GitHub API {exc.code}: {body}") from exc
 
 
+def delete_release(tag: str) -> None:
+    existing = api("GET", f"https://api.github.com/repos/{REPO}/releases/tags/{tag}")
+    if existing and isinstance(existing, dict) and existing.get("id"):
+        api("DELETE", f"https://api.github.com/repos/{REPO}/releases/{existing['id']}")
+        print("deleted release:", tag)
+
+
 def commit_without_coauthor(message: str) -> str:
     run("git", "add", "-A")
     tree = run("git", "write-tree")
@@ -100,10 +108,16 @@ def main() -> None:
     subprocess.run(["git", "push", "--force", "origin", TAG], cwd=PLUGIN_DIR, check=True, env=env)
     print("pushed tag:", TAG)
 
-    existing = api("GET", f"https://api.github.com/repos/{REPO}/releases/tags/{TAG}")
-    if existing and isinstance(existing, dict) and existing.get("id"):
-        api("DELETE", f"https://api.github.com/repos/{REPO}/releases/{existing['id']}")
+    delete_release(OLD_TAG)
+    subprocess.run(
+        ["git", "push", "origin", "--delete", OLD_TAG],
+        cwd=PLUGIN_DIR,
+        check=False,
+        env=env,
+    )
+    print("removed tag:", OLD_TAG)
 
+    delete_release(TAG)
     result = api(
         "POST",
         f"https://api.github.com/repos/{REPO}/releases",
