@@ -4,15 +4,19 @@ from __future__ import annotations
 
 import json
 import os
-import re
+import sys
 import zlib
 from pathlib import Path
+
+PLUGIN_DIR = Path(__file__).resolve().parents[1]
+if str(PLUGIN_DIR.parent) not in sys.path:
+    sys.path.insert(0, str(PLUGIN_DIR.parent))
+
+from astrbot_plugin_twrpg_query.data_loader import format_skill_hotkey, normalize_skill_name, strip_color
 
 DEFAULT_QS_DIR = Path(r"G:/魔兽/QuickSearch_0.74c/resources/app")
 QS_DIR = Path(os.environ.get("TWRPG_QS_DIR", DEFAULT_QS_DIR))
 CN_DATA = "e7c6a4d33083c01a38b979d70108013d.data"
-
-PLUGIN_DIR = Path(__file__).resolve().parents[1]
 HEROS_PATH = PLUGIN_DIR / "data" / "twrpg_query" / "heros.json"
 TOOLS_HEROS_PATH = (
     Path(__file__).resolve().parents[2]
@@ -21,34 +25,24 @@ TOOLS_HEROS_PATH = (
     / "heros.json"
 )
 
-_WAR3_COLOR_RE = re.compile(r"\|c[A-Fa-f0-9]{8}", re.IGNORECASE)
-_WAR3_END_RE = re.compile(r"\|r", re.IGNORECASE)
-
-
-def strip_color(text: str) -> str:
-    if not text:
-        return ""
-    text = _WAR3_COLOR_RE.sub("", text)
-    text = _WAR3_END_RE.sub("", text)
-    return text.replace("\r\n", "\n").replace("\r", "\n").strip()
-
-
 def _skill_entry(skill: dict) -> dict:
     desc = skill.get("desc") or ""
+    raw_name = strip_color(skill.get("displayName") or "")
     entry = {
         "id": skill.get("id", ""),
-        "name": strip_color(skill.get("displayName") or ""),
+        "name": normalize_skill_name(raw_name),
         "displayName": skill.get("displayName") or "",
         "img": skill.get("img") or "",
         "description": strip_color(desc),
         "rawDesc": desc,
-        "hotkey": (skill.get("hotKeys") or "").strip(),
+        "hotkey": format_skill_hotkey(skill.get("hotKeys") or ""),
     }
     close = skill.get("closeInfo")
     if close:
         close_desc = close.get("desc") or ""
+        close_raw = strip_color(close.get("displayName") or "")
         entry["closeInfo"] = {
-            "name": strip_color(close.get("displayName") or ""),
+            "name": normalize_skill_name(close_raw),
             "displayName": close.get("displayName") or "",
             "img": close.get("img") or "",
             "description": strip_color(close_desc),

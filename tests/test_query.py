@@ -10,13 +10,16 @@ if PARENT_DIR not in sys.path:
     sys.path.insert(0, PARENT_DIR)
 
 from astrbot_plugin_twrpg_query.card_renderer import (
+    _estimate_hero_height,
     generate_hero_card,
     generate_item_card,
     generate_skill_card,
 )
 from astrbot_plugin_twrpg_query.data_loader import (
     TwrpgDataStore,
+    format_skill_hotkey,
     normalize_query,
+    normalize_skill_name,
     resolve_data_dir,
     stage_label,
 )
@@ -174,6 +177,53 @@ class TwrpgQueryTests(unittest.TestCase):
         path = generate_skill_card(display)
         self.assertTrue(os.path.exists(path))
         self.assertGreater(os.path.getsize(path), 2000)
+        os.remove(path)
+
+    def test_skill_hotkey_display(self):
+        self.assertEqual(normalize_skill_name("圣光裂空(Q)"), "圣光裂空")
+        self.assertEqual(format_skill_hotkey("[ Q ]"), "[Q]")
+        self.assertEqual(format_skill_hotkey("[ Q - W ]"), "[Q-W]")
+
+        display = self.store.build_hero_display("H003")
+        assert display is not None
+        skill = next(s for s in display.skills if s.name == "圣光裂空")
+        self.assertEqual(skill.name, "圣光裂空")
+        self.assertEqual(skill.hotkey, "[Q]")
+        self.assertNotIn("(Q)", skill.name)
+
+        skill_display = self.store.build_skill_display(f"{display.id}:A02M")
+        assert skill_display is not None
+        self.assertEqual(skill_display.name, "圣光裂空")
+        self.assertEqual(skill_display.hotkey, "[Q]")
+
+    def test_hero_card_height_covers_content(self):
+        from PIL import Image, ImageDraw
+
+        hero = self.store.build_hero_display("H003")
+        assert hero is not None
+        measure = ImageDraw.Draw(Image.new("RGB", (640, 200)))
+        estimated = _estimate_hero_height(measure, hero)
+
+        tracked: list[int] = []
+        import astrbot_plugin_twrpg_query.card_renderer as card_mod
+
+        original = card_mod._draw_skill_block
+
+        def tracking_block(card, draw, y, skill, panel_width):
+            result = original(card, draw, y, skill, panel_width)
+            tracked.append(result)
+            return result
+
+        card_mod._draw_skill_block = tracking_block
+        try:
+            path = generate_hero_card(hero)
+        finally:
+            card_mod._draw_skill_block = original
+
+        img = Image.open(path)
+        self.assertGreaterEqual(img.size[1], tracked[-1])
+        self.assertGreaterEqual(img.size[1], estimated)
+        img.close()
         os.remove(path)
 
 

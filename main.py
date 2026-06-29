@@ -2,7 +2,7 @@
 世界RPG（TWRPG）查询插件
 ==============================
 指令:
-  世界 <物品名> / 界 <物品名> — 物品查询
+  世界 <物品名> / 界 <物品名> — 物品查询（支持无空格，如 世界世界破坏者）
   英雄 <名> / 英 <名> — 英雄查询
   技能 <名> / 技 <名> — 技能查询
 """
@@ -10,7 +10,6 @@
 from __future__ import annotations
 
 import os
-import re
 from collections.abc import AsyncIterator, Callable
 
 from astrbot.api import AstrBotConfig, logger
@@ -27,32 +26,18 @@ from .card_renderer import (
 )
 from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
 from .icon_utils import resolve_icons_dir
+from .query_parser import (
+    HERO_CMD_RE,
+    ITEM_CMD_RE,
+    SKILL_CMD_RE,
+    extract_item_query,
+    extract_prefixed_query,
+)
 
 _PLUGIN_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = resolve_data_dir(_PLUGIN_DIR)
 _ICONS_DIR = resolve_icons_dir(_PLUGIN_DIR)
 _MAX_MATCHES = 5
-
-_ITEM_CMD_RE = re.compile(r"^/?(世界|界)(\s|$)")
-_HERO_CMD_RE = re.compile(r"^/?(英雄|英)(\s|$)")
-_SKILL_CMD_RE = re.compile(r"^/?(技能|技)(\s|$)")
-
-
-def _normalize_message(text: str) -> str:
-    text = text.strip()
-    if text.startswith("/"):
-        return text[1:].strip()
-    return text
-
-
-def _extract_query_text(text: str, prefixes: tuple[str, ...]) -> str | None:
-    normalized = _normalize_message(text)
-    for prefix in prefixes:
-        if normalized == prefix:
-            return ""
-        if normalized.startswith(prefix + " "):
-            return normalized[len(prefix) + 1 :].strip()
-    return None
 
 
 class TwrpgQueryPlugin(Star):
@@ -81,10 +66,10 @@ class TwrpgQueryPlugin(Star):
         except Exception as e:
             logger.error(f"加载 TWRPG 数据失败: {e}")
 
-    @filter.regex(_ITEM_CMD_RE, priority=10)
+    @filter.regex(ITEM_CMD_RE, priority=10)
     async def on_twrpg_item_command(self, event: AstrMessageEvent):
         raw = event.message_str.strip()
-        query_text = _extract_query_text(raw, ("世界", "界"))
+        query_text = extract_item_query(raw)
         if query_text is None:
             return
 
@@ -93,7 +78,7 @@ class TwrpgQueryPlugin(Star):
             query_text,
             entity_label="物品",
             usage="世界 <物品名>\n      界 <物品名>",
-            example="世界 洞悉·真理之瞳\n      界 太阳石",
+            example="世界 世界破坏者\n      世界世界破坏者\n      界 太阳石",
             search=self.store.search,
             exact_name=lambda entity_id: self.store.item_name(entity_id),
             build_display=self.store.build_display,
@@ -105,10 +90,10 @@ class TwrpgQueryPlugin(Star):
             yield result
         event.stop_event()
 
-    @filter.regex(_HERO_CMD_RE, priority=10)
+    @filter.regex(HERO_CMD_RE, priority=10)
     async def on_twrpg_hero_command(self, event: AstrMessageEvent):
         raw = event.message_str.strip()
-        query_text = _extract_query_text(raw, ("英雄", "英"))
+        query_text = extract_prefixed_query(raw, ("英雄", "英"))
         if query_text is None:
             return
 
@@ -129,10 +114,10 @@ class TwrpgQueryPlugin(Star):
             yield result
         event.stop_event()
 
-    @filter.regex(_SKILL_CMD_RE, priority=10)
+    @filter.regex(SKILL_CMD_RE, priority=10)
     async def on_twrpg_skill_command(self, event: AstrMessageEvent):
         raw = event.message_str.strip()
-        query_text = _extract_query_text(raw, ("技能", "技"))
+        query_text = extract_prefixed_query(raw, ("技能", "技"))
         if query_text is None:
             return
 

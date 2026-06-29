@@ -14,6 +14,7 @@ _WAR3_TAG_RE = re.compile(
 
 DEFAULT_TEXT_COLOR = (255, 255, 255)
 CONTENT_PADDING = 8
+PANEL_BOTTOM_EXTRA = 6
 LINE_HEIGHT = 20
 BORDER_LAYERS = 5
 CONTENT_BG = (14, 36, 46)
@@ -153,7 +154,9 @@ def measure_game_panel(
 ) -> tuple[int, list[list[tuple[str, tuple[int, int, int]]]]]:
     text_max_width = panel_width - BORDER_LAYERS * 2 - CONTENT_PADDING * 2
     wrapped = wrap_colored_lines(draw, parse_war3_colored_lines(text), font, text_max_width)
-    content_height = max(1, len(wrapped)) * LINE_HEIGHT + CONTENT_PADDING * 2
+    content_height = (
+        max(1, len(wrapped)) * LINE_HEIGHT + CONTENT_PADDING * 2 + PANEL_BOTTOM_EXTRA
+    )
     total_height = content_height + BORDER_LAYERS * 2
     return total_height, wrapped
 
@@ -168,7 +171,11 @@ def draw_game_panel(
     font,
     bg_path: str,
 ) -> int:
-    content_height = max(1, len(wrapped_lines)) * LINE_HEIGHT + CONTENT_PADDING * 2
+    content_height = (
+        max(1, len(wrapped_lines)) * LINE_HEIGHT
+        + CONTENT_PADDING * 2
+        + PANEL_BOTTOM_EXTRA
+    )
     total_height = content_height + BORDER_LAYERS * 2
 
     bg = _load_panel_bg(bg_path, (panel_width, total_height))

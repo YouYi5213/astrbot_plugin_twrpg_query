@@ -32,6 +32,7 @@ RECIPE_GROUP_GAP = 8
 RECIPE_CHOICE_ROW_HEIGHT = 28
 SKILL_ICON_SIZE = (40, 40)
 SKILL_BLOCK_GAP = 10
+CARD_BOTTOM_EXTRA = 16
 OPTIONAL_LABEL = "[可选]"
 
 COLORS = {
@@ -669,16 +670,25 @@ def _draw_skill_block(
 def _estimate_hero_height(draw: ImageDraw.ImageDraw, hero: HeroDisplay) -> int:
     body_font = _font(15)
     content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
-    y = CARD_PADDING + TITLE_HEIGHT + SECTION_GAP
+    y = CARD_PADDING + TITLE_HEIGHT
 
     if hero.skills:
         y += HEADER_HEIGHT
         for skill in hero.skills:
             y += _skill_block_height(draw, skill, body_font, content_width)
+            y += SKILL_BLOCK_GAP
         y -= SKILL_BLOCK_GAP
-        y += SECTION_GAP
 
-    return y + CARD_PADDING
+    return y + CARD_PADDING + CARD_BOTTOM_EXTRA
+
+
+def _estimate_skill_height(draw: ImageDraw.ImageDraw, skill: SkillDisplay) -> int:
+    body_font = _font(15)
+    content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
+    y = CARD_PADDING + TITLE_HEIGHT
+    y += HEADER_HEIGHT
+    y += _skill_block_height(draw, skill, body_font, content_width)
+    return y + CARD_PADDING + CARD_BOTTOM_EXTRA
 
 
 def generate_hero_card(hero: HeroDisplay) -> str:
@@ -749,15 +759,6 @@ def generate_hero_card(hero: HeroDisplay) -> str:
     out_path = os.path.join(_CARDS_DIR, f"hero_{hero.id}_{uuid.uuid4().hex[:8]}.png")
     card.save(out_path, format="PNG", optimize=True)
     return out_path
-
-
-def _estimate_skill_height(draw: ImageDraw.ImageDraw, skill: SkillDisplay) -> int:
-    body_font = _font(15)
-    content_width = CARD_WIDTH - CARD_PADDING * 2 - 20
-    y = CARD_PADDING + TITLE_HEIGHT + SECTION_GAP
-    y += HEADER_HEIGHT
-    y += _skill_block_height(draw, skill, body_font, content_width)
-    return y + CARD_PADDING
 
 
 def generate_skill_card(skill: SkillDisplay) -> str:

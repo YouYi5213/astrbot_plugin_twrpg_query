@@ -24,6 +24,7 @@ WEAR_LIMIT_LABELS: dict[str, str] = {
 }
 
 _PASSIVE_ATTRIB_RE = re.compile(r"\n*\s*装备翻译来自B站UP 阿我的手\s*$")
+_SKILL_HOTKEY_SUFFIX_RE = re.compile(r"\s*\([A-Za-z](?:\s*-\s*[A-Za-z])*\)")
 
 # QuickSearch buildGood: Kle()[item.limit] -> limitHeroes
 # QuickSearch locale: common.stages
@@ -65,6 +66,25 @@ LIMIT_HERO_IDS: dict[str, list[str]] = {
 
 def clean_passive_text(text: str) -> str:
     return _PASSIVE_ATTRIB_RE.sub("", text or "").rstrip()
+
+
+def normalize_skill_name(name: str) -> str:
+    cleaned = _SKILL_HOTKEY_SUFFIX_RE.sub("", name or "")
+    return re.sub(r"\s{2,}", " ", cleaned).strip()
+
+
+def format_skill_hotkey(hotkey: str) -> str:
+    hotkey = (hotkey or "").strip()
+    if not hotkey:
+        return ""
+    match = re.fullmatch(r"\[\s*(.*?)\s*\]", hotkey)
+    if not match:
+        return hotkey
+    parts = [part.strip().replace(" ", "") for part in match.group(1).split("-")]
+    parts = [part for part in parts if part]
+    if not parts:
+        return hotkey
+    return "[" + "-".join(parts) + "]"
 
 
 def strip_color(text: str) -> str:
@@ -366,9 +386,11 @@ class TwrpgDataStore:
 
     @staticmethod
     def _skill_search_labels(skill: dict, suffix: str = "") -> set[str]:
+        raw_name = skill.get("name") or strip_color(skill.get("displayName") or "")
         labels = {
             skill.get("displayName", ""),
-            skill.get("name", ""),
+            raw_name,
+            normalize_skill_name(raw_name),
             skill.get("id", "") + suffix,
         }
         return {x for x in labels if x}
@@ -467,26 +489,30 @@ class TwrpgDataStore:
             return []
         entries: list[HeroSkillEntry] = []
         for skill in hero.get("skills") or []:
+            raw_name = strip_color(skill.get("name") or skill.get("displayName") or "")
+            skill_name = normalize_skill_name(raw_name)
+            skill_hotkey = format_skill_hotkey(skill.get("hotkey") or "")
             entries.append(
                 HeroSkillEntry(
                     id=skill.get("id", ""),
-                    name=strip_color(skill.get("name") or skill.get("displayName") or ""),
+                    name=skill_name,
                     description=strip_color(skill.get("description") or ""),
                     raw_description=skill.get("rawDesc") or skill.get("description") or "",
                     icon=self._entity_icon(skill.get("img", "")),
-                    hotkey=(skill.get("hotkey") or "").strip(),
+                    hotkey=skill_hotkey,
                 )
             )
             close = skill.get("closeInfo")
             if close:
+                close_raw = strip_color(close.get("name") or close.get("displayName") or "")
                 entries.append(
                     HeroSkillEntry(
                         id=f"{skill.get('id', '')}_close",
-                        name=strip_color(close.get("name") or close.get("displayName") or ""),
+                        name=normalize_skill_name(close_raw),
                         description=strip_color(close.get("description") or ""),
                         raw_description=close.get("rawDesc") or close.get("description") or "",
                         icon=self._entity_icon(close.get("img", "")),
-                        hotkey=(skill.get("hotkey") or "").strip(),
+                        hotkey=skill_hotkey,
                     )
                 )
         return entries
@@ -523,25 +549,27 @@ class TwrpgDataStore:
         is_close = skill_key.endswith("_close")
         if is_close:
             close = skill.get("closeInfo") or {}
+            close_raw = strip_color(close.get("name") or close.get("displayName") or "")
             return SkillDisplay(
                 id=f"{skill.get('id', '')}_close",
-                name=strip_color(close.get("name") or close.get("displayName") or ""),
+                name=normalize_skill_name(close_raw),
                 description=strip_color(close.get("description") or ""),
                 raw_description=close.get("rawDesc") or close.get("description") or "",
                 icon=self._entity_icon(close.get("img", "")),
-                hotkey=(skill.get("hotkey") or "").strip(),
+                hotkey=format_skill_hotkey(skill.get("hotkey") or ""),
                 hero_id=hero_id,
                 hero_name=self.hero_name(hero_id),
                 hero_icon=self._hero_icon(hero_id),
             )
 
+        raw_name = strip_color(skill.get("name") or skill.get("displayName") or "")
         return SkillDisplay(
             id=skill.get("id", ""),
-            name=strip_color(skill.get("name") or skill.get("displayName") or ""),
+            name=normalize_skill_name(raw_name),
             description=strip_color(skill.get("description") or ""),
             raw_description=skill.get("rawDesc") or skill.get("description") or "",
             icon=self._entity_icon(skill.get("img", "")),
-            hotkey=(skill.get("hotkey") or "").strip(),
+            hotkey=format_skill_hotkey(skill.get("hotkey") or ""),
             hero_id=hero_id,
             hero_name=self.hero_name(hero_id),
             hero_icon=self._hero_icon(hero_id),
