@@ -5,6 +5,8 @@ from __future__ import annotations
 import re
 
 ITEM_CMD_PREFIXES = ("世界", "界")
+WORLD_ITEM_PREFIX = "世界"
+JIE_ITEM_PREFIX = "界"
 ITEM_CMD_RE = re.compile(r"^(?:世界|界)")
 
 HERO_CMD_PREFIXES = ("英雄", "英")
@@ -43,6 +45,16 @@ def extract_item_query(raw: str) -> str | None:
         if text.startswith(prefix) and len(text) > len(prefix):
             return dedupe_item_command_prefix(text[len(prefix) :].strip())
     return None
+
+
+def used_jie_only_item_prefix(raw: str) -> bool:
+    """消息是否以单独的「界」前缀触发物品查询（不含「世界」）。"""
+    text = raw.strip()
+    if not text.startswith(JIE_ITEM_PREFIX):
+        return False
+    if text.startswith("世界"):
+        return False
+    return extract_item_query(raw) is not None
 
 
 def _strip_leading_slash(text: str) -> str:

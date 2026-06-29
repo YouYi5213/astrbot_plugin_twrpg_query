@@ -6,6 +6,15 @@
 
 ---
 
+## [1.0.10] - 2026-06-28
+
+### 新增
+
+- 拦截误用「界」前缀查询三国杀界武将：完全匹配界将名时回复「滚回去玩你的三国杀！」（如 `界 赵云`、`界赵云`）
+- 收录界·标、界·风林火山及常见界将名单（见 `sgs_jie_heroes.py`）
+
+---
+
 ## [1.0.9] - 2026-06-28
 
 ### 修复
@@ -108,6 +117,7 @@
 
 ---
 
+[1.0.10]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.0.10
 [1.0.9]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.0.9
 [1.0.8]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.0.8
 [1.0.7]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.0.7

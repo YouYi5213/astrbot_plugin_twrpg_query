@@ -1,7 +1,7 @@
 name: astrbot_plugin_twrpg_query
 display_name: 世界RPG 查询
 desc: 世界RPG（TWRPG）离线查询 — 物品「世界/界」、英雄「英雄/英」、技能「技能/技」，以图片卡片展示详情
-version: 1.0.9
+version: 1.0.10
 author: YouYi5213
 short_desc: 世界RPG 离线查询，支持物品、英雄、技能与合成链
 support_platforms:

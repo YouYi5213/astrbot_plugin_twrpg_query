@@ -32,7 +32,9 @@ from .query_parser import (
     SKILL_CMD_RE,
     extract_item_query,
     extract_prefixed_query,
+    used_jie_only_item_prefix,
 )
+from .sgs_jie_heroes import SGS_JIE_REPLY, is_sgs_jie_hero_query
 
 _PLUGIN_DIR = os.path.dirname(os.path.abspath(__file__))
 _DATA_DIR = resolve_data_dir(_PLUGIN_DIR)
@@ -71,6 +73,11 @@ class TwrpgQueryPlugin(Star):
         raw = event.message_str.strip()
         query_text = extract_item_query(raw)
         if query_text is None:
+            return
+
+        if used_jie_only_item_prefix(raw) and is_sgs_jie_hero_query(query_text):
+            yield event.plain_result(SGS_JIE_REPLY)
+            event.stop_event()
             return
 
         async for result in self._handle_entity_query(
