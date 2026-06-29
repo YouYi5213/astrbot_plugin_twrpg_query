@@ -126,8 +126,25 @@ class RecipeLine:
 @dataclass
 class DropEntry:
     boss_name: str
-    chance: float
+    chance: float | str
     icon: str | None = None
+
+
+@dataclass
+class BossDropEntry:
+    item_id: str
+    item_name: str
+    chance: float | str
+    icon: str | None = None
+
+
+@dataclass
+class BossDisplay:
+    id: str
+    name: str
+    stage_label: str = ""
+    icon: str | None = None
+    drops: list[BossDropEntry] = field(default_factory=list)
 
 
 @dataclass
@@ -214,7 +231,9 @@ class TwrpgDataStore:
         self.recipes: dict[str, list[dict]] = {}
         self.used_in: dict[str, list[tuple[str, int]]] = {}
         self.drops_by_item: dict[str, list[tuple[str, float]]] = {}
+        self.drops_by_boss: dict[str, list[dict]] = {}
         self.bosses_by_id: dict[str, dict] = {}
+        self.boss_search_index: list[tuple[str, str]] = []
         self.heros_by_id: dict[str, dict] = {}
         self.hero_search_index: list[tuple[str, str]] = []
         self.skill_search_index: list[tuple[str, str]] = []
@@ -248,6 +267,7 @@ class TwrpgDataStore:
         self._load_makes()
         self._load_drops()
         self._load_bosses()
+        self._load_boss_search_index()
         self._load_heros()
         self._load_exclusives()
         self._load_passives()
@@ -293,6 +313,7 @@ class TwrpgDataStore:
             drop_id = row.get("dropId", "")
             if not boss_id or not drop_id:
                 continue
+            self.drops_by_boss.setdefault(boss_id, []).append(row)
             try:
                 chance = float(row.get("chance") or 0)
             except (TypeError, ValueError):
@@ -304,6 +325,18 @@ class TwrpgDataStore:
             boss_id = boss.get("id", "")
             if boss_id:
                 self.bosses_by_id[boss_id] = boss
+
+    def _load_boss_search_index(self) -> None:
+        from .boss_aliases import BOSS_ALIAS_TO_ID
+
+        for boss_id, boss in self.bosses_by_id.items():
+            for label in self._boss_search_labels(boss):
+                key = normalize_query(label)
+                if key:
+                    self.boss_search_index.append((key, boss_id))
+        for key, boss_id in BOSS_ALIAS_TO_ID.items():
+            if boss_id in self.bosses_by_id:
+                self.boss_search_index.append((normalize_query(key), boss_id))
 
     def _load_heros(self) -> None:
         for hero in self._load_json("heros.json"):
@@ -424,6 +457,94 @@ class TwrpgDataStore:
         if not item:
             return item_id
         return strip_color(item.get("displayName") or item.get("name") or item_id)
+
+    @staticmethod
+    def _boss_search_labels(boss: dict) -> set[str]:
+        labels = {
+            boss.get("displayName", ""),
+            boss.get("name", ""),
+            strip_color(boss.get("colorName", "")),
+            boss.get("id", ""),
+        }
+        return {x for x in labels if x}
+
+    def infer_boss_stage(self, boss_id: str) -> int:
+        material_stages: list[int] = []
+        all_stages: list[int] = []
+        for row in self.drops_by_boss.get(boss_id, []):
+            item = self.items_by_id.get(row.get("dropId", ""))
+            if not item:
+                continue
+            stage = int(item.get("stage") or 0)
+            if not stage:
+                continue
+            all_stages.append(stage)
+            if "Material" in (item.get("category") or []):
+                material_stages.append(stage)
+        if material_stages:
+            return max(material_stages)
+        return max(all_stages) if all_stages else 0
+
+    @staticmethod
+    def _parse_drop_chance(raw) -> float | str:
+        if isinstance(raw, str):
+            text = raw.strip()
+            if not text:
+                return 0
+            try:
+                return float(text)
+            except ValueError:
+                return text
+        try:
+            return float(raw or 0)
+        except (TypeError, ValueError):
+            return 0
+
+    @staticmethod
+    def _drop_sort_key(chance: float | str) -> tuple[int, float]:
+        if isinstance(chance, str):
+            return (1, 0.0)
+        return (0, -chance)
+
+    def search_boss(self, query: str, limit: int = 8) -> list[str]:
+        return self._search_index(
+            query,
+            self.boss_search_index,
+            limit,
+            validate=lambda boss_id: boss_id in self.bosses_by_id,
+        )
+
+    def build_boss_display(self, boss_id: str) -> BossDisplay | None:
+        boss = self.bosses_by_id.get(boss_id)
+        if not boss:
+            return None
+
+        drops: list[BossDropEntry] = []
+        for row in self.drops_by_boss.get(boss_id, []):
+            drop_id = row.get("dropId", "")
+            if not drop_id or str(drop_id).startswith("000"):
+                continue
+            item = self.items_by_id.get(drop_id)
+            if not item:
+                continue
+            chance = self._parse_drop_chance(row.get("chance"))
+            drops.append(
+                BossDropEntry(
+                    item_id=drop_id,
+                    item_name=self.item_name(drop_id),
+                    chance=chance,
+                    icon=self._item_icon(drop_id),
+                )
+            )
+        drops.sort(key=lambda entry: (self._drop_sort_key(entry.chance), entry.item_name))
+
+        return BossDisplay(
+            id=boss_id,
+            name=self.boss_name(boss_id),
+            stage_label=stage_label(self.infer_boss_stage(boss_id)),
+            icon=self._entity_icon(boss.get("img", "")),
+            drops=drops,
+        )
 
     def boss_name(self, boss_id: str) -> str:
         boss = self.bosses_by_id.get(boss_id)

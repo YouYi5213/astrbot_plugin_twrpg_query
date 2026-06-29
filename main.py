@@ -3,6 +3,7 @@
 ==============================
 指令:
   世界 <物品名> / 界 <物品名> — 物品查询（支持无空格，如 世界世界破坏者）
+  世界BOSS <BOSS名> — BOSS 掉落查询（如 世界BOSS 土灵战神盖亚）
   英雄 <名> / 英 <名> — 英雄查询
   技能 <名> / 技 <名> — 技能查询
 """
@@ -17,9 +18,11 @@ from astrbot.api.event import AstrMessageEvent, filter
 from astrbot.api.star import Context, Star
 
 from .card_renderer import (
+    format_boss_text_fallback,
     format_hero_text_fallback,
     format_skill_text_fallback,
     format_text_fallback,
+    generate_boss_card,
     generate_hero_card,
     generate_item_card,
     generate_skill_card,
@@ -27,9 +30,11 @@ from .card_renderer import (
 from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
 from .icon_utils import resolve_icons_dir
 from .query_parser import (
+    BOSS_CMD_RE,
     HERO_CMD_RE,
     ITEM_CMD_RE,
     SKILL_CMD_RE,
+    extract_boss_query,
     extract_item_query,
     extract_prefixed_query,
     used_jie_only_item_prefix,
@@ -62,11 +67,36 @@ class TwrpgQueryPlugin(Star):
             logger.info(
                 "世界RPG 查询插件已加载，"
                 f"物品 {len(self.store.items_by_id)} / "
+                f"BOSS {len(self.store.bosses_by_id)} / "
                 f"英雄 {len(self.store.heros_by_id)} / "
                 f"技能 {len(self.store.skills_by_key)}"
             )
         except Exception as e:
             logger.error(f"加载 TWRPG 数据失败: {e}")
+
+    @filter.regex(BOSS_CMD_RE, priority=9)
+    async def on_twrpg_boss_command(self, event: AstrMessageEvent):
+        raw = event.message_str.strip()
+        query_text = extract_boss_query(raw)
+        if query_text is None:
+            return
+
+        async for result in self._handle_entity_query(
+            event,
+            query_text,
+            entity_label="BOSS",
+            usage="世界BOSS <BOSS名>",
+            example="世界BOSS 土灵战神盖亚\n      世界BOSS 盖亚\n      世界BOSS 土",
+            search=self.store.search_boss,
+            exact_name=lambda entity_id: self.store.boss_name(entity_id),
+            build_display=self.store.build_boss_display,
+            match_label=lambda entity_id, query: self.store.boss_name(entity_id),
+            generate_card=generate_boss_card,
+            text_fallback=format_boss_text_fallback,
+            log_prefix="BOSS",
+        ):
+            yield result
+        event.stop_event()
 
     @filter.regex(ITEM_CMD_RE, priority=10)
     async def on_twrpg_item_command(self, event: AstrMessageEvent):

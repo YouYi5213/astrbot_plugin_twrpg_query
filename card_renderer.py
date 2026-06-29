@@ -8,7 +8,7 @@ from typing import Iterable
 
 from PIL import Image, ImageDraw, ImageFont
 
-from .data_loader import HeroDisplay, ItemDisplay, RecipeLine, SkillDisplay, strip_color
+from .data_loader import BossDisplay, HeroDisplay, ItemDisplay, RecipeLine, SkillDisplay, strip_color
 from .desc_renderer import draw_game_panel, measure_game_panel, resolve_items_bg_path
 
 _PLUGIN_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -185,7 +185,9 @@ def _paste_in_slot(
     card.paste(img, (ox, oy), img)
 
 
-def _format_chance(chance: float) -> str:
+def _format_chance(chance: float | str) -> str:
+    if isinstance(chance, str):
+        return chance
     if chance >= 10:
         return f"{chance:g}%"
     if chance >= 1:
@@ -933,6 +935,96 @@ def generate_skill_card(skill: SkillDisplay) -> str:
     out_path = os.path.join(_CARDS_DIR, f"skill_{skill.id}_{uuid.uuid4().hex[:8]}.png")
     card.save(out_path, format="PNG", optimize=True)
     return out_path
+
+
+def _estimate_boss_height(draw: ImageDraw.ImageDraw, boss: BossDisplay) -> int:
+    y = CARD_PADDING + TITLE_HEIGHT
+    if boss.drops:
+        y += HEADER_HEIGHT
+        y += len(boss.drops) * ROW_HEIGHT
+    return y + CARD_PADDING + CARD_BOTTOM_EXTRA
+
+
+def generate_boss_card(boss: BossDisplay) -> str:
+    _ensure_dirs()
+    tmp = Image.new("RGB", (CARD_WIDTH, 200), COLORS["bg"])
+    measure = ImageDraw.Draw(tmp)
+    height = _estimate_boss_height(measure, boss)
+
+    card = Image.new("RGB", (CARD_WIDTH, height), COLORS["bg"])
+    draw = ImageDraw.Draw(card)
+    draw.rounded_rectangle(
+        (8, 8, CARD_WIDTH - 8, height - 8),
+        radius=14,
+        fill=COLORS["panel"],
+        outline=COLORS["border"],
+        width=1,
+    )
+
+    title_font = _font(22, bold=True)
+    title_x = CARD_PADDING + 8
+    if boss.icon:
+        title_icon = _load_image(boss.icon, TITLE_ICON_SIZE)
+        _paste_in_slot(
+            card,
+            title_icon,
+            CARD_PADDING + 8,
+            CARD_PADDING,
+            TITLE_ICON_SIZE[0],
+            TITLE_ICON_SIZE[1],
+        )
+        title_x = CARD_PADDING + 8 + TITLE_ICON_SIZE[0] + 10
+
+    title_y = CARD_PADDING + 10
+    draw.text(
+        (title_x, title_y),
+        boss.name,
+        fill=COLORS["title"],
+        font=title_font,
+    )
+    if boss.stage_label:
+        stage_x = title_x + _text_width(draw, boss.name, title_font) + 8
+        draw.text(
+            (stage_x, title_y),
+            boss.stage_label,
+            fill=COLORS["stage"],
+            font=title_font,
+        )
+
+    id_text = f"ID: {boss.id}"
+    id_font = _font(12)
+    id_w = _text_width(draw, id_text, id_font)
+    draw.text(
+        (CARD_WIDTH - CARD_PADDING - 8 - id_w, CARD_PADDING + 8),
+        id_text,
+        fill=COLORS["muted"],
+        font=id_font,
+    )
+
+    y = CARD_PADDING + TITLE_HEIGHT
+    if boss.drops:
+        y = _draw_header(draw, y, "▎掉落")
+        rows = [
+            (entry.icon, entry.item_name, _format_chance(entry.chance))
+            for entry in boss.drops
+        ]
+        _draw_icon_rows(card, draw, y, rows)
+
+    out_path = os.path.join(_CARDS_DIR, f"boss_{boss.id}_{uuid.uuid4().hex[:8]}.png")
+    card.save(out_path, format="PNG", optimize=True)
+    return out_path
+
+
+def format_boss_text_fallback(boss: BossDisplay) -> str:
+    title = boss.name
+    if boss.stage_label:
+        title = f"{title} {boss.stage_label}"
+    lines = [title, ""]
+    if boss.drops:
+        lines.append("【掉落】")
+        for entry in boss.drops:
+            lines.append(f"· {entry.item_name} ({_format_chance(entry.chance)})")
+    return "\n".join(lines).strip()
 
 
 def format_hero_text_fallback(hero: HeroDisplay) -> str:

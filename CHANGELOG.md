@@ -6,6 +6,15 @@
 
 ---
 
+## [1.1.4] - 2026-06-29
+
+### 新增
+
+- BOSS 掉落查询：`世界BOSS <名称>` 展示 BOSS 阶段与掉落物品及掉率
+- 收录常见 BOSS 别称（如盖亚/土、判官、黑天、巫妖等）
+
+---
+
 ## [1.1.3] - 2026-06-29
 
 ### 修复
@@ -142,6 +151,7 @@
 
 ---
 
+[1.1.4]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.4
 [1.1.3]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.3
 [1.1.2]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.2
 [1.1.1]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.1

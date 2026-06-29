@@ -4,6 +4,9 @@ from __future__ import annotations
 
 import re
 
+BOSS_CMD_PREFIX = "世界BOSS"
+BOSS_CMD_RE = re.compile(r"^/?世界BOSS")
+
 ITEM_CMD_PREFIXES = ("世界", "界")
 WORLD_ITEM_PREFIX = "世界"
 JIE_ITEM_PREFIX = "界"
@@ -31,10 +34,29 @@ def dedupe_item_command_prefix(query: str) -> str:
     return text
 
 
+def extract_boss_query(raw: str) -> str | None:
+    """解析 BOSS 查询文本；无法识别时返回 None。"""
+    text = raw.strip()
+    if text.startswith("/"):
+        text = text[1:].strip()
+    if not text:
+        return None
+    if text == BOSS_CMD_PREFIX:
+        return ""
+    if text.startswith(BOSS_CMD_PREFIX + " "):
+        return text[len(BOSS_CMD_PREFIX) + 1 :].strip()
+    if text.startswith(BOSS_CMD_PREFIX) and len(text) > len(BOSS_CMD_PREFIX):
+        return text[len(BOSS_CMD_PREFIX) :].strip()
+    return None
+
+
 def extract_item_query(raw: str) -> str | None:
     """解析物品查询文本；无法识别为物品指令时返回 None。"""
     text = raw.strip()
     if not text:
+        return None
+
+    if extract_boss_query(raw) is not None:
         return None
 
     for prefix in sorted(ITEM_CMD_PREFIXES, key=len, reverse=True):
