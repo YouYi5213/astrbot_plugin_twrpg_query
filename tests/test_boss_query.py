@@ -30,9 +30,14 @@ class BossQueryTests(unittest.TestCase):
     def test_boss_cmd_parser(self):
         self.assertTrue(BOSS_CMD_RE.match("世界BOSS 盖亚"))
         self.assertTrue(BOSS_CMD_RE.match("世界BOSS盖亚"))
+        self.assertTrue(BOSS_CMD_RE.match("界BOSS 盖亚"))
+        self.assertTrue(BOSS_CMD_RE.match("界BOSS盖亚"))
         self.assertEqual(extract_boss_query("世界BOSS 土灵战神盖亚"), "土灵战神盖亚")
         self.assertEqual(extract_boss_query("世界BOSS盖亚"), "盖亚")
+        self.assertEqual(extract_boss_query("界BOSS 盖亚"), "盖亚")
+        self.assertEqual(extract_boss_query("界BOSS盖亚"), "盖亚")
         self.assertIsNone(extract_item_query("世界BOSS 盖亚"))
+        self.assertIsNone(extract_item_query("界BOSS 盖亚"))
         self.assertEqual(extract_item_query("世界 太阳石"), "太阳石")
 
     def test_search_boss_by_name_and_alias(self):

@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import re
 
-BOSS_CMD_PREFIX = "世界BOSS"
-BOSS_CMD_RE = re.compile(r"^/?世界BOSS")
+BOSS_CMD_PREFIXES: tuple[str, ...] = ("世界BOSS", "界BOSS")
+BOSS_CMD_RE = re.compile(r"^/?(?:世界BOSS|界BOSS)")
 
 ITEM_CMD_PREFIXES = ("世界", "界")
 WORLD_ITEM_PREFIX = "世界"
@@ -41,12 +41,13 @@ def extract_boss_query(raw: str) -> str | None:
         text = text[1:].strip()
     if not text:
         return None
-    if text == BOSS_CMD_PREFIX:
-        return ""
-    if text.startswith(BOSS_CMD_PREFIX + " "):
-        return text[len(BOSS_CMD_PREFIX) + 1 :].strip()
-    if text.startswith(BOSS_CMD_PREFIX) and len(text) > len(BOSS_CMD_PREFIX):
-        return text[len(BOSS_CMD_PREFIX) :].strip()
+    for prefix in sorted(BOSS_CMD_PREFIXES, key=len, reverse=True):
+        if text == prefix:
+            return ""
+        if text.startswith(prefix + " "):
+            return text[len(prefix) + 1 :].strip()
+        if text.startswith(prefix) and len(text) > len(prefix):
+            return text[len(prefix) :].strip()
     return None
 
 
@@ -70,8 +71,10 @@ def extract_item_query(raw: str) -> str | None:
 
 
 def used_jie_only_item_prefix(raw: str) -> bool:
-    """消息是否以单独的「界」前缀触发物品查询（不含「世界」）。"""
+    """消息是否以单独的「界」前缀触发物品查询（不含「世界」「界BOSS」）。"""
     text = raw.strip()
+    if extract_boss_query(raw) is not None:
+        return False
     if not text.startswith(JIE_ITEM_PREFIX):
         return False
     if text.startswith("世界"):

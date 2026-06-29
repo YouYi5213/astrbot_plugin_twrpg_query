@@ -6,6 +6,14 @@
 
 ---
 
+## [1.1.5] - 2026-06-29
+
+### 新增
+
+- BOSS 掉落查询兼容 `界BOSS <名称>` 格式（与 `世界BOSS` 等价）
+
+---
+
 ## [1.1.4] - 2026-06-29
 
 ### 新增
@@ -151,6 +159,7 @@
 
 ---
 
+[1.1.5]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.5
 [1.1.4]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.4
 [1.1.3]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.3
 [1.1.2]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.2

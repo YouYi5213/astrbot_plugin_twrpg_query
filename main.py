@@ -3,7 +3,7 @@
 ==============================
 指令:
   世界 <物品名> / 界 <物品名> — 物品查询（支持无空格，如 世界世界破坏者）
-  世界BOSS <BOSS名> — BOSS 掉落查询（如 世界BOSS 土灵战神盖亚）
+  世界BOSS <BOSS名> / 界BOSS <BOSS名> — BOSS 掉落查询（如 世界BOSS 土灵战神盖亚）
   英雄 <名> / 英 <名> — 英雄查询
   技能 <名> / 技 <名> — 技能查询
 """
@@ -85,8 +85,8 @@ class TwrpgQueryPlugin(Star):
             event,
             query_text,
             entity_label="BOSS",
-            usage="世界BOSS <BOSS名>",
-            example="世界BOSS 土灵战神盖亚\n      世界BOSS 盖亚\n      世界BOSS 土",
+            usage="世界BOSS <BOSS名>\n      界BOSS <BOSS名>",
+            example="世界BOSS 土灵战神盖亚\n      界BOSS 盖亚\n      界BOSS 土",
             search=self.store.search_boss,
             exact_name=lambda entity_id: self.store.boss_name(entity_id),
             build_display=self.store.build_boss_display,
