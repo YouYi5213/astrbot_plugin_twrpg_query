@@ -6,6 +6,14 @@
 
 ---
 
+## [1.1.1] - 2026-06-28
+
+### 修复
+
+- 补全界武将拦截名单：新增界徐盛及界一将成名 2012~2015 遗漏武将（如关兴张苞、廖化、关平、张松、曹休等），并补充双将别名
+
+---
+
 ## [1.1.0] - 2026-06-28
 
 ### 新增
@@ -117,6 +125,7 @@
 
 ---
 
+[1.1.1]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.1
 [1.1.0]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.1.0
 [1.0.9]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.0.9
 [1.0.8]: https://github.com/YouYi5213/astrbot_plugin_twrpg_query/releases/tag/v1.0.8

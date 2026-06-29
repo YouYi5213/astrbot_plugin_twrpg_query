@@ -67,7 +67,7 @@ class QueryParserTests(unittest.TestCase):
         self.assertFalse(used_jie_only_item_prefix("世界 太阳石"))
 
     def test_sgs_jie_hero_block(self):
-        for message in ("界 赵云", "界赵云", "界 吕布", "界张辽"):
+        for message in ("界 赵云", "界赵云", "界 吕布", "界张辽", "界 徐盛", "界徐盛"):
             query = extract_item_query(message)
             assert query is not None
             self.assertTrue(used_jie_only_item_prefix(message))
