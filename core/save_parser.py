@@ -8,6 +8,8 @@ from dataclasses import dataclass, field
 PRELOAD_RE = re.compile(r'call\s+Preload\s*\(\s*"([^"]*)"\s*\)')
 SECTION_HEADER_RE = re.compile(r"^-{5,}\s*(.+?)\s*-{5,}$")
 SAVE_CODE_HEAD_RE = re.compile(r"存档代码\s*(\d*)\s*:")
+_SAVE_STACK_RE = re.compile(r"^(.+?)\s+[xX×]\s*(\d+)\s*$")
+_LEADING_INDEX_RE = re.compile(r"^\d+[.．、]\s*")
 
 
 @dataclass
@@ -144,3 +146,21 @@ def _strip_leading_number(line: str) -> str:
         if index + 1 >= len(text) or text[index + 1] == " ":
             return text[index + 1 :].strip()
     return text
+
+
+def parse_save_item_line(raw: str) -> tuple[str, int]:
+    """解析存档物品行，返回 (基名, 数量)。"""
+    text = _strip_leading_number((raw or "").strip())
+    text = _LEADING_INDEX_RE.sub("", text).strip()
+    if not text:
+        return "", 1
+
+    match = _SAVE_STACK_RE.match(text)
+    if match:
+        name = match.group(1).strip()
+        try:
+            qty = max(1, int(match.group(2)))
+        except ValueError:
+            qty = 1
+        return name, qty
+    return text, 1

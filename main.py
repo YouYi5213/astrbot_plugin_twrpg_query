@@ -44,7 +44,7 @@ from .core.cloud_commands import (
     _WAREHOUSE_RE,
     is_cloud_command,
 )
-from .core.cloud_service import CloudSaveService, HELP_TEXT
+from .core.cloud_service import CloudInventoryResult, CloudSaveService, HELP_TEXT
 from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
 from .icon_utils import resolve_icons_dir
 from .query_parser import (
@@ -70,7 +70,9 @@ class TwrpgQueryPlugin(Star):
         super().__init__(context)
         self.config = config or {}
         self.store = TwrpgDataStore(_DATA_DIR, icons_dir=_ICONS_DIR)
-        self._cloud = CloudSaveService(self.config, str(StarTools.get_data_dir()))
+        self._cloud = CloudSaveService(
+            self.config, str(StarTools.get_data_dir()), store=self.store
+        )
         self._load_data()
 
     def _load_data(self) -> None:
@@ -310,26 +312,43 @@ class TwrpgQueryPlugin(Star):
         event.stop_event()
         yield event.plain_result(await self._cloud.profile(str(event.get_sender_id())))
 
+    async def _yield_cloud_inventory(self, event: AstrMessageEvent, result: CloudInventoryResult | str):
+        if isinstance(result, str):
+            yield event.plain_result(result)
+            return
+        yield event.plain_result(result.caption)
+        if result.image_path:
+            yield event.image_result(result.image_path)
+
     @filter.regex(_BACKPACK_RE, priority=CLOUD_CMD_PRIORITY)
     async def on_cloud_show_backpack(self, event: AstrMessageEvent):
         if not self._cloud.enabled():
             return
         event.stop_event()
-        yield event.plain_result(await self._cloud.backpack(str(event.get_sender_id())))
+        async for msg in self._yield_cloud_inventory(
+            event, await self._cloud.backpack(str(event.get_sender_id()))
+        ):
+            yield msg
 
     @filter.regex(_WAREHOUSE_RE, priority=CLOUD_CMD_PRIORITY)
     async def on_cloud_show_warehouse(self, event: AstrMessageEvent):
         if not self._cloud.enabled():
             return
         event.stop_event()
-        yield event.plain_result(await self._cloud.warehouse(str(event.get_sender_id())))
+        async for msg in self._yield_cloud_inventory(
+            event, await self._cloud.warehouse(str(event.get_sender_id()))
+        ):
+            yield msg
 
     @filter.regex(_CARRIED_RE, priority=CLOUD_CMD_PRIORITY)
     async def on_cloud_show_carried(self, event: AstrMessageEvent):
         if not self._cloud.enabled():
             return
         event.stop_event()
-        yield event.plain_result(await self._cloud.carried(str(event.get_sender_id())))
+        async for msg in self._yield_cloud_inventory(
+            event, await self._cloud.carried(str(event.get_sender_id()))
+        ):
+            yield msg
 
     async def terminate(self):
         await self._cloud.close()

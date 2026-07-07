@@ -1,4 +1,4 @@
-from core.save_parser import parse_string_for_stage
+from core.save_parser import parse_save_item_line, parse_string_for_stage
 
 
 SAMPLE = """
@@ -45,3 +45,9 @@ call Preload("---------- 携带物品 ----------
     assert len(data.carried_items) == 1
     assert len(data.backpack_items) == 1
     assert len(data.warehouse_items) == 2
+
+
+def test_parse_save_item_line():
+    assert parse_save_item_line("普瑞斯银币 x10") == ("普瑞斯银币", 10)
+    assert parse_save_item_line("1. 荡华·净罪之冠") == ("荡华·净罪之冠", 1)
+    assert parse_save_item_line("2. 材料A x3") == ("材料A", 3)

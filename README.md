@@ -65,7 +65,6 @@ WebUI → 插件管理 → 世界RPG 查询 → 配置：
 | `cloud_save_enabled` | 是否启用云存档绑定（默认开启） |
 | `cloud_base_urls` | 云服务器地址，每行一个 |
 | `cloud_login_private_only` | 登录是否仅允许私聊 |
-| `cloud_max_items_display` | 背包/仓库展示条数 |
 
 ## 安装
 

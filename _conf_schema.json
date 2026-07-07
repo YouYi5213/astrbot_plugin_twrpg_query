@@ -17,11 +17,5 @@
     "type": "bool",
     "hint": "开启后，群聊发送「世界登录」会提示私聊机器人",
     "default": true
-  },
-  "cloud_max_items_display": {
-    "description": "云存档背包/仓库单次展示条数",
-    "type": "int",
-    "hint": "查看世界背包、世界仓库时的最大行数",
-    "default": 30
   }
 }

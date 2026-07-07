@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 
@@ -27,9 +28,15 @@ HELP_TEXT = (
     "世界存档 — 云端存档列表\n"
     "世界切换 <序号> — 切换主存档\n"
     "世界档案 — 角色信息\n"
-    "世界背包 / 世界仓库 / 世界携带 — 物品列表\n\n"
+    "世界背包 / 世界仓库 / 世界携带 — 物品图标列表\n\n"
     "查物品仍用：世界 <物品名> 或 界 <物品名>"
 )
+
+
+@dataclass
+class CloudInventoryResult:
+    caption: str
+    image_path: str | None = None
 
 
 def _format_size(size: int) -> str:
@@ -73,8 +80,14 @@ def _is_private_message(event: AstrMessageEvent) -> bool:
 
 
 class CloudSaveService:
-    def __init__(self, config: AstrBotConfig | dict[str, Any], data_dir: str):
+    def __init__(
+        self,
+        config: AstrBotConfig | dict[str, Any],
+        data_dir: str,
+        store: Any | None = None,
+    ):
         self.config = config or {}
+        self._store = store
         self._bindings = UserBindingStore(data_dir)
         self._base_urls = parse_base_urls_config(self.config.get("cloud_base_urls", ""))
         self._client = CloudSyncClient(self._base_urls)
@@ -86,9 +99,6 @@ class CloudSaveService:
 
     def _login_private_only(self) -> bool:
         return bool(self.config.get("cloud_login_private_only", True))
-
-    def _max_items_display(self) -> int:
-        return int(self.config.get("cloud_max_items_display", 30) or 30)
 
     async def close(self) -> None:
         await self._client.close()
@@ -242,16 +252,16 @@ class CloudSaveService:
         finally:
             await client.close()
 
-    async def backpack(self, qq_id: str) -> str:
+    async def backpack(self, qq_id: str) -> CloudInventoryResult | str:
         return await self._item_section(qq_id, "backpack")
 
-    async def warehouse(self, qq_id: str) -> str:
+    async def warehouse(self, qq_id: str) -> CloudInventoryResult | str:
         return await self._item_section(qq_id, "warehouse")
 
-    async def carried(self, qq_id: str) -> str:
+    async def carried(self, qq_id: str) -> CloudInventoryResult | str:
         return await self._item_section(qq_id, "carried")
 
-    async def _item_section(self, qq_id: str, section: str) -> str:
+    async def _item_section(self, qq_id: str, section: str) -> CloudInventoryResult | str:
         binding = self._bindings.get(qq_id)
         if not binding:
             return _NOT_LOGGED_HINT
@@ -269,7 +279,20 @@ class CloudSaveService:
                 items, label = data.warehouse_items, "仓库"
             else:
                 items, label = data.carried_items, "携带"
-            body = _format_item_list(items, limit=self._max_items_display())
+
+            from ..inventory_renderer import INVENTORY_DISPLAY_LIMIT, render_save_inventory
+
+            if self._store is not None:
+                caption, image_path = render_save_inventory(
+                    self._store,
+                    save_name=primary.name,
+                    section_label=label,
+                    raw_lines=items,
+                    limit=INVENTORY_DISPLAY_LIMIT,
+                )
+                return CloudInventoryResult(caption=caption, image_path=image_path)
+
+            body = _format_item_list(items, limit=INVENTORY_DISPLAY_LIMIT)
             return f"【{primary.name}】{label}（{len(items)}）\n{body}"
         except CloudSyncError as exc:
             return str(exc)

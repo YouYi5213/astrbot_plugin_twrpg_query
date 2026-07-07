@@ -213,6 +213,7 @@ class ItemDisplay:
     description: str
     raw_description: str = ""
     stage_label: str = ""
+    level: int = 0
     icon: str | None = None
     passive: str = ""
     limit_heroes: list[HeroRef] = field(default_factory=list)
@@ -659,6 +660,23 @@ class TwrpgDataStore:
             validate=lambda skill_key: skill_key in self.skills_by_key,
         )
 
+    def resolve_item_by_name(self, name: str) -> ItemDisplay | None:
+        text = strip_color(name or "").strip()
+        if not text:
+            return None
+        query_key = normalize_query(text)
+        matches = self.search(text, limit=8)
+        exact = [
+            item_id
+            for item_id in matches
+            if normalize_query(self.item_name(item_id)) == query_key
+        ]
+        if len(exact) == 1:
+            return self.build_display(exact[0])
+        if len(matches) == 1:
+            return self.build_display(matches[0])
+        return None
+
     def _hero_skill_entries(self, hero_id: str) -> list[HeroSkillEntry]:
         hero = self.heros_by_id.get(hero_id)
         if not hero:
@@ -880,6 +898,7 @@ class TwrpgDataStore:
             id=item_id,
             name=name,
             stage_label=stage_label(item.get("stage")),
+            level=int(item.get("level") or 0),
             description=description,
             raw_description=raw_description,
             icon=self._item_icon(item_id),

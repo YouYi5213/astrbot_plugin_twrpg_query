@@ -6,29 +6,19 @@
 
 ---
 
-## [1.2.3] - 2026-07-07
+## [1.3.0] - 2026-07-07
+
+### 新增
+
+- 云存档「背包 / 仓库 / 携带」改为图标网格图片 + 标题文字（5 列密集布局，匹配离线物品图标）
 
 ### 修复
 
-- 修复插件加载失败：`StarTools.get_data_dir()` 改在 `main.py` 调用并传入 `CloudSaveService`
-- 根因：在 `core/` 子模块内调用 `get_data_dir()` 时，AstrBot 无法从 `star_map` 解析该子模块 metadata
+- 修复插件加载失败：`StarTools.get_data_dir()` 仅在 `main.py` 调用（子模块内调用无法解析 metadata）
 
----
+### 变更
 
-## [1.2.2] - 2026-07-07
-
-### 修复
-
-- 云存档 `@filter` 处理器全部移至 `main.py`，`core/` 仅保留纯业务类
-- 彻底解决 AstrBot 扫描子模块 metadata 失败的问题
-
----
-
-## [1.2.1] - 2026-07-07
-
-### 修复
-
-- 修复插件加载失败：`cloud_save.py` 移至 `core/`，避免 AstrBot 将根目录模块误识别为独立插件
+- 移除 WebUI 配置项 `cloud_max_items_display`，单次图片内置最多展示 40 件
 
 ---
 
