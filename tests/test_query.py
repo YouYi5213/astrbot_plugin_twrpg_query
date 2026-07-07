@@ -46,6 +46,17 @@ class TwrpgQueryTests(unittest.TestCase):
         matches = self.store.search("I0ET")
         self.assertEqual(matches[0], "I0ET")
 
+    def test_resolve_duplicate_item_names(self):
+        for name, expected_id in (
+            ("拉撒路的传家宝", "mlst"),
+            ("格林之镰", "rlif"),
+        ):
+            display = self.store.resolve_item_by_name(name)
+            self.assertIsNotNone(display, name)
+            assert display is not None
+            self.assertEqual(display.id, expected_id)
+            self.assertTrue(display.icon and os.path.exists(display.icon), name)
+
     def test_build_display_sections(self):
         display = self.store.build_display("I0ET")
         self.assertIsNotNone(display)

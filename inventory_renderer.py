@@ -26,18 +26,52 @@ from .data_loader import ItemDisplay, TwrpgDataStore
 _PLUGIN_DIR = os.path.dirname(os.path.abspath(__file__))
 _CARDS_DIR = os.path.join(_PLUGIN_DIR, "data", "cards")
 
-GRID_COLS = 5
-INVENTORY_DISPLAY_LIMIT = 40
 GRID_PADDING = 10
 GRID_GAP = 3
-CELL_W = (CARD_WIDTH - GRID_PADDING * 2 - GRID_GAP * (GRID_COLS - 1)) // GRID_COLS
-ICON_SIZE = 46
-ICON_ZONE = 50
-NAME_ZONE = 26
-FOOTER_H = 13
-CELL_H = ICON_ZONE + 2 + NAME_ZONE + FOOTER_H
 HERO_DOT = 13
 TITLE_H = 34
+
+
+@dataclass(frozen=True)
+class InventoryLayout:
+    cols: int
+    max_items: int
+    card_width: int
+    icon_size: int
+    name_zone: int
+    footer_h: int = 13
+    fixed_rows: int | None = None
+
+    @property
+    def icon_zone(self) -> int:
+        return self.icon_size + 4
+
+    @property
+    def cell_h(self) -> int:
+        return self.icon_zone + 2 + self.name_zone + self.footer_h
+
+    @property
+    def cell_w(self) -> int:
+        inner = self.card_width - GRID_PADDING * 2 - GRID_GAP * (self.cols - 1)
+        return inner // self.cols
+
+
+BACKPACK_LAYOUT = InventoryLayout(
+    cols=5,
+    max_items=40,
+    card_width=CARD_WIDTH,
+    icon_size=46,
+    name_zone=26,
+)
+
+CARRIED_LAYOUT = InventoryLayout(
+    cols=2,
+    max_items=6,
+    card_width=280,
+    icon_size=54,
+    name_zone=30,
+    fixed_rows=3,
+)
 
 
 @dataclass
@@ -46,6 +80,13 @@ class InventoryTile:
     name: str
     quantity: int = 1
     display: ItemDisplay | None = None
+
+
+def format_save_display_name(filename: str) -> str:
+    name = (filename or "").strip()
+    if name.lower().endswith(".txt"):
+        return name[:-4]
+    return name
 
 
 def build_inventory_tiles(
@@ -87,15 +128,22 @@ def _draw_placeholder(size: int) -> Image.Image:
     return img
 
 
-def _draw_stack_badge(draw: ImageDraw.ImageDraw, x: int, y: int, count: int) -> None:
+def _draw_stack_badge(
+    draw: ImageDraw.ImageDraw,
+    x: int,
+    y: int,
+    count: int,
+    *,
+    icon_size: int,
+) -> None:
     if count <= 1:
         return
     text = str(count)
     font = _font(11, bold=True)
     tw = _text_width(draw, text, font)
     th = _text_height(draw, text, font)
-    bx = x + ICON_SIZE - tw - 4
-    by = y + ICON_SIZE - th - 2
+    bx = x + icon_size - tw - 4
+    by = y + icon_size - th - 2
     for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1)):
         draw.text((bx + dx, by + dy), text, fill=(0, 0, 0), font=font)
     draw.text((bx, by), text, fill=(255, 255, 255), font=font)
@@ -118,9 +166,15 @@ def _draw_tile(
     tile: InventoryTile | None,
     x: int,
     y: int,
+    *,
+    layout: InventoryLayout,
 ) -> None:
+    cell_w = layout.cell_w
+    cell_h = layout.cell_h
+    icon_size = layout.icon_size
+
     draw.rounded_rectangle(
-        (x, y, x + CELL_W - 1, y + CELL_H - 1),
+        (x, y, x + cell_w - 1, y + cell_h - 1),
         radius=8,
         fill=(40, 43, 56),
         outline=(62, 68, 86),
@@ -135,14 +189,14 @@ def _draw_tile(
     level = display.level if display else 0
     subtitle = _tile_subtitle(tile)
 
-    icon_x = x + (CELL_W - ICON_SIZE) // 2
+    icon_x = x + (cell_w - icon_size) // 2
     icon_y = y + 2
     icon_path = display.icon if display else None
-    icon = _load_image(icon_path, (ICON_SIZE, ICON_SIZE)) if icon_path else None
+    icon = _load_image(icon_path, (icon_size, icon_size)) if icon_path else None
     if icon is None:
-        icon = _draw_placeholder(ICON_SIZE)
-    _paste_in_slot(canvas, icon, icon_x, icon_y, ICON_SIZE, ICON_SIZE)
-    _draw_stack_badge(draw, icon_x, icon_y, tile.quantity)
+        icon = _draw_placeholder(icon_size)
+    _paste_in_slot(canvas, icon, icon_x, icon_y, icon_size, icon_size)
+    _draw_stack_badge(draw, icon_x, icon_y, tile.quantity, icon_size=icon_size)
 
     if display and display.limit_heroes:
         hx = x + 3
@@ -156,15 +210,15 @@ def _draw_tile(
         stage_font = _font(9, bold=True)
         stage_w = _text_width(draw, stage, stage_font)
         draw.text(
-            (x + CELL_W - stage_w - 3, y + 2),
+            (x + cell_w - stage_w - 3, y + 2),
             stage,
             fill=COLORS["stage"],
             font=stage_font,
         )
 
     name_font = _font(10)
-    name_top = y + ICON_ZONE + 2
-    max_name_w = CELL_W - 6
+    name_top = y + layout.icon_zone + 2
+    max_name_w = cell_w - 6
     lines = _wrap_lines(draw, name, name_font, max_name_w)[:2]
     if len(lines) == 1 and _text_width(draw, name, name_font) > max_name_w:
         lines = _wrap_lines(draw, name, _font(9), max_name_w)[:2]
@@ -173,20 +227,20 @@ def _draw_tile(
     for index, line in enumerate(lines):
         lw = _text_width(draw, line, name_font)
         draw.text(
-            (x + (CELL_W - lw) // 2, name_top + index * line_h),
+            (x + (cell_w - lw) // 2, name_top + index * line_h),
             line,
             fill=COLORS["text"],
             font=name_font,
         )
 
-    footer_y = y + CELL_H - FOOTER_H
+    footer_y = y + cell_h - layout.footer_h
     footer_font = _font(9)
     if level > 0:
         draw.text((x + 4, footer_y), f"Lv{level}", fill=COLORS["muted"], font=footer_font)
     if subtitle:
         sw = _text_width(draw, subtitle, footer_font)
         draw.text(
-            (x + CELL_W - sw - 4, footer_y),
+            (x + cell_w - sw - 4, footer_y),
             subtitle,
             fill=(210, 150, 210),
             font=footer_font,
@@ -195,22 +249,33 @@ def _draw_tile(
 
 def generate_inventory_grid(
     *,
-    title: str,
+    save_display_name: str,
+    section_label: str,
     tiles: list[InventoryTile],
-    total_count: int | None = None,
+    total_count: int,
+    layout: InventoryLayout,
 ) -> str:
     _ensure_dirs()
     os.makedirs(_CARDS_DIR, exist_ok=True)
 
-    count = total_count if total_count is not None else len(tiles)
-    rows = max(1, math.ceil(len(tiles) / GRID_COLS)) if tiles else 1
-    grid_h = rows * CELL_H + (rows - 1) * GRID_GAP
+    cols = layout.cols
+    cell_h = layout.cell_h
+    card_width = layout.card_width
+
+    if layout.fixed_rows is not None:
+        rows = layout.fixed_rows
+    elif tiles:
+        rows = math.ceil(len(tiles) / cols)
+    else:
+        rows = 1
+
+    grid_h = rows * cell_h + (rows - 1) * GRID_GAP
     height = GRID_PADDING * 2 + TITLE_H + 6 + grid_h + 8
 
-    card = Image.new("RGB", (CARD_WIDTH, height), COLORS["bg"])
+    card = Image.new("RGB", (card_width, height), COLORS["bg"])
     draw = ImageDraw.Draw(card)
     draw.rounded_rectangle(
-        (6, 6, CARD_WIDTH - 6, height - 6),
+        (6, 6, card_width - 6, height - 6),
         radius=12,
         fill=COLORS["panel"],
         outline=COLORS["border"],
@@ -219,26 +284,26 @@ def generate_inventory_grid(
 
     title_font = _font(18, bold=True)
     subtitle_font = _font(12)
-    header = title
-    sub = f"共 {count} 件"
+    header = f"{save_display_name} · {section_label}"
+    sub = f"共 {total_count} 件"
     draw.text((GRID_PADDING + 4, GRID_PADDING + 4), header, fill=COLORS["title"], font=title_font)
     sub_w = _text_width(draw, sub, subtitle_font)
     draw.text(
-        (CARD_WIDTH - GRID_PADDING - 4 - sub_w, GRID_PADDING + 8),
+        (card_width - GRID_PADDING - 4 - sub_w, GRID_PADDING + 8),
         sub,
         fill=COLORS["muted"],
         font=subtitle_font,
     )
 
     grid_top = GRID_PADDING + TITLE_H + 4
-    slots = rows * GRID_COLS
+    slots = rows * cols
     for index in range(slots):
-        row = index // GRID_COLS
-        col = index % GRID_COLS
-        cx = GRID_PADDING + col * (CELL_W + GRID_GAP)
-        cy = grid_top + row * (CELL_H + GRID_GAP)
+        row = index // cols
+        col = index % cols
+        cx = GRID_PADDING + col * (layout.cell_w + GRID_GAP)
+        cy = grid_top + row * (cell_h + GRID_GAP)
         tile = tiles[index] if index < len(tiles) else None
-        _draw_tile(card, draw, tile, cx, cy)
+        _draw_tile(card, draw, tile, cx, cy, layout=layout)
 
     out_path = os.path.join(_CARDS_DIR, f"inv_{uuid.uuid4().hex[:8]}.png")
     card.save(out_path, format="PNG", optimize=True)
@@ -251,27 +316,32 @@ def render_save_inventory(
     save_name: str,
     section_label: str,
     raw_lines: list[str],
-    limit: int,
+    layout: InventoryLayout,
 ) -> tuple[str, str | None]:
     """返回 (说明文字, 图片路径或 None)。"""
+    display_name = format_save_display_name(save_name)
     total = len(raw_lines)
+    limit = layout.max_items
+
     if total == 0:
-        return f"【{save_name}】{section_label}（空）", None
+        return f"【{display_name}】{section_label}（空）", None
 
     if not store.loaded:
         lines = [f"{index}. {item}" for index, item in enumerate(raw_lines[:limit], start=1)]
-        if len(raw_lines) > limit:
-            lines.append(f"... 还有 {len(raw_lines) - limit} 条未显示")
+        if total > limit:
+            lines.append(f"... 还有 {total - limit} 条未显示")
         body = "\n".join(lines) if lines else "（空）"
-        return f"【{save_name}】{section_label}（{total}）\n{body}", None
+        return f"【{display_name}】{section_label}（{total}）\n{body}", None
 
     tiles = build_inventory_tiles(raw_lines, store, limit=limit)
-    caption = f"【{save_name}】{section_label}（{total}）"
+    caption = f"【{display_name}】{section_label}（{total}）"
     if total > limit:
         caption += f"\n仅展示前 {limit} 件，还有 {total - limit} 件未显示。"
     image_path = generate_inventory_grid(
-        title=f"{section_label}",
+        save_display_name=display_name,
+        section_label=section_label,
         tiles=tiles,
         total_count=total,
+        layout=layout,
     )
     return caption, image_path

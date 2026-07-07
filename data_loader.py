@@ -228,6 +228,7 @@ class TwrpgDataStore:
         self.data_dir = data_dir
         self.icons_dir = icons_dir
         self.items_by_id: dict[str, dict] = {}
+        self.name_to_item_id: dict[str, str] = {}
         self.search_index: list[tuple[str, str]] = []
         self.recipes: dict[str, list[dict]] = {}
         self.used_in: dict[str, list[tuple[str, int]]] = {}
@@ -262,8 +263,14 @@ class TwrpgDataStore:
                 continue
             for label in self._item_search_labels(item):
                 key = normalize_query(label)
-                if key:
-                    self.search_index.append((key, item_id))
+                if not key:
+                    continue
+                self.search_index.append((key, item_id))
+                existing = self.name_to_item_id.get(key)
+                if existing is None or self._item_entry_priority(
+                    item
+                ) >= self._item_entry_priority(self.items_by_id[existing]):
+                    self.name_to_item_id[key] = item_id
 
         self._load_makes()
         self._load_drops()
@@ -660,21 +667,36 @@ class TwrpgDataStore:
             validate=lambda skill_key: skill_key in self.skills_by_key,
         )
 
+    def _pick_best_item_id(self, item_ids: list[str]) -> str | None:
+        best: str | None = None
+        best_score = -1
+        for item_id in item_ids:
+            item = self.items_by_id.get(item_id)
+            if not item or not self._is_queryable(item):
+                continue
+            score = self._item_entry_priority(item)
+            if score > best_score:
+                best_score = score
+                best = item_id
+        return best
+
     def resolve_item_by_name(self, name: str) -> ItemDisplay | None:
         text = strip_color(name or "").strip()
         if not text:
             return None
         query_key = normalize_query(text)
-        matches = self.search(text, limit=8)
+        item_id = self.name_to_item_id.get(query_key)
+        if item_id:
+            return self.build_display(item_id)
+        matches = self.search(text, limit=12)
         exact = [
-            item_id
-            for item_id in matches
-            if normalize_query(self.item_name(item_id)) == query_key
+            candidate
+            for candidate in matches
+            if normalize_query(self.item_name(candidate)) == query_key
         ]
-        if len(exact) == 1:
-            return self.build_display(exact[0])
-        if len(matches) == 1:
-            return self.build_display(matches[0])
+        item_id = self._pick_best_item_id(exact) or self._pick_best_item_id(matches)
+        if item_id:
+            return self.build_display(item_id)
         return None
 
     def _hero_skill_entries(self, hero_id: str) -> list[HeroSkillEntry]:

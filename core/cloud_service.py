@@ -280,7 +280,14 @@ class CloudSaveService:
             else:
                 items, label = data.carried_items, "携带"
 
-            from ..inventory_renderer import INVENTORY_DISPLAY_LIMIT, render_save_inventory
+            from ..inventory_renderer import (
+                BACKPACK_LAYOUT,
+                CARRIED_LAYOUT,
+                format_save_display_name,
+                render_save_inventory,
+            )
+
+            layout = CARRIED_LAYOUT if section == "carried" else BACKPACK_LAYOUT
 
             if self._store is not None:
                 caption, image_path = render_save_inventory(
@@ -288,12 +295,13 @@ class CloudSaveService:
                     save_name=primary.name,
                     section_label=label,
                     raw_lines=items,
-                    limit=INVENTORY_DISPLAY_LIMIT,
+                    layout=layout,
                 )
                 return CloudInventoryResult(caption=caption, image_path=image_path)
 
-            body = _format_item_list(items, limit=INVENTORY_DISPLAY_LIMIT)
-            return f"【{primary.name}】{label}（{len(items)}）\n{body}"
+            display_name = format_save_display_name(primary.name)
+            body = _format_item_list(items, limit=layout.max_items)
+            return f"【{display_name}】{label}（{len(items)}）\n{body}"
         except CloudSyncError as exc:
             return str(exc)
         except Exception as exc:
