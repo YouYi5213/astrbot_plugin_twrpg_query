@@ -1,6 +1,6 @@
 """指令解析测试。"""
 
-from cloud_commands import (
+from core.cloud_commands import (
     _BACKPACK_RE,
     _HELP_RE,
     _LOGIN_RE,

@@ -31,8 +31,8 @@ from .card_renderer import (
     generate_item_card,
     generate_skill_card,
 )
-from .cloud_commands import is_cloud_command
-from .cloud_save import CloudSaveMixin
+from .core.cloud_commands import is_cloud_command
+from .core.cloud_save import CloudSaveMixin
 from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
 from .icon_utils import resolve_icons_dir
 from .query_parser import (

@@ -1,10 +1,9 @@
-"""云存档指令正则（无需 / 前缀，且优先于 twrpg_query 的「世界/界」物品匹配）。"""
+"""云存档指令正则（无需 / 前缀，且优先于物品查询）。"""
 
 from __future__ import annotations
 
 import re
 
-# 比 twrpg_query（priority=10）更高，避免「世界背包」等被当成物品查询
 CLOUD_CMD_PRIORITY = 15
 
 _LOGIN_RE = re.compile(r"^/?(世界登录|界登录)\s+(\S+)\s+(.+)$", re.IGNORECASE)
