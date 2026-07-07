@@ -1,7 +1,7 @@
 name: astrbot_plugin_twrpg_query
 display_name: 世界RPG 查询
 desc: 世界RPG（TWRPG）离线查询与云存档 — 物品/英雄/技能/BOSS 查询，可选云存档绑定与背包仓库查看
-version: 1.3.2
+version: 1.3.3
 author: YouYi5213
 short_desc: 世界RPG 查询 + 可选云存档绑定
 support_platforms:

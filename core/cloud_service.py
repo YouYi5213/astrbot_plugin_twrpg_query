@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime
 from typing import Any
 
 from astrbot.api import AstrBotConfig, logger
 from astrbot.api.event import AstrMessageEvent
+
+from ..inventory_renderer import format_save_display_name
 
 from .cloud_client import (
     CloudSyncClient,
@@ -37,23 +38,6 @@ HELP_TEXT = (
 class CloudInventoryResult:
     caption: str
     image_path: str | None = None
-
-
-def _format_size(size: int) -> str:
-    if size < 1024:
-        return f"{size} B"
-    if size < 1024 * 1024:
-        return f"{size / 1024:.1f} KB"
-    return f"{size / (1024 * 1024):.1f} MB"
-
-
-def _format_ts(ms: int | None) -> str:
-    if not ms:
-        return "未知"
-    try:
-        return datetime.fromtimestamp(ms / 1000).strftime("%Y-%m-%d %H:%M")
-    except (OSError, OverflowError, ValueError):
-        return "未知"
 
 
 def _format_item_list(items: list[str], *, limit: int) -> str:
@@ -152,7 +136,7 @@ class CloudSaveService:
             )
             save_hint = f"已检测到 {len(saves)} 个云端存档。"
             if primary_save:
-                save_hint += f"\n当前主存档：{primary_save}"
+                save_hint += f"\n当前主存档：{format_save_display_name(primary_save)}"
             else:
                 save_hint += "\n云端暂无存档文件。"
             return (
@@ -187,8 +171,7 @@ class CloudSaveService:
             for index, entry in enumerate(saves, start=1):
                 mark = " ⭐" if entry.name == primary else ""
                 lines.append(
-                    f"{index}. {entry.name}{mark}\n"
-                    f"   大小 {_format_size(entry.size)} | 更新 {_format_ts(entry.last_modified)}"
+                    f"{index}. {format_save_display_name(entry.name)}{mark}"
                 )
             lines.append("\n使用「世界切换 <序号>」切换主存档。")
             return "\n".join(lines)
@@ -216,7 +199,7 @@ class CloudSaveService:
                 return f"序号无效，请输入 1～{len(saves)}。"
             chosen = saves[index - 1]
             self._bindings.set_primary_save(qq_id, chosen.name)
-            return f"已切换主存档为：{chosen.name}"
+            return f"已切换主存档为：{format_save_display_name(chosen.name)}"
         except CloudSyncError as exc:
             return str(exc)
         finally:
@@ -234,13 +217,11 @@ class CloudSaveService:
                 return "云端暂无存档文件。"
             raw = await client.download_save(primary.name)
             data = parse_string_for_stage(raw.decode("utf-8", errors="replace"))
-            badge = data.account_badge_display or "无"
             lines = [
-                f"【{primary.name}】",
+                f"【{format_save_display_name(primary.name)}】",
                 f"游戏ID：{data.game_id or '未知'}",
                 f"职业：{data.job or '未知'}",
                 f"等级：{data.level or '未知'}",
-                f"徽章：{badge}",
                 f"携带 {len(data.carried_items)} | 背包 {len(data.backpack_items)} | 仓库 {len(data.warehouse_items)}",
             ]
             return "\n".join(lines)
