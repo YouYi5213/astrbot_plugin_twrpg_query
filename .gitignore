@@ -2,3 +2,7 @@ data/cards/
 __pycache__/
 *.pyc
 .pytest_cache/
+
+# 本地发布脚本（按版本复制的 publish_v*.py 勿提交）
+scripts/publish_v*.py
+scripts/publish_release.py
