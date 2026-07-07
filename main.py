@@ -6,6 +6,10 @@
   世界BOSS <BOSS名> / 界BOSS <BOSS名> — BOSS 掉落查询（如 世界BOSS 土灵战神盖亚）
   英雄 <名> / 英 <名> — 英雄查询
   技能 <名> / 技 <名> — 技能查询
+
+云存档（需在配置中启用）:
+  世界登录 <用户名> <密码> — 私聊绑定云账号
+  世界存档 / 世界档案 / 世界背包 / 世界仓库 等
 """
 
 from __future__ import annotations
@@ -27,6 +31,8 @@ from .card_renderer import (
     generate_item_card,
     generate_skill_card,
 )
+from .cloud_commands import is_cloud_command
+from .cloud_save import CloudSaveMixin
 from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
 from .icon_utils import resolve_icons_dir
 from .query_parser import (
@@ -47,12 +53,13 @@ _ICONS_DIR = resolve_icons_dir(_PLUGIN_DIR)
 _MAX_MATCHES = 5
 
 
-class TwrpgQueryPlugin(Star):
+class TwrpgQueryPlugin(CloudSaveMixin, Star):
     def __init__(self, context: Context, config: AstrBotConfig | None = None):
         super().__init__(context)
         self.config = config or {}
         self.store = TwrpgDataStore(_DATA_DIR, icons_dir=_ICONS_DIR)
         self._load_data()
+        self._init_cloud_save()
 
     def _load_data(self) -> None:
         items_json = os.path.join(_DATA_DIR, "items.json")
@@ -101,6 +108,8 @@ class TwrpgQueryPlugin(Star):
     @filter.regex(ITEM_CMD_RE, priority=10)
     async def on_twrpg_item_command(self, event: AstrMessageEvent):
         raw = event.message_str.strip()
+        if self._cloud_save_enabled() and is_cloud_command(raw):
+            return
         query_text = extract_item_query(raw)
         if query_text is None:
             return
@@ -245,4 +254,5 @@ class TwrpgQueryPlugin(Star):
             yield event.plain_result(text_fallback(display))
 
     async def terminate(self):
+        await self._shutdown_cloud_save()
         logger.info("世界RPG 查询插件已卸载")

@@ -1,0 +1,27 @@
+{
+  "cloud_save_enabled": {
+    "description": "启用云存档绑定功能",
+    "type": "bool",
+    "hint": "关闭后，世界登录/世界背包等云存档指令不生效，仅保留离线查询",
+    "default": true,
+    "obvious_hint": true
+  },
+  "cloud_base_urls": {
+    "description": "云存档服务器地址",
+    "type": "text",
+    "hint": "每行一个，按顺序尝试。留空使用默认；请带端口，如 http://81.71.72.19:8080",
+    "default": ""
+  },
+  "cloud_login_private_only": {
+    "description": "云存档登录仅允许私聊",
+    "type": "bool",
+    "hint": "开启后，群聊发送「世界登录」会提示私聊机器人",
+    "default": true
+  },
+  "cloud_max_items_display": {
+    "description": "云存档背包/仓库单次展示条数",
+    "type": "int",
+    "hint": "查看世界背包、世界仓库时的最大行数",
+    "default": 30
+  }
+}
