@@ -9,6 +9,7 @@ if PARENT_DIR not in sys.path:
     sys.path.insert(0, PARENT_DIR)
 
 from astrbot_plugin_twrpg_query.save_list_renderer import (
+    PRIMARY_MARK,
     SaveListRow,
     generate_save_list_image,
     render_save_list,
@@ -19,6 +20,7 @@ def test_render_save_list():
     names = [f"save{i}.txt" for i in range(1, 10)]
     caption, path = render_save_list("atong", names, primary_name="save3.txt")
     assert "共 9 个存档" in caption
+    assert PRIMARY_MARK in caption
     assert os.path.exists(path)
 
     from PIL import Image

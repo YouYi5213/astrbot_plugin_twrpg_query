@@ -14,6 +14,8 @@ from .inventory_renderer import format_save_display_name
 
 _CARDS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "cards")
 
+PRIMARY_MARK = "\u2605"  # ★ — 内置字体可渲染，emoji ⭐ 会显示为方框
+
 LIST_COLS = 4
 LIST_PADDING = 12
 LIST_GAP = 4
@@ -97,7 +99,7 @@ def generate_save_list_image(
         entry = entries[slot]
         label = f"{entry.index}. {entry.display_name}"
         if entry.is_primary:
-            label += " ⭐"
+            star = f" {PRIMARY_MARK}"
             draw.rounded_rectangle(
                 (cx, cy, cx + cell_w - 1, cy + ROW_H - 1),
                 radius=6,
@@ -107,16 +109,17 @@ def generate_save_list_image(
             )
             font = primary_font
             color = COLORS["title"]
+            star_w = _text_width(draw, star, font)
+            text = _truncate_text(draw, label, font, cell_w - 8 - star_w) + star
         else:
             font = item_font
             color = COLORS["text"]
-
-        text = _truncate_text(draw, label, font, cell_w - 8)
+            text = _truncate_text(draw, label, font, cell_w - 8)
         ty = cy + (ROW_H - _text_height(draw, text, font)) // 2
         draw.text((cx + 4, ty), text, fill=color, font=font)
 
     footer_font = _font(11)
-    footer = "⭐ 主存档 · 世界切换 <序号>"
+    footer = f"{PRIMARY_MARK} 主存档 · 世界切换 <序号>"
     draw.text(
         (LIST_PADDING + 4, height - LIST_PADDING - FOOTER_H + 4),
         footer,
@@ -146,7 +149,7 @@ def render_save_list(
     ]
     caption = (
         f"云账号 {username} · 共 {len(entries)} 个存档\n"
-        "⭐ 主存档 · 使用「世界切换 <序号>」"
+        f"{PRIMARY_MARK} 主存档 · 使用「世界切换 <序号>」"
     )
     image_path = generate_save_list_image(username=username, entries=entries)
     return caption, image_path
