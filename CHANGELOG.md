@@ -6,6 +6,15 @@
 
 ---
 
+## [1.2.3] - 2026-07-07
+
+### 修复
+
+- 修复插件加载失败：`StarTools.get_data_dir()` 改在 `main.py` 调用并传入 `CloudSaveService`
+- 根因：在 `core/` 子模块内调用 `get_data_dir()` 时，AstrBot 无法从 `star_map` 解析该子模块 metadata
+
+---
+
 ## [1.2.2] - 2026-07-07
 
 ### 修复

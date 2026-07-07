@@ -7,7 +7,6 @@ from typing import Any
 
 from astrbot.api import AstrBotConfig, logger
 from astrbot.api.event import AstrMessageEvent
-from astrbot.api.star import StarTools
 
 from .cloud_client import (
     CloudSyncClient,
@@ -74,9 +73,8 @@ def _is_private_message(event: AstrMessageEvent) -> bool:
 
 
 class CloudSaveService:
-    def __init__(self, config: AstrBotConfig | dict[str, Any]):
+    def __init__(self, config: AstrBotConfig | dict[str, Any], data_dir: str):
         self.config = config or {}
-        data_dir = str(StarTools.get_data_dir())
         self._bindings = UserBindingStore(data_dir)
         self._base_urls = parse_base_urls_config(self.config.get("cloud_base_urls", ""))
         self._client = CloudSyncClient(self._base_urls)

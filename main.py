@@ -19,7 +19,7 @@ from collections.abc import AsyncIterator, Callable
 
 from astrbot.api import AstrBotConfig, logger
 from astrbot.api.event import AstrMessageEvent, filter
-from astrbot.api.star import Context, Star
+from astrbot.api.star import Context, Star, StarTools
 
 from .card_renderer import (
     format_boss_text_fallback,
@@ -70,7 +70,7 @@ class TwrpgQueryPlugin(Star):
         super().__init__(context)
         self.config = config or {}
         self.store = TwrpgDataStore(_DATA_DIR, icons_dir=_ICONS_DIR)
-        self._cloud = CloudSaveService(self.config)
+        self._cloud = CloudSaveService(self.config, str(StarTools.get_data_dir()))
         self._load_data()
 
     def _load_data(self) -> None:
