@@ -31,8 +31,20 @@ from .card_renderer import (
     generate_item_card,
     generate_skill_card,
 )
-from .core.cloud_commands import is_cloud_command
-from .core.cloud_save import CloudSaveMixin
+from .core.cloud_commands import (
+    CLOUD_CMD_PRIORITY,
+    _BACKPACK_RE,
+    _CARRIED_RE,
+    _HELP_RE,
+    _LOGIN_RE,
+    _PROFILE_RE,
+    _SAVES_RE,
+    _SWITCH_RE,
+    _UNBIND_RE,
+    _WAREHOUSE_RE,
+    is_cloud_command,
+)
+from .core.cloud_service import CloudSaveService, HELP_TEXT
 from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
 from .icon_utils import resolve_icons_dir
 from .query_parser import (
@@ -53,13 +65,13 @@ _ICONS_DIR = resolve_icons_dir(_PLUGIN_DIR)
 _MAX_MATCHES = 5
 
 
-class TwrpgQueryPlugin(CloudSaveMixin, Star):
+class TwrpgQueryPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig | None = None):
         super().__init__(context)
         self.config = config or {}
         self.store = TwrpgDataStore(_DATA_DIR, icons_dir=_ICONS_DIR)
+        self._cloud = CloudSaveService(self.config)
         self._load_data()
-        self._init_cloud_save()
 
     def _load_data(self) -> None:
         items_json = os.path.join(_DATA_DIR, "items.json")
@@ -108,7 +120,7 @@ class TwrpgQueryPlugin(CloudSaveMixin, Star):
     @filter.regex(ITEM_CMD_RE, priority=10)
     async def on_twrpg_item_command(self, event: AstrMessageEvent):
         raw = event.message_str.strip()
-        if self._cloud_save_enabled() and is_cloud_command(raw):
+        if self._cloud.enabled() and is_cloud_command(raw):
             return
         query_text = extract_item_query(raw)
         if query_text is None:
@@ -253,6 +265,72 @@ class TwrpgQueryPlugin(CloudSaveMixin, Star):
             logger.error(f"生成 TWRPG {log_prefix}查询卡片失败 ({entity_id}): {e}")
             yield event.plain_result(text_fallback(display))
 
+    @filter.regex(_LOGIN_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_cloud_login(self, event: AstrMessageEvent):
+        """私聊绑定云存档账号：世界登录 用户名 密码"""
+        if not self._cloud.enabled():
+            return
+        event.stop_event()
+        yield event.plain_result(await self._cloud.login(event))
+
+    @filter.regex(_HELP_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_cloud_help(self, event: AstrMessageEvent):
+        if not self._cloud.enabled():
+            return
+        event.stop_event()
+        yield event.plain_result(HELP_TEXT)
+
+    @filter.regex(_UNBIND_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_cloud_unbind(self, event: AstrMessageEvent):
+        if not self._cloud.enabled():
+            return
+        event.stop_event()
+        yield event.plain_result(await self._cloud.unbind(event.get_sender_id()))
+
+    @filter.regex(_SAVES_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_cloud_list_saves(self, event: AstrMessageEvent):
+        if not self._cloud.enabled():
+            return
+        event.stop_event()
+        yield event.plain_result(await self._cloud.list_saves(str(event.get_sender_id())))
+
+    @filter.regex(_SWITCH_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_cloud_switch_save(self, event: AstrMessageEvent):
+        if not self._cloud.enabled():
+            return
+        event.stop_event()
+        yield event.plain_result(
+            await self._cloud.switch_save(str(event.get_sender_id()), event.message_str)
+        )
+
+    @filter.regex(_PROFILE_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_cloud_save_profile(self, event: AstrMessageEvent):
+        if not self._cloud.enabled():
+            return
+        event.stop_event()
+        yield event.plain_result(await self._cloud.profile(str(event.get_sender_id())))
+
+    @filter.regex(_BACKPACK_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_cloud_show_backpack(self, event: AstrMessageEvent):
+        if not self._cloud.enabled():
+            return
+        event.stop_event()
+        yield event.plain_result(await self._cloud.backpack(str(event.get_sender_id())))
+
+    @filter.regex(_WAREHOUSE_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_cloud_show_warehouse(self, event: AstrMessageEvent):
+        if not self._cloud.enabled():
+            return
+        event.stop_event()
+        yield event.plain_result(await self._cloud.warehouse(str(event.get_sender_id())))
+
+    @filter.regex(_CARRIED_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_cloud_show_carried(self, event: AstrMessageEvent):
+        if not self._cloud.enabled():
+            return
+        event.stop_event()
+        yield event.plain_result(await self._cloud.carried(str(event.get_sender_id())))
+
     async def terminate(self):
-        await self._shutdown_cloud_save()
+        await self._cloud.close()
         logger.info("世界RPG 查询插件已卸载")
