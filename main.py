@@ -20,6 +20,7 @@ from collections.abc import AsyncIterator, Callable
 from astrbot.api import AstrBotConfig, logger
 from astrbot.api.event import AstrMessageEvent, filter
 from astrbot.api.star import Context, Star, StarTools
+from astrbot.core.message.components import Image, Plain
 
 from .card_renderer import (
     format_boss_text_fallback,
@@ -316,39 +317,50 @@ class TwrpgQueryPlugin(Star):
         if isinstance(result, str):
             yield event.plain_result(result)
             return
+
+        image_path = result.image_path
+        if image_path and os.path.exists(image_path):
+            yield event.chain_result(
+                [
+                    Plain(result.caption),
+                    Image.fromFileSystem(image_path),
+                ]
+            )
+            return
+
+        if image_path:
+            logger.warning(f"[TWRPG Query] 云存档图片不存在: {image_path}")
         yield event.plain_result(result.caption)
-        if result.image_path:
-            yield event.image_result(result.image_path)
 
     @filter.regex(_BACKPACK_RE, priority=CLOUD_CMD_PRIORITY)
     async def on_cloud_show_backpack(self, event: AstrMessageEvent):
         if not self._cloud.enabled():
             return
-        event.stop_event()
         async for msg in self._yield_cloud_inventory(
             event, await self._cloud.backpack(str(event.get_sender_id()))
         ):
             yield msg
+        event.stop_event()
 
     @filter.regex(_WAREHOUSE_RE, priority=CLOUD_CMD_PRIORITY)
     async def on_cloud_show_warehouse(self, event: AstrMessageEvent):
         if not self._cloud.enabled():
             return
-        event.stop_event()
         async for msg in self._yield_cloud_inventory(
             event, await self._cloud.warehouse(str(event.get_sender_id()))
         ):
             yield msg
+        event.stop_event()
 
     @filter.regex(_CARRIED_RE, priority=CLOUD_CMD_PRIORITY)
     async def on_cloud_show_carried(self, event: AstrMessageEvent):
         if not self._cloud.enabled():
             return
-        event.stop_event()
         async for msg in self._yield_cloud_inventory(
             event, await self._cloud.carried(str(event.get_sender_id()))
         ):
             yield msg
+        event.stop_event()
 
     async def terminate(self):
         await self._cloud.close()
