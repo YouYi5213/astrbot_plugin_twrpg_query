@@ -156,7 +156,7 @@ class CloudSaveService:
             return "已解除云存档绑定。"
         return "当前未绑定云存档账号。"
 
-    async def list_saves(self, qq_id: str) -> str:
+    async def list_saves(self, qq_id: str) -> CloudInventoryResult | str:
         binding = self._bindings.get(qq_id)
         if not binding:
             return _NOT_LOGGED_HINT
@@ -167,14 +167,14 @@ class CloudSaveService:
             if not saves:
                 return f"云账号 {binding.get('username', '')} 暂无存档。"
             primary = str(binding.get("primary_save") or "")
-            lines = [f"云账号：{binding.get('username', '')}（共 {len(saves)} 个存档）", ""]
-            for index, entry in enumerate(saves, start=1):
-                mark = " ⭐" if entry.name == primary else ""
-                lines.append(
-                    f"{index}. {format_save_display_name(entry.name)}{mark}"
-                )
-            lines.append("\n使用「世界切换 <序号>」切换主存档。")
-            return "\n".join(lines)
+            from ..save_list_renderer import render_save_list
+
+            caption, image_path = render_save_list(
+                str(binding.get("username") or ""),
+                [entry.name for entry in saves],
+                primary_name=primary,
+            )
+            return CloudInventoryResult(caption=caption, image_path=image_path)
         except CloudSyncError as exc:
             return str(exc)
         finally:

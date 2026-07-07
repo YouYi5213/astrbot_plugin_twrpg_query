@@ -294,8 +294,11 @@ class TwrpgQueryPlugin(Star):
     async def on_cloud_list_saves(self, event: AstrMessageEvent):
         if not self._cloud.enabled():
             return
+        async for msg in self._yield_cloud_inventory(
+            event, await self._cloud.list_saves(str(event.get_sender_id()))
+        ):
+            yield msg
         event.stop_event()
-        yield event.plain_result(await self._cloud.list_saves(str(event.get_sender_id())))
 
     @filter.regex(_SWITCH_RE, priority=CLOUD_CMD_PRIORITY)
     async def on_cloud_switch_save(self, event: AstrMessageEvent):
