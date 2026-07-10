@@ -15,7 +15,7 @@ _BACKPACK_RE = re.compile(r"^/?(世界背包|界背包)\s*$")
 _WAREHOUSE_RE = re.compile(r"^/?(世界仓库|界仓库)\s*$")
 _CARRIED_RE = re.compile(r"^/?(世界携带|界携带)\s*$")
 _HELP_RE = re.compile(r"^/?(世界云帮助|界云帮助|世界云)\s*$")
-_READER_UPDATE_RE = re.compile(r"^/?读档器更新内容\s*$")
+_READER_UPDATE_RE = re.compile(r"^/?(读档器更新内容|读档器更新日志|读档器更新)\s*$")
 
 CLOUD_RESERVED_PREFIXES = (
     "世界登录",

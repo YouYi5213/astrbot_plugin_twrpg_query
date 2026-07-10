@@ -33,8 +33,9 @@ def test_switch_regex():
 
 
 def test_reader_update_regex():
-    assert _READER_UPDATE_RE.match("读档器更新内容")
-    assert _READER_UPDATE_RE.match("/读档器更新内容")
+    for cmd in ("读档器更新内容", "读档器更新", "读档器更新日志", "/读档器更新"):
+        assert _READER_UPDATE_RE.match(cmd), cmd
+    assert not _READER_UPDATE_RE.match("读档器更新 内容")
 
 
 def test_is_cloud_command():
