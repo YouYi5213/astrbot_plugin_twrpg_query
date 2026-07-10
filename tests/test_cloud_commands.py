@@ -4,6 +4,7 @@ from core.cloud_commands import (
     _BACKPACK_RE,
     _HELP_RE,
     _LOGIN_RE,
+    _READER_UPDATE_RE,
     _SWITCH_RE,
     is_cloud_command,
 )
@@ -29,6 +30,11 @@ def test_login_regex():
 def test_switch_regex():
     m = _SWITCH_RE.match("世界切换 2")
     assert m and m.group(2) == "2"
+
+
+def test_reader_update_regex():
+    assert _READER_UPDATE_RE.match("读档器更新内容")
+    assert _READER_UPDATE_RE.match("/读档器更新内容")
 
 
 def test_is_cloud_command():

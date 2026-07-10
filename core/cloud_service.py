@@ -17,6 +17,7 @@ from .cloud_client import (
     parse_base_urls_config,
 )
 from .cloud_commands import _LOGIN_RE, _SWITCH_RE
+from .reader_update import format_reader_update
 from .save_parser import parse_string_for_stage
 from .user_binding import UserBindingStore
 
@@ -29,7 +30,8 @@ HELP_TEXT = (
     "世界存档 — 云端存档列表\n"
     "世界切换 <序号> — 切换主存档\n"
     "世界档案 — 角色信息\n"
-    "世界背包 / 世界仓库 / 世界携带 — 物品图标列表\n\n"
+    "世界背包 / 世界仓库 / 世界携带 — 物品图标列表\n"
+    "读档器更新内容 — 读档器最新版本与更新说明\n\n"
     "查物品仍用：世界 <物品名> 或 界 <物品名>"
 )
 
@@ -155,6 +157,19 @@ class CloudSaveService:
         if self._bindings.remove(qq_id):
             return "已解除云存档绑定。"
         return "当前未绑定云存档账号。"
+
+    async def reader_update_content(self) -> str:
+        client = CloudSyncClient(self._base_urls)
+        try:
+            body = await client.check_update()
+            return format_reader_update(body)
+        except CloudSyncError as exc:
+            return str(exc)
+        except Exception as exc:
+            logger.error(f"[TWRPG Query] 获取读档器更新信息失败: {exc}")
+            return "获取读档器更新信息失败，请稍后再试。"
+        finally:
+            await client.close()
 
     async def list_saves(self, qq_id: str) -> CloudInventoryResult | str:
         binding = self._bindings.get(qq_id)

@@ -138,6 +138,14 @@ class CloudSyncClient:
             total_online_seconds=int(body.get("totalOnlineSeconds") or 0),
         )
 
+    async def check_update(self) -> dict[str, Any]:
+        status, body = await self._request_json("GET", "/api/update/check", auth=False)
+        if status != 200:
+            raise CloudSyncError(f"获取更新信息失败 (HTTP {status})")
+        if not isinstance(body, dict):
+            raise CloudSyncError("获取更新信息失败：响应格式异常")
+        return body
+
     async def _request_json(
         self,
         method: str,

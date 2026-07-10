@@ -39,6 +39,7 @@ from .core.cloud_commands import (
     _HELP_RE,
     _LOGIN_RE,
     _PROFILE_RE,
+    _READER_UPDATE_RE,
     _SAVES_RE,
     _SWITCH_RE,
     _UNBIND_RE,
@@ -289,6 +290,11 @@ class TwrpgQueryPlugin(Star):
             return
         event.stop_event()
         yield event.plain_result(await self._cloud.unbind(event.get_sender_id()))
+
+    @filter.regex(_READER_UPDATE_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_reader_update_content(self, event: AstrMessageEvent):
+        event.stop_event()
+        yield event.plain_result(await self._cloud.reader_update_content())
 
     @filter.regex(_SAVES_RE, priority=CLOUD_CMD_PRIORITY)
     async def on_cloud_list_saves(self, event: AstrMessageEvent):
