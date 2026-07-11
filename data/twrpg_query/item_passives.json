@@ -39,7 +39,7 @@
     "enName": "Madness of Old God",
     "koName": "고대신의 광기",
     "en": "Passive\n⁘ On skill critical hit, activates Ruin\n⁘ Deals 55000 additional damage, restores 3% HP\n⁘ Charges 1 time every 3 seconds (max 3 charges)\n\nActive\n❖ On use, activates Oath of Ruin\n❖ For 10 seconds, main stat increases by 300, crit multiplier increases by 0.25x, movement speed increases by 150\n❖ Each skill cast increases above stats by 10% and charges 1 Ruin (max 10 times)\n❖ Cooldown: 30s",
-    "cn": "被动：\n技能暴击命中时发动毁灭\n造成 55000 点额外伤害，恢复 3% 生命值\n每 3 秒充能 1 次（最多充能 3 次）\n\n主动：\n使用时发动毁灭之誓\n10 秒内主属性增加 300、暴击倍率增加 0.25 倍、移动速度增加 150\n每次施放技能时，上述属性增加量提升 10%，并充能 1 次毁灭（最多 10 次）\n冷却时间：30 秒"
+    "cn": "被动：\n技能暴击命中时发动毁灭\n造成 70000 点额外伤害，恢复 3% 生命值\n每 3 秒充能 1 次（最多充能 3 次）\n\n主动：\n使用时发动毁灭之誓\n10 秒内主属性增加 300、暴击倍率增加 0.25 倍、移动速度增加 150\n每次施放技能时，上述属性增加量提升 10%，并充能 1 次毁灭（最多 10 次）\n冷却时间：30 秒"
   },
   {
     "id": "I02L",
@@ -74,7 +74,7 @@
     "enName": "Heaven's Fall",
     "koName": "헤븐즈 폴",
     "en": "Passive\n⁘ When healing allies, activates Blessing\n⁘ For 6 seconds, increases target's skill damage and healing received by 15%\n⁘ After healing others 20 times, grants Awakening effect, increasing skill damage by an additional 10% for 6 seconds\n\nActive\n❖ On use, activates Heaven's Judgment\n❖ Drops a cross on target area, dealing INT X 20 magic damage and stunning for 1 second\n❖ Leaves a 6-second sanctuary; allies inside restore INT X 1 HP per second, enemies take INT X 3 magic damage per second and take 4% increased damage\n❖ Charges 1 time every 10 seconds (max 3 charges)",
-    "cn": "被动：\n为友方恢复时发动祝福\n6 秒内使目标的技能伤害及受到的恢复量增加 15%\n\n为他人治疗 20 次时，赋予觉醒效果，6 秒内技能伤害额外增加 10%\n\n主动：\n使用时发动天降之罚\n向目标区域降下十字架，造成智力 ×20 的魔法伤害，并使其眩晕 1 秒\n留下 6 秒的圣域，圣域内的友方每秒恢复智力 ×1 的生命值，敌人每秒受到智力 ×3 的魔法伤害且受到的伤害增加 4%\n每 10 秒装填 1 次（最多可装填 3 次）"
+    "cn": "被动：\n为友方恢复时发动祝福\n6 秒内使目标的技能伤害及受到的恢复量增加 12%\n\n为他人治疗 20 次时，赋予觉醒效果，6 秒内技能伤害额外增加 8%\n\n主动：\n使用时发动天降之罚\n向目标区域降下十字架，造成智力 ×20 的魔法伤害，并使其眩晕 1 秒\n留下 6 秒的圣域，圣域内的友方每秒恢复智力 ×1 的生命值，敌人每秒受到智力 ×3 的魔法伤害且受到的伤害增加 4%\n每 10 秒装填 1 次（最多可装填 3 次）"
   },
   {
     "id": "I02H",
@@ -137,7 +137,7 @@
     "enName": "Godslayer Signet",
     "koName": "신살자의 인장",
     "en": "Passive\n⁘ On attack, chance to activate Twilight of the Gods\n⁘ Activation chance: 20%\n⁘ For 7.5 seconds, AD increases by 10500, main stat and HP regen increase by 600\n⁘ Next 3 attacks, and every 6th attack thereafter, deal AD X 125% additional pure damage and apply 5-second Godslayer Mark (max 7 activations/stacks)\n⁘ Next hit with base damage over 300k consumes marks, each stack increases damage by 2% (no more marks stack during passive duration)\n⁘ Cooldown: 15s\n\nActive\n❖ On use, activates Blasphemous Chant\n❖ Consumes 75% current HP, immediately activates Twilight of the Gods\n❖ Cooldown: 60s",
-    "cn": "被动：\n攻击时，有概率发动诸神的终焉\n发动概率 20%\n7.5 秒内，攻击力增加 10500，主属性及生命值再生率增加 600\n接下来的 3 次攻击，以及之后的第 6 次攻击起，每次攻击造成攻击力 ×125% 的额外纯粹伤害，并施加 5 秒的弑神标记（最多发动 / 叠加 7 次）\n接下来命中的、基础伤害量 30 万以上的伤害会消耗标记，每层标记使伤害增加 2%（发动时，被动持续时间内不再叠加标记）\n冷却时间：15 秒\n\n主动：\n使用时发动亵渎圣歌\n消耗当前 75% 的生命值，立即发动诸神的终焉\n冷却时间：60 秒"
+    "cn": "被动：\n攻击时，有概率发动诸神的终焉\n发动概率 20%\n7.5 秒内，攻击力增加 11000，主属性及生命值再生率增加 600\n接下来的 3 次攻击，以及之后的第 6 次攻击起，每次攻击造成攻击力 ×125% 的额外纯粹伤害，并施加 5 秒的弑神标记（最多发动 / 叠加 7 次）\n接下来命中的、基础伤害量 30 万以上的伤害会消耗标记，每层标记使伤害增加 3%（发动时，被动持续时间内不再叠加标记）\n冷却时间：15 秒\n\n主动：\n使用时发动亵渎圣歌\n消耗当前 75% 的生命值，立即发动诸神的终焉\n冷却时间：60 秒"
   },
   {
     "id": "I02C",
