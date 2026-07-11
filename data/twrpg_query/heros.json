@@ -522,7 +522,7 @@
         "displayName": "|c00ff8080惩戒光环|c00ffcc00(Q)|r",
         "img": "ReplaceableTextures\\CommandButtons\\BTNAuraOfRetribution.blp",
         "description": "[被动技能]\n直指敌人的弱点.\n∴周围的友军友军攻击伤害 8%提升\n∴审判 - 伤害 150%提高\n∴护佑 - 20秒内技能伤害 8% 提升\n∴当力量为主属性时，技能伤害增幅 2.5%(自身7.5%)\n∴奉献: 技能等级恢复 (智力 / 800)% 提高",
-        "rawDesc": "|c0087cefa[被动技能]|r\r\n直指敌人的弱点.\r\n|c002040f0∴|c0080ff00周围的友军友军攻击伤害 8%提升\r\n|c002040f0∴|c00cd96ff审判 - 伤害 150%提高\r\n|c002040f0∴|c00afee8a护佑 - 20秒内技能伤害 |c00ffff998% |c00afee8a提升\r\n|c002040f0∴|c00afee8a当力量为主属性时，技能伤害增幅 |c00ffff992.5% |c00afee8a提升(自身|c00ffff992.5%7.5%)\r\n|c002040f0∴|c00bae9e1奉献: 技能等级恢复 |c00ffff99(智力 / 800)% |c00bae9e1提高",
+        "rawDesc": "|c0087cefa[被动技能]|r\r\n直指敌人的弱点.\r\n|c002040f0∴|c0080ff00周围的友军友军攻击伤害 8%提升\r\n|c002040f0∴|c00cd96ff审判 - 伤害 150%提高\r\n|c002040f0∴|c00afee8a护佑 - 20秒内技能伤害 |c00ffff998% |c00afee8a提升\r\n|c002040f0∴|c00afee8a当力量为主属性时，技能伤害增幅 |c00ffff992.5% |c00afee8a提升(自身|c00ffff997.5%)\r\n|c002040f0∴|c00bae9e1奉献: 技能等级恢复 |c00ffff99(智力 / 800)% |c00bae9e1提高",
         "hotkey": "[D-Q]"
       },
       {
