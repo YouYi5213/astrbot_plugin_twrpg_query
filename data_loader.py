@@ -242,6 +242,7 @@ class TwrpgDataStore:
         self.skills_by_key: dict[str, tuple[str, int]] = {}
         self.exclusives_by_item: dict[str, list[dict]] = {}
         self.passives_by_id: dict[str, dict] = {}
+        self._boss_stage_cache: dict[str, int] = {}
         self.loaded = False
 
     def load(self) -> None:
@@ -401,6 +402,22 @@ class TwrpgDataStore:
             return None
         return resolve_icon_path(self.icons_dir, item.get("img", ""))
 
+    def item_icon(self, item_id: str) -> str | None:
+        """物品图标路径（供材料规划等模块复用）。"""
+        return self._item_icon(item_id)
+
+    def item_stage(self, item_id: str) -> int:
+        item = self.items_by_id.get(item_id) or {}
+        return int(item.get("stage") or 0)
+
+    def item_quality(self, item_id: str) -> int:
+        item = self.items_by_id.get(item_id) or {}
+        return int(item.get("quality") or 0)
+
+    def item_categories(self, item_id: str) -> list[str]:
+        item = self.items_by_id.get(item_id) or {}
+        return list(item.get("category") or [])
+
     def _entity_icon(self, img: str) -> str | None:
         return resolve_icon_path(self.icons_dir, img)
 
@@ -477,6 +494,13 @@ class TwrpgDataStore:
         return {x for x in labels if x}
 
     def infer_boss_stage(self, boss_id: str) -> int:
+        if boss_id in self._boss_stage_cache:
+            return self._boss_stage_cache[boss_id]
+        stage = self._infer_boss_stage(boss_id)
+        self._boss_stage_cache[boss_id] = stage
+        return stage
+
+    def _infer_boss_stage(self, boss_id: str) -> int:
         material_stages: list[int] = []
         all_stages: list[int] = []
         for row in self.drops_by_boss.get(boss_id, []):

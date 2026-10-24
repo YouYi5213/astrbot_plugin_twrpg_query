@@ -33,8 +33,10 @@ HELP_TEXT = (
     "世界切换 <序号> — 切换主存档\n"
     "世界档案 — 角色信息\n"
     "世界背包 / 世界仓库 / 世界携带 — 物品图标列表\n"
+    "世界材料 <物品名> — 按主存档库存统计目标物品缺料\n"
     "读档器更新内容 / 读档器更新 / 读档器更新日志 — 读档器最新版本与更新说明\n\n"
-    "查物品仍用：世界 <物品名> 或 界 <物品名>"
+    "查物品仍用：世界 <物品名> 或 界 <物品名>\n"
+    "图鉴浏览用：世界图鉴 <分类>，例如 世界图鉴 武器"
 )
 
 
@@ -42,6 +44,22 @@ HELP_TEXT = (
 class CloudInventoryResult:
     caption: str
     image_path: str | None = None
+
+
+@dataclass
+class InventorySnapshot:
+    """主存档的物品数量快照。"""
+
+    save_name: str
+    counts: dict[str, int]
+    display_name: str = ""
+    carried: int = 0
+    backpack: int = 0
+    warehouse: int = 0
+
+    @property
+    def total_lines(self) -> int:
+        return self.carried + self.backpack + self.warehouse
 
 
 def _format_item_list(items: list[str], *, limit: int) -> str:
@@ -262,6 +280,49 @@ class CloudSaveService:
 
     async def carried(self, qq_id: str) -> CloudInventoryResult | str:
         return await self._item_section(qq_id, "carried")
+
+    async def inventory_snapshot(self, qq_id: str) -> InventorySnapshot | str:
+        """读取主存档，聚合携带/背包/仓库的物品数量。"""
+        if self._store is None:
+            return "物品数据尚未就绪，请稍后再试。"
+        binding = self._bindings.get(qq_id)
+        if not binding:
+            return _NOT_LOGGED_HINT
+
+        client = self._client_for(binding)
+        try:
+            primary, _ = await self._pick_primary_save(client, binding, qq_id)
+            if primary is None:
+                return "云端暂无存档文件。"
+            raw = await client.download_save(primary.name)
+            data = parse_string_for_stage(raw.decode("utf-8", errors="replace"))
+
+            from ..inventory_renderer import format_save_display_name
+            from ..material_planner import inventory_from_save_lines
+
+            counts: dict[str, int] = {}
+            for lines in (
+                data.carried_items,
+                data.backpack_items,
+                data.warehouse_items,
+            ):
+                inventory_from_save_lines(self._store, lines, into=counts)
+
+            return InventorySnapshot(
+                save_name=primary.name,
+                display_name=format_save_display_name(primary.name),
+                counts=counts,
+                carried=len(data.carried_items),
+                backpack=len(data.backpack_items),
+                warehouse=len(data.warehouse_items),
+            )
+        except CloudSyncError as exc:
+            return str(exc)
+        except Exception as exc:
+            logger.error(f"[TWRPG Query] 聚合云存档库存失败: {exc}")
+            return "读取云端存档失败，请稍后再试。"
+        finally:
+            await client.close()
 
     async def _item_section(self, qq_id: str, section: str) -> CloudInventoryResult | str:
         binding = self._bindings.get(qq_id)

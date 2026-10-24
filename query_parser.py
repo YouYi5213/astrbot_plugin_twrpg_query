@@ -18,6 +18,57 @@ HERO_CMD_RE = re.compile(r"^/?(英雄|英)(\s|$)")
 SKILL_CMD_PREFIXES = ("技能", "技")
 SKILL_CMD_RE = re.compile(r"^/?(技能|技)(\s|$)")
 
+MATERIAL_CMD_PREFIXES = (
+    "世界材料",
+    "界材料",
+    "世界缺料",
+    "界缺料",
+    "世界还差",
+    "界还差",
+)
+MATERIAL_CMD_RE = re.compile(r"^/?(?:世界|界)(?:材料|缺料|还差)")
+
+CODEX_CMD_PREFIXES = ("世界图鉴", "界图鉴")
+CODEX_CMD_RE = re.compile(r"^/?(?:世界|界)图鉴")
+
+# 工具类指令（材料统计/图鉴）需要早于物品与 BOSS 指令执行
+TOOL_CMD_PRIORITY = 8
+
+
+def is_tool_command(raw: str) -> bool:
+    """是否命中材料统计或图鉴指令（物品 handler 需要让行）。"""
+    text = (raw or "").strip()
+    if text.startswith("/"):
+        text = text[1:].strip()
+    return bool(MATERIAL_CMD_RE.match(text) or CODEX_CMD_RE.match(text))
+
+
+def extract_material_query(raw: str) -> str | None:
+    """解析「世界材料 XXX」，返回目标物品文本；未命中返回 None。"""
+    text = (raw or "").strip()
+    if text.startswith("/"):
+        text = text[1:].strip()
+    for prefix in sorted(MATERIAL_CMD_PREFIXES, key=len, reverse=True):
+        if text == prefix:
+            return ""
+        if text.startswith(prefix):
+            return text[len(prefix) :].strip()
+    return None
+
+
+def extract_codex_query(raw: str) -> str | None:
+    """解析「世界图鉴 ...」，返回参数文本；未命中返回 None。"""
+    text = (raw or "").strip()
+    if text.startswith("/"):
+        text = text[1:].strip()
+    for prefix in sorted(CODEX_CMD_PREFIXES, key=len, reverse=True):
+        if text == prefix:
+            return ""
+        if text.startswith(prefix):
+            return text[len(prefix) :].strip()
+    return None
+
+
 
 def dedupe_item_command_prefix(query: str) -> str:
     """去掉查询里重复的关键字，如「世界 世界破坏者」→「世界破坏者」。"""

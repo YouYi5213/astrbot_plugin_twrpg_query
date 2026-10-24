@@ -6,6 +6,8 @@
   世界BOSS <BOSS名> / 界BOSS <BOSS名> — BOSS 掉落查询（如 世界BOSS 土灵战神盖亚）
   英雄 <名> / 英 <名> — 英雄查询
   技能 <名> / 技 <名> — 技能查询
+  世界材料 <物品名> [xN] — 按主存档库存统计目标物品缺料
+  世界图鉴 [分类] [阶段] [关键词] [第N页] — 图鉴分类浏览
 
 云存档（需在配置中启用）:
   世界登录 <用户名> <密码> — 私聊绑定云账号
@@ -16,6 +18,7 @@ from __future__ import annotations
 
 import asyncio
 import os
+import re
 from collections.abc import AsyncIterator, Callable
 
 from astrbot.api import AstrBotConfig, logger
@@ -34,6 +37,8 @@ from .card_renderer import (
     generate_item_card,
     generate_skill_card,
 )
+from .codex import build_selection, category_hint_text, parse_codex_args
+from .codex_renderer import format_codex_text, render_codex
 from .core.cloud_commands import (
     CLOUD_CMD_PRIORITY,
     CLOUD_FALLBACK_PRIORITY,
@@ -51,17 +56,35 @@ from .core.cloud_commands import (
     cloud_command_usage,
     is_cloud_command,
 )
-from .core.cloud_service import CLOUD_DISABLED_HINT, CloudInventoryResult, CloudSaveService, HELP_TEXT
+from .core.cloud_service import (
+    CLOUD_DISABLED_HINT,
+    CloudInventoryResult,
+    CloudSaveService,
+    HELP_TEXT,
+    InventorySnapshot,
+)
 from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
 from .icon_utils import resolve_icons_dir
+from .material_planner import parse_quantity, plan_materials, resolve_item_id
+from .material_renderer import (
+    format_material_caption,
+    format_material_text,
+    generate_material_card,
+)
 from .query_parser import (
     BOSS_CMD_RE,
+    CODEX_CMD_RE,
     HERO_CMD_RE,
     ITEM_CMD_RE,
+    MATERIAL_CMD_RE,
     SKILL_CMD_RE,
+    TOOL_CMD_PRIORITY,
     extract_boss_query,
+    extract_codex_query,
     extract_item_query,
+    extract_material_query,
     extract_prefixed_query,
+    is_tool_command,
     used_jie_only_item_prefix,
 )
 from .sgs_jie_heroes import SGS_JIE_REPLY, is_sgs_jie_hero_query
@@ -131,7 +154,7 @@ class TwrpgQueryPlugin(Star):
     @filter.regex(ITEM_CMD_RE, priority=10)
     async def on_twrpg_item_command(self, event: AstrMessageEvent):
         raw = event.message_str.strip()
-        if is_cloud_command(raw):
+        if is_cloud_command(raw) or is_tool_command(raw):
             return
         query_text = extract_item_query(raw)
         if query_text is None:
@@ -210,6 +233,131 @@ class TwrpgQueryPlugin(Star):
         ):
             yield result
         event.stop_event()
+
+    @filter.regex(MATERIAL_CMD_RE, priority=TOOL_CMD_PRIORITY)
+    async def on_twrpg_material_command(self, event: AstrMessageEvent):
+        """世界材料 <物品名> [xN] — 按主存档库存统计目标物品缺料"""
+        raw = event.message_str.strip()
+        query_text = extract_material_query(raw)
+        if query_text is None:
+            return
+        event.stop_event()
+
+        if not self.store.loaded:
+            yield event.plain_result("❌ 离线数据尚未准备。\n请确认插件目录下存在 data/twrpg_query/items.json")
+            return
+
+        if not query_text:
+            yield event.plain_result(
+                "用法: 世界材料 <物品名> [数量]\n"
+                "例如: 世界材料 世界破坏者\n"
+                "      界材料 太阳石 x5\n"
+                "绑定云存档后会自动扣除携带 / 背包 / 仓库中的现成材料。"
+            )
+            return
+
+        name, quantity = parse_quantity(query_text)
+        target_id = resolve_item_id(self.store, name)
+        if not target_id:
+            yield event.plain_result(f"❌ 未找到「{name}」的相关物品。")
+            return
+
+        if not self.store.recipes.get(target_id) and not self.store.drops_by_item.get(target_id):
+            yield event.plain_result(
+                f"「{self.store.item_name(target_id)}」没有合成配方与掉落记录，无需统计材料。"
+            )
+            return
+
+        inventory = None
+        save_name = ""
+        if self._cloud.enabled():
+            snapshot = await self._cloud.inventory_snapshot(str(event.get_sender_id()))
+            if isinstance(snapshot, InventorySnapshot):
+                inventory = snapshot.counts
+                save_name = snapshot.display_name
+
+        try:
+            plan = await asyncio.to_thread(
+                plan_materials,
+                self.store,
+                target_id,
+                quantity=quantity,
+                inventory=inventory,
+            )
+        except Exception as e:
+            logger.error(f"[TWRPG Query] 统计材料失败 ({target_id}): {e}")
+            yield event.plain_result("材料统计失败，请稍后再试。")
+            return
+
+        if plan is None:
+            yield event.plain_result(f"❌ 无法解析「{name}」的合成配方。")
+            return
+
+        try:
+            image_path = await asyncio.to_thread(generate_material_card, plan)
+            yield event.chain_result(
+                [
+                    Plain(format_material_caption(plan, save_name=save_name)),
+                    Image.fromFileSystem(image_path),
+                ]
+            )
+        except Exception as e:
+            logger.error(f"[TWRPG Query] 生成材料统计卡片失败 ({target_id}): {e}")
+            yield event.plain_result(format_material_text(plan, save_name=save_name))
+
+    @filter.regex(CODEX_CMD_RE, priority=TOOL_CMD_PRIORITY)
+    async def on_twrpg_codex_command(self, event: AstrMessageEvent):
+        """世界图鉴 [分类] [阶段] [关键词] [第N页] — 图鉴分类浏览"""
+        raw = event.message_str.strip()
+        query_text = extract_codex_query(raw)
+        if query_text is None:
+            return
+        event.stop_event()
+
+        if not self.store.loaded:
+            yield event.plain_result("❌ 离线数据尚未准备。\n请确认插件目录下存在 data/twrpg_query/items.json")
+            return
+
+        tokens = [token for token in re.split(r"\s+", query_text) if token]
+        if not tokens:
+            yield event.plain_result(category_hint_text(self.store))
+            return
+
+        category, stage, keyword, page = parse_codex_args(tokens)
+        try:
+            selection = await asyncio.to_thread(
+                build_selection,
+                self.store,
+                category,
+                stage=stage,
+                keyword=keyword,
+                page=page,
+            )
+        except Exception as e:
+            logger.error(f"[TWRPG Query] 图鉴检索失败 ({query_text}): {e}")
+            yield event.plain_result("图鉴检索失败，请稍后再试。")
+            return
+
+        if selection.total <= 0:
+            yield event.plain_result(
+                f"❌ 图鉴中没有符合「{selection.label or query_text}」的条目。\n"
+                "可用分类：武器 / 衣服 / 头盔 / 饰品 / 翅膀 / 材料 / 其他 / 全部"
+            )
+            return
+
+        try:
+            caption, image_path = await asyncio.to_thread(
+                render_codex, self.store, selection
+            )
+            if image_path:
+                yield event.chain_result(
+                    [Plain(caption), Image.fromFileSystem(image_path)]
+                )
+            else:
+                yield event.plain_result(caption)
+        except Exception as e:
+            logger.error(f"[TWRPG Query] 生成图鉴卡片失败 ({query_text}): {e}")
+            yield event.plain_result(format_codex_text(self.store, selection))
 
     async def _handle_entity_query(
         self,

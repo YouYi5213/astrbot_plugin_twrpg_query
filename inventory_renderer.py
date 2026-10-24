@@ -37,6 +37,7 @@ class InventoryLayout:
     name_zone: int
     footer_h: int = 13
     fixed_rows: int | None = None
+    show_hero_dots: bool = True
 
     @property
     def icon_zone(self) -> int:
@@ -194,7 +195,7 @@ def _draw_tile(
     _paste_in_slot(canvas, icon, icon_x, icon_y, icon_size, icon_size)
     _draw_stack_badge(draw, icon_x, icon_y, tile.quantity, icon_size=icon_size)
 
-    if display and display.limit_heroes:
+    if layout.show_hero_dots and display and display.limit_heroes:
         hx = x + 3
         for hero in display.limit_heroes[:3]:
             hero_icon = _load_image(hero.icon, (HERO_DOT, HERO_DOT))
@@ -250,6 +251,7 @@ def generate_inventory_grid(
     tiles: list[InventoryTile],
     total_count: int,
     layout: InventoryLayout,
+    sub_text: str | None = None,
 ) -> str:
     cols = layout.cols
     cell_h = layout.cell_h
@@ -278,7 +280,7 @@ def generate_inventory_grid(
     title_font = _font(18, bold=True)
     subtitle_font = _font(12)
     header = f"{save_display_name} · {section_label}"
-    sub = f"共 {total_count} 件"
+    sub = sub_text if sub_text is not None else f"共 {total_count} 件"
     draw.text((GRID_PADDING + 4, GRID_PADDING + 4), header, fill=COLORS["title"], font=title_font)
     sub_w = _text_width(draw, sub, subtitle_font)
     draw.text(
