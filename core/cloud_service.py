@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 from dataclasses import dataclass
 from typing import Any
 
@@ -23,6 +24,7 @@ from .user_binding import UserBindingStore
 
 _NOT_LOGGED_HINT = "尚未绑定云存档，请私聊发送：世界登录 用户名 密码"
 _PRIVATE_LOGIN_HINT = "登录涉及账号密码，请私聊机器人发送：世界登录 用户名 密码"
+CLOUD_DISABLED_HINT = "云存档功能已关闭，离线查询仍可使用。"
 HELP_TEXT = (
     "【世界RPG 云存档】\n"
     "私聊：世界登录 用户名 密码\n"
@@ -184,7 +186,8 @@ class CloudSaveService:
             primary = str(binding.get("primary_save") or "")
             from ..save_list_renderer import render_save_list
 
-            caption, image_path = render_save_list(
+            caption, image_path = await asyncio.to_thread(
+                render_save_list,
                 str(binding.get("username") or ""),
                 [entry.name for entry in saves],
                 primary_name=primary,
@@ -192,6 +195,9 @@ class CloudSaveService:
             return CloudInventoryResult(caption=caption, image_path=image_path)
         except CloudSyncError as exc:
             return str(exc)
+        except Exception as exc:
+            logger.error(f"[TWRPG Query] 获取云存档列表失败: {exc}")
+            return "获取云端存档列表失败，请稍后再试。"
         finally:
             await client.close()
 
@@ -286,7 +292,8 @@ class CloudSaveService:
             layout = CARRIED_LAYOUT if section == "carried" else BACKPACK_LAYOUT
 
             if self._store is not None:
-                caption, image_path = render_save_inventory(
+                caption, image_path = await asyncio.to_thread(
+                    render_save_inventory,
                     self._store,
                     save_name=primary.name,
                     section_label=label,

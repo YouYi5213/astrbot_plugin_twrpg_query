@@ -225,6 +225,8 @@ class CloudSyncClient:
                 "云服务器地址发生重定向，请在插件配置中使用带端口的地址，"
                 "例如 http://81.71.72.19:8080"
             )
+        if last_status is not None:
+            raise CloudSyncError(f"无法连接云存档服务器：最后响应 HTTP {last_status}")
         raise CloudSyncError(f"无法连接云存档服务器：{last_error}")
 
 

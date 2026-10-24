@@ -3,16 +3,13 @@
 from __future__ import annotations
 
 import math
-import os
 import uuid
 from dataclasses import dataclass
 
 from PIL import Image, ImageDraw
 
-from .card_renderer import CARD_WIDTH, COLORS, _ensure_dirs, _font, _text_height, _text_width
+from .card_renderer import CARD_WIDTH, COLORS, _font, _text_height, _text_width, save_card_png
 from .inventory_renderer import format_save_display_name
-
-_CARDS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "cards")
 
 PRIMARY_MARK = "\u2605"  # ★ — 内置字体可渲染，emoji ⭐ 会显示为方框
 
@@ -50,9 +47,6 @@ def generate_save_list_image(
     username: str,
     entries: list[SaveListRow],
 ) -> str:
-    _ensure_dirs()
-    os.makedirs(_CARDS_DIR, exist_ok=True)
-
     cols = LIST_COLS
     cell_w = _cell_width()
     rows = max(1, math.ceil(len(entries) / cols)) if entries else 1
@@ -127,9 +121,7 @@ def generate_save_list_image(
         font=footer_font,
     )
 
-    out_path = os.path.join(_CARDS_DIR, f"saves_{uuid.uuid4().hex[:8]}.png")
-    card.save(out_path, format="PNG", optimize=True)
-    return out_path
+    return save_card_png(card, f"saves_{uuid.uuid4().hex[:8]}.png")
 
 
 def render_save_list(

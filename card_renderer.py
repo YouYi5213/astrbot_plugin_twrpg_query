@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import time
 import uuid
 from typing import Iterable
 
@@ -16,6 +17,11 @@ _FONT_DIR = os.path.join(_PLUGIN_DIR, "assets", "fonts")
 _CARDS_DIR = os.path.join(_PLUGIN_DIR, "data", "cards")
 _BUNDLED_FONT = os.path.join(_FONT_DIR, "NotoSansSC-Bold.otf")
 _ITEMS_BG = resolve_items_bg_path(_PLUGIN_DIR)
+_MAX_CARD_FILES = 300
+_MAX_CARD_AGE_SECONDS = 3 * 24 * 60 * 60
+_CLEANUP_INTERVAL_SECONDS = 10 * 60
+_CLEANUP_ENABLED = False
+_LAST_CLEANUP_TS = 0.0
 
 CARD_WIDTH = 640
 CARD_PADDING = 22
@@ -53,8 +59,80 @@ _FONT_CACHE: dict[int, ImageFont.FreeTypeFont | ImageFont.ImageFont] = {}
 _RESOLVED_FONT: str | None = None
 
 
+def configure_cards_dir(cards_dir: str, *, cleanup: bool = True) -> None:
+    """Set the directory used for generated runtime card images."""
+    global _CARDS_DIR, _CLEANUP_ENABLED, _LAST_CLEANUP_TS
+    if not cards_dir:
+        return
+    _CARDS_DIR = os.path.abspath(os.fspath(cards_dir))
+    _CLEANUP_ENABLED = cleanup
+    _LAST_CLEANUP_TS = 0.0
+
+
+def configure_runtime_cards_dir(data_dir: str) -> None:
+    """Use AstrBot's plugin data directory for generated runtime images."""
+    if data_dir:
+        configure_cards_dir(os.path.join(os.fspath(data_dir), "cards"))
+
+
+def get_cards_dir() -> str:
+    return _CARDS_DIR
+
+
 def _ensure_dirs() -> None:
     os.makedirs(_CARDS_DIR, exist_ok=True)
+    if _CLEANUP_ENABLED:
+        _cleanup_generated_cards()
+
+
+def _cleanup_generated_cards(now: float | None = None) -> None:
+    global _LAST_CLEANUP_TS
+    now = time.time() if now is None else now
+    if now - _LAST_CLEANUP_TS < _CLEANUP_INTERVAL_SECONDS:
+        return
+    _LAST_CLEANUP_TS = now
+
+    try:
+        entries: list[tuple[float, str]] = []
+        for name in os.listdir(_CARDS_DIR):
+            if not name.lower().endswith(".png"):
+                continue
+            path = os.path.join(_CARDS_DIR, name)
+            if not os.path.isfile(path):
+                continue
+            try:
+                entries.append((os.path.getmtime(path), path))
+            except OSError:
+                continue
+
+        cutoff = now - _MAX_CARD_AGE_SECONDS
+        kept: list[tuple[float, str]] = []
+        for mtime, path in entries:
+            if mtime < cutoff:
+                _remove_generated_card(path)
+            else:
+                kept.append((mtime, path))
+
+        overflow = len(kept) - _MAX_CARD_FILES
+        if overflow > 0:
+            for _, path in sorted(kept)[:overflow]:
+                _remove_generated_card(path)
+    except OSError:
+        return
+
+
+def _remove_generated_card(path: str) -> None:
+    try:
+        os.remove(path)
+    except OSError:
+        pass
+
+
+def save_card_png(card: Image.Image, filename: str) -> str:
+    _ensure_dirs()
+    out_path = os.path.join(_CARDS_DIR, filename)
+    card.save(out_path, format="PNG", optimize=True)
+    return out_path
 
 
 def _resolve_font_path() -> str | None:
@@ -660,9 +738,7 @@ def generate_item_card(item: ItemDisplay) -> str:
         ]
         y = _draw_icon_rows(card, draw, y, rows)
 
-    out_path = os.path.join(_CARDS_DIR, f"{item.id}_{uuid.uuid4().hex[:8]}.png")
-    card.save(out_path, format="PNG", optimize=True)
-    return out_path
+    return save_card_png(card, f"{item.id}_{uuid.uuid4().hex[:8]}.png")
 
 
 def format_text_fallback(item: ItemDisplay) -> str:
@@ -849,9 +925,7 @@ def generate_hero_card(hero: HeroDisplay) -> str:
     if _hero_has_skill_content(hero):
         _draw_hero_skill_sections(card, draw, y, hero, content_width)
 
-    out_path = os.path.join(_CARDS_DIR, f"hero_{hero.id}_{uuid.uuid4().hex[:8]}.png")
-    card.save(out_path, format="PNG", optimize=True)
-    return out_path
+    return save_card_png(card, f"hero_{hero.id}_{uuid.uuid4().hex[:8]}.png")
 
 
 def generate_skill_card(skill: SkillDisplay) -> str:
@@ -932,9 +1006,7 @@ def generate_skill_card(skill: SkillDisplay) -> str:
     y = _draw_header(draw, y, "▎描述")
     _draw_skill_block(card, draw, y, skill, content_width)
 
-    out_path = os.path.join(_CARDS_DIR, f"skill_{skill.id}_{uuid.uuid4().hex[:8]}.png")
-    card.save(out_path, format="PNG", optimize=True)
-    return out_path
+    return save_card_png(card, f"skill_{skill.id}_{uuid.uuid4().hex[:8]}.png")
 
 
 def _estimate_boss_height(draw: ImageDraw.ImageDraw, boss: BossDisplay) -> int:
@@ -1010,9 +1082,7 @@ def generate_boss_card(boss: BossDisplay) -> str:
         ]
         _draw_icon_rows(card, draw, y, rows)
 
-    out_path = os.path.join(_CARDS_DIR, f"boss_{boss.id}_{uuid.uuid4().hex[:8]}.png")
-    card.save(out_path, format="PNG", optimize=True)
-    return out_path
+    return save_card_png(card, f"boss_{boss.id}_{uuid.uuid4().hex[:8]}.png")
 
 
 def format_boss_text_fallback(boss: BossDisplay) -> str:

@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import os
 from collections.abc import AsyncIterator, Callable
 
@@ -23,6 +24,7 @@ from astrbot.api.star import Context, Star, StarTools
 from astrbot.core.message.components import Image, Plain
 
 from .card_renderer import (
+    configure_runtime_cards_dir,
     format_boss_text_fallback,
     format_hero_text_fallback,
     format_skill_text_fallback,
@@ -34,8 +36,10 @@ from .card_renderer import (
 )
 from .core.cloud_commands import (
     CLOUD_CMD_PRIORITY,
+    CLOUD_FALLBACK_PRIORITY,
     _BACKPACK_RE,
     _CARRIED_RE,
+    _CLOUD_RESERVED_RE,
     _HELP_RE,
     _LOGIN_RE,
     _PROFILE_RE,
@@ -44,9 +48,10 @@ from .core.cloud_commands import (
     _SWITCH_RE,
     _UNBIND_RE,
     _WAREHOUSE_RE,
+    cloud_command_usage,
     is_cloud_command,
 )
-from .core.cloud_service import CloudInventoryResult, CloudSaveService, HELP_TEXT
+from .core.cloud_service import CLOUD_DISABLED_HINT, CloudInventoryResult, CloudSaveService, HELP_TEXT
 from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
 from .icon_utils import resolve_icons_dir
 from .query_parser import (
@@ -71,9 +76,11 @@ class TwrpgQueryPlugin(Star):
     def __init__(self, context: Context, config: AstrBotConfig | None = None):
         super().__init__(context)
         self.config = config or {}
+        self._runtime_data_dir = str(StarTools.get_data_dir())
+        configure_runtime_cards_dir(self._runtime_data_dir)
         self.store = TwrpgDataStore(_DATA_DIR, icons_dir=_ICONS_DIR)
         self._cloud = CloudSaveService(
-            self.config, str(StarTools.get_data_dir()), store=self.store
+            self.config, self._runtime_data_dir, store=self.store
         )
         self._load_data()
 
@@ -124,7 +131,7 @@ class TwrpgQueryPlugin(Star):
     @filter.regex(ITEM_CMD_RE, priority=10)
     async def on_twrpg_item_command(self, event: AstrMessageEvent):
         raw = event.message_str.strip()
-        if self._cloud.enabled() and is_cloud_command(raw):
+        if is_cloud_command(raw):
             return
         query_text = extract_item_query(raw)
         if query_text is None:
@@ -263,7 +270,7 @@ class TwrpgQueryPlugin(Star):
             return
 
         try:
-            card_path = generate_card(display)
+            card_path = await asyncio.to_thread(generate_card, display)
             yield event.image_result(card_path)
         except Exception as e:
             logger.error(f"生成 TWRPG {log_prefix}查询卡片失败 ({entity_id}): {e}")
@@ -294,7 +301,18 @@ class TwrpgQueryPlugin(Star):
     @filter.regex(_READER_UPDATE_RE, priority=CLOUD_CMD_PRIORITY)
     async def on_reader_update_content(self, event: AstrMessageEvent):
         event.stop_event()
+        if not self._cloud.enabled():
+            yield event.plain_result(CLOUD_DISABLED_HINT)
+            return
         yield event.plain_result(await self._cloud.reader_update_content())
+
+    @filter.regex(_CLOUD_RESERVED_RE, priority=CLOUD_FALLBACK_PRIORITY)
+    async def on_cloud_command_fallback(self, event: AstrMessageEvent):
+        event.stop_event()
+        if not self._cloud.enabled():
+            yield event.plain_result(CLOUD_DISABLED_HINT)
+            return
+        yield event.plain_result(cloud_command_usage(event.message_str))
 
     @filter.regex(_SAVES_RE, priority=CLOUD_CMD_PRIORITY)
     async def on_cloud_list_saves(self, event: AstrMessageEvent):

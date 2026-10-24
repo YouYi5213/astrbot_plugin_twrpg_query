@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import math
-import os
 import uuid
 from dataclasses import dataclass
 
@@ -12,19 +11,16 @@ from PIL import Image, ImageDraw
 from .card_renderer import (
     CARD_WIDTH,
     COLORS,
-    _ensure_dirs,
     _font,
     _load_image,
     _paste_in_slot,
     _text_height,
     _text_width,
     _wrap_lines,
+    save_card_png,
 )
 from .core.save_parser import parse_save_item_line
 from .data_loader import ItemDisplay, TwrpgDataStore
-
-_PLUGIN_DIR = os.path.dirname(os.path.abspath(__file__))
-_CARDS_DIR = os.path.join(_PLUGIN_DIR, "data", "cards")
 
 GRID_PADDING = 10
 GRID_GAP = 3
@@ -255,9 +251,6 @@ def generate_inventory_grid(
     total_count: int,
     layout: InventoryLayout,
 ) -> str:
-    _ensure_dirs()
-    os.makedirs(_CARDS_DIR, exist_ok=True)
-
     cols = layout.cols
     cell_h = layout.cell_h
     card_width = layout.card_width
@@ -305,9 +298,7 @@ def generate_inventory_grid(
         tile = tiles[index] if index < len(tiles) else None
         _draw_tile(card, draw, tile, cx, cy, layout=layout)
 
-    out_path = os.path.join(_CARDS_DIR, f"inv_{uuid.uuid4().hex[:8]}.png")
-    card.save(out_path, format="PNG", optimize=True)
-    return out_path
+    return save_card_png(card, f"inv_{uuid.uuid4().hex[:8]}.png")
 
 
 def render_save_inventory(
