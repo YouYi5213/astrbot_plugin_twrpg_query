@@ -47,6 +47,7 @@ from .core.cloud_commands import (
     _CLOUD_RESERVED_RE,
     _HELP_RE,
     _LOGIN_RE,
+    _ONLINE_RE,
     _PROFILE_RE,
     _READER_UPDATE_RE,
     _SAVES_RE,
@@ -487,6 +488,15 @@ class TwrpgQueryPlugin(Star):
             return
         event.stop_event()
         yield event.plain_result(await self._cloud.profile(str(event.get_sender_id())))
+
+    @filter.regex(_ONLINE_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_cloud_online(self, event: AstrMessageEvent):
+        if not self._cloud.enabled():
+            return
+        event.stop_event()
+        yield event.plain_result(
+            await self._cloud.online_status(str(event.get_sender_id()))
+        )
 
     async def _yield_cloud_inventory(self, event: AstrMessageEvent, result: CloudInventoryResult | str):
         if isinstance(result, str):

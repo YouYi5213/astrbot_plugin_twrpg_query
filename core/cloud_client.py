@@ -19,6 +19,9 @@ MSG_SESSION_EXPIRED = "登录已过期，请私聊发送「世界登录 用户�
 USER_AGENT = "TWRPGQuery/1.2 AstrBot-Plugin"
 _REDIRECT_STATUSES = frozenset({301, 302, 303, 307, 308})
 _RETRYABLE_STATUSES = frozenset({500, 502, 503, 504})
+# 后端的 Spring Security 未配置 authenticationEntryPoint：令牌缺失/过期时
+# 需要鉴权的接口一律返回 403（不是 401），因此两者都按"登录已过期"处理。
+_AUTH_FAILURE_STATUSES = frozenset({401, 403})
 
 
 @dataclass
@@ -92,7 +95,7 @@ class CloudSyncClient:
 
     async def list_saves(self) -> list[SaveEntry]:
         status, body = await self._request_json("GET", "/api/saves")
-        if status == 401:
+        if status in _AUTH_FAILURE_STATUSES:
             raise CloudSyncError(MSG_SESSION_EXPIRED)
         if status != 200:
             raise CloudSyncError(f"获取存档列表失败 (HTTP {status})")
@@ -117,7 +120,7 @@ class CloudSyncClient:
     async def download_save(self, filename: str) -> bytes:
         encoded = quote(filename, safe="")
         status, data = await self._request_bytes("GET", f"/api/saves/{encoded}")
-        if status == 401:
+        if status in _AUTH_FAILURE_STATUSES:
             raise CloudSyncError(MSG_SESSION_EXPIRED)
         if status == 404:
             raise CloudSyncError("存档不存在")
@@ -127,7 +130,7 @@ class CloudSyncClient:
 
     async def get_profile(self) -> ProfileInfo:
         status, body = await self._request_json("GET", "/api/account/profile")
-        if status == 401:
+        if status in _AUTH_FAILURE_STATUSES:
             raise CloudSyncError(MSG_SESSION_EXPIRED)
         if status != 200:
             raise CloudSyncError(f"获取账号资料失败 (HTTP {status})")
@@ -137,6 +140,20 @@ class CloudSyncClient:
             level=int(body.get("level") or 0),
             total_online_seconds=int(body.get("totalOnlineSeconds") or 0),
         )
+
+    async def get_online_count(self) -> int:
+        """在线人数：统计 5 分钟内活跃的读档器会话。"""
+        status, body = await self._request_json("GET", "/api/account/online-count")
+        if status in _AUTH_FAILURE_STATUSES:
+            raise CloudSyncError(MSG_SESSION_EXPIRED)
+        if status != 200:
+            raise CloudSyncError(f"获取在线人数失败 (HTTP {status})")
+        if not isinstance(body, dict):
+            return 0
+        try:
+            return max(0, int(body.get("onlineCount") or 0))
+        except (TypeError, ValueError):
+            return 0
 
     async def check_update(self) -> dict[str, Any]:
         status, body = await self._request_json("GET", "/api/update/check", auth=False)

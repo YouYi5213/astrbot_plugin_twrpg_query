@@ -33,6 +33,7 @@ HELP_TEXT = (
     "世界切换 <序号> — 切换主存档\n"
     "世界档案 — 角色信息\n"
     "世界背包 / 世界仓库 / 世界携带 — 物品图标列表\n"
+    "世界在线 — 当前在线人数与自己累计在线时长\n"
     "世界材料 <物品名> — 按主存档库存统计目标物品缺料\n"
     "读档器更新内容 / 读档器更新 / 读档器更新日志 — 读档器最新版本与更新说明\n\n"
     "查物品仍用：世界 <物品名> 或 界 <物品名>\n"
@@ -69,6 +70,17 @@ def _format_item_list(items: list[str], *, limit: int) -> str:
     if len(items) > limit:
         lines.append(f"... 还有 {len(items) - limit} 条未显示")
     return "\n".join(lines)
+
+
+def _format_online_duration(seconds: int) -> str:
+    total = max(0, int(seconds or 0))
+    hours, remainder = divmod(total, 3600)
+    minutes = remainder // 60
+    if hours:
+        return f"{hours} 小时 {minutes} 分钟"
+    if minutes:
+        return f"{minutes} 分钟"
+    return f"{total} 秒"
 
 
 def _is_private_message(event: AstrMessageEvent) -> bool:
@@ -269,6 +281,39 @@ class CloudSaveService:
         except Exception as exc:
             logger.error(f"[TWRPG Query] 读取云存档失败: {exc}")
             return "读取云端存档失败，请稍后再试。"
+        finally:
+            await client.close()
+
+    async def online_status(self, qq_id: str) -> str:
+        """在线人数 + 自己的在线时长。"""
+        binding = self._bindings.get(qq_id)
+        if not binding:
+            return _NOT_LOGGED_HINT
+
+        client = self._client_for(binding)
+        try:
+            count = await client.get_online_count()
+            lines = [
+                f"【世界RPG 在线】当前在线 {count} 人",
+                "（统计 5 分钟内活跃的读档器会话）",
+            ]
+            try:
+                info = await client.get_profile()
+            except CloudSyncError as exc:
+                lines.append(str(exc))
+            else:
+                name = info.nickname or info.username or str(binding.get("username") or "")
+                lines.append("")
+                lines.append(
+                    f"你：{name} · Lv{info.level} · "
+                    f"累计在线 {_format_online_duration(info.total_online_seconds)}"
+                )
+            return "\n".join(lines)
+        except CloudSyncError as exc:
+            return str(exc)
+        except Exception as exc:
+            logger.error(f"[TWRPG Query] 获取在线人数失败: {exc}")
+            return "获取在线人数失败，请稍后再试。"
         finally:
             await client.close()
 
