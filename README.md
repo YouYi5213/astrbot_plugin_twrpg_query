@@ -128,3 +128,7 @@ git clone <本仓库地址> astrbot_plugin_twrpg_query
 ```
 python -m pytest -q
 ```
+
+## 计划
+
+待实现功能的调研结论与设计方案见 [docs/PLAN_leaderboard_and_loot.md](docs/PLAN_leaderboard_and_loot.md)（等级排行榜 / 出货排行榜，当前状态：已调研、暂不实现）。
