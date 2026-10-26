@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 from collections import Counter
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 from .core.save_parser import parse_save_item_line
 from .data_loader import TwrpgDataStore, normalize_query, stage_label
@@ -14,6 +14,29 @@ from .data_loader import TwrpgDataStore, normalize_query, stage_label
 DEFAULT_MAX_DEPTH = 12
 MAX_DROPS_PER_MATERIAL = 3
 MAX_SOURCE_MATERIALS = 6
+
+# 「魔石」「硬币」属于兑换材料，不是需要去打/合成的目标。与读档器一致：
+# 当一件物品的配方全部由兑换材料组成时，不再向下展开，直接把该物品本身
+# 算作缺料（玩家真正要找的是这件「完整材料」，而不是它下面的魔石）。
+EXCHANGE_MATERIAL_KEYWORDS = ("魔石", "币")
+
+
+def is_exchange_material(name: str) -> bool:
+    """是否为兑换类材料（魔石 / 硬币）。"""
+    text = (name or "").strip()
+    return any(keyword in text for keyword in EXCHANGE_MATERIAL_KEYWORDS)
+
+
+def recipe_has_real_material(store: TwrpgDataStore, rows) -> bool:
+    """配方里是否存在非兑换类材料（存在才值得继续展开）。"""
+    for row in rows or []:
+        sub_id = str(row.get("sub_id") or "")
+        if sub_id and not is_exchange_material(store.item_name(sub_id)):
+            return True
+        for opt_id, _opt_num in row.get("choose") or []:
+            if not is_exchange_material(store.item_name(opt_id)):
+                return True
+    return False
 
 
 @dataclass
@@ -25,6 +48,8 @@ class DropSource:
     chance: float | str
     stage: int = 0
     icon: str | None = None
+    # 完整材料本身不掉落时，从它的兑换材料继承来源，这里记下那个魔石的名字。
+    source_name: str = ""
 
     @property
     def stage_label(self) -> str:
@@ -166,6 +191,44 @@ def _drop_sources(store: TwrpgDataStore, item_id: str) -> list[DropSource]:
     return sources[:MAX_DROPS_PER_MATERIAL]
 
 
+def _exchange_children(store: TwrpgDataStore, item_id: str) -> list[str]:
+    """配方里的兑换材料（魔石 / 硬币）item_id 列表。"""
+    ids: list[str] = []
+    for row in store.recipes.get(item_id) or []:
+        sub_id = str(row.get("sub_id") or "")
+        if sub_id:
+            ids.append(sub_id)
+        for opt_id, _opt_num in row.get("choose") or []:
+            if opt_id:
+                ids.append(str(opt_id))
+    return ids
+
+
+def _inherited_drop_sources(store: TwrpgDataStore, item_id: str) -> list[DropSource]:
+    """完整材料自身没有掉落时，用它的魔石/硬币来源代替，并标注是哪种材料。"""
+    merged: list[DropSource] = []
+    seen: set[tuple[str, str, str]] = set()
+    for sub_id in _exchange_children(store, item_id):
+        for source in _drop_sources(store, sub_id):
+            key = (source.boss_id, str(source.chance), sub_id)
+            if key in seen:
+                continue
+            seen.add(key)
+            merged.append(replace(source, source_name=store.item_name(sub_id)))
+
+    def _sort_key(src: DropSource) -> tuple[int, float]:
+        chance = src.chance if isinstance(src.chance, (int, float)) else 0.0
+        return (-src.stage, -float(chance))
+
+    merged.sort(key=_sort_key)
+    return merged[:MAX_DROPS_PER_MATERIAL]
+
+
+def leaf_drop_sources(store: TwrpgDataStore, item_id: str) -> list[DropSource]:
+    """缺口材料的掉落来源：优先自身掉落，其次继承兑换材料的掉落。"""
+    return _drop_sources(store, item_id) or _inherited_drop_sources(store, item_id)
+
+
 def plan_materials(
     store: TwrpgDataStore,
     target_id: str,
@@ -206,6 +269,11 @@ def plan_materials(
 
         rows = store.recipes.get(item_id) or []
         if not rows or item_id in chain:
+            leaves[item_id] += qty
+            return
+        # 依赖里的配方全是魔石/硬币时停在当前物品（缺的是这件完整材料）；
+        # 目标物品本身仍展开一层，方便查看它需要哪些兑换材料。
+        if depth > 0 and not recipe_has_real_material(store, rows):
             leaves[item_id] += qty
             return
         if depth >= max_depth:
@@ -256,7 +324,7 @@ def plan_materials(
             stage=store.item_stage(item_id),
             icon=store.item_icon(item_id),
             depth=depths.get(item_id, 0),
-            drops=_drop_sources(store, item_id) if count else [],
+            drops=leaf_drop_sources(store, item_id) if count else [],
         )
         needs.append(need)
 

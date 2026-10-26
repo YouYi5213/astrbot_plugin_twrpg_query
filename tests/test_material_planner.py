@@ -14,8 +14,11 @@ from astrbot_plugin_twrpg_query.material_planner import (
     MaterialPlan,
     inventory_from_save_lines,
     inventory_summary,
+    is_exchange_material,
+    leaf_drop_sources,
     parse_quantity,
     plan_materials,
+    recipe_has_real_material,
     resolve_item_id,
 )
 
@@ -167,3 +170,98 @@ def test_plan_materials_unknown_item_returns_none():
     if store is None:
         return
     assert plan_materials(store, "NOT_A_REAL_ITEM_ID") is None
+
+
+def test_is_exchange_material():
+    assert is_exchange_material("土神魔石")
+    assert is_exchange_material("公爵魔石")
+    assert is_exchange_material("普瑞斯黄金硬币")
+    assert is_exchange_material("普瑞斯银币")
+    assert not is_exchange_material("自然之纹")
+    assert not is_exchange_material("")
+    assert not is_exchange_material("秘银")
+
+
+class _StubStore:
+    """只保留 leaf_drop_sources 需要的接口。"""
+
+    def __init__(self) -> None:
+        self.recipes = {"FULL": [{"sub_id": "STONE", "num": 2}]}
+        self.drops_by_item = {"STONE": [("boss1", 0.2)]}
+        self.bosses_by_id = {"boss1": {"img": ""}}
+        self.items_by_id = {
+            "FULL": {"name": "自然之纹"},
+            "STONE": {"name": "土神魔石"},
+        }
+
+    def item_name(self, item_id: str) -> str:
+        return self.items_by_id.get(item_id, {}).get("name", item_id)
+
+    def item_stage(self, item_id: str) -> int:
+        return 8
+
+    def item_icon(self, item_id: str):
+        return None
+
+    def boss_name(self, boss_id: str) -> str:
+        return "土灵战神盖亚"
+
+    def infer_boss_stage(self, boss_id: str) -> int:
+        return 8
+
+    def _entity_icon(self, img):
+        return None
+
+
+def test_recipe_has_real_material():
+    store = _StubStore()
+    assert recipe_has_real_material(store, [{"sub_id": "STONE", "num": 2}]) is False
+    assert recipe_has_real_material(store, []) is False
+    assert recipe_has_real_material(store, [{"sub_id": "STONE", "num": 2, "choose": [("FULL", 1)]}]) is True
+
+
+def test_leaf_drop_sources_inherits_exchange_material_drops():
+    store = _StubStore()
+    drops = leaf_drop_sources(store, "FULL")
+    assert len(drops) == 1
+    assert drops[0].boss_name == "土灵战神盖亚"
+    assert drops[0].source_name == "土神魔石"
+    assert float(drops[0].chance) == 0.2
+
+
+def _item_id_by_name(store: TwrpgDataStore, name: str) -> str | None:
+    for item_id, item in store.items_by_id.items():
+        if item.get("name") == name and store._is_queryable(item):
+            return item_id
+    return None
+
+
+def test_plan_stops_at_complete_material():
+    """配方全是魔石/硬币的物品，缺料应报物品本身而不是魔石。"""
+    store = _load_store()
+    if store is None:
+        return
+    target_id = _item_id_by_name(store, "弗罗斯特先驱的衣服")
+    if target_id is None:
+        return
+    plan = plan_materials(store, target_id)
+    assert plan is not None
+    names = {need.name for need in plan.needs}
+    assert "自然之纹" in names
+    assert "堕落灰烬" in names
+    assert "土神魔石" not in names
+    assert "公爵魔石" not in names
+
+
+def test_plan_expands_target_exchange_material():
+    """直接把完整材料当目标查询时，仍展开一层显示需要的魔石。"""
+    store = _load_store()
+    if store is None:
+        return
+    target_id = _item_id_by_name(store, "自然之纹")
+    if target_id is None:
+        return
+    plan = plan_materials(store, target_id)
+    assert plan is not None
+    assert [need.name for need in plan.needs] == ["土神魔石"]
+    assert plan.needs[0].missing == 2

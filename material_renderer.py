@@ -209,10 +209,16 @@ def _draw_sources(
             name = drop.boss_name
             stage_text = drop.stage_label
             draw.text((text_x, y + 6), name, fill=COLORS["text"], font=font)
-            if stage_text:
-                name_w = _text_width(draw, name, font)
+            cursor_x = text_x + _text_width(draw, name, font) + 6
+            if drop.source_name and drop.source_name != need.name:
+                source_text = f"· {drop.source_name}"
                 draw.text(
-                    (text_x + name_w + 6, y + 6),
+                    (cursor_x, y + 6), source_text, fill=COLORS["muted"], font=note_font
+                )
+                cursor_x += _text_width(draw, source_text, note_font) + 6
+            if stage_text:
+                draw.text(
+                    (cursor_x, y + 6),
                     stage_text,
                     fill=COLORS["muted"],
                     font=note_font,
