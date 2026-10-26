@@ -12,11 +12,14 @@ from astrbot_plugin_twrpg_query.data_loader import TwrpgDataStore, resolve_data_
 from astrbot_plugin_twrpg_query.material_planner import (
     DEFAULT_MAX_DEPTH,
     MaterialPlan,
+    goal_counts,
     inventory_from_save_lines,
     inventory_summary,
     is_exchange_material,
     leaf_drop_sources,
+    order_goal_ids,
     parse_quantity,
+    plan_goals,
     plan_materials,
     recipe_has_real_material,
     resolve_item_id,
@@ -265,3 +268,65 @@ def test_plan_expands_target_exchange_material():
     assert plan is not None
     assert [need.name for need in plan.needs] == ["土神魔石"]
     assert plan.needs[0].missing == 2
+
+
+def test_goal_counts_duplicates_as_quantity():
+    counts = goal_counts(["I018", "I018", "I0B4", "", "I018"])
+    assert counts == {"I018": 3, "I0B4": 1}
+
+
+def test_order_goal_ids_puts_ingredient_first():
+    store = _load_store()
+    if store is None:
+        return
+    parent = _item_id_by_name(store, "弗罗斯特先驱的衣服")
+    if parent is None:
+        return
+    child = store.recipes[parent][0]["sub_id"]
+    ordered = order_goal_ids(store, [parent, child])
+    assert ordered == [child, parent]
+
+
+def test_plan_goals_shares_stock_between_goals():
+    store = _load_store()
+    if store is None:
+        return
+    target_id = _item_id_by_name(store, "自然之纹")
+    if target_id is None:
+        return
+    # 同一目标出现两次 → 需要 2 份，库存只有 2 个魔石 → 合计仍缺 2 个
+    plan = plan_goals(store, [target_id, target_id], inventory={"I0LY": 2})
+    assert plan is not None
+    assert plan.count == 1
+    assert plan.goals[0].quantity == 2
+    merged = {need.item_id: need for need in plan.merged_needs}
+    assert merged["I0LY"].required == 4
+    assert merged["I0LY"].owned == 2
+    assert merged["I0LY"].missing == 2
+
+
+def test_plan_goals_hides_satisfied_goals_from_missing():
+    store = _load_store()
+    if store is None:
+        return
+    target_id = _item_id_by_name(store, "自然之纹")
+    if target_id is None:
+        return
+    plan = plan_goals(store, [target_id], inventory={"I0LY": 10})
+    assert plan is not None
+    assert plan.missing == []
+    assert len(plan.satisfied_goals) == 1
+    assert plan.missing_goals == []
+
+
+def test_plan_goals_skips_unknown_ids():
+    store = _load_store()
+    if store is None:
+        return
+    target_id = _item_id_by_name(store, "自然之纹")
+    if target_id is None:
+        return
+    assert plan_goals(store, ["NOT_REAL_ID"]) is None
+    plan = plan_goals(store, ["NOT_REAL_ID", target_id])
+    assert plan is not None
+    assert plan.count == 1

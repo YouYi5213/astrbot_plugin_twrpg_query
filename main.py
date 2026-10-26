@@ -45,6 +45,7 @@ from .core.cloud_commands import (
     _BACKPACK_RE,
     _CARRIED_RE,
     _CLOUD_RESERVED_RE,
+    _GOALS_RE,
     _HELP_RE,
     _LOGIN_RE,
     _ONLINE_RE,
@@ -65,8 +66,14 @@ from .core.cloud_service import (
     InventorySnapshot,
 )
 from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
+from .goal_renderer import format_goal_caption, format_goal_text, generate_goal_card
 from .icon_utils import resolve_icons_dir
-from .material_planner import parse_quantity, plan_materials, resolve_item_id
+from .material_planner import (
+    parse_quantity,
+    plan_goals,
+    plan_materials,
+    resolve_item_id,
+)
 from .material_renderer import (
     format_material_caption,
     format_material_text,
@@ -497,6 +504,62 @@ class TwrpgQueryPlugin(Star):
         yield event.plain_result(
             await self._cloud.online_status(str(event.get_sender_id()))
         )
+
+    @filter.regex(_GOALS_RE, priority=CLOUD_CMD_PRIORITY)
+    async def on_cloud_goals(self, event: AstrMessageEvent):
+        """世界目标 — 汇总读档器里为当前存档设置的目标缺料"""
+        if not self._cloud.enabled():
+            return
+        event.stop_event()
+
+        if not self.store.loaded:
+            yield event.plain_result("❌ 离线数据尚未准备。\n请确认插件目录下存在 data/twrpg_query/items.json")
+            return
+
+        snapshot = await self._cloud.goal_snapshot(str(event.get_sender_id()))
+        if isinstance(snapshot, str):
+            yield event.plain_result(snapshot)
+            return
+
+        if not snapshot.goal_ids:
+            yield event.plain_result(
+                f"「{snapshot.display_name}」还没有设置物品目标。\n"
+                "在读档器里右键物品 → 加入收集目标，保存后回来再发一次「世界目标」。"
+            )
+            return
+
+        try:
+            plan = await asyncio.to_thread(
+                plan_goals,
+                self.store,
+                snapshot.goal_ids,
+                inventory=snapshot.counts,
+                save_name=snapshot.display_name,
+            )
+        except Exception as e:
+            logger.error(f"[TWRPG Query] 汇总目标缺料失败: {e}")
+            yield event.plain_result("汇总目标缺料失败，请稍后再试。")
+            return
+
+        if plan is None:
+            yield event.plain_result(
+                "目标里的物品都没有找到对应的物品数据，可能数据版本不一致。"
+            )
+            return
+
+        try:
+            image_path = await asyncio.to_thread(generate_goal_card, plan)
+            yield event.chain_result(
+                [
+                    Plain(format_goal_caption(plan, save_name=snapshot.display_name)),
+                    Image.fromFileSystem(image_path),
+                ]
+            )
+        except Exception as e:
+            logger.error(f"[TWRPG Query] 生成目标缺料卡片失败: {e}")
+            yield event.plain_result(
+                format_goal_text(plan, save_name=snapshot.display_name)
+            )
 
     async def _yield_cloud_inventory(self, event: AstrMessageEvent, result: CloudInventoryResult | str):
         if isinstance(result, str):

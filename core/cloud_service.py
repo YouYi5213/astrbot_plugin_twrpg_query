@@ -35,6 +35,7 @@ HELP_TEXT = (
     "世界背包 / 世界仓库 / 世界携带 — 物品图标列表\n"
     "世界在线 — 当前在线人数与自己累计在线时长\n"
     "世界材料 <物品名> — 按主存档库存统计目标物品缺料\n"
+    "世界目标 — 汇总读档器里为当前存档设置的目标缺料\n"
     "读档器更新内容 / 读档器更新 / 读档器更新日志 — 读档器最新版本与更新说明\n\n"
     "查物品仍用：世界 <物品名> 或 界 <物品名>\n"
     "图鉴浏览用：世界图鉴 <分类>，例如 世界图鉴 武器"
@@ -61,6 +62,20 @@ class InventorySnapshot:
     @property
     def total_lines(self) -> int:
         return self.carried + self.backpack + self.warehouse
+
+
+@dataclass
+class GoalSnapshot:
+    """某个存档的云端物品目标与库存。"""
+
+    save_name: str
+    display_name: str
+    goal_ids: list[str]
+    counts: dict[str, int]
+
+    @property
+    def goal_count(self) -> int:
+        return len(self.goal_ids)
 
 
 def _format_item_list(items: list[str], *, limit: int) -> str:
@@ -326,6 +341,39 @@ class CloudSaveService:
     async def carried(self, qq_id: str) -> CloudInventoryResult | str:
         return await self._item_section(qq_id, "carried")
 
+    async def _load_inventory_snapshot(
+        self,
+        client: CloudSyncClient,
+        binding: dict,
+        qq_id: str,
+    ) -> InventorySnapshot | str:
+        """下载主存档并聚合携带/背包/仓库的物品数量。"""
+        from ..inventory_renderer import format_save_display_name
+        from ..material_planner import inventory_from_save_lines
+
+        primary, _ = await self._pick_primary_save(client, binding, qq_id)
+        if primary is None:
+            return "云端暂无存档文件。"
+        raw = await client.download_save(primary.name)
+        data = parse_string_for_stage(raw.decode("utf-8", errors="replace"))
+
+        counts: dict[str, int] = {}
+        for lines in (
+            data.carried_items,
+            data.backpack_items,
+            data.warehouse_items,
+        ):
+            inventory_from_save_lines(self._store, lines, into=counts)
+
+        return InventorySnapshot(
+            save_name=primary.name,
+            display_name=format_save_display_name(primary.name),
+            counts=counts,
+            carried=len(data.carried_items),
+            backpack=len(data.backpack_items),
+            warehouse=len(data.warehouse_items),
+        )
+
     async def inventory_snapshot(self, qq_id: str) -> InventorySnapshot | str:
         """读取主存档，聚合携带/背包/仓库的物品数量。"""
         if self._store is None:
@@ -336,36 +384,40 @@ class CloudSaveService:
 
         client = self._client_for(binding)
         try:
-            primary, _ = await self._pick_primary_save(client, binding, qq_id)
-            if primary is None:
-                return "云端暂无存档文件。"
-            raw = await client.download_save(primary.name)
-            data = parse_string_for_stage(raw.decode("utf-8", errors="replace"))
-
-            from ..inventory_renderer import format_save_display_name
-            from ..material_planner import inventory_from_save_lines
-
-            counts: dict[str, int] = {}
-            for lines in (
-                data.carried_items,
-                data.backpack_items,
-                data.warehouse_items,
-            ):
-                inventory_from_save_lines(self._store, lines, into=counts)
-
-            return InventorySnapshot(
-                save_name=primary.name,
-                display_name=format_save_display_name(primary.name),
-                counts=counts,
-                carried=len(data.carried_items),
-                backpack=len(data.backpack_items),
-                warehouse=len(data.warehouse_items),
-            )
+            return await self._load_inventory_snapshot(client, binding, qq_id)
         except CloudSyncError as exc:
             return str(exc)
         except Exception as exc:
             logger.error(f"[TWRPG Query] 聚合云存档库存失败: {exc}")
             return "读取云端存档失败，请稍后再试。"
+        finally:
+            await client.close()
+
+    async def goal_snapshot(self, qq_id: str) -> GoalSnapshot | str:
+        """读取主存档的云端物品目标（只读，与读档器共用同一份数据）。"""
+        if self._store is None:
+            return "物品数据尚未就绪，请稍后再试。"
+        binding = self._bindings.get(qq_id)
+        if not binding:
+            return _NOT_LOGGED_HINT
+
+        client = self._client_for(binding)
+        try:
+            snapshot = await self._load_inventory_snapshot(client, binding, qq_id)
+            if isinstance(snapshot, str):
+                return snapshot
+            goal_ids = await client.get_item_goals(snapshot.save_name)
+            return GoalSnapshot(
+                save_name=snapshot.save_name,
+                display_name=snapshot.display_name,
+                goal_ids=goal_ids,
+                counts=snapshot.counts,
+            )
+        except CloudSyncError as exc:
+            return str(exc)
+        except Exception as exc:
+            logger.error(f"[TWRPG Query] 读取云端物品目标失败: {exc}")
+            return "读取云端目标失败，请稍后再试。"
         finally:
             await client.close()
 

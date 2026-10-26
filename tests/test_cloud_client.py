@@ -96,3 +96,61 @@ def test_forbidden_counts_as_expired_session():
     assert asyncio.run(run(lambda c: c.list_saves())) == MSG_SESSION_EXPIRED
     assert asyncio.run(run(lambda c: c.get_profile())) == MSG_SESSION_EXPIRED
     assert asyncio.run(run(lambda c: c.download_save("a.txt"))) == MSG_SESSION_EXPIRED
+
+
+def test_get_item_goals_filters_and_encodes_save_name():
+    seen = {}
+
+    async def run():
+        def handler(request):
+            seen['path'] = request.url.path
+            seen['save'] = request.url.params.get('saveName')
+            seen['auth'] = request.headers.get('Authorization')
+            return httpx.Response(200, json=['I018', ' ', '', 'I0B4'], request=request)
+
+        transport = httpx.MockTransport(handler)
+        client = CloudSyncClient(['https://primary.example'], token='t')
+        client._client = httpx.AsyncClient(transport=transport)
+        try:
+            return await client.get_item_goals('mxdc 的存档.txt')
+        finally:
+            await client.close()
+
+    goals = asyncio.run(run())
+    assert goals == ['I018', 'I0B4']
+    assert seen['path'] == '/api/item-goals'
+    assert seen['save'] == 'mxdc 的存档.txt'
+    assert seen['auth'] == 'Bearer t'
+
+
+def test_get_item_goals_empty_name_skips_request():
+    async def run():
+        def handler(request):
+            raise AssertionError('不应发起请求')
+
+        client = CloudSyncClient(['https://primary.example'], token='t')
+        client._client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+        try:
+            return await client.get_item_goals('   ')
+        finally:
+            await client.close()
+
+    assert asyncio.run(run()) == []
+
+
+def test_get_item_goals_handles_non_list_and_403():
+    async def run(payload, status):
+        transport = httpx.MockTransport(
+            lambda request: httpx.Response(status, json=payload, request=request)
+        )
+        client = CloudSyncClient(['https://primary.example'], token='t')
+        client._client = httpx.AsyncClient(transport=transport)
+        try:
+            return await client.get_item_goals('a.txt')
+        finally:
+            await client.close()
+
+    assert asyncio.run(run({}, 200)) == []
+    with pytest.raises(CloudSyncError) as exc_info:
+        asyncio.run(run({'message': 'no'}, 403))
+    assert str(exc_info.value) == MSG_SESSION_EXPIRED

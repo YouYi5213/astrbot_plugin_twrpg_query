@@ -236,13 +236,20 @@ def plan_materials(
     quantity: int = 1,
     inventory: dict[str, int] | None = None,
     max_depth: int = DEFAULT_MAX_DEPTH,
+    stock: dict[str, int] | None = None,
 ) -> MaterialPlan | None:
-    """展开目标物品配方，扣除库存，返回缺口材料与掉落来源。"""
+    """展开目标物品配方，扣除库存，返回缺口材料与掉落来源。
+
+    ``stock`` 传入时复用同一份库存池（会被就地扣减），供多目标汇总避免重复计数。
+    """
     if target_id not in store.items_by_id:
         return None
 
     quantity = max(1, int(quantity or 1))
-    stock = {key: int(value) for key, value in (inventory or {}).items() if int(value) > 0}
+    if stock is None:
+        stock = {
+            key: int(value) for key, value in (inventory or {}).items() if int(value) > 0
+        }
 
     gross: Counter[str] = Counter()
     owned: Counter[str] = Counter()
@@ -340,6 +347,143 @@ def plan_materials(
         optional_groups=optional_groups,
         truncated=truncated,
     )
+
+
+@dataclass
+class GoalPlan:
+    """云端物品目标表的汇总结果。"""
+
+    goals: list[MaterialPlan] = field(default_factory=list)
+    merged_needs: list[MaterialNeed] = field(default_factory=list)
+    save_name: str = ""
+
+    @property
+    def count(self) -> int:
+        return len(self.goals)
+
+    @property
+    def missing(self) -> list[MaterialNeed]:
+        return [need for need in self.merged_needs if not need.satisfied]
+
+    @property
+    def satisfied(self) -> list[MaterialNeed]:
+        return [need for need in self.merged_needs if need.satisfied]
+
+    @property
+    def missing_goals(self) -> list[MaterialPlan]:
+        return [plan for plan in self.goals if plan.missing]
+
+    @property
+    def satisfied_goals(self) -> list[MaterialPlan]:
+        return [plan for plan in self.goals if not plan.missing]
+
+    @property
+    def truncated(self) -> bool:
+        return any(plan.truncated for plan in self.goals)
+
+    @property
+    def source_materials(self) -> list[MaterialNeed]:
+        return [need for need in self.missing if need.drops][:MAX_SOURCE_MATERIALS]
+
+
+def _recipe_option_ids(store: TwrpgDataStore, item_id: str) -> list[str]:
+    """配方里所有可选项的 item_id（含 choose 备选）。"""
+    ids: list[str] = []
+    for row in store.recipes.get(item_id) or []:
+        sub_id = str(row.get("sub_id") or "")
+        if sub_id:
+            ids.append(sub_id)
+        for opt_id, _opt_num in row.get("choose") or []:
+            if opt_id:
+                ids.append(str(opt_id))
+    return ids
+
+
+def _goal_depth(
+    store: TwrpgDataStore,
+    item_id: str,
+    selected: set[str],
+    memo: dict[str, int],
+    chain: frozenset[str],
+) -> int:
+    """目标依赖深度：越大表示越「上层」（它依赖别的目标）。"""
+    if item_id in memo:
+        return memo[item_id]
+    if item_id in chain:
+        return -1
+    best = 0 if item_id in selected else -1
+    next_chain = chain | {item_id}
+    for sub_id in _recipe_option_ids(store, item_id):
+        depth = _goal_depth(store, sub_id, selected, memo, next_chain)
+        if depth >= 0:
+            best = max(best, depth + 1)
+    memo[item_id] = best
+    return best
+
+
+def order_goal_ids(store: TwrpgDataStore, goal_ids: list[str]) -> list[str]:
+    """按依赖深度排序目标：底层材料先算，避免共享材料的库存被上层先吃掉。"""
+    unique = list(dict.fromkeys(goal_ids))
+    selected = set(unique)
+    memo: dict[str, int] = {}
+    ranked = [
+        (max(0, _goal_depth(store, goal_id, selected, memo, frozenset())), index, goal_id)
+        for index, goal_id in enumerate(unique)
+    ]
+    ranked.sort()
+    return [goal_id for _depth, _index, goal_id in ranked]
+
+
+def goal_counts(goal_ids: list[str]) -> Counter[str]:
+    """目标表里同一物品出现多次即数量（与读档器一致）。"""
+    return Counter(item_id for item_id in goal_ids if item_id)
+
+
+def plan_goals(
+    store: TwrpgDataStore,
+    goal_ids: list[str],
+    *,
+    inventory: dict[str, int] | None = None,
+    max_depth: int = DEFAULT_MAX_DEPTH,
+    save_name: str = "",
+) -> GoalPlan | None:
+    """把云端目标表整体展开成缺料汇总（共享同一份库存）。"""
+    counts = goal_counts(goal_ids)
+    known = Counter({key: value for key, value in counts.items() if key in store.items_by_id})
+    if not known:
+        return None
+
+    stock = {
+        key: int(value) for key, value in (inventory or {}).items() if int(value) > 0
+    }
+    goals: list[MaterialPlan] = []
+    merged: dict[str, MaterialNeed] = {}
+
+    for goal_id in order_goal_ids(store, list(known)):
+        plan = plan_materials(
+            store,
+            goal_id,
+            quantity=known[goal_id],
+            max_depth=max_depth,
+            stock=stock,
+        )
+        if plan is None:
+            continue
+        goals.append(plan)
+        for need in plan.needs:
+            current = merged.get(need.item_id)
+            if current is None:
+                merged[need.item_id] = replace(need)
+            else:
+                current.required += need.required
+                current.owned += need.owned
+                current.missing += need.missing
+
+    ordered = sorted(
+        merged.values(),
+        key=lambda need: (need.satisfied, -need.stage, -need.missing, need.name),
+    )
+    return GoalPlan(goals=goals, merged_needs=ordered, save_name=save_name)
 
 
 def inventory_summary(store: TwrpgDataStore, counts: dict[str, int]) -> int:

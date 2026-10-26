@@ -155,6 +155,28 @@ class CloudSyncClient:
         except (TypeError, ValueError):
             return 0
 
+    async def get_item_goals(self, save_name: str) -> list[str]:
+        """读取某个存档的物品目标（只读，与读档器共用同一份数据）。"""
+        name = (save_name or "").strip()
+        if not name:
+            return []
+        encoded = quote(name, safe="")
+        status, body = await self._request_json(
+            "GET", f"/api/item-goals?saveName={encoded}"
+        )
+        if status in _AUTH_FAILURE_STATUSES:
+            raise CloudSyncError(MSG_SESSION_EXPIRED)
+        if status != 200:
+            raise CloudSyncError(f"获取物品目标失败 (HTTP {status})")
+        if not isinstance(body, list):
+            return []
+        goals: list[str] = []
+        for entry in body:
+            text = str(entry or "").strip()
+            if text:
+                goals.append(text)
+        return goals
+
     async def check_update(self) -> dict[str, Any]:
         status, body = await self._request_json("GET", "/api/update/check", auth=False)
         if status != 200:

@@ -3,6 +3,7 @@
 from core.cloud_commands import (
     _BACKPACK_RE,
     _CLOUD_RESERVED_RE,
+    _GOALS_RE,
     _HELP_RE,
     _LOGIN_RE,
     _ONLINE_RE,
@@ -48,11 +49,20 @@ def test_online_regex():
     assert not _ONLINE_RE.match("世界 在线")
 
 
+def test_goals_regex():
+    assert _GOALS_RE.match("世界目标")
+    assert _GOALS_RE.match("/界目标")
+    assert not _GOALS_RE.match("世界目标 添加")
+    assert not _GOALS_RE.match("世界 目标")
+
+
 def test_is_cloud_command():
     assert is_cloud_command("世界仓库")
     assert is_cloud_command("世界登录 a b")
     assert is_cloud_command("世界在线")
     assert is_cloud_command("界在线")
+    assert is_cloud_command("世界目标")
+    assert is_cloud_command("世界目标 添加 x")
     assert not is_cloud_command("世界 太阳石")
     assert not is_cloud_command("世界在线人数")
 
@@ -62,6 +72,7 @@ def test_cloud_reserved_fallback_regex():
     assert _CLOUD_RESERVED_RE.match("/世界切换 abc")
     assert _CLOUD_RESERVED_RE.match("世界背包 多余参数")
     assert _CLOUD_RESERVED_RE.match("世界在线 多余参数")
+    assert _CLOUD_RESERVED_RE.match("世界目标 多余参数")
     assert not _CLOUD_RESERVED_RE.match("世界 太阳石")
 
 
@@ -70,3 +81,4 @@ def test_cloud_command_usage():
     assert cloud_command_usage("世界切换 abc") == "格式：世界切换 <序号>"
     assert cloud_command_usage("世界背包 多余参数") == "格式：世界背包"
     assert cloud_command_usage("世界在线 1") == "格式：世界在线"
+    assert cloud_command_usage("世界目标 1") == "格式：世界目标"
