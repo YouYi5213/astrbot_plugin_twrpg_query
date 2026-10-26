@@ -6,3 +6,6 @@ __pycache__/
 # 本地发布脚本（按版本复制的 publish_v*.py 勿提交）
 scripts/publish_v*.py
 scripts/publish_release.py
+
+# 测试渲染产物（最终只保留 .gitkeep）
+tests/runtime_cards/*.png
