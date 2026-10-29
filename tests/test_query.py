@@ -72,7 +72,7 @@ class TwrpgQueryTests(unittest.TestCase):
             )
             self.assertEqual(collapsed, [expected_id], name)
 
-    def test_collapse_keeps_fuzzy_multi_match_prompt(self):
+    def test_collapse_fuzzy_same_name_picks_best(self):
         matches = self.store.search("格林", limit=12)
         collapsed = collapse_exact_name_matches(
             matches,
@@ -80,7 +80,19 @@ class TwrpgQueryTests(unittest.TestCase):
             self.store.item_name,
             pick_best=self.store._pick_best_item_id,
         )
+        self.assertEqual(collapsed, ["rlif"])
+
+    def test_collapse_keeps_fuzzy_multi_match_prompt(self):
+        matches = self.store.search("自然", limit=12)
+        collapsed = collapse_exact_name_matches(
+            matches,
+            "自然",
+            self.store.item_name,
+            pick_best=self.store._pick_best_item_id,
+        )
         self.assertGreater(len(collapsed), 1)
+        names = [self.store.item_name(item_id) for item_id in collapsed]
+        self.assertEqual(len(names), len(set(names)))
 
     def test_build_display_sections(self):
         display = self.store.build_display("I0ET")

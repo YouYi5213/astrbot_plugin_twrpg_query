@@ -964,24 +964,42 @@ def collapse_exact_name_matches(
     exact_name: Callable[[str], str],
     pick_best: Callable[[list[str]], str | None] | None = None,
 ) -> list[str]:
-    """Exact same display name → one id (via pick_best); fuzzy multi-match unchanged."""
-    query_key = normalize_query(query)
-    if not query_key or not matches:
+    """Same display name → one id (via pick_best).
+
+    Prefer exact query matches when present; otherwise dedupe the fuzzy list by
+    display name so prompts never show two identical labels.
+    """
+    if not matches:
         return matches
+    query_key = normalize_query(query)
     exact = [
         entity_id
         for entity_id in matches
-        if normalize_query(exact_name(entity_id)) == query_key
+        if query_key and normalize_query(exact_name(entity_id)) == query_key
     ]
-    if not exact:
-        return matches
-    if len(exact) == 1:
-        return exact
-    if pick_best is not None:
-        best = pick_best(exact)
-        if best:
-            return [best]
-    return [exact[0]]
+    pool = exact if exact else list(matches)
+
+    groups: dict[str, list[str]] = {}
+    order: list[str] = []
+    for entity_id in pool:
+        key = normalize_query(exact_name(entity_id)) or entity_id
+        if key not in groups:
+            order.append(key)
+            groups[key] = []
+        groups[key].append(entity_id)
+
+    collapsed: list[str] = []
+    for key in order:
+        ids = groups[key]
+        if len(ids) == 1:
+            collapsed.append(ids[0])
+            continue
+        if pick_best is not None:
+            best = pick_best(ids)
+            collapsed.append(best or ids[0])
+        else:
+            collapsed.append(ids[0])
+    return collapsed
 
 
 def resolve_data_dir(plugin_dir: str) -> str:
