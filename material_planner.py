@@ -19,11 +19,15 @@ MAX_SOURCE_MATERIALS = 6
 # 当一件物品的配方全部由兑换材料组成时，不再向下展开，直接把该物品本身
 # 算作缺料（玩家真正要找的是这件「完整材料」，而不是它下面的魔石）。
 EXCHANGE_MATERIAL_KEYWORDS = ("魔石", "币")
+# 真材料白名单：精确全名优先于「魔石」关键词（如 item nflg）
+REAL_MATERIAL_WHITELIST = frozenset({"边缘世界的魔石"})
 
 
 def is_exchange_material(name: str) -> bool:
     """是否为兑换类材料（魔石 / 硬币）。"""
     text = (name or "").strip()
+    if text in REAL_MATERIAL_WHITELIST:
+        return False
     return any(keyword in text for keyword in EXCHANGE_MATERIAL_KEYWORDS)
 
 
