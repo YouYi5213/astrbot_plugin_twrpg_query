@@ -439,6 +439,55 @@ def goal_counts(goal_ids: list[str]) -> Counter[str]:
     return Counter(item_id for item_id in goal_ids if item_id)
 
 
+
+def collapse_goal_ids_by_name(store: TwrpgDataStore, goal_ids: list[str]) -> Counter[str]:
+    """同名（显示名）目标合并到最优 ID，数量相加。"""
+    raw = goal_counts(goal_ids)
+    groups: dict[str, Counter[str]] = {}
+    for item_id, qty in raw.items():
+        if item_id not in store.items_by_id:
+            # 未知 ID 原样保留，后续 known 过滤会丢掉
+            groups.setdefault(item_id, Counter())[item_id] += qty
+            continue
+        key = normalize_query(store.item_name(item_id)) or item_id
+        groups.setdefault(key, Counter())[item_id] += qty
+
+    collapsed: Counter[str] = Counter()
+    for id_counts in groups.values():
+        ids = list(id_counts)
+        best = store._pick_best_item_id(ids) if all(i in store.items_by_id for i in ids) else None
+        if best is None:
+            best = ids[0]
+        collapsed[best] += sum(id_counts.values())
+    return collapsed
+
+
+def fold_stock_to_canonical(
+    store: TwrpgDataStore,
+    stock: dict[str, int],
+    canonical_ids: list[str],
+) -> dict[str, int]:
+    """把与目标同名的其它 ID 库存并入最优目标 ID。"""
+    name_to_best = {
+        normalize_query(store.item_name(item_id)): item_id
+        for item_id in canonical_ids
+        if item_id in store.items_by_id and normalize_query(store.item_name(item_id))
+    }
+    if not name_to_best:
+        return dict(stock)
+    folded: dict[str, int] = {}
+    for item_id, qty in stock.items():
+        qty = int(qty)
+        if qty <= 0:
+            continue
+        if item_id in store.items_by_id:
+            key = normalize_query(store.item_name(item_id))
+            dest = name_to_best.get(key, item_id) if key else item_id
+        else:
+            dest = item_id
+        folded[dest] = folded.get(dest, 0) + qty
+    return folded
+
 def plan_goals(
     store: TwrpgDataStore,
     goal_ids: list[str],
@@ -448,7 +497,7 @@ def plan_goals(
     save_name: str = "",
 ) -> GoalPlan | None:
     """把云端目标表整体展开成缺料汇总（共享同一份库存）。"""
-    counts = goal_counts(goal_ids)
+    counts = collapse_goal_ids_by_name(store, goal_ids)
     known = Counter({key: value for key, value in counts.items() if key in store.items_by_id})
     if not known:
         return None
@@ -456,6 +505,7 @@ def plan_goals(
     stock = {
         key: int(value) for key, value in (inventory or {}).items() if int(value) > 0
     }
+    stock = fold_stock_to_canonical(store, stock, list(known))
     goals: list[MaterialPlan] = []
     merged: dict[str, MaterialNeed] = {}
 

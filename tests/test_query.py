@@ -17,6 +17,7 @@ from astrbot_plugin_twrpg_query.card_renderer import (
 )
 from astrbot_plugin_twrpg_query.data_loader import (
     TwrpgDataStore,
+    collapse_exact_name_matches,
     format_skill_hotkey,
     normalize_query,
     normalize_skill_name,
@@ -56,6 +57,30 @@ class TwrpgQueryTests(unittest.TestCase):
             assert display is not None
             self.assertEqual(display.id, expected_id)
             self.assertTrue(display.icon and os.path.exists(display.icon), name)
+
+    def test_collapse_exact_duplicate_names_picks_best(self):
+        for name, expected_id in (
+            ("弗罗斯特先驱的衣服", "I018"),
+            ("格林之镰", "rlif"),
+        ):
+            matches = self.store.search(name, limit=12)
+            collapsed = collapse_exact_name_matches(
+                matches,
+                name,
+                self.store.item_name,
+                pick_best=self.store._pick_best_item_id,
+            )
+            self.assertEqual(collapsed, [expected_id], name)
+
+    def test_collapse_keeps_fuzzy_multi_match_prompt(self):
+        matches = self.store.search("格林", limit=12)
+        collapsed = collapse_exact_name_matches(
+            matches,
+            "格林",
+            self.store.item_name,
+            pick_best=self.store._pick_best_item_id,
+        )
+        self.assertGreater(len(collapsed), 1)
 
     def test_build_display_sections(self):
         display = self.store.build_display("I0ET")

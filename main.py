@@ -65,7 +65,7 @@ from .core.cloud_service import (
     HELP_TEXT,
     InventorySnapshot,
 )
-from .data_loader import TwrpgDataStore, normalize_query, resolve_data_dir
+from .data_loader import TwrpgDataStore, collapse_exact_name_matches, resolve_data_dir
 from .goal_renderer import format_goal_caption, format_goal_text, generate_goal_card
 from .icon_utils import resolve_icons_dir
 from .material_planner import (
@@ -186,6 +186,7 @@ class TwrpgQueryPlugin(Star):
             generate_card=generate_item_card,
             text_fallback=format_text_fallback,
             log_prefix="物品",
+            pick_best=self.store._pick_best_item_id,
         ):
             yield result
         event.stop_event()
@@ -382,6 +383,7 @@ class TwrpgQueryPlugin(Star):
         generate_card: Callable[[object], str],
         text_fallback: Callable[[object], str],
         log_prefix: str,
+        pick_best: Callable[[list[str]], str | None] | None = None,
     ) -> AsyncIterator:
         if not self.store.loaded:
             yield event.plain_result(
@@ -400,14 +402,12 @@ class TwrpgQueryPlugin(Star):
             yield event.plain_result(f"❌ 未找到「{text}」的相关{entity_label}。")
             return
 
-        query_key = normalize_query(text)
-        exact_matches = [
-            entity_id
-            for entity_id in matches
-            if normalize_query(exact_name(entity_id)) == query_key
-        ]
-        if len(exact_matches) == 1:
-            matches = exact_matches
+        matches = collapse_exact_name_matches(
+            matches,
+            text,
+            exact_name,
+            pick_best=pick_best,
+        )
 
         if len(matches) > 1:
             lines = [

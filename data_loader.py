@@ -6,6 +6,7 @@ import json
 import os
 import re
 import unicodedata
+from collections.abc import Callable
 from dataclasses import dataclass, field
 
 from .icon_utils import resolve_icon_path
@@ -955,6 +956,32 @@ class TwrpgDataStore:
             crafts_into=crafts_into,
             boss_drops=boss_drops,
         )
+
+
+def collapse_exact_name_matches(
+    matches: list[str],
+    query: str,
+    exact_name: Callable[[str], str],
+    pick_best: Callable[[list[str]], str | None] | None = None,
+) -> list[str]:
+    """Exact same display name → one id (via pick_best); fuzzy multi-match unchanged."""
+    query_key = normalize_query(query)
+    if not query_key or not matches:
+        return matches
+    exact = [
+        entity_id
+        for entity_id in matches
+        if normalize_query(exact_name(entity_id)) == query_key
+    ]
+    if not exact:
+        return matches
+    if len(exact) == 1:
+        return exact
+    if pick_best is not None:
+        best = pick_best(exact)
+        if best:
+            return [best]
+    return [exact[0]]
 
 
 def resolve_data_dir(plugin_dir: str) -> str:

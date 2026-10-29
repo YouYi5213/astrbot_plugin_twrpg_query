@@ -12,6 +12,7 @@ from astrbot_plugin_twrpg_query.data_loader import TwrpgDataStore, resolve_data_
 from astrbot_plugin_twrpg_query.material_planner import (
     DEFAULT_MAX_DEPTH,
     MaterialPlan,
+    collapse_goal_ids_by_name,
     goal_counts,
     inventory_from_save_lines,
     inventory_summary,
@@ -330,3 +331,17 @@ def test_plan_goals_skips_unknown_ids():
     plan = plan_goals(store, ["NOT_REAL_ID", target_id])
     assert plan is not None
     assert plan.count == 1
+
+def test_collapse_same_name_goal_ids():
+    store = _load_store()
+    if store is None:
+        return
+    collapsed = collapse_goal_ids_by_name(store, ["I018", "I0RQ", "I018"])
+    assert collapsed == {"I018": 3}
+    plan = plan_goals(store, ["I018", "I0RQ"])
+    assert plan is not None
+    assert plan.count == 1
+    assert plan.goals[0].target_id == "I018"
+    assert plan.goals[0].target_name == "弗罗斯特先驱的衣服"
+    assert plan.goals[0].quantity == 2
+
