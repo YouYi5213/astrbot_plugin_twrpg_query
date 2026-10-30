@@ -258,16 +258,60 @@ class FetchTests(unittest.TestCase):
         with self.assertRaises(rq.TokenExpired):
             asyncio.run(run())
 
+    def test_snapshot_keeps_map_logo(self):
+        def handler(request):
+            return httpx.Response(
+                200,
+                json={"status": 200, "data": {
+                    "preparing": [{
+                        **_raw(1),
+                        "url_logo": "https://example.com/logo.png",
+                    }],
+                    "count": 1, "now": 1,
+                }},
+                request=request,
+            )
+
+        async def run():
+            async with _client(handler) as client:
+                return await rq.fetch_snapshot(client, "a" * 96, 2310)
+
+        snap = asyncio.run(run())
+        self.assertEqual(snap.logo, "https://example.com/logo.png")
+
+    def test_snapshot_falls_back_to_detail_logo(self):
+        def handler(request):
+            if request.url.path == "/api/v3/map/detail":
+                return httpx.Response(
+                    200,
+                    json={"status": 200,
+                          "data": {"logo": "https://example.com/d.png"}},
+                    request=request,
+                )
+            return httpx.Response(
+                200,
+                json={"status": 200,
+                      "data": {"preparing": [], "count": 0, "now": 1}},
+                request=request,
+            )
+
+        async def run():
+            async with _client(handler) as client:
+                return await rq.fetch_snapshot(client, "a" * 96, 2310)
+
+        self.assertEqual(asyncio.run(run()).logo,
+                         "https://example.com/d.png")
+
     def test_resolve_map_by_name(self):
-        index = {197239: "世界RPG·测试"}
+        index = {197239: "守护小天使"}
 
         async def run():
             async with _client(
                 lambda r: httpx.Response(200, json={}, request=r)
             ) as client:
-                return await rq.resolve_map(client, "世界RPG·测试", index)
+                return await rq.resolve_map(client, "守护小天使", index)
 
-        self.assertEqual(asyncio.run(run()), (197239, "世界RPG·测试"))
+        self.assertEqual(asyncio.run(run()), (197239, "守护小天使"))
 
     def test_resolve_map_prefers_exact_name(self):
         index = {2310: "世界RPG", 197239: "世界RPG·测试"}
@@ -321,18 +365,14 @@ class FetchTests(unittest.TestCase):
         self.assertIn("更新目录", str(ctx.exception))
 
     def test_resolve_map_by_id(self):
-        def handler(request):
-            return httpx.Response(
-                200,
-                json={"status": 200, "data": {"mapName": "世界RPG"}},
-                request=request,
-            )
-
         async def run():
-            async with _client(handler) as client:
+            async with _client(
+                lambda r: httpx.Response(200, json={}, request=r)
+            ) as client:
                 return await rq.resolve_map(client, "2310")
 
-        self.assertEqual(asyncio.run(run()), (2310, "世界RPG"))
+        # 数字 ID 直接返回，地图名由随后的 search_by_map_ids 补齐
+        self.assertEqual(asyncio.run(run()), (2310, ""))
 
 
 class MapIndexTests(unittest.TestCase):
@@ -346,6 +386,14 @@ class MapIndexTests(unittest.TestCase):
         # 没有缓存时不能自己联网；直接返回空表
         with tempfile.TemporaryDirectory() as tmp:
             self.assertEqual(asyncio.run(rq.get_map_index(tmp)), {})
+
+    def test_search_skips_test_maps(self):
+        index = {1: "世界RPG·测试", 2: "世界RPG", 3: "测试图"}
+        self.assertEqual(
+            [mid for mid, _ in rq.search_map_index(index, "世界RPG")],
+            [2],
+        )
+        self.assertEqual(rq.search_map_index(index, "测试"), [])
 
     def test_search_ranking(self):
         index = {1: "守护", 2: "守护者", 3: "我的守护", 4: "无关"}
@@ -368,6 +416,41 @@ class MapIndexTests(unittest.TestCase):
             ts, maps = rq._load_map_index(path)
             self.assertGreater(ts, 0)
             self.assertEqual(maps, {2310: "世界RPG"})
+
+    def test_build_index_skips_test_maps(self):
+        def handler(request):
+            if request.url.path == "/api/v3/map/tabs":
+                return httpx.Response(
+                    200, json={"status": 200, "data": [{"id": 1}]},
+                    request=request,
+                )
+            if request.url.path == "/api/v3/map/detail":
+                return httpx.Response(
+                    200,
+                    json={"status": 200, "data": {"mapName": "正常图"}},
+                    request=request,
+                )
+            return httpx.Response(
+                200,
+                json={"status": 200, "data": {
+                    "rows": [
+                        {"mapId": 1, "mapName": "正常图", "testMap": False},
+                        {"mapId": 2, "mapName": "世界RPG·测试", "testMap": False},
+                        {"mapId": 3, "mapName": "测试服图", "testMap": True},
+                    ],
+                    "total": 3,
+                }},
+                request=request,
+            )
+
+        async def run():
+            async with _client(handler) as client:
+                return await rq.build_map_index(client)
+
+        maps = asyncio.run(run())
+        self.assertEqual(maps.get(1), "正常图")
+        self.assertNotIn(2, maps)
+        self.assertNotIn(3, maps)
 
     def test_build_index_paginates(self):
         def handler(request):

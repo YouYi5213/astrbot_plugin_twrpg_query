@@ -69,8 +69,9 @@ from .core.cloud_service import (
 from .core.room_query import (
     RoomQueryError,
     TokenExpired,
+    format_snapshot,
     is_index_command,
-    query_rooms_text,
+    query_rooms,
     refresh_map_index,
 )
 from .data_loader import TwrpgDataStore, collapse_exact_name_matches, resolve_data_dir
@@ -82,6 +83,7 @@ from .material_planner import (
     plan_materials,
     resolve_item_id,
 )
+from .room_renderer import render_room_card
 from .material_renderer import (
     format_material_caption,
     format_material_text,
@@ -412,7 +414,7 @@ class TwrpgQueryPlugin(Star):
             return
 
         try:
-            text = await query_rooms_text(
+            snapshot, include_playing = await query_rooms(
                 self._runtime_data_dir,
                 query_text,
                 token_path_override=token_path,
@@ -425,7 +427,14 @@ class TwrpgQueryPlugin(Star):
             yield event.plain_result("房间查询失败，请稍后再试。")
             return
 
-        yield event.plain_result(text)
+        try:
+            image_path = await asyncio.to_thread(
+                render_room_card, snapshot, include_playing)
+            yield event.image_result(image_path)
+        except Exception as e:
+            logger.error(f"[TWRPG Query] 生成房间卡片失败 ({query_text}): {e}")
+            yield event.plain_result(
+                format_snapshot(snapshot, include_playing=include_playing))
 
     async def _handle_entity_query(
         self,

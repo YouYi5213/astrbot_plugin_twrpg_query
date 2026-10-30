@@ -17,7 +17,7 @@ import json
 import os
 import re
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import httpx
 
@@ -37,8 +37,8 @@ INDEX_PAGE_LIMIT = 500      # 服务端允许一次拿 500+ 条
 INDEX_MAX_PAGES = 80
 INDEX_CONCURRENCY = 4
 INDEX_COMMANDS = frozenset({"更新目录", "刷新目录", "更新地图", "刷新地图"})
-# 世界RPG 本体和测试图不参与官方地图目录（扫遍所有分类都没有），
-# 但它们是本插件最常用的地图，构建索引时用 mapId 直接补进去。
+# 世界RPG（2310）和守护小天使（197239）不参与官方地图目录，
+# 构建索引时用 mapId 直接补入；补入时同样跳过测试图。
 SEED_MAP_IDS = (DEFAULT_MAP_ID, 197239)
 
 # 和官方客户端一致的 UA（Platform.exe 里的 QtWebEngine 5.15.2）
@@ -86,6 +86,8 @@ class Room:
     level: str
     attr: str
     need_password: bool
+    mode: str = "不限"
+    vip: bool = False
 
 
 @dataclass
@@ -95,6 +97,15 @@ class RoomSnapshot:
     total: int
     now: int
     rooms: list[Room]
+    logo: str = ""
+    map_version: str = ""
+    war3_version: str = ""
+    map_type: str = ""
+    engine: str = "War3"
+    tags: list[str] = field(default_factory=list)
+    hot: int = 0
+    score: float | None = None
+    score_count: int = 0
 
 
 # ---------------------------------------------------------------- token
@@ -276,8 +287,12 @@ async def build_map_index(client: httpx.AsyncClient) -> dict[int, str]:
         data = body.get("data") or {}
         for row in data.get("rows") or []:
             mid, name = row.get("mapId"), row.get("mapName")
-            if mid and name:
-                maps[int(mid)] = str(name)
+            if not (mid and name):
+                continue
+            # 测试图不进目录（例如名字里带「测试」的图）
+            if row.get("testMap") or "测试" in str(name):
+                continue
+            maps[int(mid)] = str(name)
         return int(data.get("total") or 0)
 
     firsts = await asyncio.gather(
@@ -303,15 +318,16 @@ async def build_map_index(client: httpx.AsyncClient) -> dict[int, str]:
         if not isinstance(body, Exception):
             absorb(body)
 
-    # 补上不在目录里的官方地图（世界RPG / 测试图）
+    # 补上不在目录里的官方地图（世界RPG / 守护小天使）；测试图跳过
     for mid in SEED_MAP_IDS:
         if mid in maps:
             continue
         try:
             async with sem:
                 body = await _get(client, "/api/v3/map/detail", {"mapId": mid})
-            name = (body.get("data") or {}).get("mapName")
-            if name:
+            data = body.get("data") or {}
+            name = data.get("mapName")
+            if name and not data.get("testMap") and "测试" not in str(name):
                 maps[int(mid)] = str(name)
         except Exception:
             continue
@@ -367,6 +383,8 @@ def search_map_index(
         return []
     scored = []
     for mid, name in index.items():
+        if "测试" in name:
+            continue
         n = _norm_name(name)
         if n == q:
             rank = 0
@@ -398,42 +416,66 @@ async def resolve_map(
     """
     spec = (spec or "").strip()
     if not spec:
-        map_id = DEFAULT_MAP_ID
-    elif spec.isdigit():
-        map_id = int(spec)
-    else:
-        if not index:
-            raise RoomQueryError(
-                "❌ 本地还没有地图目录，暂时只能按地图ID查询。\n"
-                "管理员发送「魔兽房间 更新目录」可以手动拉取一次。"
-            )
-        matches = search_map_index(index or {}, spec)
-        if not matches:
-            raise RoomQueryError(
-                f"❌ 地图目录里没有匹配「{spec}」的地图。\n"
-                "可以发送「魔兽房间 更新目录」刷新目录，"
-                "或发送「魔兽房间 <地图ID>」直接查询。"
-            )
-        exact = [m for m in matches if _norm_name(m[1]) == _norm_name(spec)]
-        if len(exact) == 1:
-            return exact[0]
-        if len(matches) == 1:
-            return matches[0]
-        raise AmbiguousMap(
-            format_map_candidates(
-                spec, [MapCandidate(mid, name) for mid, name in matches]
-            )
+        return DEFAULT_MAP_ID, ""
+    if spec.isdigit():
+        return int(spec), ""
+    if not index:
+        raise RoomQueryError(
+            "❌ 本地还没有地图目录，暂时只能按地图ID查询。\n"
+            "管理员发送「魔兽房间 更新目录」可以手动拉取一次。"
         )
+    matches = search_map_index(index or {}, spec)
+    if not matches:
+        raise RoomQueryError(
+            f"❌ 地图目录里没有匹配「{spec}」的地图。\n"
+            "可以发送「魔兽房间 更新目录」刷新目录，"
+            "或发送「魔兽房间 <地图ID>」直接查询。"
+        )
+    exact = [m for m in matches if _norm_name(m[1]) == _norm_name(spec)]
+    if len(exact) == 1:
+        return exact[0]
+    if len(matches) == 1:
+        return matches[0]
+    raise AmbiguousMap(
+        format_map_candidates(
+            spec, [MapCandidate(mid, name) for mid, name in matches]
+        )
+    )
 
-    body = await _get(client, "/api/v3/map/detail", {"mapId": map_id})
-    name = str((body.get("data") or {}).get("mapName") or f"地图 {map_id}")
-    return map_id, name
+
+async def _fetch_map_meta(
+    client: httpx.AsyncClient, map_id: int, token: str = ""
+) -> dict:
+    """地图名 / 版本 / 分类 / 标签 / 热度 / 评分，一次请求拿全。"""
+    try:
+        body = await _get(
+            client, "/api/v3/map/search_by_map_ids", {"mapIds": map_id},
+            token)
+        rows = (body.get("data") or {}).get("rows") or []
+        if rows:
+            return rows[0]
+    except Exception:
+        pass
+    try:
+        body = await _get(client, "/api/v3/map/detail", {"mapId": map_id})
+        return body.get("data") or {}
+    except Exception:
+        return {}
 
 
 async def fetch_snapshot(
     client: httpx.AsyncClient, token: str, map_id: int, map_name: str = ""
 ) -> RoomSnapshot:
-    """翻页拉全量（服务端每页硬顶 32），按 room_guid 去重。"""
+    """拉地图信息 + 房间列表。服务端每页硬顶 32，按 room_guid 去重。"""
+    meta = await _fetch_map_meta(client, map_id, token)
+    name = str(meta.get("mapName") or map_name or f"地图 {map_id}")
+    logo = str(meta.get("logo") or "")
+    score = meta.get("score")
+    try:
+        score = float(score) if score not in (None, "") else None
+    except (TypeError, ValueError):
+        score = None
+
     seen: dict[str, dict] = {}
     total = 0
     now = 0
@@ -457,6 +499,8 @@ async def fetch_snapshot(
             gid = str(raw.get("room_guid") or "")
             if gid and gid not in seen:
                 seen[gid] = raw
+            if not logo:
+                logo = str(raw.get("url_logo") or "")
 
         # 房间顺序会随时间变化，可能出现重复页；按 offset 走完全部页，
         # 不要因为「这一页没有新房间」就提前停止，否则会漏掉后面的房间。
@@ -466,10 +510,19 @@ async def fetch_snapshot(
 
     return RoomSnapshot(
         map_id=map_id,
-        map_name=map_name or f"地图 {map_id}",
+        map_name=name,
         total=total,
         now=now,
         rooms=[_to_room(raw) for raw in seen.values()],
+        logo=logo,
+        map_version=str(meta.get("mapVersion") or ""),
+        war3_version=str(meta.get("war3Version") or ""),
+        map_type=str(meta.get("mapTypeStr") or ""),
+        engine="Y3" if meta.get("y3Map") else "War3",
+        tags=[str(t) for t in (meta.get("tagsString") or []) if t],
+        hot=int(meta.get("hot") or 0),
+        score=score,
+        score_count=int(meta.get("scoreCount") or 0),
     )
 
 
@@ -507,6 +560,8 @@ def _to_room(raw: dict) -> Room:
         level=_format_level(raw.get("enter_limit_map_lvl") or {}),
         attr=room_attr(raw),
         need_password=bool(raw.get("need_password")),
+        mode=str(raw.get("mode_name") or raw.get("mode") or "不限"),
+        vip=int(raw.get("room_flag") or 0) == 2,
     )
 
 
@@ -517,13 +572,21 @@ def _room_no_key(no: str) -> int:
         return 0
 
 
-def format_snapshot(snap: RoomSnapshot, include_playing: bool = False) -> str:
+def split_visible(
+    snap: RoomSnapshot, include_playing: bool = False
+) -> tuple[list[Room], list[Room], list[Room], list[Room]]:
+    """返回 (要显示的, 可加入, 游戏中, 观战)。显示列表按人数从多到少。"""
     joinable = [r for r in snap.rooms if r.attr == "-"]
     playing = [r for r in snap.rooms if r.attr == "游戏中"]
     watching = [r for r in snap.rooms if r.attr == "观战"]
 
     shown = joinable + (playing if include_playing else [])
     shown.sort(key=lambda r: (-r.players, _room_no_key(r.no)))
+    return shown, joinable, playing, watching
+
+
+def format_snapshot(snap: RoomSnapshot, include_playing: bool = False) -> str:
+    shown, joinable, playing, watching = split_visible(snap, include_playing)
 
     stamp = time.strftime(
         "%H:%M", time.localtime(snap.now or time.time())
@@ -531,7 +594,21 @@ def format_snapshot(snap: RoomSnapshot, include_playing: bool = False) -> str:
     head = f"🗺️ {snap.map_name} · 可加入 {len(joinable)} 间"
     if include_playing:
         head += f" · 游戏中 {len(playing)} 间"
-    lines = [head, f"🕒 {stamp}｜在线共 {snap.total} 间"]
+    meta_parts = []
+    if snap.engine:
+        meta_parts.append(snap.engine)
+    if snap.map_type:
+        meta_parts.append(snap.map_type)
+    if snap.map_version:
+        meta_parts.append(f"V{snap.map_version}")
+    if snap.hot:
+        meta_parts.append(f"热度 {snap.hot}")
+    if snap.score is not None:
+        meta_parts.append(f"{snap.score:g} 分")
+    lines = [head]
+    if meta_parts:
+        lines.append(" · ".join(meta_parts))
+    lines.append(f"🕒 {stamp}｜在线共 {snap.total} 间")
 
     if not shown:
         lines.append("")
@@ -564,31 +641,41 @@ _cache: dict[str, tuple[float, RoomSnapshot]] = {}
 _lock = asyncio.Lock()
 
 
+async def query_rooms(
+    data_dir: str,
+    query: str = "",
+    token_path_override: str = "",
+) -> tuple[RoomSnapshot, bool]:
+    """按指令参数查询，返回 (快照, 是否包含游戏中)。"""
+    spec, include_playing = parse_room_args(query)
+    token = load_token(resolve_token_path(data_dir, token_path_override))
+
+    cached = _cache.get(spec)
+    if cached and time.time() - cached[0] < CACHE_TTL:
+        return cached[1], include_playing
+
+    async with _lock:
+        cached = _cache.get(spec)
+        if cached and time.time() - cached[0] < CACHE_TTL:
+            return cached[1], include_playing
+
+        index: dict[int, str] = {}
+        if spec and not spec.isdigit():
+            # 只有按名字查才需要地图目录；目录也是本地缓存的
+            index = await get_map_index(data_dir, token_path_override)
+        async with make_client() as client:
+            map_id, map_name = await resolve_map(client, spec, index)
+            snap = await fetch_snapshot(client, token, map_id, map_name)
+        _cache[spec] = (time.time(), snap)
+        return snap, include_playing
+
+
 async def query_rooms_text(
     data_dir: str,
     query: str = "",
     token_path_override: str = "",
 ) -> str:
     """按指令参数查询房间，返回可直接发到群里的文本。"""
-    spec, include_playing = parse_room_args(query)
-    token = load_token(resolve_token_path(data_dir, token_path_override))
-
-    cached = _cache.get(spec)
-    if cached and time.time() - cached[0] < CACHE_TTL:
-        snap = cached[1]
-    else:
-        async with _lock:
-            cached = _cache.get(spec)
-            if cached and time.time() - cached[0] < CACHE_TTL:
-                snap = cached[1]
-            else:
-                index: dict[int, str] = {}
-                if spec and not spec.isdigit():
-                    # 只有按名字查才需要地图目录；目录也是本地缓存的
-                    index = await get_map_index(data_dir, token_path_override)
-                async with make_client() as client:
-                    map_id, map_name = await resolve_map(client, spec, index)
-                    snap = await fetch_snapshot(client, token, map_id, map_name)
-                _cache[spec] = (time.time(), snap)
-
+    snap, include_playing = await query_rooms(
+        data_dir, query, token_path_override)
     return format_snapshot(snap, include_playing=include_playing)

@@ -9,3 +9,6 @@ scripts/publish_release.py
 
 # 测试渲染产物（最终只保留 .gitkeep）
 tests/runtime_cards/*.png
+
+# 地图图标缓存（运行时生成）
+tests/runtime_cards/map_logos/
