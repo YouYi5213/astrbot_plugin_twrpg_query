@@ -8,6 +8,7 @@
   技能 <名> / 技 <名> — 技能查询
   世界材料 <物品名> [xN] — 按主存档库存统计目标物品缺料
   世界图鉴 [分类] [阶段] [关键词] [第N页] — 图鉴分类浏览
+  魔兽房间 [地图] [全部] — 查询地图当前可加入的房间（名称模糊匹配，观战始终隐藏）
 
 云存档（需在配置中启用）:
   世界登录 <用户名> <密码> — 私聊绑定云账号
@@ -65,6 +66,13 @@ from .core.cloud_service import (
     HELP_TEXT,
     InventorySnapshot,
 )
+from .core.room_query import (
+    RoomQueryError,
+    TokenExpired,
+    is_index_command,
+    query_rooms_text,
+    refresh_map_index,
+)
 from .data_loader import TwrpgDataStore, collapse_exact_name_matches, resolve_data_dir
 from .goal_renderer import format_goal_caption, format_goal_text, generate_goal_card
 from .icon_utils import resolve_icons_dir
@@ -85,6 +93,7 @@ from .query_parser import (
     HERO_CMD_RE,
     ITEM_CMD_RE,
     MATERIAL_CMD_RE,
+    ROOM_CMD_RE,
     SKILL_CMD_RE,
     TOOL_CMD_PRIORITY,
     extract_boss_query,
@@ -92,6 +101,7 @@ from .query_parser import (
     extract_item_query,
     extract_material_query,
     extract_prefixed_query,
+    extract_room_query,
     is_tool_command,
     used_jie_only_item_prefix,
 )
@@ -367,6 +377,55 @@ class TwrpgQueryPlugin(Star):
         except Exception as e:
             logger.error(f"[TWRPG Query] 生成图鉴卡片失败 ({query_text}): {e}")
             yield event.plain_result(format_codex_text(self.store, selection))
+
+    @filter.regex(ROOM_CMD_RE, priority=TOOL_CMD_PRIORITY)
+    async def on_twrpg_room_command(self, event: AstrMessageEvent):
+        """魔兽房间 [地图] [全部] — 查询地图当前可加入的房间"""
+        raw = event.message_str.strip()
+        query_text = extract_room_query(raw)
+        if query_text is None:
+            return
+        event.stop_event()
+
+        if not bool(self.config.get("kk_room_enabled", True)):
+            yield event.plain_result("房间查询已关闭，请在 WebUI 插件配置中开启。")
+            return
+
+        token_path = str(self.config.get("kk_room_token_path", "") or "")
+
+        if is_index_command(query_text):
+            admin = getattr(event, "is_admin", None)
+            if admin is not None:
+                allowed = admin() if callable(admin) else bool(admin)
+                if not allowed:
+                    yield event.plain_result("只有管理员可以更新地图目录。")
+                    return
+            try:
+                yield event.plain_result(
+                    await refresh_map_index(self._runtime_data_dir, token_path)
+                )
+            except RoomQueryError as e:
+                yield event.plain_result(str(e))
+            except Exception as e:
+                logger.error(f"[TWRPG Query] 更新地图目录失败: {e}")
+                yield event.plain_result("更新地图目录失败，请稍后再试。")
+            return
+
+        try:
+            text = await query_rooms_text(
+                self._runtime_data_dir,
+                query_text,
+                token_path_override=token_path,
+            )
+        except (TokenExpired, RoomQueryError) as e:
+            yield event.plain_result(str(e))
+            return
+        except Exception as e:
+            logger.error(f"[TWRPG Query] 房间查询失败 ({query_text}): {e}")
+            yield event.plain_result("房间查询失败，请稍后再试。")
+            return
+
+        yield event.plain_result(text)
 
     async def _handle_entity_query(
         self,

@@ -17,5 +17,18 @@
     "type": "bool",
     "hint": "开启后，群聊发送「世界登录」会提示私聊机器人",
     "default": true
+  },
+  "kk_room_enabled": {
+    "description": "启用世界房间查询",
+    "type": "bool",
+    "hint": "「世界房间」指令需要 Windows 端把 token 同步到插件数据目录的 kk_room/token.json",
+    "default": true,
+    "obvious_hint": true
+  },
+  "kk_room_token_path": {
+    "description": "房间 token 文件路径",
+    "type": "text",
+    "hint": "留空 = 插件数据目录/kk_room/token.json。一般不用改",
+    "default": ""
   }
 }
