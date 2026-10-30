@@ -28,7 +28,10 @@ PAGE_CAP = 32            # 服务端硬顶
 MAX_PAGES = 20
 HTTP_TIMEOUT = 12.0
 CACHE_TTL = 10.0         # 群聊里连续查询时复用同一份，别把上游当压测目标
-MAX_LINES = 50
+MAX_LINES = 30
+
+ATTR_LABELS = {"-": "可加入", "观战": "观战", "游戏中": "游戏中"}
+_ATTR_ORDER = {"-": 0, "游戏中": 1, "观战": 2}
 
 TOKEN_SUBDIR = "kk_room"
 TOKEN_NAME = "token.json"
@@ -143,19 +146,35 @@ def load_token(path: str) -> str:
 
 # ---------------------------------------------------------------- 参数
 
-def parse_room_args(text: str) -> tuple[str, bool]:
-    """解析「魔兽房间」后面的参数，返回 (地图参数, 是否包含游戏中)。"""
+def attr_label(attr: str) -> str:
+    """对外显示的属性：内部用 "-" 表示可加入，展示成「可加入」。"""
+    return ATTR_LABELS.get(attr, attr)
+
+
+def parse_room_args(
+    text: str, watching_default: bool = False
+) -> tuple[str, bool, bool]:
+    """
+    解析「魔兽房间」后面的参数，返回 (地图参数, 是否含游戏中, 是否含观战)。
+
+    watching_default 来自插件配置；命令里的「观战 / 不观战」可临时覆盖。
+    """
     tokens = [t for t in re.split(r"\s+", (text or "").strip()) if t]
     include_playing = False
+    include_watching = watching_default
     rest: list[str] = []
     for token in tokens:
         if token in ("全部", "所有", "含游戏中"):
             include_playing = True
         elif token in ("可加入", "可进"):
             include_playing = False
+        elif token in ("观战", "显示观战", "含观战"):
+            include_watching = True
+        elif token in ("不观战", "隐藏观战", "不显示观战"):
+            include_watching = False
         else:
             rest.append(token)
-    return " ".join(rest), include_playing
+    return " ".join(rest), include_playing, include_watching
 
 
 # ---------------------------------------------------------------- HTTP
@@ -573,24 +592,39 @@ def _room_no_key(no: str) -> int:
 
 
 def split_visible(
-    snap: RoomSnapshot, include_playing: bool = False
+    snap: RoomSnapshot,
+    include_playing: bool = False,
+    include_watching: bool = False,
 ) -> tuple[list[Room], list[Room], list[Room], list[Room]]:
     """返回 (要显示的, 可加入, 游戏中, 观战)。
 
-    排序：无密码房优先，然后按人数从多到少；带密码的沉到最后。
+    排序：无密码房优先 → 可加入 / 游戏中 / 观战 → 人数从多到少。
     """
     joinable = [r for r in snap.rooms if r.attr == "-"]
     playing = [r for r in snap.rooms if r.attr == "游戏中"]
     watching = [r for r in snap.rooms if r.attr == "观战"]
 
-    shown = joinable + (playing if include_playing else [])
-    shown.sort(key=lambda r: (r.need_password, -r.players,
-                              _room_no_key(r.no)))
+    shown = list(joinable)
+    if include_playing:
+        shown += playing
+    if include_watching:
+        shown += watching
+    shown.sort(key=lambda r: (
+        r.need_password,
+        _ATTR_ORDER.get(r.attr, 9),
+        -r.players,
+        _room_no_key(r.no),
+    ))
     return shown, joinable, playing, watching
 
 
-def format_snapshot(snap: RoomSnapshot, include_playing: bool = False) -> str:
-    shown, joinable, playing, watching = split_visible(snap, include_playing)
+def format_snapshot(
+    snap: RoomSnapshot,
+    include_playing: bool = False,
+    include_watching: bool = False,
+) -> str:
+    shown, joinable, playing, watching = split_visible(
+        snap, include_playing, include_watching)
 
     stamp = time.strftime(
         "%H:%M", time.localtime(snap.now or time.time())
@@ -598,6 +632,8 @@ def format_snapshot(snap: RoomSnapshot, include_playing: bool = False) -> str:
     head = f"🗺️ {snap.map_name} · 可加入 {len(joinable)} 间"
     if include_playing:
         head += f" · 游戏中 {len(playing)} 间"
+    if include_watching:
+        head += f" · 观战 {len(watching)} 间"
     meta_parts = []
     if snap.engine:
         meta_parts.append(snap.engine)
@@ -629,13 +665,13 @@ def format_snapshot(snap: RoomSnapshot, include_playing: bool = False) -> str:
         name = re.sub(r"\s+", " ", room.name)[:18]
         lines.append(
             f"{room.no}  {room.players}/{room.slots}  "
-            f"[等级{room.level}] {lock}{name}"
+            f"[{attr_label(room.attr)}] [等级{room.level}] {lock}{name}"
         )
     if len(shown) > MAX_LINES:
         lines.append(f"…还有 {len(shown) - MAX_LINES} 间")
-    if watching:
+    if watching and not include_watching:
         lines.append("")
-        lines.append(f"观战 {len(watching)} 间已隐藏")
+        lines.append(f"观战 {len(watching)} 间已隐藏（发送「魔兽房间 观战」可显示）")
     return "\n".join(lines)
 
 
@@ -649,19 +685,21 @@ async def query_rooms(
     data_dir: str,
     query: str = "",
     token_path_override: str = "",
-) -> tuple[RoomSnapshot, bool]:
-    """按指令参数查询，返回 (快照, 是否包含游戏中)。"""
-    spec, include_playing = parse_room_args(query)
+    watching_default: bool = False,
+) -> tuple[RoomSnapshot, bool, bool]:
+    """按指令参数查询，返回 (快照, 是否含游戏中, 是否含观战)。"""
+    spec, include_playing, include_watching = parse_room_args(
+        query, watching_default)
     token = load_token(resolve_token_path(data_dir, token_path_override))
 
     cached = _cache.get(spec)
     if cached and time.time() - cached[0] < CACHE_TTL:
-        return cached[1], include_playing
+        return cached[1], include_playing, include_watching
 
     async with _lock:
         cached = _cache.get(spec)
         if cached and time.time() - cached[0] < CACHE_TTL:
-            return cached[1], include_playing
+            return cached[1], include_playing, include_watching
 
         index: dict[int, str] = {}
         if spec and not spec.isdigit():
@@ -671,15 +709,16 @@ async def query_rooms(
             map_id, map_name = await resolve_map(client, spec, index)
             snap = await fetch_snapshot(client, token, map_id, map_name)
         _cache[spec] = (time.time(), snap)
-        return snap, include_playing
+        return snap, include_playing, include_watching
 
 
 async def query_rooms_text(
     data_dir: str,
     query: str = "",
     token_path_override: str = "",
+    watching_default: bool = False,
 ) -> str:
     """按指令参数查询房间，返回可直接发到群里的文本。"""
-    snap, include_playing = await query_rooms(
-        data_dir, query, token_path_override)
-    return format_snapshot(snap, include_playing=include_playing)
+    snap, include_playing, include_watching = await query_rooms(
+        data_dir, query, token_path_override, watching_default)
+    return format_snapshot(snap, include_playing, include_watching)

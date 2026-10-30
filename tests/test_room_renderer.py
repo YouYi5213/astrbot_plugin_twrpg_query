@@ -80,6 +80,14 @@ class RoomRendererTests(unittest.TestCase):
         with Image.open(path) as img:
             self.assertGreater(img.height, 100)
 
+    def test_render_include_watching(self):
+        snap = _snapshot([
+            rq._to_room(_raw(1001)),
+            rq._to_room(_raw(1002, status=6, watch_ready=True)),
+        ])
+        path = render_room_card(snap, include_watching=True)
+        self.assertTrue(os.path.exists(path))
+
     def test_render_empty(self):
         path = render_room_card(_snapshot([], total=5))
         self.assertTrue(os.path.exists(path))

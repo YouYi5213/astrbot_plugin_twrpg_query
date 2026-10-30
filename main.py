@@ -413,11 +413,13 @@ class TwrpgQueryPlugin(Star):
                 yield event.plain_result("更新地图目录失败，请稍后再试。")
             return
 
+        watching_default = bool(self.config.get("kk_room_show_watch", False))
         try:
-            snapshot, include_playing = await query_rooms(
+            snapshot, include_playing, include_watching = await query_rooms(
                 self._runtime_data_dir,
                 query_text,
                 token_path_override=token_path,
+                watching_default=watching_default,
             )
         except (TokenExpired, RoomQueryError) as e:
             yield event.plain_result(str(e))
@@ -429,12 +431,13 @@ class TwrpgQueryPlugin(Star):
 
         try:
             image_path = await asyncio.to_thread(
-                render_room_card, snapshot, include_playing)
+                render_room_card, snapshot, include_playing,
+                include_watching)
             yield event.image_result(image_path)
         except Exception as e:
             logger.error(f"[TWRPG Query] 生成房间卡片失败 ({query_text}): {e}")
             yield event.plain_result(
-                format_snapshot(snapshot, include_playing=include_playing))
+                format_snapshot(snapshot, include_playing, include_watching))
 
     async def _handle_entity_query(
         self,

@@ -30,5 +30,11 @@
     "type": "text",
     "hint": "留空 = 插件数据目录/kk_room/token.json。一般不用改",
     "default": ""
+  },
+  "kk_room_show_watch": {
+    "description": "默认显示观战房间",
+    "type": "bool",
+    "hint": "开启后房间列表会包含观战房；群聊里也可以用「魔兽房间 观战 / 不观战」临时切换",
+    "default": false
   }
 }

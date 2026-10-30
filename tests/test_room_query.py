@@ -109,23 +109,35 @@ class ParserTests(unittest.TestCase):
         self.assertFalse(is_tool_command("世界 房间"))
 
     def test_parse_default(self):
-        self.assertEqual(rq.parse_room_args(""), ("", False))
+        self.assertEqual(rq.parse_room_args(""), ("", False, False))
 
     def test_parse_map_id(self):
-        self.assertEqual(rq.parse_room_args("2310"), ("2310", False))
+        self.assertEqual(rq.parse_room_args("2310"), ("2310", False, False))
 
     def test_parse_map_name(self):
-        self.assertEqual(rq.parse_room_args("世界RPG"), ("世界RPG", False))
-        self.assertEqual(
-            rq.parse_room_args("守护小天使"), ("守护小天使", False)
-        )
+        self.assertEqual(rq.parse_room_args("世界RPG"),
+                         ("世界RPG", False, False))
+        self.assertEqual(rq.parse_room_args("守护小天使"),
+                         ("守护小天使", False, False))
 
     def test_parse_all(self):
-        self.assertEqual(rq.parse_room_args("全部"), ("", True))
-        self.assertEqual(rq.parse_room_args("世界RPG 全部"), ("世界RPG", True))
+        self.assertEqual(rq.parse_room_args("全部"), ("", True, False))
+        self.assertEqual(rq.parse_room_args("世界RPG 全部"),
+                         ("世界RPG", True, False))
 
     def test_parse_joinable_resets(self):
-        self.assertEqual(rq.parse_room_args("全部 可加入"), ("", False))
+        self.assertEqual(rq.parse_room_args("全部 可加入"),
+                         ("", False, False))
+
+    def test_parse_watch_toggle(self):
+        self.assertEqual(rq.parse_room_args("观战"), ("", False, True))
+        self.assertEqual(rq.parse_room_args("世界RPG 全部 观战"),
+                         ("世界RPG", True, True))
+        self.assertEqual(rq.parse_room_args("不观战"), ("", False, False))
+        # 配置默认显示时，命令里可以用「不观战」临时关掉
+        self.assertEqual(rq.parse_room_args("", True), ("", False, True))
+        self.assertEqual(rq.parse_room_args("不观战", True),
+                         ("", False, False))
 
 
 class AttrTests(unittest.TestCase):
@@ -137,6 +149,11 @@ class AttrTests(unittest.TestCase):
         self.assertEqual(
             rq.room_attr({"room_status": 6, "watch_ready": False}), "游戏中"
         )
+
+    def test_attr_label(self):
+        self.assertEqual(rq.attr_label("-"), "可加入")
+        self.assertEqual(rq.attr_label("观战"), "观战")
+        self.assertEqual(rq.attr_label("游戏中"), "游戏中")
 
 
 class FormatTests(unittest.TestCase):
@@ -165,6 +182,23 @@ class FormatTests(unittest.TestCase):
         self.assertIn("1001", text)
         self.assertNotIn("1002", text)
         self.assertIn("1003", text)
+
+    def test_include_watching_shows_watch_rooms(self):
+        text = rq.format_snapshot(self._snap(), include_watching=True)
+        self.assertIn("1001", text)
+        self.assertIn("1002", text)
+        self.assertNotIn("1003", text)
+        self.assertIn("观战 1 间", text)
+
+    def test_max_30_rows(self):
+        snap = rq.RoomSnapshot(
+            2310, "世界RPG", 35, 0,
+            [rq._to_room(_raw(1000 + i)) for i in range(35)],
+        )
+        text = rq.format_snapshot(snap)
+        rows = [line for line in text.splitlines() if line.startswith("10")]
+        self.assertEqual(len(rows), 30)
+        self.assertIn("还有 5 间", text)
 
     def test_empty_room_list(self):
         snap = rq.RoomSnapshot(2310, "世界RPG", 0, 0, [])

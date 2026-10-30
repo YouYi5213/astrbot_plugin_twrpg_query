@@ -11,14 +11,19 @@ import httpx
 from PIL import Image, ImageDraw, ImageOps
 
 from .card_renderer import _font, _text_width, get_cards_dir, save_card_png
-from .core.room_query import Room, RoomSnapshot, split_visible
+from .core.room_query import (
+    Room,
+    RoomSnapshot,
+    attr_label,
+    split_visible,
+)
 
 CARD_W = 760
 PAD = 22
 TITLE_H = 96
 HEADER_H = 34
 ROW_H = 36
-MAX_ROWS = 40
+MAX_ROWS = 30
 LOGO_SIZE = 52
 LOGO_GAP = 12
 
@@ -119,12 +124,16 @@ def _draw_title(
     snap: RoomSnapshot,
     joinable: list[Room],
     playing: list[Room],
+    watching: list[Room],
     include_playing: bool,
+    include_watching: bool,
     text_x: int,
 ) -> None:
     title = f"{snap.map_name} · 可加入 {len(joinable)} 间"
     if include_playing:
         title += f" · 游戏中 {len(playing)} 间"
+    if include_watching:
+        title += f" · 观战 {len(watching)} 间"
     title_font = _font(22)
     draw.text((text_x, 12), title, font=title_font, fill=(242, 242, 247))
 
@@ -205,16 +214,18 @@ def _draw_row(draw: ImageDraw.ImageDraw, room: Room, y: int,
               fill=TEXT, anchor="lm")
     draw.text((COLUMNS[4][1], cy), f"{room.players}/{room.slots}",
               font=font, fill=TEXT, anchor="lm")
-    draw.text((COLUMNS[5][1], cy), room.attr, font=font,
+    draw.text((COLUMNS[5][1], cy), attr_label(room.attr), font=font,
               fill=ATTR_COLORS.get(room.attr, TEXT), anchor="lm")
 
     draw.line([(0, y + ROW_H), (CARD_W, y + ROW_H)], fill=LINE)
 
 
 def render_room_card(snap: RoomSnapshot,
-                     include_playing: bool = False) -> str:
+                     include_playing: bool = False,
+                     include_watching: bool = False) -> str:
     """把房间快照画成一张深色表格卡片，返回图片路径。"""
-    shown, joinable, playing, watching = split_visible(snap, include_playing)
+    shown, joinable, playing, watching = split_visible(
+        snap, include_playing, include_watching)
     rows = shown[:MAX_ROWS]
     empty = not rows
     body_h = 84 if empty else ROW_H * len(rows)
@@ -230,7 +241,8 @@ def render_room_card(snap: RoomSnapshot,
         card.paste(rounded, (PAD, 14), rounded)
         text_x = PAD + LOGO_SIZE + LOGO_GAP
 
-    _draw_title(draw, snap, joinable, playing, include_playing, text_x)
+    _draw_title(draw, snap, joinable, playing, watching,
+                include_playing, include_watching, text_x)
     y = TITLE_H
     _draw_header(draw, y)
     y += HEADER_H
@@ -253,7 +265,10 @@ def render_room_card(snap: RoomSnapshot,
             y += ROW_H
 
     footer_y = y + 18 + 7
-    left = f"观战 {len(watching)} 间已隐藏"
+    if include_watching:
+        left = f"观战 {len(watching)} 间已显示"
+    else:
+        left = f"观战 {len(watching)} 间已隐藏"
     if len(shown) > MAX_ROWS:
         left += f" · 还有 {len(shown) - MAX_ROWS} 间"
     draw.text((PAD, footer_y), left, font=_font(14),
