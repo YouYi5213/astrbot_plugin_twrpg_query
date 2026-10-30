@@ -575,13 +575,17 @@ def _room_no_key(no: str) -> int:
 def split_visible(
     snap: RoomSnapshot, include_playing: bool = False
 ) -> tuple[list[Room], list[Room], list[Room], list[Room]]:
-    """返回 (要显示的, 可加入, 游戏中, 观战)。显示列表按人数从多到少。"""
+    """返回 (要显示的, 可加入, 游戏中, 观战)。
+
+    排序：无密码房优先，然后按人数从多到少；带密码的沉到最后。
+    """
     joinable = [r for r in snap.rooms if r.attr == "-"]
     playing = [r for r in snap.rooms if r.attr == "游戏中"]
     watching = [r for r in snap.rooms if r.attr == "观战"]
 
     shown = joinable + (playing if include_playing else [])
-    shown.sort(key=lambda r: (-r.players, _room_no_key(r.no)))
+    shown.sort(key=lambda r: (r.need_password, -r.players,
+                              _room_no_key(r.no)))
     return shown, joinable, playing, watching
 
 

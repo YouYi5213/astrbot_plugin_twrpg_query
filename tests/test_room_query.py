@@ -33,6 +33,7 @@ def _raw(
     slots=10,
     level=None,
     name="测试房",
+    pwd=False,
 ):
     return {
         "show_id": no,
@@ -43,7 +44,7 @@ def _raw(
         "room_status": status,
         "watch_ready": watch_ready,
         "enter_limit_map_lvl": level or {},
-        "need_password": False,
+        "need_password": pwd,
     }
 
 
@@ -180,6 +181,18 @@ class FormatTests(unittest.TestCase):
             [rq._to_room(_raw(1001, level={"min_map_lvl": 5}))],
         )
         self.assertIn("[等级≥5]", rq.format_snapshot(limited))
+
+    def test_password_rooms_sorted_last(self):
+        snap = rq.RoomSnapshot(
+            2310, "世界RPG", 2, 0,
+            [
+                rq._to_room(_raw(1001, players=9, name="密码房", pwd=True)),
+                rq._to_room(_raw(1002, players=1, name="普通房")),
+            ],
+        )
+        for text in (rq.format_snapshot(snap),
+                     rq.format_snapshot(snap, include_playing=True)):
+            self.assertLess(text.index("1002"), text.index("1001"))
 
     def test_sort_by_players_desc(self):
         snap = rq.RoomSnapshot(
