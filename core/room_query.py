@@ -17,6 +17,7 @@ import json
 import os
 import re
 import time
+import unicodedata
 from dataclasses import dataclass, field
 
 import httpx
@@ -229,9 +230,14 @@ async def _get(
 
 MAX_MAP_CANDIDATES = 10
 
+# 「地图名 + 纯数字/版本号」以外的多余文字不算匹配。
+# 例如「世界RPG2310」可以匹配「世界RPG」，但「僵尸VS马头」不能匹配「僵尸」。
+_EXTRA_SUFFIX_RE = re.compile(r"v?\d+(?:\.\d+)*", re.IGNORECASE)
+
 
 def _norm_name(name: str) -> str:
-    return re.sub(r"\s+", "", name or "").lower()
+    # NFKC 把全角英文/数字（ＶＳ、２３１０）转成半角，避免中英混排名字对不上
+    return re.sub(r"\s+", "", unicodedata.normalize("NFKC", name or "")).lower()
 
 
 _mem_index: tuple[float, str, dict[int, str]] | None = None
@@ -411,7 +417,9 @@ def search_map_index(
             rank = 1
         elif q in n:
             rank = 2
-        elif n in q:
+        elif q.startswith(n) and _EXTRA_SUFFIX_RE.fullmatch(q[len(n):]):
+            # 只允许追加地图ID/版本号（如「世界RPG2310」）；
+            # 带其他文字的查询不能退化成短名字，否则「僵尸VS马头」会命中「僵尸」。
             rank = 3
         else:
             continue
@@ -445,10 +453,26 @@ async def resolve_map(
         )
     matches = search_map_index(index or {}, spec)
     if not matches:
+        hint = ""
+        spec_norm = _norm_name(spec)
+        partials = [
+            (mid, name) for mid, name in (index or {}).items()
+            if "测试" not in name
+            and (name_norm := _norm_name(name))
+            and name_norm in spec_norm
+        ]
+        if len(partials) == 1:
+            mid, name = partials[0]
+            hint = (
+                f"\n目录里只有包含在查询中的「{name}」（ID {mid}）；"
+                f"如果那就是你要找的图，请发送「魔兽房间 {mid}」。"
+            )
         raise RoomQueryError(
             f"❌ 地图目录里没有匹配「{spec}」的地图。\n"
-            "可以发送「魔兽房间 更新目录」刷新目录，"
-            "或发送「魔兽房间 <地图ID>」直接查询。"
+            "请确认地图名与 KK 平台上的写法一致（英文和数字也要完整）。"
+            f"{hint}\n"
+            "也可以发送「魔兽房间 <地图ID>」直接查询，"
+            "或让管理员发送「魔兽房间 更新目录」刷新目录。"
         )
     exact = [m for m in matches if _norm_name(m[1]) == _norm_name(spec)]
     if len(exact) == 1:

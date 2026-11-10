@@ -456,6 +456,39 @@ class MapIndexTests(unittest.TestCase):
         self.assertEqual(rq.search_map_index(index, "worldrpg")[0][0], 2310)
         self.assertEqual(rq.search_map_index(index, "World RPG")[0][0], 2310)
 
+    def test_search_normalizes_fullwidth(self):
+        index = {9247: "Plants vs. Zombies"}
+        self.assertEqual(
+            [mid for mid, _ in rq.search_map_index(
+                index, "Ｐｌａｎｔｓ　ｖｓ．　Ｚｏｍｂｉｅｓ")],
+            [9247],
+        )
+
+    def test_search_does_not_fall_back_to_shorter_name(self):
+        # 「僵尸VS马头」不是「僵尸」：短名字不能吞掉查询里剩下的文字
+        self.assertEqual(
+            rq.search_map_index({29772: "僵尸"}, "僵尸VS马头"),
+            [],
+        )
+        self.assertEqual(
+            [mid for mid, _ in rq.search_map_index(
+                {29772: "僵尸", 29773: "僵尸VS马头"}, "僵尸VS马头")],
+            [29773],
+        )
+
+    def test_search_allows_id_and_version_suffix(self):
+        index = {2310: "世界RPG"}
+        self.assertEqual(rq.search_map_index(index, "世界RPG2310")[0][0], 2310)
+        self.assertEqual(rq.search_map_index(index, "世界RPG v1.0")[0][0], 2310)
+
+    def test_resolve_map_reports_partial_without_silently_using_it(self):
+        with self.assertRaises(rq.RoomQueryError) as ctx:
+            asyncio.run(rq.resolve_map(None, "僵尸VS马头", {29772: "僵尸"}))
+        message = str(ctx.exception)
+        self.assertIn("没有匹配", message)
+        self.assertIn("僵尸", message)
+        self.assertIn("29772", message)
+
     def test_roundtrip(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = rq.map_index_path(tmp)
